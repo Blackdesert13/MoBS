@@ -1,0 +1,1508 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MoBa.Components</name>
+    </assembly>
+    <members>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Constanten">
+            <summary>
+            Projekt Constanten
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Constanten.STANDARDRASTER">
+            <summary>
+            Festgelegter Standardraster einer neuen Anlage.
+            20 Pixel
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Constanten.STANDARDFILENAME">
+            <summary>
+            Festgelegter Standardname einer neuen 
+            Unbenannt
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Constanten.STANDARDANLAGENGRÖßEINRASTER">
+            <summary>
+            Festgelegte Standardgröße einer neuen Anlage
+            20 x 15 Raster
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Constanten.ProgrammName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.Int32EventHandler">
+            <summary>
+            Event für Zoomänderung
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.ViewTypEventHandler">
+            <summary>
+            Event für AnzeigeTypänderung
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.SizeEventHandler">
+            <summary>
+            Event für Größenänderung
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.StringEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.BoolEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.ArduinoSendEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="adresse"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.AppTypEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.DateTimeEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.ViewNeuZeichnenEventHandler">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.ArduinoRueckmeldungEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.AnlagenZustandEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Delegates.AnlageDatenEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="AnlageDaten"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Dialogs.ColorDialogExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Dialogs.ColorDialogExtension.SetWindowText(System.IntPtr,System.String)">
+            <summary>
+            Sets the window text.
+            </summary>
+            <param name="hWnd">The h WND.</param>
+            <param name="text">The text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Dialogs.ColorDialogExtension.SetWindowPos(System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32)">
+            <summary>
+            Sets the window pos.
+            </summary>
+            <param name="hWnd">The h WND.</param>
+            <param name="hWndInsertAfter">The h WND insert after.</param>
+            <param name="x">The x.</param>
+            <param name="y">The y.</param>
+            <param name="cx">The cx.</param>
+            <param name="cy">The cy.</param>
+            <param name="uFlags">The u flags.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Dialogs.ColorDialogExtension.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MoBaSteuerung.Anlagenkomponenten.Dialogs.ColorDialogExtension"/> class.
+            </summary>
+            <param name="x">The X position</param>
+            <param name="y">The Y position</param>
+            <param name="title">The title of the windows. If set to null(by default), the title will not be changed</param>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Dialogs.ColorDialogExtension.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Defines the common dialog box hook procedure that is overridden to add specific functionality to a common dialog box.
+            </summary>
+            <param name="hWnd">The handle to the dialog box window.</param>
+            <param name="msg">The message being received.</param>
+            <param name="wparam">Additional information about the message.</param>
+            <param name="lparam">Additional information about the message.</param>
+            <returns>
+            A zero value if the default dialog box procedure processes the message; a nonzero value if the default dialog box procedure ignores the message.
+            </returns>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Enum.LogLevel">
+            <summary>
+            Log Level
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.LogLevel.UnhandledException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.LogLevel.ThreadException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.LogLevel.Error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.LogLevel.Trace">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.LogLevel.Info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Enum.AppTyp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.AppTyp.Undefiniert">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.AppTyp.Slave">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.AppTyp.Master">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp">
+            <summary>
+            Anzeigetyp der Anzeige.
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp.Bedienen">
+            <summary>
+            Bedienen der Anlage.
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp.Bearbeiten">
+            <summary>
+            Bearbeiten der Anlage.
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus">
+            <summary>
+            Bearbeitungs Modus 
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Selektieren">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Knoten">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Weiche">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Schalter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Entkuppler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Signal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Platiene">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.MC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Gleis">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus.Fss">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Enum.GitterTyp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.GitterTyp.Linie">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.GitterTyp.LinieVersetzt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.GitterTyp.Punkt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.GitterTyp.PunktVersetzt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Enum.FadenkreuzTyp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.FadenkreuzTyp.Linie">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.FadenkreuzTyp.Punkte">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.O">
+            <summary>
+            Ost 0 in X+ Richtung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.SO">
+            <summary>
+            SüdOst 1 in X+ Y+ Richtung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.S">
+            <summary>
+            Süd 2 in Y+ Richtung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.SW">
+            <summary>
+            SüdWest 3 in X- Y+ Richtung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.W">
+            <summary>
+            West 4 in X- Richtung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.NW">
+            <summary>
+            NordWest 5 in X- Y- Richtung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.N">
+            <summary>
+            Nord 6 Y- Richtung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Enum.ElementRichtung.NO">
+            <summary>
+            NordOst 7 X+ Y- Richtung
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Extensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Extensions.ToAnzeigeTyp(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Extensions.ToGitterTyp(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Extensions.ToFadenkreuzTyp(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Extensions.ToInt32(System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Extensions.ToFloat(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Interfaces.IZyan">
+            <summary>
+            Schnittstelle der Komunikation von Slave zum Master
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Interfaces.IZyan.SlaveAnmelden(System.String,System.Action{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="callback1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Interfaces.IZyan.SlaveAbmelden(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Interfaces.IZyan.SlaveMouseClick(System.Drawing.Point)">
+            <summary>
+            Slave Klick-Punkt auf RasterDefault umgerechnet.
+            </summary>
+            <param name="SlaveMousePoint"></param>
+        </member>
+        <member name="E:MoBaSteuerung.Anlagenkomponenten.Interfaces.IZyan.MasterZumClient_AnlageZustandsDaten">
+            <summary>
+            Sendet ein AnlagenObject zum zeichnen der Anlage.
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Anlagenkomponenten.Interfaces.IZyan.MasterZumClient_MasterDisconnected">
+            <summary>
+            Server sendet, das er beendet wird.
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Logging">
+            <summary>
+            Stellt eine Klasse zum Loggen dar.
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.Logging.Log">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.Logging.LogDateiPfad">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Logging.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Logging.SchreibeException(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="exception"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Logging.Schreibe(System.String,MoBaSteuerung.Anlagenkomponenten.Enum.LogLevel)">
+            <summary>
+            Schreibt in die Logdatei oder in die Debugausgabe
+            </summary>
+            <param name="level"></param>
+            <param name="logText"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Logging.DebugPrint(System.String)">
+            <summary>
+            Schreibt in die in die Debugausgabe
+            </summary>
+            <param name="logText"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.MsgBox">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MsgBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton)">
+            <summary>
+            
+            </summary>
+            <param name="test"></param>
+            <param name="caption"></param>
+            <param name="buttons"></param>
+            <param name="icon"></param>
+            <param name="defaultButton"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Win32">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Win32.WH_CBT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Win32.HCBT_ACTIVATE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Win32.RECT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Win32.RECT.left">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Win32.RECT.top">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Win32.RECT.right">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Anlagenkomponenten.Win32.RECT.bottom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.Win32.WindowsHookProc">
+            <summary>
+            Arg for SetWindowsHookEx() 
+            </summary>
+            <param name="nCode"></param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.SetWindowsHookEx(System.Int32,MoBaSteuerung.Anlagenkomponenten.Win32.WindowsHookProc,System.IntPtr,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idHook"></param>
+            <param name="lpfn"></param>
+            <param name="hInstance"></param>
+            <param name="threadId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.UnhookWindowsHookEx(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idHook"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.CallNextHookEx(System.Int32,System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="idHook"></param>
+            <param name="nCode"></param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetWindowTextLength(System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="hWnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetClassName(System.IntPtr,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hWnd"></param>
+            <param name="lpClassName"></param>
+            <param name="nMaxCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetWindowText(System.IntPtr,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hWnd"></param>
+            <param name="lpString"></param>
+            <param name="nMaxCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetDlgItemText(System.IntPtr,System.Int32,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hDlg"></param>
+            <param name="nIDDlgItem"></param>
+            <param name="lpString"></param>
+            <param name="nMaxCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetDlgItem(System.IntPtr,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hDlg"></param>
+            <param name="nIDDlgItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetParent(System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="hWnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetWindowRect(System.IntPtr,MoBaSteuerung.Anlagenkomponenten.Win32.RECT@)">
+            <summary>
+            
+            </summary>
+            <param name="handle"></param>
+            <param name="r"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.SetWindowPos(System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32)">
+            <summary>
+            
+            </summary>
+            <param name="hWnd"></param>
+            <param name="hWndInsertAfter"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="cx"></param>
+            <param name="cy"></param>
+            <param name="uFlags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetClassName(System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="hWnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetWindowText(System.IntPtr)">
+            <summary>
+            
+            </summary>
+            <param name="hWnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.Win32.GetDlgItemText(System.IntPtr,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hDlg"></param>
+            <param name="nIDDlgItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MCSpeicher.Adresse.AusgangSchalten">
+            <summary>
+            Schaltet den Ausgang auf 'Stellung'(Befehl)
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MCSpeicher.Adresse.AusgangToggeln">
+            <summary>
+            Schaltet den Ausgang um.
+            Gibt "true" zurück, wenn der Ausgang geschaltet werden 
+            konnte, andernfalls "false".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MCSpeicher.Adresse.AusgangSchalten(System.Boolean)">
+            <summary>
+            Schaltet den Ausgang in den angegebenen Schaltzustand.
+            Gibt "true" zurück, wenn der Ausgang geschaltet werden 
+            konnte, andernfalls "false".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MCSpeicher.MCSpeicher.SendeByteListe(System.Boolean)">
+            <summary>
+            liefert die Ausgangsbefele an die Arduinos als ein ByteArray 
+            </summary>
+            <param name="Alles">ist true wenn alle Ausgänge ausgegeben werden</param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MCSpeicher.MCSpeicher.RMBytsAusBitArray">
+            <summary>
+            erzeugt im MCSpeicher intern ein ByteArray 
+            als Spiegelbild des gegenwärtigen Zustandes der Rückmeldung
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MCSpeicher.MCSpeicher.RueckmeldungSetzen(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            setzt die Bits einer RückmeldeAdresse(in Arbeit)
+            </summary>
+            <param name="ByteL">das niederwertige Byte</param>
+            <param name="ByteH">das höherwetige Byte</param>
+            <param name="AdresseLP">Adresse der Rückmeldeplatiene</param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.MCSpeicher.MCSpeicher.RmBitsSetzenAlt(System.Int32,System.Int32)">
+            <summary>
+            alte Methode aus Version 2013
+            </summary>
+            <param name="Adresse"></param>
+            <param name="Byte"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente">
+            <summary>
+            enthält alle Elemente einer Anlage
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.#ctor">
+            <summary>
+            enthält alle Elemente der Anlage
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.Zoom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.AnzeigeTyp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.GleisElemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.WeicheElemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.SignalElemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.SchalterElemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.FssElemente">
+            <summary>
+            liefert die Fahrstromschalter-Liste
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.InfoElemente">
+            <summary>
+            liefert die Infofenster-Liste
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.HaltestellenElemente">
+            <summary>
+            liefert die Infofenster-Liste
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.KnotenElemente">
+            <summary>
+            liefert die Knoten-Liste
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.EntkupplerElemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.RelaisAdresseSuchen(System.Int32,System.Int32)">
+            <summary>
+            liefert alle Anlagenelemente auf einer Relais-Platine
+            </summary>
+            <param name="ArduinoNr"></param>
+            <param name="PlatinenNr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.RMAdresseSuchen(System.Int32,System.Int32)">
+            <summary>
+            liefert alle Gleise einer RM-Platine
+            </summary>
+            <param name="ArduinoNr"></param>
+            <param name="PlatinenNr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.Steckersuchen(System.String)">
+            <summary>
+            liefert alle Anlagenelemente mit dem gleichen Stecker
+            </summary>
+            <param name="SteckerBezeichnung"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.ZuegeAktualisieren">
+            <summary>
+            belegt alle Signale mit den Zügen neu(in Arbeit)
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.FSSLaden">
+            <summary>
+            verknüpft FSS untereinander
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.AlleLöschen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Anlagenkomponenten.AnlagenElemente.SucheKnoten(System.Drawing.Point)">
+            <summary>
+            prüft ob auf einem Rasterpunkt schon ein Knoten existiert
+            </summary>
+            <param name="rasterPunkt"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.ElementListe`1">
+            <summary>
+            eine Auflistung eines Typs AnlagenElements und deren Verwaltung
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.ElementListe`1.Elemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.ElementListe`1.SpeicherString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.ElementListe`1.AnzeigeTyp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.ElementListe`1.Zoom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.Hinzufügen(`0)">
+            <summary>
+            
+            </summary>
+            <param name="element"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.Löschen(`0)">
+            <summary>
+            
+            </summary>
+            <param name="element"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.Element(System.Int32)">
+            <summary>
+            liefert das Element mit der ID
+            </summary>
+            <param name="iD">die laufende Nr. des Elements</param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.ListeSortieren">
+            <summary>
+            Sortiert die Liste nach der ID Nummer
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.FreieID">
+            <summary>
+            liefert die kleinste freie ID
+            </summary>
+            <returns>freie ID</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.AlleLöschen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.ElementeZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.SucheFreieNummer">
+            <summary>
+            Sucht in der Elementenliste die erste nicht belegte Nummer
+            </summary>
+            <returns>Gibt die erste freie Nummer in der Liste zurück</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.AdresseSuchen(System.Int32,System.Int32)">
+            <summary>
+            sucht alle Elemente mit einer Arduino-Nr und Platinen-Nr
+            </summary>
+            <param name="ArduinoNr"></param>
+            <param name="PlatinenNr"></param>
+            <returns></returns>  
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.ElementListe`1.SteckerSuchen(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="SteckerName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.RasterAnlagenElement.PositionRaster">
+            <summary>
+            Position des Elementes in Rasterpunktens
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.RasterAnlagenElement.Position">
+            <summary>
+            Position des Elementes in Pixeln
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.AnlagenElement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.Ausgang">
+            <summary>
+            Adresse des Elementes zum Schalten
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.KurzBezeichnung">
+            <summary>
+            die Kurzbezeichnung des Elements
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.ID">
+            <summary>
+            Eindeutige ID des Elementes
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.Zoom">
+            <summary>
+            Zeichengröße
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.AnzeigenTyp">
+            <summary>
+            Art der Anzeige (Bedienen,Bearbeiten)
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.Parent">
+            <summary>
+            Verweis auf Anzeigelemente
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.Stecker">
+            <summary>
+            Anlagen-Steckerbezeichnung
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.AnlagenElement.SteckerSuche(System.String)">
+            <summary>
+            prüft ob der Stecker eingetragen ist
+            </summary>
+            <param name="SteckerName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.AnlagenElement.Bezeichnung">
+            <summary>
+            Anlagenbezeichnung
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.AnlagenElement.#ctor(MoBaSteuerung.Anlagenkomponenten.AnlagenElemente,System.Int32,System.Int32,MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp)">
+            <summary>
+            
+            </summary>
+            <param name="parent"></param>
+            <param name="iD"></param>
+            <param name="zoom"></param>
+            <param name="anzeigeTyp"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.AnlagenElement.BerechneRechteck(System.Drawing.Point,System.Int32,System.Int32)">
+            <summary>
+            Berechnet um Mittelpunkt symmetrich ein Rechteck.
+            </summary>
+            <param name="center">Mittelpunkt des Rechtecks in Pixeln</param>
+            <param name="width">Länge des Rechtecks in Pixeln</param>
+            <param name="height">Höhe des Rechtecks in Pixeln</param>
+            <returns>Gibt symmetrsisches Rechteck um Mittelpunkt zurück.</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.AnlagenElement.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            Zeichnet das Element.
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.AnlagenElement.AnschlussGleisSuchen">
+            <summary>
+            In dieser Methode wird nach einem geeigneten Gleis gesucht um dieses Gleiselement anzuschließen
+            </summary>
+            <returns>Gibt TRUE zurück, wenn das Gleiselement an ein Gleis angeschlossen werden konnte</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.AnlagenElement.BearbeitenAktualisierenNeuZeichnen">
+            <summary>
+            In wird wird das Objekt bei einer Veränderung beim Neu zeichnen aktualisiert.
+            </summary>
+            <returns>Gibt TRUE zurück, wenn eine Veränderung im Objekt aufgetreten ist</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.AnlagenElement.GleisElementAustragen">
+            <summary>
+            Durch diese Methode soll ein Gleiselement in einem Gleis ausgetragen werden
+            </summary>
+            <returns>Wenn das Objekt erfolgreich ausgetragen wurde, wird TRUE zurück gegeben</returns>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Haltestelle">
+            <summary>
+            zur Anzeige von Schaltzuständen in Straßenbahn-Steuerungen
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Haltestelle.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.InfoFenster">
+            <summary>
+            zur Anzeige von Infos (zB. über Haltestellen oder Zügen an Signalen)
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.InfoFenster.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.InfoFenster.#ctor(MoBaSteuerung.Anlagenkomponenten.AnlagenElemente,System.Int32,MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp,System.String[])">
+            <summary>
+            Konstruktor zum laden aus der .anl-Datei
+            </summary>
+            <param name="parent"></param>
+            <param name="zoom"></param>
+            <param name="anzeigeTyp"></param>
+            <param name="elem"></param>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.InfoFenster.Text">
+            <summary>
+            Text zur Anzeige
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Regler">
+            <summary>
+            Fahrregler
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Regler.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Regler.Berechnung">
+            <summary>
+            berechnet die Grafik
+            </summary>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.FSS">
+            <summary>
+            schaltet den Fahrstrom zwischen zwei Reglern bzw. anderen FSS um
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FSS.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FSS.#ctor(MoBaSteuerung.Anlagenkomponenten.AnlagenElemente,System.Int32,MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp,System.String[])">
+            <summary>
+            zum Laden aus der Text-Datei
+            </summary>
+            <param name="parent">AnlagenElemente</param>
+            <param name="zoom"></param>
+            <param name="anzeigeTyp"></param>
+            <param name="elem">Zeile aus der Text-Datei</param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FSS.reglerAktualisieren">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FSS.AktiverRegler">
+            <summary>
+            liefert den aktiven Regler,
+            die aktuelle Stellung eines anderen FSS wird nicht überprüft
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FSS.AktiverReglerNr">
+            <summary>
+            liefert die aktive Reglernummer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FSS.reset">
+            <summary>
+            zum reseten von verketteten FSS
+            und liefert die derzeitige aktive ReglerNummer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FSS.reglerCheck">
+            <summary>
+            liefert die aktive Reglernummer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Entkuppler">
+            <summary>
+            Entkuppler
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Entkuppler.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Entkuppler.InfoString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Entkuppler.#ctor(MoBaSteuerung.Anlagenkomponenten.AnlagenElemente,System.Int32,MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp,System.String[])">
+            <summary>
+            Zum laden aus der Anlagen-Datei
+            </summary>
+            <param name="parent"></param>
+            <param name="zoom"></param>
+            <param name="anzeigeTyp"></param>
+            <param name="elem"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Entkuppler.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Entkuppler.AnschlussGleisSuchen">
+            <summary>
+            Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
+            und wenn diese Position noch frei ist, wird dieses Element mit dem Gleis verknüpft.
+            </summary>
+            <returns>Gibt TRUE zurück, wenn dieses Objekt in einem Gleis eingetragen werden konnte</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Entkuppler.BearbeitenAktualisierenNeuZeichnen">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Knoten">
+            <summary>
+            Knoten, definiert Gleis-Endpunkte
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Knoten.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Knoten.#ctor(MoBaSteuerung.Anlagenkomponenten.AnlagenElemente,System.Int32,System.Int32,MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp,System.Drawing.Point)">
+            <summary>
+            
+            </summary>
+            <param name="iD"></param>
+            <param name="zoom"></param>
+            <param name="anzeigeTyp"></param>
+            <param name="positionRaster"></param>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Knoten.MouseEnter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Knoten.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.FahrstrassenElemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FahrstrassenElemente.AktiveFahrstrassen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FahrstrassenElemente.Zoom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FahrstrassenElemente.AnzeigeTyp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenElemente.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenElemente.HinzufügenAktiv(MoBaSteuerung.Elemente.Fahrstrasse)">
+            <summary>
+            
+            </summary>
+            <param name="fahrstrasse"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenElemente.Fahrstrasse(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="iD"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenElemente.AlleLöschen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenElemente.ElementeZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Fahrstrasse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Fahrstrasse.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.FahrstrassenNElemente">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FahrstrassenNElemente.AktiveFahrstrassen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FahrstrassenNElemente.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FahrstrassenNElemente.Zoom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.FahrstrassenNElemente.AnzeigeTyp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenNElemente.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenNElemente.HinzufügenAktiv(MoBaSteuerung.Elemente.FahrstrasseN)">
+            <summary>
+            
+            </summary>
+            <param name="fahrstrasse"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenNElemente.Fahrstrasse(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="iD"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenNElemente.AlleLöschen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrassenNElemente.ElementeZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrasseN.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.FahrstrasseN.AdressenFrei">
+            <summary>
+            prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Schalter">
+            <summary>
+            Schalter für Gleise
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Schalter.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Schalter.An">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Schalter.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Schalter.AnschlussGleisSuchen">
+            <summary>
+            Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
+            und wenn diese Position noch frei ist, wird dieses Element mit dem Gleis verknüpft.
+            </summary>
+            <returns>Gibt TRUE zurück, wenn dieses Objekt in einem Gleis eingetragen werden konnte</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Schalter.BearbeitenAktualisierenNeuZeichnen">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Weiche">
+            <summary>
+            Weiche
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Weiche.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Weiche.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Gleis">
+            <summary>
+            Gleis
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Gleis.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Gleis.#ctor(MoBaSteuerung.Anlagenkomponenten.AnlagenElemente,System.Int32,MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp,System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="parent"></param>
+            <param name="zoom"></param>
+            <param name="anzeigeTyp"></param>
+            <param name="elem"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Gleis.ElementZeichnen1(System.Drawing.Graphics)">
+            <summary>
+            zeichnet die Regler-Farbe des Gleises
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Gleis.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Gleis.GleisElementAnschluss(MoBaSteuerung.Elemente.Schalter)">
+            <summary>
+            
+            </summary>
+            <param name="schalter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Gleis.GleisElementAustragen(MoBaSteuerung.Elemente.Schalter)">
+            <summary>
+            Durch diese Methode wird der Schalter, welcher diesem Gleis zugeordnet ist ausgetragen.
+            </summary>
+            <param name="schalter">zu löschender Schalter</param>
+            <returns>Gibt TRUE zurück, wenn der übergeben Schalter gleich dem Schalter ist des Gleises ist und dieser ausgetragen wurde.</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Gleis.GleisElementAustragen(MoBaSteuerung.Elemente.Entkuppler)">
+            <summary>
+            Durch diese Methode wird ein Entkuppler, welcher diesem Gleis zugeordnet ist entfernt.
+            </summary>
+            <param name="entkuppler">zu entfernender Entkuppler</param>
+            <returns>Gibt TRUE zurück, wenn der übergeben Entkuppler erfolgreich entfernt wurde, andernfalls FALSE. Wenn der Entkuppler nicht gefunden wurde ebenfalls FALSE</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Gleis.GleisElementAustragen(MoBaSteuerung.Elemente.Signal)">
+            <summary>
+            Durch diese Methode wird ein Signal, welches diesem Gleis zugeordnet ist entfernt.
+            </summary>
+            <param name="signal">zu entfernendes Signal</param>
+            <returns>Gibt TRUE zurück, wenn das übergebene Signal erfolgreich entfernt wurde, andernfalls FALSE. Wenn das Signal nicht gefunden wurde ebenfalls FALSE.</returns>
+        </member>
+        <member name="T:MoBaSteuerung.Elemente.Signal">
+            <summary>
+            Signal
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Signal.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Signal.InfoString">
+            <summary>
+            InfoString zur Anzeige
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Elemente.Signal.Durchfahrt">
+            <summary>
+            wechselt die Farbe grün-rot
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Signal.ElementZeichnen(System.Drawing.Graphics)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Signal.Berechnung">
+            <summary>
+            berechnet die Grafik
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Signal.AnschlussGleisSuchen">
+            <summary>
+            Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
+            und wenn diese Position noch frei ist, wird dieses Element mit dem Gleis verknüpft.
+            </summary>
+            <returns>Gibt TRUE zurück, wenn dieses Objekt in einem Gleis eingetragen werden konnte</returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Signal.BearbeitenAktualisierenNeuZeichnen">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Elemente.Signal.ZugWechsel(System.Int32)">
+            <summary>
+            Überträgt den Zug auf das neue Signal
+            </summary>
+            <param name="NeuesSignal"></param>
+        </member>
+        <member name="T:MoBaSteuerung.ZeichnenElemente.Zug">
+            <summary>
+            Zug
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.ZeichnenElemente.Zug.SpeicherString">
+            <summary>
+            zum Speichern in der Anlagen-Datei
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.ZeichnenElemente.Zug.SignalNummer">
+            <summary>
+            die aktuelle Position auf der Anlage
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.ZeichnenElemente.Zug.ZugTyp">
+            <summary>
+            die Art des Zuges, zB: P, G, D, ICE
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.ZeichnenElemente.Zug.Lok">
+            <summary>
+            Triebfahrzeug
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.ZeichnenElemente.Zug.Geschwindigkeit">
+            <summary>
+            Maximal-Geschwindigkeit
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.ZeichnenElemente.Zug.Anzeige">
+            <summary>
+            Text für InfoFeld
+            </summary>
+        </member>
+    </members>
+</doc>

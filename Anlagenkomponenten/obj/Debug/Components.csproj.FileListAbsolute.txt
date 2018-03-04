@@ -1,0 +1,11 @@
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\ModellBahnSteuerung\Components\bin\Debug\Mek49eV.Components.xml
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\ModellBahnSteuerung\Components\bin\Debug\Mek49eV.Components.dll
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\ModellBahnSteuerung\Components\bin\Debug\Mek49eV.Components.pdb
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\ModellBahnSteuerung\Components\obj\Debug\Mek49eV.Components.dll
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\ModellBahnSteuerung\Components\obj\Debug\Mek49eV.Components.pdb
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\UCfM\Components\bin\Debug\UCfM.Components.xml
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\UCfM\Components\bin\Debug\UCfM.Components.dll
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\UCfM\Components\bin\Debug\UCfM.Components.pdb
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\UCfM\Components\obj\Debug\Components.csprojResolveAssemblyReference.cache
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\UCfM\Components\obj\Debug\UCfM.Components.dll
+D:\Visual Studio Projects\VS2015\SourceSafe\CSharp\MeK49eV\UCfM\Components\obj\Debug\UCfM.Components.pdb
