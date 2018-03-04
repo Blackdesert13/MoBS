@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MoBa.Controller</name>
+    </assembly>
+    <members>
+        <member name="T:MoBaSteuerung.Controller">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller._model">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller.appTyp">
+            <summary>
+            Programmtyp Master oder Slave
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller.anzeigeTyp">
+            <summary>
+            Anzeigetyp Bedienen oder Bearbeiten
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller.zoom">
+            <summary>
+            View Zoom
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller.zoomFaktor">
+            <summary>
+            Zoomfaktor
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller.zoomFaktorVorÄnderung">
+            <summary>
+            Zoomfaktor vor Änderung
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller.anlageGrößeInRaster">
+            <summary>
+            Anlagengröße
+            </summary>
+        </member>
+        <member name="F:MoBaSteuerung.Controller.anzeigeGrößeInPixel">
+            <summary>
+            Standardgröße der Anlage
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.AppTyp">
+            <summary>
+            Programmtyp.
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.ZeichnenElemente">
+            <summary>
+            alle AnlagenElementListen
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.MitClientsVerbunden">
+            <summary>
+            Mit Client verbinden.
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.MitServerVerbunden">
+            <summary>
+            Mit dem Server verbunden.
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.AnzeigeTyp">
+            <summary>
+            Anzeigetyp.
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.Zoom">
+            <summary>
+            Zoom
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.ZoomFaktor">
+            <summary>
+            Zoomfaktor
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.ZoomFaktorVorÄnderung">
+            <summary>
+            ZoomfaktorVorÄnderung
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.AnlageGrößeInRaster">
+            <summary>
+            Gibt die Anlagengröße zurück.
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.AnzeigeGrößeInPixel">
+            <summary>
+            Größe der Anzeige in Pixel.
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.#ctor(MoBaSteuerung.Model)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AnlageNeu">
+            <summary>
+            Anlage zurück setzen.
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AnlageLaden(System.String)">
+            <summary>
+            Anlage laden.
+            </summary>
+            <param name="anlageName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AnlageSchließen">
+            <summary>
+            Anlage schließen.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AnlageSpeichern">
+            <summary>
+            Anlage speichern.
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AnlageSpeichernUnter(System.String)">
+            <summary>
+            Anlage speichern unter.
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.SlaveMitMasterVerbinden(System.String)">
+            <summary>
+            Mit Master verbinden.
+            </summary>
+            <param name="masterName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.SlaveVomMasterTrennen">
+            <summary>
+            Vom Master trennen.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.ZoomStandard">
+            <summary>
+            View auf Standardzoom setzen.
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.ZeichneElementeBedienen(System.Drawing.Graphics)">
+            <summary>
+            Elemente zeichnen Bedienmodus.
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.ZeichneElementeBearbeiten(System.Drawing.Graphics)">
+            <summary>
+            Elemente zeichnen Bedarbeitungsmodus.
+            </summary>
+            <param name="graphics"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AuswahlRechteckElemente(System.Drawing.Drawing2D.GraphicsPath)">
+            <summary>
+            Abfrage, ob Elemente im Auswahlrechteck vorhanden sind.
+            </summary>
+            <param name="graphicsPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AuswahlRechteckVerschieben(System.Drawing.Drawing2D.GraphicsPath)">
+            <summary>
+            Alle Elemente im Auswahlrechteck verschieben.
+            </summary>
+            <param name="graphicsPath"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AuswahlRechteckElementeLöschen(System.Drawing.Drawing2D.GraphicsPath)">
+            <summary>
+            Alle Elemente im Auswahlrechteck löschen.
+            </summary>
+            <param name="graphicsPath"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.AktuelleZeit">
+            <summary>
+            Aktuelle Uhrzeit.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.FileNew">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.FileLoaded">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.FileSave">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.FileSaved">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.MasterConnected">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.ZoomChanged">
+            <summary>
+            Event zum Zoomänderung.
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.AnlageGrößeInRasterChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.AppTypChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.ViewTypChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:MoBaSteuerung.Controller.ViewNeuZeichnen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnFileLoaded(System.String)">
+            <summary>
+            Wird ausgelösst, wenn eine Anlage geladen wurde.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnFileSave(System.Boolean)">
+            <summary>
+            Wird ausgelösst, wenn die Anlage gespeichert wird.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnFileSaved(System.String)">
+            <summary>
+            Wird ausgelösst, wenn die Anlage gespeichert wurde.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnFileNew(System.String)">
+            <summary>
+            Wird ausgelösst, wenn eine neue Anlage erzeugt wurde.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnMasterConnected(System.String)">
+            <summary>
+            Wird ausgelösst, wenn mit einem Server verbunden.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnZoomChanged(System.Int32)">
+            <summary>
+            Wird ausgelösst, wenn der Zoom geändert wurde.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnAnlageGrößeInRasterChanged(System.Drawing.Size)">
+            <summary>
+            Wird ausgelösst, wenn die Größe geändert wurde.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnAppTypChanged(MoBaSteuerung.Anlagenkomponenten.Enum.AppTyp)">
+            <summary>
+            Wird ausgelösst, wenn der Programmtyp geändert wurde.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnViewTypeChanged(MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp)">
+            <summary>
+            Wird ausgelösst, wenn der Anzeigetyp geändert wurde.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.OnViewNeuZeichnen">
+            <summary>
+            Wird ausgelösst, wenn neu gezeichnet werden müßte.
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.BedienenAuswahlLöschen">
+            <summary>
+            Löscht die gegenwärtige Auswahl (Selektion) im Bedienmodus, gegenwärtig können dies nur Fahrstraßen sein
+            </summary>
+            <returns>Gibt TRUE zurück, wenn eine Auswahl gelöscht wurde</returns>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.RückmeldungAnzeigen">
+            <summary>
+            Gibt an ob Rückmeldung angezeigt werden soll
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.RückmeldungAktiv">
+            <summary>
+            Gibt an ob die Rückmeldung vom Arduino gesendet werden
+            </summary>
+        </member>
+        <member name="P:MoBaSteuerung.Controller.FahrstraßenStartVerzögerung">
+            <summary>
+            Gibt an nach wie vielen Millisekunden das Startgleis einer Fahrstraße eingeschaltet wird
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.NeuesElementVorschau(MoBaSteuerung.Anlagenkomponenten.Enum.BearbeitungsModus,System.Drawing.Point)">
+            <summary>
+            aktualisiert die Vorschau für ein neues Anlagenelement
+            </summary>
+            <param name="bearbeitungsModus">Angabe des Elementtyps</param>
+            <param name="_letzterRasterpunkt">Position des neuen Elements</param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.NeuesElementVorschauReset">
+            <summary>
+            Setzt das Vorschau Element zurück
+            </summary>
+        </member>
+        <member name="M:MoBaSteuerung.Controller.BerechneRasterPunkt(System.Drawing.Point)">
+            <summary>
+            Berechnet aus den übergebenen Pixelkoordinaten den Rasterpunkt´und gibt diesen als neuen Punkt zurück
+            </summary>
+            <param name="punkt">Pixelkoordinaten</param>
+            <returns>Rasterpunkt</returns>
+        </member>
+    </members>
+</doc>
