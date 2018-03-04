@@ -1,5 +1,0 @@
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Anlagenkomponenten\bin\Release\UCfM.Components.dll
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Anlagenkomponenten\bin\Release\UCfM.Components.pdb
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Anlagenkomponenten\obj\Release\UCfM.Components.dll
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Anlagenkomponenten\obj\Release\UCfM.Components.pdb
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Anlagenkomponenten\obj\Release\Anlagenkomponenten.csprojResolveAssemblyReference.cache
