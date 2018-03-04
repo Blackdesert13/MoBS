@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{589E1672-5A81-4393-9D5E-844F8564B6A1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ModellBahnSteuerung</RootNamespace>
+    <AssemblyName>ModellBahnSteuerung</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Mek49.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ImageViewer">
+      <HintPath>..\..\..\MeK49\ImageView\ImageViewer\bin\Debug\ImageViewer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dialoge\frmArduino.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialoge\frmArduino.Designer.cs">
+      <DependentUpon>frmArduino.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialoge\frmEinstellung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialoge\frmEinstellung.Designer.cs">
+      <DependentUpon>frmEinstellung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialoge\frmLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialoge\frmLog.Designer.cs">
+      <DependentUpon>frmLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialoge\frmInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialoge\frmInfo.Designer.cs">
+      <DependentUpon>frmInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SteckerAnzeige.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include=".Designer.cs">
+      <DependentUpon>SteckerAnzeige.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="ToolBox\Knoten.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\Knoten.Designer.cs">
+      <DependentUpon>Knoten.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\Gleis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\Gleis.Designer.cs">
+      <DependentUpon>Gleis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\RueckMeldung.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\RueckMeldung.Designer.cs">
+      <DependentUpon>RueckMeldung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\Signal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\Signal.Designer.cs">
+      <DependentUpon>Signal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\FSS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\FSS.Designer.cs">
+      <DependentUpon>FSS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\Weiche.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\Weiche.Designer.cs">
+      <DependentUpon>Weiche.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\Relaise.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\Relaise.Designer.cs">
+      <DependentUpon>Relaise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\Schalter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\Schalter.Designer.cs">
+      <DependentUpon>Schalter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\Entkuppler.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolBox\Entkuppler.Designer.cs">
+      <DependentUpon>Entkuppler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBox\frmToolBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolBox\frmToolBox.Designer.cs">
+      <DependentUpon>frmToolBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolStripSplitButtonCheckable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="frmMoBaSt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMoBaSt.Designer.cs">
+      <DependentUpon>frmMoBaSt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZugEditor\frmZugEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZugEditor\frmZugEditor.Designer.cs">
+      <DependentUpon>frmZugEditor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Dialoge\frmArduino.resx">
+      <DependentUpon>frmArduino.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialoge\frmEinstellung.resx">
+      <DependentUpon>frmEinstellung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialoge\frmLog.resx">
+      <DependentUpon>frmLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialoge\frmInfo.resx">
+      <DependentUpon>frmInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SteckerAnzeige.resx">
+      <DependentUpon>SteckerAnzeige.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\Knoten.resx">
+      <DependentUpon>Knoten.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\Gleis.resx">
+      <DependentUpon>Gleis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\RueckMeldung.resx">
+      <DependentUpon>RueckMeldung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\Signal.resx">
+      <DependentUpon>Signal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\FSS.resx">
+      <DependentUpon>FSS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\Weiche.resx">
+      <DependentUpon>Weiche.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\Relaise.resx">
+      <DependentUpon>Relaise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\Schalter.resx">
+      <DependentUpon>Schalter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\Entkuppler.resx">
+      <DependentUpon>Entkuppler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolBox\frmToolBox.resx">
+      <DependentUpon>frmToolBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMoBaSt.resx">
+      <DependentUpon>frmMoBaSt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ZugEditor\frmZugEditor.resx">
+      <DependentUpon>frmZugEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mek49.ico" />
+    <None Include="Resources\107619_LowPriorityNote_16x16.png" />
+    <None Include="Resources\107597_HighPriorityNote_16x16.png" />
+    <None Include="Resources\NewNoteWhite_32x32.png" />
+    <None Include="Resources\ReportBlank_32.png" />
+    <None Include="Resources\ActivityReports.png" />
+    <None Include="Resources\1435_ClipBoard.png" />
+    <None Include="Resources\OpenMouseDown.png" />
+    <None Include="Resources\Open.png" />
+    <None Include="Resources\CloseMouseEnter.png" />
+    <None Include="Resources\CloseMouseDown.png" />
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\OpenMouseEnter.png" />
+    <None Include="Resources\OpenFileFromProject_16x.png" />
+    <None Include="Resources\Stop_16x.png" />
+    <None Include="Resources\StartWithoutDebug_16x.png" />
+    <None Include="Resources\Setting.png" />
+    <None Include="Resources\SaveAs_16x.png" />
+    <None Include="Resources\Save_16x.png" />
+    <None Include="Resources\Raster.png" />
+    <None Include="Resources\Printer.png" />
+    <None Include="Resources\Plus_MouseOver1.png" />
+    <None Include="Resources\Plus_MouseDown1.png" />
+    <None Include="Resources\Plus1.png" />
+    <None Include="Resources\NewFile_16x.png" />
+    <None Include="Resources\Minus_MouseOver1.png" />
+    <None Include="Resources\Minus_MouseDown1.png" />
+    <None Include="Resources\Minus1.png" />
+    <None Include="Resources\Info.png" />
+    <None Include="Resources\help.png" />
+    <None Include="Resources\Close_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Anlagenkomponenten\Anlagenkomponenten.csproj">
+      <Project>{70b87220-8038-4b85-8652-a88786c86b75}</Project>
+      <Name>Anlagenkomponenten</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controller\Controller.csproj">
+      <Project>{bee15628-43e4-4fea-9e8f-4440886d4b90}</Project>
+      <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{010ba840-cc8e-4091-9606-7f590cdf01e3}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist $(SolutionDir)\MoBSExe mkdir $(SolutionDir)\MoBSExe
+xcopy  "$(TargetDir)ModellbahnSteuerung.exe" "$(SolutionDir)\MoBSExe\" /Y /C
+xcopy  "$(TargetDir)ModellbahnSteuerung.exe.config" "$(SolutionDir)\MoBSExe\"  /Y /C
+xcopy  "$(TargetDir)MoBa.Model.dll" "$(SolutionDir)\MoBSExe\"  /Y /C
+xcopy  "$(TargetDir)MoBa.Components.dll" "$(SolutionDir)\MoBSExe\"  /Y /C
+xcopy  "$(TargetDir)MoBa.Controller.dll" "$(SolutionDir)\MoBSExe\"  /Y /C
+xcopy  "$(TargetDir)MoBaKommunikation.dll" "$(SolutionDir)\MoBSExe\"  /Y /C
+xcopy  "$(SolutionDir)MoBS.chm" "$(SolutionDir)\MoBSExe\"  /Y /C</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
