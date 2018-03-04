@@ -1,9 +1,0 @@
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\bin\Release\UCfM.Controller.dll
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\bin\Release\UCfM.Controller.pdb
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\bin\Release\UCfM.Components.dll
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\bin\Release\UCfM.Model.dll
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\bin\Release\UCfM.Components.pdb
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\bin\Release\UCfM.Model.pdb
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\obj\Release\Controller.csprojResolveAssemblyReference.cache
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\obj\Release\UCfM.Controller.dll
-C:\Users\Black\Desktop\Programmierprogramme\René\Projects\UCfM\Controller\obj\Release\UCfM.Controller.pdb
