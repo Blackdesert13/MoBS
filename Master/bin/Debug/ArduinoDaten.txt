@@ -1,0 +1,348 @@
+﻿Arduino 6
+Relais-Platine 6-0
+PC-Bezeichnung													Gl356	Gl358	Gl360	Gl361 Gl362	
+Anlagen-Bezeichnung													2135	2136	2137	2138	 
+Stecker													23-Vk1/2_b5	23-Vk1/2_b6	23-Vk1/2_b7	23-Vk1/2_b8	
+Rückmeldung													RM6-1-5	RM6-1-6	RM6-1-7	RM6-1-8	
+Regler																	 
+Relais-Platine 6-1
+PC-Bezeichnung	Gl86	Gl301	Gl70	Gl88	Gl76	Gl330		Gl71	Gl341	Gl338	Gl337	Gl336	Gl334	Gl332	Gl73	Gl78	
+Anlagen-Bezeichnung	2111	2115	2101	2114	2106	2107		2103	2120	2122	2123	2117	2118	2119	2104	2108	 
+Stecker	23-Vk1/2_a8	21-P_a7	21-P_a1	21-P_a6	21-P_a2	21-P_a3		23-Vk1/2_a2	24-Vk1/3_a5	24-Vk1/3_a7	24-Vk1/3_a8	24-Vk1/3_a2	24-Vk1/3_a3	24-Vk1/3_a4	23-Vk1/2_a3	23-Vk1/2_a5	
+Rückmeldung	RM6-0-5	RM6-0-6	RM6-0-0	RM6-0-7	RM6-0-2	RM6-0-8		RM6-0-12	RM6-1-0	RM6-1-2	RM6-0-10	RM6-1-1	RM6-1-3	RM6-1-4	RM6-0-11	RM6-0-3	
+Regler																	 
+Relais-Platine 6-2
+PC-Bezeichnung	We2 We1	We4 We3	We5 We6	We8 We7	We10	We11 We9	We48	We12	We49	We50	We52	We51	We54	We53	We2380	We55	
+Anlagen-Bezeichnung	1204 1205	2208 2209	2210 2211	2204 2205	2203	2201 2202	1201	2212	1202	1203	2214	2215	2217	2216	2213	2218	 
+Stecker	12-Vk2/1_a4	22-Vk2/2_a5	22-Vk2/2_a6	22-Vk2/2_a3	22-Vk2/2_a2	22-Vk2/2_a1	12-Vk2/1_a1	22-Vk2/2_a7	12-Vk2/1_a2	12-Vk2/1_a3	22-Vk2/2_a10	22-Vk2/2_a9	23-Vk1/2_b2	23-Vk1/2_b1	22-Vk2/2_a8	23-Vk1/2_b3	
+Rückmeldung																	
+Regler																	 
+RM-Platine 6-0
+PC-Bezeichnung	Gl70	Gl81 Gl256 Gl257 Gl258	Gl76	Gl78	Gl69 Gl72 Gl366	Gl86	Gl301	Gl88	Gl330	Gl250 Gl251 Gl252	Gl337	Gl73	Gl71	Gl67	Gl342	Gl355	
+Anlagen-Bezeichnung	2101	2109 1103	2106	2108	2105	2111	2115	2114	2107	1102	2123	2104	2103	2110	2124	2139	
+Stecker	21-P_a1	23-Vk1/2_a6	21-P_a2	23-Vk1/2_a5	23-Vk1/2_a4	23-Vk1/2_a8	21-P_a7	21-P_a6	21-P_a3		24-Vk1/3_a8	23-Vk1/2_a3	23-Vk1/2_a2	23-Vk1/2_a7	24-Vk1/3_a9	23-Vk1/2_c9	
+Relais	Re6-1-2	Re0-0-0	Re6-1-4	Re6-1-15	Re0-0-0	Re6-1-0	Re6-1-1	Re6-1-3	Re6-1-5	Re0-0-0	Re6-1-10	Re6-1-14	Re6-1-7	Re0-0-0	Re0-0-0	Re0-0-0	
+RM-Platine 6-1
+PC-Bezeichnung	Gl341	Gl336	Gl338	Gl334	Gl332	Gl356	Gl358	Gl360	Gl361 Gl362								
+Anlagen-Bezeichnung	2120	2117	2122	2118	2119	2135	2136	2137	2138								
+Stecker	24-Vk1/3_a5	24-Vk1/3_a2	24-Vk1/3_a7	24-Vk1/3_a3	24-Vk1/3_a4	23-Vk1/2_b5	23-Vk1/2_b6	23-Vk1/2_b7	23-Vk1/2_b8								
+Relais	Re6-1-8	Re6-1-11	Re6-1-9	Re6-1-12	Re6-1-13	Re6-0-12	Re6-0-13	Re6-0-14	Re6-0-15								
+Arduino 7
+Relais-Platine 7-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 7-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 7-2
+PC-Bezeichnung			Fss18	Fss11	Fss29	Fss6	Fss5	Fss27									
+Anlagen-Bezeichnung			2918	2911	2929	2906	2905	2927									 
+Stecker			V2-3_6	V2-3_4													
+Rückmeldung			Re7-2-5	Regler5	Regler5	Re1-0-0	Regler5	Regler5									
+Regler			Regler4	Re7-2-5	Regler4	Regler4	Regler4	Regler4									 
+RM-Platine 7-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 7-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 8
+Relais-Platine 8-0
+PC-Bezeichnung	Fss20	Fss21	Fss25	Fss17									Fss22	Fss23	Fss24		
+Anlagen-Bezeichnung	3920	3921	3925	3917									3922	3923	3924		 
+Stecker	V2-3_1	V2-3_2		V2-3_5									V2-3_3				
+Rückmeldung	Re13-2-0	Re13-2-0	Regler5	Re14-0-0									Re13-2-0	Re10-2-5	Re1-0-0		
+Regler	Re7-2-2	Re7-2-2	Re7-2-3	Regler4									Re7-2-2	Re7-2-3	Regler2		 
+Relais-Platine 8-1
+PC-Bezeichnung	Gl45 Gl62	Gl63	Gl64	Gl91 Gl92 Gl93	Gl365	Gl89 Gl314 Gl315	Gl74	Gl61 Gl66							Gl400		
+Anlagen-Bezeichnung	2102 3101	3102	3103	3106	3126	3107	3127	3105							3128		 
+Stecker	V2-3_25 23-Vk1/2_a1 32-Vk2/3_a1	32-Vk2/3_a2	32-Vk2/3_a2	32-Vk2/3_a6	31-P_a6	31-P_a1	31-P_a7	32-Vk2/3_a5							31-P_a8		
+Rückmeldung	RM8-0-3	RM8-0-5	RM8-0-4	RM8-0-0	RM0-0-0	RM8-0-1	RM0-0-0	RM8-0-2							RM0-0-0		
+Regler																	 
+Relais-Platine 8-2
+PC-Bezeichnung	We14 We15	We16 We17	We26	We28 We27	We58	We59	We56	We57		We13							
+Anlagen-Bezeichnung	3201 3202	3203 3204	3207	3206 3205	3212	3213	3211	3210		3208							 
+Stecker	32-Vk2/3_b1	32-Vk2/3_b2	32-Vk2/3_b4	31-P_b1	33-Vk_c10	33-Vk1/4_c7	33-Vk1/4_c9	33-Vk1/4		32-Vk2/3_b5							
+Rückmeldung																	
+Regler																	 
+RM-Platine 8-0
+PC-Bezeichnung	Gl91 Gl92 Gl93	Gl89 Gl314 Gl315	Gl61 Gl66	Gl40 Gl45 Gl62 Gl68	Gl47 Gl64	Gl46 Gl63											
+Anlagen-Bezeichnung	3106	3107	3105	2102 3101 4101	4103 3103	4102 3102											
+Stecker	32-Vk2/3_a6	31-P_a1	32-Vk2/3_a5	V2-3_25 23-Vk1/2_a1 32-Vk2/3_a1 42-Vk2/4_a1	32-Vk2/3_a2	32-Vk2/3_a2											
+Relais	Re8-1-3	Re8-1-5	Re8-1-7	Re0-0-0 Re8-1-0 Re10-1-4	Re10-1-2 Re8-1-2	Re10-1-1 Re8-1-1											
+RM-Platine 8-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 9
+Relais-Platine 9-0
+PC-Bezeichnung	Fss4																
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung	Re14-0-0																
+Regler	Regler2																 
+Relais-Platine 9-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 9-2
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+RM-Platine 9-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 9-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 10
+Relais-Platine 10-0
+PC-Bezeichnung			Fss19														
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung			Regler2														
+Regler			Regler4														 
+Relais-Platine 10-1
+PC-Bezeichnung	Gl37 Gl38	Gl43 Gl44 Gl46	Gl33 Gl34 Gl47	Gl30 Gl31	Gl52 Gl68	Gl304 Gl364											
+Anlagen-Bezeichnung	4112	4113 4102	4114 4103	4115	4116 4101	4117											 
+Stecker					42-Vk2/4_a1												
+Rückmeldung	RM0-0-0	RM0-0-0 RM8-0-5	RM0-0-0 RM8-0-4	RM0-0-0	RM0-0-0 RM8-0-3	RM0-0-0											
+Regler																	 
+Relais-Platine 10-2
+PC-Bezeichnung	We20	We21 Fss7	We18 We19	We23 We22	We24	We25 Fss12	We30 We29	We32 We33	We34								
+Anlagen-Bezeichnung	4201	4203	4205 4204	4216 4217	4208	4209	4212 4213	4214 4215	4219								 
+Stecker	42-Vk2/4_c1	42-Vk2/4_c2	42-Vk2/4_c3	42-Vk2/4_c10	42-Vk2/4_c5	42-Vk2/4_c5	42-Vk2/4_c8	42-Vk2/4_c9									
+Rückmeldung		Regler5				Re13-2-2											
+Regler		Regler4				Re10-2-1											 
+RM-Platine 10-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 10-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 11
+Relais-Platine 11-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 11-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 11-2
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+RM-Platine 11-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 11-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 12
+Relais-Platine 12-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 12-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 12-2
+PC-Bezeichnung	We40 We41	We35	We38	We39 We31													
+Anlagen-Bezeichnung	5203 5202	5208	5206	5205 5204													 
+Stecker	???	51-P_a8	51-P_a4	51-P_a3													
+Rückmeldung																	
+Regler																	 
+RM-Platine 12-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 12-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 13
+Relais-Platine 13-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 13-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 13-2
+PC-Bezeichnung	Fss10 Fss28	Fss16	Fss13	Fss9 Fss14		Fss8											
+Anlagen-Bezeichnung	5910 5928	5916	5913	5909 5914		5908											 
+Stecker																	
+Rückmeldung	Regler5 Re14-0-1	Regler3	Regler5	Regler5 Regler2		Regler5											
+Regler	Regler4 Regler1	Regler4	Re14-0-2	Regler4 Regler1		Regler4											 
+RM-Platine 13-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 13-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 14
+Relais-Platine 14-0
+PC-Bezeichnung	Fss2	Fss3	Fss15														
+Anlagen-Bezeichnung	6902	2903	2915														 
+Stecker																	
+Rückmeldung	Regler3	Re14-0-0	Regler2														
+Regler	Regler4	Regler2	Re14-0-0														 
+Relais-Platine 14-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 14-2
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+RM-Platine 14-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 14-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 15
+Relais-Platine 15-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 15-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 15-2
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+RM-Platine 15-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 15-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 16
+Relais-Platine 16-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 16-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 16-2
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+RM-Platine 16-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 16-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+Arduino 17
+Relais-Platine 17-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 17-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+Relais-Platine 17-2
+PC-Bezeichnung	We46 We47	We44 We45															
+Anlagen-Bezeichnung																	 
+Stecker																	
+Rückmeldung																	
+Regler																	 
+RM-Platine 17-0
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	
+RM-Platine 17-1
+PC-Bezeichnung																	
+Anlagen-Bezeichnung																	
+Stecker																	
+Relais																	

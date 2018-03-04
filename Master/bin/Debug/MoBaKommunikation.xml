@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MoBaKommunikation</name>
+    </assembly>
+    <members>
+        <member name="T:MoBaKommunikation.SlaveClients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.Add(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <param name="slavePort"></param>
+            <param name="slaveRemoteID"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.Remove(System.String,System.Int32,System.String)">
+            <summary>1
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <param name="slavePort"></param>
+            <param name="slaveRemoteID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.Item(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.SendenAnlageZustandsDatenAnAlle(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="anlageDaten"></param>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.SendenAnlage(System.String,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <param name="anlageDaten"></param>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.SendenBeenden">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClients.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:MoBaKommunikation.SlaveClient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaKommunikation.SlaveClient.SlaveDNS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaKommunikation.SlaveClient.SlavePort">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaKommunikation.SlaveClient.SlaveRemoteID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaKommunikation.SlaveClient.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MoBaKommunikation.SlaveClient.SendenZumSlave">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClient.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClient.#ctor(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dnsName"></param>
+            <param name="port"></param>
+            <param name="remoteID"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClient.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.SlaveClient.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:MoBaKommunikation.IMaster">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaKommunikation.IMaster.SlaveAnmelden">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaKommunikation.IMaster.SlaveAbmelden">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaKommunikation.IMaster.SlaveMouseClick">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.IMaster.Anmelden(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <param name="slavePort"></param>
+            <param name="slaveRemoteID"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaKommunikation.IMaster.Abmelden(System.String,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <param name="slavePort"></param>
+            <param name="slaveRemoteID"></param>
+        </member>
+        <member name="T:MoBaKommunikation.InterfaceMoBaMaster">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.InterfaceMoBaMaster.Anmelden(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <param name="port"></param>
+            <param name="remoteID"></param>
+            <param name="clientName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MoBaKommunikation.InterfaceMoBaMaster.Abmelden(System.String,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="slaveDNS"></param>
+            <param name="port"></param>
+            <param name="remoteID"></param>
+        </member>
+        <member name="T:MoBaKommunikation.InterfaceMoBaSlave">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.InterfaceMoBaSlave.AnlageDaten(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="anlagenDaten"></param>
+        </member>
+        <member name="M:MoBaKommunikation.InterfaceMoBaSlave.AnlageZustandsDaten(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="anlagenZustandsDaten"></param>
+        </member>
+        <member name="M:MoBaKommunikation.InterfaceMoBaSlave.MasterBeendet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaKommunikation.ISlave">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:MoBaKommunikation.ISlave.MasterAnlageDaten">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.ISlave.AnlageDaten(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="anlageDaten"></param>
+        </member>
+        <member name="M:MoBaKommunikation.ISlave.AnlageZustandsDaten(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="anlageZustandDaten"></param>
+        </member>
+        <member name="M:MoBaKommunikation.ISlave.MasterBeendet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaKommunikation.Master">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Master.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MoBaKommunikation.Master.AnmeldenEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="slaveClient"></param>
+        </member>
+        <member name="E:MoBaKommunikation.Master.SlaveAnmeldenClickEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Master.OnSlaveAnmelden(MoBaKommunikation.SlaveClient)">
+            <summary>
+            
+            </summary>
+            <param name="slaveClient"></param>
+        </member>
+        <member name="T:MoBaKommunikation.Master.AbmeldenEventHandler">
+            <summary>
+            
+            </summary>
+            <param name="slaveClient"></param>
+        </member>
+        <member name="E:MoBaKommunikation.Master.SlaveAbmeldenClickEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Master.OnSlaveAbmelden(MoBaKommunikation.SlaveClient)">
+            <summary>
+            
+            </summary>
+            <param name="slaveClient"></param>
+        </member>
+        <member name="E:MoBaKommunikation.Master.SlaveMouseClickEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Master.Start(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="remoteID"></param>
+            <param name="port"></param>
+        </member>
+        <member name="M:MoBaKommunikation.Master.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Master.SendeAnlageZuSlave(System.String,System.Byte[])">
+            <summary>
+            Sendet die Anlage zu dem angegebenen Slave.
+            </summary>
+            <param name="slaveDNS">Slave Rechner Name</param>
+            <param name="anlage">Anlagedaten</param>
+        </member>
+        <member name="M:MoBaKommunikation.Master.SendeAnlageZustandsDatenAnAlle(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="anlageZustandsDaten"></param>
+        </member>
+        <member name="M:MoBaKommunikation.Master.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Master.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:MoBaKommunikation.Slave">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Slave.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Slave.Start(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="masterDNS">DNS</param>
+            <param name="port">Port</param>
+            <param name="remoteID">Remote Unique</param>
+            <param name="clientName"></param>
+        </member>
+        <member name="M:MoBaKommunikation.Slave.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Slave.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MoBaKommunikation.Slave.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+    </members>
+</doc>
