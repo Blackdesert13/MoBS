@@ -14,7 +14,7 @@ namespace MoBaSteuerung.Elemente {
     /// </summary>
     public class Gleis : LinienAnlagenElement {
 
-        private int reglerNr = 1;
+        private int reglerNr = 0;
         //private int reglerNrAktuell = 0;
         private Regler regler;
         private FSS fss;
