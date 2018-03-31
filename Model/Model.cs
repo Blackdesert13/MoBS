@@ -26,6 +26,9 @@ namespace MoBaSteuerung {
     public class Model : Control {
 
 
+
+
+
         #region Private Felder
 
         private AnzeigeTyp anzeigeTyp;
