@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZeichnenElemente\BasisKlassen.cs" />
     <Compile Include="ZeichnenElemente\Anschluss.cs" />
+    <Compile Include="ZeichnenElemente\ServoElement.cs" />
     <Compile Include="ZeichnenElemente\ZugElement.cs" />
     <Compile Include="ZeichnenElemente\HaltestellenElement.cs" />
     <Compile Include="ZeichnenElemente\InfoElement.cs" />

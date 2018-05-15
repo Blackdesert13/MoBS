@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
 using MoBaSteuerung.ZeichnenElemente;
+using MoBa.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
 namespace MoBaSteuerung {
@@ -289,6 +290,9 @@ namespace MoBaSteuerung {
             foreach (Signal el in zeichnenElemente.SignalElemente.Elemente)
                 if (el.MouseClick(punkt))
                     elemList.Add(el);
+            foreach (Servo el in zeichnenElemente.ServoElemente.Elemente)
+                if (el.MouseClick(punkt))
+                    elemList.Add(el);
             foreach (Weiche el in zeichnenElemente.WeicheElemente.Elemente)
                 if (el.MouseClick(punkt))
                     elemList.Add(el);
@@ -320,6 +324,9 @@ namespace MoBaSteuerung {
         public bool ElementToggeln(string elementName, int nr) {
             AnlagenElement el = null;
             switch (elementName) {
+                case "Servo":
+                    el = zeichnenElemente.ServoElemente.Element(nr);
+                    break;
                 case "Signal":
                     el = zeichnenElemente.SignalElemente.Element(nr);
                     break;
@@ -350,7 +357,7 @@ namespace MoBaSteuerung {
 
             if (el != null) {
                 bool action = el.AusgangToggeln();
-                if(elementName == "FSS")
+                if (elementName == "FSS")
                     zeichnenElemente.FSSAktualisieren();
                 if (action && _ardController.IsPortOpen())
                     OnAnlagenZustandAdresseChanged(el.Ausgang);
@@ -542,6 +549,10 @@ namespace MoBaSteuerung {
                     new Knoten(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
                 }
 
+                if (elem[0] == "Servo") {
+                    new Servo(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
+                }
+
                 if (elem[0] == "Gleis") {
                     new Gleis(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
                 }
@@ -702,6 +713,7 @@ namespace MoBaSteuerung {
             this.zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
+            this.zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
             graphics.SmoothingMode = SmoothingMode.Default;
         }
 
@@ -720,6 +732,8 @@ namespace MoBaSteuerung {
             this.zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
+            this.zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
+            this.zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
 
             if (this._neuesElement != null)
                 this._neuesElement.ElementZeichnen(graphics);

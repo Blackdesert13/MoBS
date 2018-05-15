@@ -78,11 +78,6 @@ namespace MoBaSteuerung.Elemente {
                     this.Berechnung();
                 }
             }
-            //neuerSchalter.Nr = Convert.ToInt32(elem[1]);
-            //neuerSchalter.Anschluss.Speicherstring = elem[2];
-            //neuerSchalter.Anschluss.Typ = "Schalter";
-            //neuerSchalter.Bezeichnung = elem[3];
-            //schalterListe.NeuesElement(neuerSchalter);
         }
 
         /// <summary>

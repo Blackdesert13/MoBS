@@ -6,7 +6,8 @@ using System.Text;
 
 namespace MoBaSteuerung.Elemente
 {
-   /* public class Anschluss :AnlagenElement
+   /*soll Anschlüsse dokumentieren welche nicht durch Anlagenelemente bezeichnet sind
+   public class Anschluss :AnlagenElement
     {
     }*/
 }

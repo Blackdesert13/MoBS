@@ -137,7 +137,7 @@ namespace MoBaSteuerung.Elemente {
         /// <param name="parent"></param>
         /// <param name="zoom"></param>
         /// <param name="anzeigeTyp"></param>
-        /// <param name="elem"></param>
+        /// <param name="elem">gesplittete Speicherstring aus der Anlagendatei (anl)</param>
         public Gleis(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)
             : base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp) {
             Ausgang = new Adresse(Parent);

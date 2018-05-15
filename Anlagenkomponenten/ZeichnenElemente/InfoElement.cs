@@ -83,19 +83,16 @@ namespace MoBaSteuerung.Elemente
             this.graphicsPathText = new GraphicsPath();
             this.graphicsPathText.AddString(txt, new FontFamily("Arial"), 0, 0.6f, new PointF(-0.5f, -0.36f), this.stringFormat);
             RectangleF rechteck = graphicsPathText.GetBounds();
+            //rechteck.Inflate(0.1f, 0.1f);
 
-            //graphicsPathText.AddRectangle(rechteck);
             this.graphicsPathText.Transform(matrix);
             this.graphicsPathHintergrund = new GraphicsPath();
             this.graphicsPathHintergrund.AddRectangle(rechteck);
             //this.graphicsPathText.Reset();
-            //this.graphicsPathText.AddString(ID.ToString(), new FontFamily("Arial"), 0, 0.5f, this.DrehenUmPunkt(new PointF(0, 0), new PointF(0, -0.25f), winkel), this.stringFormat);
-            //                                                                      grösse
-           // this.graphicsPathHintergrund.AddString(txt, new FontFamily("Arial"), 0, 0.5f, new PointF(-0.5f, -0.25f), this.stringFormat);
-            // this.graphicsPathHintergrund.AddString("123", new FontFamily("Arial"), 0, 0.5f, )
             this.graphicsPathHintergrund.Transform(matrix);
 
         }
+
         public override void ElementZeichnen(Graphics graphics)
         {
            // Color farbeStift = Color.Black;

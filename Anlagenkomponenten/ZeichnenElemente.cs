@@ -8,6 +8,7 @@ using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 using System.Drawing;
 using MoBaSteuerung.ZeichnenElemente;
+using MoBa.Elemente;
 
 namespace MoBaSteuerung.Anlagenkomponenten {
 
@@ -18,6 +19,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
     public class AnlagenElemente
     {
         private ElementListe<Regler> reglerElemente;
+        private ElementListe<Servo> servoElemente;
         private ElementListe<FSS> fssElemente;
         private ElementListe<Gleis> gleisElemente;
         private ElementListe<Weiche> weicheElemente;
@@ -41,16 +43,16 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         /// </summary>
         public AnlagenElemente() {
 
-            this.reglerElemente = new ElementListe<Regler>();
-            this.knotenElemente = new ElementListe<Knoten>();
-            this.gleisElemente = new ElementListe<Gleis>();
-            this.weicheElemente = new ElementListe<Weiche>();
-            this.signalElemente = new ElementListe<Signal>();
+            this.reglerElemente   = new ElementListe<Regler>();
+            this.servoElemente    = new ElementListe<Servo>();
+            this.knotenElemente   = new ElementListe<Knoten>();
+            this.gleisElemente    = new ElementListe<Gleis>();
+            this.weicheElemente   = new ElementListe<Weiche>();
+            this.signalElemente   = new ElementListe<Signal>();
             this.schalterElemente = new ElementListe<Schalter>();
-            this.fssElemente = new ElementListe<FSS>();
-            
+            this.fssElemente      = new ElementListe<FSS>();           
             this.entkupplerElemente = new ElementListe<Entkuppler>();
-            this.infoElemente = new ElementListe<InfoFenster>();
+            this.infoElemente       = new ElementListe<InfoFenster>();
             this.haltestellenElemente = new ElementListe<Haltestelle>();
 
             this.listeMCSpeicher = new ElementListe<MCSpeicher.MCSpeicher>();
@@ -100,8 +102,14 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         public ElementListe<Regler> ReglerElemente {
             get { return this.reglerElemente; }
         }
+
+        public ElementListe<Servo> ServoElemente
+        {
+            get { return this.servoElemente; }
+        }
+
         /// <summary>
-        /// 
+        /// Liste aller Gleise
         /// </summary>
         public ElementListe<Gleis> GleisElemente {
             get {
