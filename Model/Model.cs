@@ -24,7 +24,7 @@ namespace MoBaSteuerung {
     /// <summary>
     /// Anlagenlogik
     /// </summary>
-    public class Model : Control {
+    public partial class Model : Control {
 
 
 
@@ -36,8 +36,6 @@ namespace MoBaSteuerung {
         private AnlagenElemente zeichnenElemente;
         private ArduinoController _ardController;
         private bool _master = false;
-        private AnlagenElement _neuesElement;
-        private List<AnlagenElement> _auswahlElemente;
         private int _fahrstraßenStartVerzögerung;
 
         /// <summary>
@@ -236,6 +234,8 @@ namespace MoBaSteuerung {
 
 
 
+
+
         /// <summary>
         /// Wenn Zustand in einer Adresse geändert wurde, wird dieser über den ArduinoController gesendet.
         /// Wird keine Adresse an die Methode übergeben, werden alle Adressen ausgegeben.
@@ -299,6 +299,11 @@ namespace MoBaSteuerung {
             foreach (Gleis el in zeichnenElemente.GleisElemente.Elemente)
                 if (el.MouseClick(punkt))
                     elemList.Add(el);
+
+            if(this.ZeichnenElemente.AktiverServoAction != ServoAction.None && this.ZeichnenElemente.AktiverServo != null) {
+                OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, this.ZeichnenElemente.AktiverServoAction);
+                this.ZeichnenElemente.AktiverServoAction = ServoAction.None;
+            }
 
             return elemList;
         }
@@ -367,7 +372,41 @@ namespace MoBaSteuerung {
             return false;
         }
 
-		public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp){
+        public bool ServoBewegungManuell(int servo, ServoAction action) {
+            Servo s = this.ZeichnenElemente.ServoElemente.Element(servo);
+            if (s != null) {
+                byte[] befehl = new byte[5];
+                befehl[0] = (byte)s.Ausgang.ArdNr;
+                befehl[1] = 72;
+                befehl[2] = (byte)(s.Ausgang.AdressenNr * 2 + s.Ausgang.BitNr);
+                if(action == ServoAction.LinksClick || action == ServoAction.RechtsClick) {
+                    befehl[2] |= 0x080;
+                    befehl[3] = 5;
+                    if(action == ServoAction.LinksClick) {
+                        befehl[3] = (byte)-befehl[3];
+                    }
+                }
+                else if(action == ServoAction.RechtsHold || action == ServoAction.LinksHold || action == ServoAction.HoldStop) {
+                    befehl[2] |= 0x40;
+                    switch (action) {
+                        case ServoAction.RechtsHold:
+                            befehl[3] = 255;
+                            break;
+                        case ServoAction.LinksHold:
+                            befehl[3] = 1;
+                            break;
+                        case ServoAction.HoldStop:
+                            befehl[3] = 0;
+                            break;
+                    }
+                }
+                befehl[4] = (byte)((befehl[0] + befehl[1] + befehl[2] + befehl[3]) % 256);
+                _ardController.SendData(befehl);
+            }
+            return false;
+        }
+
+        public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp){
 			if (el != null) {
 				if (!el.IsAktiv) {
 					Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
@@ -658,6 +697,8 @@ namespace MoBaSteuerung {
             StreamWriter anlageStreamWriter = new StreamWriter(anlageDateiPfadName, false, System.Text.Encoding.UTF8);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Arduinos\tNr.\tLageX\tLageY\tAnl.-Teil"
                                             + this.zeichnenElemente.ListeMCSpeicher.SpeicherString);
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Servos\tNr.\tLageX\tLageY\tWinkelE\tWinkelA\tSpeed\tManuell\tAusgang\tBeschr.\tBez\tStecker"
+                                            + this.zeichnenElemente.ServoElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FahrReg\tNr.\tLageX\tLageY\tFarbe\tFarbeZ\tBez\tStecker"
                                             + this.zeichnenElemente.ReglerElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Knoten\tNr.\tLageX\tLageY"
@@ -829,7 +870,11 @@ namespace MoBaSteuerung {
         /// </summary>
         public event AnlagenZustandEventHandler AnlagenzustandChanged;
 
+        public event ServoBewegungEventHandler ZubehoerServoAction;
+
         #endregion
+
+        
 
         /// <summary>
         /// 
@@ -843,6 +888,12 @@ namespace MoBaSteuerung {
         protected virtual void OnArduinoRueckmeldungReceived() {
             if (this.ArduinoRueckmeldungReceived != null) {
                 this.ArduinoRueckmeldungReceived();
+            }
+        }
+
+        protected virtual void OnZubehoerServoAction(int servo, ServoAction richtung) {
+            if (this.ZubehoerServoAction != null) {
+                this.ZubehoerServoAction(servo, richtung);
             }
         }
 
@@ -903,13 +954,7 @@ namespace MoBaSteuerung {
             return this._ardController.CloseComPort();
         }
 
-        public void FahrstrassenSuchen() {
-            zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Clear();
-            zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen = new List<FahrstrasseN>();
-            foreach (Signal sn in zeichnenElemente.SignalElemente.Elemente) {
-                zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen(sn);
-            }
-        }
+        
 
         /// <summary>
         /// Löscht die gegenwärtige Auswahl (Selektion) im Bedienmodus, gegenwärtig können dies nur Fahrstraßen sein
@@ -1021,167 +1066,18 @@ namespace MoBaSteuerung {
             return true;
         }
 
-        /// <summary>
-        /// Setzt das Vorschau Element zurück (weist diesem NULL zu)
-        /// </summary>
-        public void NeuesElementVorschauReset() {
-            if (this._neuesElement != null) {
-                this._neuesElement = null;
-                OnAnlageNeuZeichnen();
+        
+        public void BedienenServoManuell(ServoAction action) {
+            Debug.Print("Servo Action " + action);
+            if (this.zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen()) {
+                OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, action);
+                //if (keyData == Keys.Left) {
+                //    OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, ServoAction.LinksClick);
+                //}
+                //else if(keyData == Keys.Right) {
+                //    OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, ServoAction.RechtsClick);
+                //}
             }
-        }
-
-
-        public bool BearbeitenNeuZeichnen(BearbeitungsModus bearbeitungsModus, MouseButtons button, Point rasterpunkt) {
-            if (this._neuesElement != null) {
-                switch (bearbeitungsModus) {
-                    case BearbeitungsModus.Gleis:
-                        if (this._neuesElement.GetType().Name == "Knoten") {
-                            Gleis gl = new Gleis(this.zeichnenElemente, this._neuesElement.Zoom, this.anzeigeTyp, (Knoten)this._neuesElement, (Knoten)this._neuesElement);
-                            this._neuesElement = gl;
-                        }
-                        else {
-                            Gleis gl = (Gleis)this._neuesElement;
-                            Knoten startKnoten = this.zeichnenElemente.SucheKnoten(gl.StartKn.PositionRaster);
-                            Knoten endKnoten = this.zeichnenElemente.SucheKnoten(gl.EndKn.PositionRaster);
-                            if (startKnoten == null)
-                                startKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.StartKn.Zoom,
-                                                                this.anzeigeTyp, gl.StartKn.PositionRaster);
-                            if (endKnoten == null)
-                                endKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.EndKn.Zoom,
-                                                                this.anzeigeTyp, gl.EndKn.PositionRaster);
-                            new Gleis(this.zeichnenElemente, this.zeichnenElemente.GleisElemente.SucheFreieNummer(), _neuesElement.Zoom, this.anzeigeTyp,
-                                        startKnoten, endKnoten);
-                            NeuesElementVorschauReset();
-                            return true;
-                        }
-                        break;
-                    case BearbeitungsModus.Signal:
-                        _neuesElement.GleisElementAustragen();
-                        new Signal(this.zeichnenElemente, this.zeichnenElemente.SignalElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                    _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster, ((Signal)_neuesElement).InZeichenRichtung);
-                        NeuesElementVorschauReset();
-                        return true;
-                    case BearbeitungsModus.Entkuppler:
-                        _neuesElement.GleisElementAustragen();
-                        new Entkuppler(this.zeichnenElemente, this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                        _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
-                        NeuesElementVorschauReset();
-                        return true;
-                    case BearbeitungsModus.Schalter:
-                        _neuesElement.GleisElementAustragen();
-                        new Schalter(this.zeichnenElemente, this.zeichnenElemente.SchalterElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                      _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
-                        NeuesElementVorschauReset();
-                        return true;
-                    case BearbeitungsModus.Fss:
-                        _neuesElement.GleisElementAustragen();
-                        new FSS(this.zeichnenElemente, this.zeichnenElemente.FssElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                      _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
-                        NeuesElementVorschauReset();
-                        return true;
-                }
-            }
-            return false;
-        }
-
-        private List<AnlagenElement> SucheElementSelektieren(Point punkt) {
-            List<AnlagenElement> elemList = new List<AnlagenElement> { };
-
-            foreach (Knoten el in zeichnenElemente.KnotenElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Entkuppler el in zeichnenElemente.EntkupplerElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Schalter el in zeichnenElemente.SchalterElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Signal el in zeichnenElemente.SignalElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Weiche el in zeichnenElemente.WeicheElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (FSS el in zeichnenElemente.FssElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Gleis el in zeichnenElemente.GleisElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            return elemList;
-        }
-
-
-        public bool StartOnSelElement(Point location) {
-            foreach (AnlagenElement el in this.AuswahlElemente)
-                if (el.MouseClick(location))
-                    return true;
-            return false;
-        }
-
-
-        public string BearbeitenAnlagenElementInfoText(Point punkt) {
-            List<AnlagenElement> elListe = this.SucheElementAufPunkt(punkt);
-            if(elListe.Count > 0) {
-                return elListe[0].InfoString;
-            }
-            return String.Empty;
-        }
-
-        public void BearbeitenSelektionLöschen() {
-            foreach (AnlagenElement el in this.AuswahlElemente)
-                el.Selektiert = false;
-            this.AuswahlElemente.Clear();
-        }
-
-        public bool BearbeitenSelektieren(MouseButtons button, bool ctrlPressed, Point punkt) {
-            List<AnlagenElement> elListe = this.SucheElementSelektieren(punkt);
-            if (ctrlPressed) {
-                //this._auswahlElemente.AddRange(elListe);
-            }
-            else {
-                BearbeitenSelektionLöschen();
-                this.AuswahlElemente = elListe;
-            }
-
-            foreach (AnlagenElement el in this.AuswahlElemente)
-                el.Selektiert = true;
-
-            return true;
-        }
-
-        public void BearbeitenSelektieren(AnlagenElement element) {
-            BearbeitenSelektionLöschen();
-            if (element == null) {
-                OnAnlageNeuZeichnen();
-                return;
-            }
-            this.AuswahlElemente.Add(element);
-            element.Selektiert = true;
-            OnAnlageNeuZeichnen();
-        }
-
-        public void BearbeitenDragDrop(Point deltaRaster, DragDropEffects effect) {
-            foreach (AnlagenElement el in this.AuswahlElemente)
-                ((RasterAnlagenElement)el).DragDropPositionVerschieben(deltaRaster);
-        }
-
-        public void BearbeitenDragDropAbschließen(DragDropEffects effect) {
-            foreach (AnlagenElement el in this.AuswahlElemente)
-                ((RasterAnlagenElement)el).DragDropAbschließen();
-
-            BearbeitenSelektieren(MouseButtons.Left, false, new Point(-1, -1));
-        }
-
-        public bool SignalDrehen() {
-            if (_neuesElement.GetType().Name == "Signal") {
-                Signal sig = (Signal)_neuesElement;
-                sig.InZeichenRichtung = !sig.InZeichenRichtung;
-                sig.Berechnung();
-                return true;
-            }
-            return false;
         }
         #endregion
     }

@@ -14,6 +14,7 @@ using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 using MoBaSteuerung.Elemente;
 using System.Collections.Generic;
 using ModellBahnSteuerung;
+using System.Diagnostics;
 
 namespace MoBaSteuerung {
     /// <summary>
@@ -29,6 +30,7 @@ namespace MoBaSteuerung {
         private string _adminPwd = "MoBS_Mek49";
         private bool _adminAktiviert = false;
         private bool _anlageBearbeitenAktiviert=true;
+        private ServoAction _servoKeyAction = ServoAction.None;
 
         #endregion
 
@@ -1171,7 +1173,42 @@ namespace MoBaSteuerung {
 
         private int _signalNummer = -1;
 
-        
+
+        protected override bool ProcessDialogKey(Keys keyData) {
+            if (_servoKeyAction != ServoAction.LinksHold && _servoKeyAction != ServoAction.RechtsHold) {
+                switch (keyData) {
+                    case Keys.Left:
+                        if (_servoKeyAction == ServoAction.LinksClick) {
+                            _servoKeyAction = ServoAction.LinksHold;
+                            Model.BedienenServoManuell(_servoKeyAction);
+                        }
+                        else {
+                            _servoKeyAction = ServoAction.LinksClick;
+                        }
+                        break;
+                    case Keys.Right:
+                        if (_servoKeyAction == ServoAction.RechtsClick) {
+                            _servoKeyAction = ServoAction.RechtsHold;
+                            Model.BedienenServoManuell(_servoKeyAction);
+                        }
+                        else {
+                            if(_servoKeyAction != ServoAction.None) {
+
+                            }
+                            _servoKeyAction = ServoAction.RechtsClick;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //if (keyData == Keys.Right || keyData == Keys.Left) {
+            //    Debug.Print("ProcessDialogKey " + keyData);
+            //    //_servoKeyAction = 
+            //    Model.BedienenServoManuell(keyData);
+            //}
+            return base.ProcessDialogKey(keyData);
+        }
 
         private void MoBaStForm_KeyDown(object sender, KeyEventArgs e) {
             this.keydownEventArgs = e;
@@ -1269,6 +1306,9 @@ namespace MoBaSteuerung {
                     if (e.KeyData == Keys.Escape) {
                         neuZeichnen = this.Controller.BedienenAuswahlLöschen();
                     }
+                    if (e.KeyData == Keys.Left || e.KeyData == Keys.Right) {
+                        neuZeichnen = this.Controller.BedienenAuswahlLöschen();
+                    }
                     break;
             }
             if (neuZeichnen) this.pictureBoxView.Invalidate();
@@ -1288,6 +1328,16 @@ namespace MoBaSteuerung {
                 if (this.Controller.FahrstrassenSignal(_signalNummer))
                     this.pictureBoxView.Invalidate();
                 _signalNummer = -1;
+            }
+            if(e.KeyData == Keys.Left || e.KeyData == Keys.Right) {
+                if((_servoKeyAction == ServoAction.RechtsHold && e.KeyData == Keys.Right)
+                    ||( _servoKeyAction == ServoAction.LinksHold && e.KeyData == Keys.Left)) {
+                    Model.BedienenServoManuell(ServoAction.HoldStop);
+                }
+                else {
+                    Model.BedienenServoManuell(_servoKeyAction);                                      
+                }
+                _servoKeyAction = ServoAction.None;
             }
             if (_signalNummer >= 0) {
                 this.toolStripStatusLabelInfo.Text = "Signal " + _signalNummer;
@@ -1366,5 +1416,9 @@ namespace MoBaSteuerung {
             frmStecker.Show();
 
         }
-}
+
+        private void toolStripButtonFahrstrassenSuchen_Click(object sender, EventArgs e) {
+            this._model.FahrstrassenSuchen();
+        }
+    }
 }

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using MoBaSteuerung.Anlagenkomponenten.Enum;
+using MoBa.Elemente;
 
 namespace MoBaSteuerung.Anlagenkomponenten.Delegates {
     /// <summary>
@@ -76,4 +77,6 @@ namespace MoBaSteuerung.Anlagenkomponenten.Delegates {
     /// </summary>
     /// <param name="AnlageDaten"></param>
     public delegate void AnlageDatenEventHandler(byte[] AnlageDaten);
+
+    public delegate void ServoBewegungEventHandler(int Servo, ServoAction Richtung);
 }

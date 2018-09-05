@@ -57,6 +57,15 @@
         Bearbeiten
     }
 
+    public enum ServoAction {
+        None,
+        LinksClick,
+        RechtsClick,
+        LinksHold,
+        RechtsHold,
+        HoldStop
+    }
+
     /// <summary>
     /// Bearbeitungs Modus 
     /// </summary>

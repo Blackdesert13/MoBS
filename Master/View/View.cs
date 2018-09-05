@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using MoBaSteuerung.Anlagenkomponenten;
 using MoBaSteuerung.Anlagenkomponenten.Enum;
+using System.Diagnostics;
 
 namespace MoBaSteuerung {
     /// <summary>
@@ -541,7 +542,7 @@ namespace MoBaSteuerung {
                         //    }
                         //}
 
-                        if (this.mouseDownEventArgs != null && this.Controller.StartOnSelElement(this.mouseDownEventArgs.Location)) {
+                        if (this.mouseDownEventArgs != null && this.Model.StartOnSelElement(this.mouseDownEventArgs.Location)) {
                             Rectangle dragTestRect = new Rectangle(this.mouseDownEventArgs.Location, Size.Empty);
                             dragTestRect.Inflate(SystemInformation.DragSize);
                             Point pt = this.PointToClient(Control.MousePosition);
@@ -982,7 +983,7 @@ namespace MoBaSteuerung {
 
         private bool BedienenMouseDown() {
             bool result = false;
-
+            //Model.BedienenMouseDown(this.mouseDownEventArgs.)
 
 
             return result;

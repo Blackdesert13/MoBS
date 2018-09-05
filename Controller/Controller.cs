@@ -220,6 +220,21 @@ namespace MoBaSteuerung {
             return _model.BedienenMouseDoubleClick(location);
         }
 
+        private void Model_ZubehoerServoAction(int servo, ServoAction action) {
+            if (this.AppTyp == AppTyp.Master) {
+                if (_model.ServoBewegungManuell(servo, action)) {
+                    //if (master != null) {
+                    //    master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
+                    //}
+                }
+            }
+            if (this.AppTyp == AppTyp.Slave) {
+                if (slave != null) {
+                    //slave.SlaveAnMasterMouseClick(el[0].GetType().Name, el[0].ID);
+                }
+            }
+        }
+
         public bool BedienenMouseClick(Point p, MouseButtons button) {
             List<Elemente.AnlagenElement> el;
             switch (button) {
@@ -491,9 +506,9 @@ namespace MoBaSteuerung {
             this._model.AnlageNeuZeichnen += Model_AnlageNeuZeichnen;
             this._model.AnlageGrößeInRasterChanged += Model_AnlageGrößeInRasterChanged;
             this._model.AnlagenzustandChanged += Model_AnlagenzustandAdresseChanged;
+            this._model.ZubehoerServoAction += Model_ZubehoerServoAction;
             this.AnlageAusgangsZustand(AppTyp.Undefiniert);
         }
-
 
 
         public void StartServer(string remoteID, Int32 iPPort) {
@@ -530,10 +545,6 @@ namespace MoBaSteuerung {
 
 
 
-        }
-
-        public bool StartOnSelElement(Point location) {
-            return this._model.StartOnSelElement(location);
         }
 
         private void Model_AnlageNeuZeichnen() {

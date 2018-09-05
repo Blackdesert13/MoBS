@@ -57,6 +57,9 @@
     <Compile Include="Model.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Model_Editieren.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -38,6 +38,10 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         private bool _rückmeldungAnzeigen;
         private bool _rückmeldungAktiv;
 
+        private Servo _aktiverServo = null;
+        private ServoAction _aktiverServoRichtung = ServoAction.None;
+
+
         /// <summary>
         /// enthält alle Elemente der Anlage
         /// </summary>
@@ -234,9 +238,30 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             get {
                 return _rückmeldungAktiv;
             }
-
             set {
                 _rückmeldungAktiv = value;
+            }
+        }
+
+        public Servo AktiverServo {
+            get {
+                return _aktiverServo;
+            }
+            set {
+                if(_aktiverServo != null && value != null) {
+                    _aktiverServo.AusgangToggeln();
+                }
+                _aktiverServo = value;
+            }
+        }
+
+        public ServoAction AktiverServoAction {
+            get {
+                return _aktiverServoRichtung;
+            }
+
+            set {
+                _aktiverServoRichtung = value;
             }
         }
 
