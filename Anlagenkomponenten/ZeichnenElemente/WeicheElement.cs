@@ -39,7 +39,8 @@ namespace MoBaSteuerung.Elemente {
                  + "\t" + Grundstellung.ToString()
                  + "\t" + Ausgang.SpeicherString
                  + "\t" + Bezeichnung 
-                 + "\t" + Stecker; 
+                 + "\t" + Stecker
+                 + "\t" + KoppelungsString; 
             }
         }
 
@@ -59,7 +60,33 @@ namespace MoBaSteuerung.Elemente {
             }
         }
 
-
+        /// <summary>
+        /// zum Laden aus der Text-Datei
+        /// </summary>
+        /// <param name="parent">AnlagenElemente</param>
+        /// <param name="zoom"></param>
+        /// <param name="anzeigeTyp"></param>
+        /// <param name="elem">Zeile aus der Text-Datei</param>
+        public Weiche(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)
+        : base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp)
+        {// inArbeit
+            KurzBezeichnung = "We";
+            string[] knotString = elem[2].Split(' ');
+            Knoten kn = parent.KnotenElemente.Element(Convert.ToInt32(knotString[0]));
+            if (kn != null)
+            {
+                //this = kn.Weichen[Convert.ToInt32(knotString[1])];
+            }
+                Grundstellung = Convert.ToBoolean(elem[3]);
+            
+            Ausgang.SpeicherString = elem[4];
+            Bezeichnung = elem[5];
+            if (elem.Length > 6)
+                Stecker = elem[6];
+            if (elem.Length > 7)
+                KoppelungsString = elem[7];
+            Parent.WeicheElemente.Hinzufügen(this);
+        }
 
         public Weiche(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten node, Gleis gleis1, Gleis gleis2)
          : base(parent, iD, zoom, anzeigeTyp) {
