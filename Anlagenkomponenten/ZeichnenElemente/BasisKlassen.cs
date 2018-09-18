@@ -4,51 +4,12 @@ using MoBaSteuerung.Anlagenkomponenten.Enum;
 using MoBaSteuerung.Anlagenkomponenten;
 using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace MoBaSteuerung.Elemente
 {
-    public class Befehl
-    {
-        AnlagenElement _element;
-        bool _schaltZustand;
-
-        public AnlagenElement Element
-        {
-            get
-            {
-                return _element;
-            }
-
-            set
-            {
-                _element = value;
-            }
-        }
-
-        public bool SchaltZustand
-        {
-            get
-            {
-                return _schaltZustand;
-            }
-
-            set
-            {
-                _schaltZustand = value;
-            }
-        }
-
-        public Befehl(AnlagenElement element, bool schaltZustand)
-        {
-            this.Element = element;
-            this.SchaltZustand = schaltZustand;
-        }
-
-        public void BefehlAusfuehren()
-        {
-            this.Element.Ausgang.AusgangSchalten(this.SchaltZustand);
-        }
-    }
+    
     /// <summary>
     /// eine Auflistung eines Typs AnlagenElements und deren Verwaltung
     /// </summary>
@@ -254,6 +215,17 @@ namespace MoBaSteuerung.Elemente
         {
             return items.FindAll( x => x.SteckerSuche(SteckerName) );
         }
+
+        /// <summary>
+        /// Aktiviert die Koppelungs-Befehle
+        /// </summary>
+        public void KoppelungenAktivieren()
+        {
+            foreach (T item in this.items)
+            {
+                item.KoppelungAktivieren();
+            }
+        }
     }
 
 
@@ -409,12 +381,106 @@ namespace MoBaSteuerung.Elemente
         private string _kurzBezeichnung;
         private string _stecker;
         private Adresse _ausgang;
-        private AnlagenElemente _parent;       
+        private AnlagenElemente _parent;
+
         private AnzeigeTyp _anzeigenTyp;
         private Int32 _zoom;
         private bool _passiv;
         private bool _selektiert;
-        
+        private BefehlsListe _kopplungsBefehlsListe;
+        private string _kopplungsString;
+
+        public string KoppelungsString
+        {
+            get { return _kopplungsString; }
+            set { _kopplungsString = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void KoppelungAktivieren()
+        {
+            _kopplungsBefehlsListe = new BefehlsListe(_parent, _ausgang.Stellung,_kopplungsString);
+           // _kopplungsBefehlsListe.AusgangsStellung = _ausgang.Stellung;
+           // _kopplungsBefehlsListe.ListenString = _kopplungsString;
+           /* if (_kopplungsString!= "" && _kopplungsString != null)
+            {
+                
+                string[] bStringArray = _kopplungsString.Split(' ');
+                for (int i = 0; i < bStringArray.Length; i+)
+                {
+                    string[] befehl = bStringArray[i].Split(':');
+                    string[] elName = Regex.Matches(befehl[0], @"[a-zA-Z]+|\d+").Cast<Match>().Select(m => m.Value).ToArray();
+                    Befehl nBefehl = new Befehl();
+                    AnlagenElement el = null;
+                    switch (elName[0])
+                    {
+                        case "Gl":
+                            el = this.Parent.GleisElemente.Element(Convert.ToInt16(elName[1]));
+                            break;
+                        case "Sn":
+                            el = this.Parent.SignalElemente.Element(Convert.ToInt16(elName[1]));
+                            break;
+                        case "We":
+                            el = this.Parent.WeicheElemente.Element(Convert.ToInt16(elName[1]));
+                            break;
+                        case "Fss":
+                            el = this.Parent.FssElemente.Element(Convert.ToInt16(elName[1]));
+                            break;
+                        default:
+                            break;
+                    }
+                    nBefehl.Element = el;
+                    nBefehl.Attribut = befehl[1];
+                }
+            }*/
+       
+            /*
+            //private bool EinlesenBefehlsliste(List<Befehl>list, string[] spString) {
+            for (int i = 1; i < spString.Length; i++) {
+                string[] befehl = spString[i].Split(':');
+                string[] elName = Regex.Matches(befehl[0], @"[a-zA-Z]+|\d+").Cast<Match>().Select(m => m.Value).ToArray();
+                AnlagenElement el = null;
+                switch (elName[0]) {
+                    case "Gl":
+                        el = this.Parent.GleisElemente.Element(Convert.ToInt16(elName[1]));
+                        break;
+                    case "Sn":
+                        el = this.Parent.SignalElemente.Element(Convert.ToInt16(elName[1]));
+                        break;
+                    case "We":
+                        el = this.Parent.WeicheElemente.Element(Convert.ToInt16(elName[1]));
+                        break;
+                    case "Fss":
+                        el = this.Parent.FssElemente.Element(Convert.ToInt16(elName[1]));
+                        break;
+                    default:
+                        break;
+                }
+                if (el != null) {
+                    bool zustand=false;
+                    if (befehl[1] == "An")
+                        zustand = true;
+                    else if (befehl[1] != "Aus")
+                        return false;
+                    list.Add(new Befehl(el,zustand));
+                }
+
+            }
+            return true;
+        }
+             
+            string[] kBefehlString = _kopplungsString.Split(' ');
+                _kopplungsBefehlsListe = new List<Befehl>();
+                foreach(string x in kBefehlString)
+                {
+                    string[] befehlString = x.Split(':');
+                    Befehl neuerBefehl;
+                }*/
+            
+        }
+
         /// <summary>
         /// Adresse des Elementes zum Schalten
         /// </summary>
@@ -686,7 +752,14 @@ namespace MoBaSteuerung.Elemente
         {
             if (Ausgang != null)
             {
-                return Ausgang.AusgangToggeln();
+                bool ergebnis = Ausgang.AusgangToggeln();
+                if (_kopplungsBefehlsListe != null)
+                {
+                    _kopplungsBefehlsListe.KoppelungSchalten(Ausgang.Stellung);
+                }
+                return ergebnis;
+
+                
             }
             return false;
         }
@@ -727,6 +800,7 @@ namespace MoBaSteuerung.Elemente
         {
             if (_ausgang != null)
                 _ausgang.AusgangToggeln();
+            _kopplungsBefehlsListe.KoppelungSchalten();
         }
 
         /// <summary>

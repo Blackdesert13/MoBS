@@ -28,10 +28,7 @@ namespace MoBaSteuerung.Elemente
         : base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp)
         {
             this.stringFormat = new StringFormat();
-           // this.stringFormat.Alignment = StringAlignment.Center;
-           // this.stringFormat.LineAlignment = StringAlignment    .Center;
             PositionRaster = new Point(Convert.ToInt32(elem[2]), Convert.ToInt32(elem[3]));
-            //PositionRaster = positionRaster;
             Parent.ReglerElemente.Hinzufügen(this);
             Position = new Point(PositionRaster.X * zoom, PositionRaster.Y * zoom);
             this.graphicsPath = new GraphicsPath();
@@ -51,9 +48,6 @@ namespace MoBaSteuerung.Elemente
         {
             get
             {
-                //fuellFarbe = 200;/ ToArgb;
-                //int farbe = fuellFarbe.ToArgb();
-
                 string spString = "Regler"
                     + "\t" + ID
                     + "\t" + PositionRaster.X

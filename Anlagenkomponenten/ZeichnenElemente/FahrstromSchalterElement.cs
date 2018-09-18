@@ -43,7 +43,8 @@ namespace MoBaSteuerung.Elemente
                         + "\t" + _reglerNr[1]
                         + "\t" + Ausgang.SpeicherString
                         + "\t" + Bezeichnung
-                        + "\t" + Stecker;
+                        + "\t" + Stecker
+                        + "\t" + KoppelungsString;
             }
         }
 
@@ -109,6 +110,12 @@ namespace MoBaSteuerung.Elemente
                 Bezeichnung = elem[6];
                 Stecker = elem[7];
             }
+            if (elem.Length > 8)
+            {
+                KoppelungsString = elem[8];
+            }
+
+
             Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
             Gleisposition = Convert.ToInt32(glAnschl[1]);
             if (gl != null)
@@ -124,6 +131,9 @@ namespace MoBaSteuerung.Elemente
                 }
             }
         }
+
+        
+
         public int ReglerNummer1
         {
             get { return _reglerNr[0]; }

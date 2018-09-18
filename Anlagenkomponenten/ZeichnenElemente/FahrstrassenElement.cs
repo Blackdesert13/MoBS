@@ -838,18 +838,16 @@ namespace MoBaSteuerung.Elemente {
                 }
             }
         }
-
-
     }
 
     public class FahrstrasseN : AnlagenElement {
+
+
         private GraphicsPath _fahrstrLinie = new GraphicsPath();
         private AnlagenElement[] _listeElemente;
         private Signal _startSignal;
         private Signal _endSignal;
-
         private bool _isAktiv = false;
-
         private List<Befehl> _startBefehle;
         private List<Befehl> _endBefehle;
 

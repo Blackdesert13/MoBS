@@ -111,8 +111,6 @@ namespace MoBaSteuerung.Elemente {
             }
         }
 
-
-
         /// <summary>
         /// 
         /// </summary>
