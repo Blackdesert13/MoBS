@@ -363,7 +363,7 @@ namespace MoBaSteuerung {
                 if (elementName == "FSS")
                     zeichnenElemente.FSSAktualisieren();
                 if (action && _ardController.IsPortOpen())
-                    OnAnlagenZustandAdresseChanged(el.Ausgang);
+                    OnAnlagenZustandAdresseChanged(/*el.Ausgang*/null); //TODO: nur senden von Platinen auf denen sich ein Ausgan geändert hat
                 return action;
             }
 
