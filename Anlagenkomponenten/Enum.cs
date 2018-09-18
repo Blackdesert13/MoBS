@@ -154,6 +154,8 @@
     public enum Elementzustand {
         An,
         Aus,
+        Neg,
+        Gleich,
         Selektiert
     }
 
