@@ -19,6 +19,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
     public class AnlagenElemente
     {
         private ElementListe<Regler> reglerElemente;
+        private ElementListe<Anschluss> anschlussElemente;
         private ElementListe<Servo> servoElemente;
         private ElementListe<FSS> fssElemente;
         private ElementListe<Gleis> gleisElemente;
@@ -41,13 +42,13 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         private Servo _aktiverServo = null;
         private ServoAction _aktiverServoRichtung = ServoAction.None;
 
-
         /// <summary>
         /// enthält alle Elemente der Anlage
         /// </summary>
         public AnlagenElemente() {
 
             this.reglerElemente   = new ElementListe<Regler>();
+            this.anschlussElemente = new ElementListe<Anschluss>();
             this.servoElemente    = new ElementListe<Servo>();
             this.knotenElemente   = new ElementListe<Knoten>();
             this.gleisElemente    = new ElementListe<Gleis>();
@@ -103,8 +104,13 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             }
         }
 
-        public ElementListe<Regler> ReglerElemente {
+        public ElementListe<Regler> ReglerElemente
+        {
             get { return this.reglerElemente; }
+        }
+        public ElementListe<Anschluss> AnschlussElemente
+        {
+            get { return this.anschlussElemente; }
         }
 
         public ElementListe<Servo> ServoElemente
@@ -238,9 +244,15 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             get {
                 return _rückmeldungAktiv;
             }
+
             set {
                 _rückmeldungAktiv = value;
             }
+        }
+
+        public void KoppelungenAktivieren()
+        {
+            fssElemente.KoppelungenAktivieren();
         }
 
         public Servo AktiverServo {
@@ -264,7 +276,6 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 _aktiverServoRichtung = value;
             }
         }
-
         public void FSSAktualisieren()
         {
             //Logging.Log.Schreibe("123", LogLevel.Info);
@@ -349,6 +360,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             ergebnis.AddRange(fssElemente.SteckerSuchen(stecker));
             ergebnis.AddRange(entkupplerElemente.SteckerSuchen(stecker));
             ergebnis.AddRange(signalElemente.SteckerSuchen(stecker));
+            ergebnis.AddRange(anschlussElemente.SteckerSuchen(stecker));
             return ergebnis;
         }
 
