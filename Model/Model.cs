@@ -234,8 +234,6 @@ namespace MoBaSteuerung {
 
 
 
-
-
         /// <summary>
         /// Wenn Zustand in einer Adresse geändert wurde, wird dieser über den ArduinoController gesendet.
         /// Wird keine Adresse an die Methode übergeben, werden alle Adressen ausgegeben.
@@ -406,7 +404,7 @@ namespace MoBaSteuerung {
             return false;
         }
 
-        public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp){
+		public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp){
 			if (el != null) {
 				if (!el.IsAktiv) {
 					Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
@@ -584,6 +582,10 @@ namespace MoBaSteuerung {
                     new Regler(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
                 }
 
+                if (elem[0] == "Anschluss")
+                {
+                    new Anschluss(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
+                }
                 if (elem[0] == "Knot") {
                     new Knoten(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
                 }
@@ -611,6 +613,10 @@ namespace MoBaSteuerung {
                         }
                     }
                 }
+               /* if (elem[0] == "Weiche")
+                {
+                    new Weiche(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
+                }*/
 
                 if (elem[0] == "Signal") {
                     new Signal(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
@@ -655,6 +661,7 @@ namespace MoBaSteuerung {
 				}
 			}      
             anlageDatenStreamReader.Dispose();
+            this.zeichnenElemente.KoppelungenAktivieren();
             this.zeichnenElemente.FSSLaden();
             zeichnenElemente.FSSAktualisieren();
             this.OnAnlageGrößeInRasterChanged(new Size(65, 35));
@@ -695,9 +702,12 @@ namespace MoBaSteuerung {
             string trennung = "--------------------------------------------------------------------------------------------";
 
             StreamWriter anlageStreamWriter = new StreamWriter(anlageDateiPfadName, false, System.Text.Encoding.UTF8);
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Anschlüsse\tNr.\tBez.\tStecker"
+                                                        + this.zeichnenElemente.AnschlussElemente.SpeicherString);
+
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Arduinos\tNr.\tLageX\tLageY\tAnl.-Teil"
                                             + this.zeichnenElemente.ListeMCSpeicher.SpeicherString);
-            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Servos\tNr.\tLageX\tLageY\tWinkelE\tWinkelA\tSpeed\tManuell\tAusgang\tBeschr.\tBez\tStecker"
+         anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Servos\tNr.\tLageX\tLageY\tWinkelE\tWinkelA\tSpeed\tManuell\tAusgang\tBeschr.\tBez\tStecker"
                                             + this.zeichnenElemente.ServoElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FahrReg\tNr.\tLageX\tLageY\tFarbe\tFarbeZ\tBez\tStecker"
                                             + this.zeichnenElemente.ReglerElemente.SpeicherString);
@@ -709,7 +719,7 @@ namespace MoBaSteuerung {
                                             + this.zeichnenElemente.WeicheElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "GleisSchalter\tNr.\tGleis\tBez."
                                             + this.zeichnenElemente.SchalterElemente.SpeicherString);
-            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker"
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung"
                                             + this.zeichnenElemente.FssElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Entkuppler_\tNr.\tGleis\tAusgang\tBez.\tStecker"
                                             + this.zeichnenElemente.EntkupplerElemente.SpeicherString);
@@ -871,10 +881,7 @@ namespace MoBaSteuerung {
         public event AnlagenZustandEventHandler AnlagenzustandChanged;
 
         public event ServoBewegungEventHandler ZubehoerServoAction;
-
         #endregion
-
-        
 
         /// <summary>
         /// 
@@ -896,7 +903,6 @@ namespace MoBaSteuerung {
                 this.ZubehoerServoAction(servo, richtung);
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -954,7 +960,7 @@ namespace MoBaSteuerung {
             return this._ardController.CloseComPort();
         }
 
-        
+
 
         /// <summary>
         /// Löscht die gegenwärtige Auswahl (Selektion) im Bedienmodus, gegenwärtig können dies nur Fahrstraßen sein
@@ -1066,7 +1072,6 @@ namespace MoBaSteuerung {
             return true;
         }
 
-        
         public void BedienenServoManuell(ServoAction action) {
             Debug.Print("Servo Action " + action);
             if (this.zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen()) {
