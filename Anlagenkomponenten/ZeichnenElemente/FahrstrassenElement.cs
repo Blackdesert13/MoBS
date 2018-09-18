@@ -843,40 +843,6 @@ namespace MoBaSteuerung.Elemente {
     }
 
     public class FahrstrasseN : AnlagenElement {
-        public class Befehl {
-            AnlagenElement _element;
-            bool _schaltZustand;
-
-            public AnlagenElement Element {
-                get {
-                    return _element;
-                }
-
-                set {
-                    _element = value;
-                }
-            }
-
-            public bool SchaltZustand {
-                get {
-                    return _schaltZustand;
-                }
-
-                set {
-                    _schaltZustand = value;
-                }
-            }
-
-            public Befehl(AnlagenElement element, bool schaltZustand) {
-                this.Element = element;
-                this.SchaltZustand = schaltZustand;
-            }
-
-            public void BefehlAusfuehren() {
-				this.Element.Ausgang.AusgangSchalten(this.SchaltZustand);
-            }
-        }
-
         private GraphicsPath _fahrstrLinie = new GraphicsPath();
         private AnlagenElement[] _listeElemente;
         private Signal _startSignal;

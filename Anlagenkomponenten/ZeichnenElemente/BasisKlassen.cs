@@ -7,6 +7,48 @@ using System.Collections.Generic;
 
 namespace MoBaSteuerung.Elemente
 {
+    public class Befehl
+    {
+        AnlagenElement _element;
+        bool _schaltZustand;
+
+        public AnlagenElement Element
+        {
+            get
+            {
+                return _element;
+            }
+
+            set
+            {
+                _element = value;
+            }
+        }
+
+        public bool SchaltZustand
+        {
+            get
+            {
+                return _schaltZustand;
+            }
+
+            set
+            {
+                _schaltZustand = value;
+            }
+        }
+
+        public Befehl(AnlagenElement element, bool schaltZustand)
+        {
+            this.Element = element;
+            this.SchaltZustand = schaltZustand;
+        }
+
+        public void BefehlAusfuehren()
+        {
+            this.Element.Ausgang.AusgangSchalten(this.SchaltZustand);
+        }
+    }
     /// <summary>
     /// eine Auflistung eines Typs AnlagenElements und deren Verwaltung
     /// </summary>
@@ -372,7 +414,7 @@ namespace MoBaSteuerung.Elemente
         private Int32 _zoom;
         private bool _passiv;
         private bool _selektiert;
-
+        
         /// <summary>
         /// Adresse des Elementes zum Schalten
         /// </summary>
