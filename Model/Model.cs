@@ -382,7 +382,7 @@ namespace MoBaSteuerung {
                     }
                 }
                 if (action && _ardController.IsPortOpen())
-                    OnAnlagenZustandAdresseChanged(el.Ausgang);
+                    OnAnlagenZustandAdresseChanged(null);
                 return action;
             }
 
