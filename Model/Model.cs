@@ -37,6 +37,7 @@ namespace MoBaSteuerung {
         private ArduinoController _ardController;
         private bool _master = false;
         private int _fahrstraßenStartVerzögerung;
+        private int _zubehörServoSchrittweite;
 
         /// <summary>
         /// Dateiname.
@@ -56,6 +57,16 @@ namespace MoBaSteuerung {
         #endregion
 
         #region Öffentliche Eigenschaften (Properties)
+
+        public int EntkupplerAbschaltAutoWert {
+            get { return this.ZeichnenElemente.EntkupplerAbschaltAutoWert; }
+            set { this.ZeichnenElemente.EntkupplerAbschaltAutoWert = value; }
+        }
+
+        public bool EntkupplerAbschaltAutoAktiv {
+            get { return this.ZeichnenElemente.EntkupplerAbschaltAutoAktiv; }
+            set { this.ZeichnenElemente.EntkupplerAbschaltAutoAktiv = value; }
+        }
 
         /// <summary>
         /// alle AnlagenElementListen
@@ -160,6 +171,7 @@ namespace MoBaSteuerung {
             this.AnlagenzustandAdresseChanged += Model_AnlagenzustandAdresseChanged;
 
             this.FahrstraßenStartVerzögerung = 1000;
+            this.ZubehörServoSchrittweite = 1;
         }
 
         /// <summary>
@@ -231,6 +243,8 @@ namespace MoBaSteuerung {
                 }
             }
         }
+
+
 
 
 
@@ -341,7 +355,6 @@ namespace MoBaSteuerung {
                     break;
                 case "FSS":
                     el = zeichnenElemente.FssElemente.Element(nr);
-                    
                     break;
                 case "Entkuppler":
                     el = zeichnenElemente.EntkupplerElemente.Element(nr);
@@ -362,8 +375,14 @@ namespace MoBaSteuerung {
                 bool action = el.AusgangToggeln();
                 if (elementName == "FSS")
                     zeichnenElemente.FSSAktualisieren();
+                else if(elementName == "Entkuppler") {
+                    if(el.ElementZustand == Elementzustand.An && EntkupplerAbschaltAutoAktiv) {
+                        Thread entkupplerAbschalt = new Thread(this.EntkupplerAbschaltung);
+                        entkupplerAbschalt.Start(el);
+                    }
+                }
                 if (action && _ardController.IsPortOpen())
-                    OnAnlagenZustandAdresseChanged(/*el.Ausgang*/null); //TODO: nur senden von Platinen auf denen sich ein Ausgan geändert hat
+                    OnAnlagenZustandAdresseChanged(el.Ausgang);
                 return action;
             }
 
@@ -379,7 +398,7 @@ namespace MoBaSteuerung {
                 befehl[2] = (byte)(s.Ausgang.AdressenNr * 2 + s.Ausgang.BitNr);
                 if(action == ServoAction.LinksClick || action == ServoAction.RechtsClick) {
                     befehl[2] |= 0x080;
-                    befehl[3] = 5;
+                    befehl[3] = (byte)ZubehörServoSchrittweite;
                     if(action == ServoAction.LinksClick) {
                         befehl[3] = (byte)-befehl[3];
                     }
@@ -404,7 +423,7 @@ namespace MoBaSteuerung {
             return false;
         }
 
-		public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp){
+        public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp){
 			if (el != null) {
 				if (!el.IsAktiv) {
 					Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
@@ -582,10 +601,6 @@ namespace MoBaSteuerung {
                     new Regler(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
                 }
 
-                if (elem[0] == "Anschluss")
-                {
-                    new Anschluss(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
-                }
                 if (elem[0] == "Knot") {
                     new Knoten(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
                 }
@@ -613,10 +628,6 @@ namespace MoBaSteuerung {
                         }
                     }
                 }
-               /* if (elem[0] == "Weiche")
-                {
-                    new Weiche(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
-                }*/
 
                 if (elem[0] == "Signal") {
                     new Signal(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
@@ -661,7 +672,6 @@ namespace MoBaSteuerung {
 				}
 			}      
             anlageDatenStreamReader.Dispose();
-            this.zeichnenElemente.KoppelungenAktivieren();
             this.zeichnenElemente.FSSLaden();
             zeichnenElemente.FSSAktualisieren();
             this.OnAnlageGrößeInRasterChanged(new Size(65, 35));
@@ -702,12 +712,9 @@ namespace MoBaSteuerung {
             string trennung = "--------------------------------------------------------------------------------------------";
 
             StreamWriter anlageStreamWriter = new StreamWriter(anlageDateiPfadName, false, System.Text.Encoding.UTF8);
-            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Anschlüsse\tNr.\tBez.\tStecker"
-                                                        + this.zeichnenElemente.AnschlussElemente.SpeicherString);
-
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Arduinos\tNr.\tLageX\tLageY\tAnl.-Teil"
                                             + this.zeichnenElemente.ListeMCSpeicher.SpeicherString);
-         anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Servos\tNr.\tLageX\tLageY\tWinkelE\tWinkelA\tSpeed\tManuell\tAusgang\tBeschr.\tBez\tStecker"
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Servos\tNr.\tLageX\tLageY\tWinkelE\tWinkelA\tSpeed\tManuell\tAusgang\tBeschr.\tBez\tStecker"
                                             + this.zeichnenElemente.ServoElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FahrReg\tNr.\tLageX\tLageY\tFarbe\tFarbeZ\tBez\tStecker"
                                             + this.zeichnenElemente.ReglerElemente.SpeicherString);
@@ -719,7 +726,7 @@ namespace MoBaSteuerung {
                                             + this.zeichnenElemente.WeicheElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "GleisSchalter\tNr.\tGleis\tBez."
                                             + this.zeichnenElemente.SchalterElemente.SpeicherString);
-            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung"
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker"
                                             + this.zeichnenElemente.FssElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Entkuppler_\tNr.\tGleis\tAusgang\tBez.\tStecker"
                                             + this.zeichnenElemente.EntkupplerElemente.SpeicherString);
@@ -881,7 +888,10 @@ namespace MoBaSteuerung {
         public event AnlagenZustandEventHandler AnlagenzustandChanged;
 
         public event ServoBewegungEventHandler ZubehoerServoAction;
+
         #endregion
+
+        
 
         /// <summary>
         /// 
@@ -903,6 +913,7 @@ namespace MoBaSteuerung {
                 this.ZubehoerServoAction(servo, richtung);
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -960,7 +971,7 @@ namespace MoBaSteuerung {
             return this._ardController.CloseComPort();
         }
 
-
+        
 
         /// <summary>
         /// Löscht die gegenwärtige Auswahl (Selektion) im Bedienmodus, gegenwärtig können dies nur Fahrstraßen sein
@@ -1025,7 +1036,15 @@ namespace MoBaSteuerung {
             }
         }
 
+        public int ZubehörServoSchrittweite {
+            get {
+                return _zubehörServoSchrittweite;
+            }
 
+            set {
+                _zubehörServoSchrittweite = value;
+            }
+        }
 
         public bool NeuesElementVorschau(BearbeitungsModus bearbeitungsModus, Point letzterRasterpunkt, int zoom) {
             if (this._neuesElement == null) {
@@ -1072,6 +1091,7 @@ namespace MoBaSteuerung {
             return true;
         }
 
+        
         public void BedienenServoManuell(ServoAction action) {
             Debug.Print("Servo Action " + action);
             if (this.zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen()) {
@@ -1085,5 +1105,18 @@ namespace MoBaSteuerung {
             }
         }
         #endregion
+
+        private void EntkupplerAbschaltung(object entkuppler) {
+            Entkuppler el = (Entkuppler)entkuppler;
+            Thread.Sleep(this.EntkupplerAbschaltAutoWert*1000);
+            if (el.ElementZustand == Elementzustand.An) {
+                el.AusgangToggeln();
+
+                this.OnAnlageNeuZeichnen();
+                this.OnAnlagenzustandChanged();
+                if (_ardController.IsPortOpen())
+                    this.OnAnlagenZustandAdresseChanged(el.Ausgang);
+            }
+        }
     }
 }
