@@ -771,6 +771,9 @@ namespace MoBaSteuerung {
             einstellungenForm.AdminAktiviert = this._adminAktiviert;
             einstellungenForm.AnlageBearbeitenAktiviert = this.toolStripMenuItemBearbeiten.Enabled;
             einstellungenForm.Pwd = this._adminPwd;
+            einstellungenForm.EntkupplerAbschaltAutoAktiv = this.Model.EntkupplerAbschaltAutoAktiv;
+            einstellungenForm.EntkupplerAbschaltAutoWert = this.Model.EntkupplerAbschaltAutoWert;
+            einstellungenForm.ServoSchrittweite = this.Model.ZubehörServoSchrittweite;
 
             if (einstellungenForm.ShowDialog(this) == DialogResult.OK) {
                 this.Controller.RückmeldungAnzeigen = einstellungenForm.RückmeldungAnzeigen;
@@ -784,7 +787,9 @@ namespace MoBaSteuerung {
                 }
                 this._anlageBearbeitenAktiviert = einstellungenForm.AnlageBearbeitenAktiviert;
                 this.toolStripMenuItemBearbeiten.Enabled = einstellungenForm.AnlageBearbeitenAktiviert;
-
+                this.Model.EntkupplerAbschaltAutoAktiv = einstellungenForm.EntkupplerAbschaltAutoAktiv;
+                this.Model.EntkupplerAbschaltAutoWert = einstellungenForm.EntkupplerAbschaltAutoWert;
+                this.Model.ZubehörServoSchrittweite = einstellungenForm.ServoSchrittweite;
             }
             
         }
