@@ -142,6 +142,13 @@ namespace MoBaSteuerung.Elemente {
             return (_passivZeichen.IsVisible(punkt) || _aktivZeichen.IsVisible(punkt));
         }
 
+        public override bool AusgangToggeln() {
+            if (Parent.EntkupplerAbschaltAutoAktiv) {
+
+            }
+            return base.AusgangToggeln();
+        }
+
         /// <summary>
         /// Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
         /// und wenn diese Position noch frei ist, wird dieses Element mit dem Gleis verknüpft.
@@ -176,5 +183,7 @@ namespace MoBaSteuerung.Elemente {
             }
             return false;
         }
+
     }
+
 }
