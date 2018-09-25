@@ -38,6 +38,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 
         private bool _rückmeldungAnzeigen;
         private bool _rückmeldungAktiv;
+        private int _entkupplerAbschaltAutoWert;
+        private bool _entkupplerAbschaltAutoAktiv;
 
         private Servo _aktiverServo = null;
         private ServoAction _aktiverServoRichtung = ServoAction.None;
@@ -67,6 +69,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 
             this.RückmeldungAnzeigen = false;
             this.RückmeldungAktiv = false;
+            this.EntkupplerAbschaltAutoAktiv = true;
+            this.EntkupplerAbschaltAutoWert = 3;
         }
 
         /// <summary>
@@ -276,6 +280,26 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 _aktiverServoRichtung = value;
             }
         }
+        public int EntkupplerAbschaltAutoWert {
+            get {
+                return _entkupplerAbschaltAutoWert;
+            }
+
+            set {
+                _entkupplerAbschaltAutoWert = value;
+            }
+        }
+
+        public bool EntkupplerAbschaltAutoAktiv {
+            get {
+                return _entkupplerAbschaltAutoAktiv;
+            }
+
+            set {
+                _entkupplerAbschaltAutoAktiv = value;
+            }
+        }
+
         public void FSSAktualisieren()
         {
             //Logging.Log.Schreibe("123", LogLevel.Info);
