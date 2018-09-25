@@ -33,6 +33,9 @@
             this.buttonAbbrechen = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageAnzeige = new System.Windows.Forms.TabPage();
+            this.entkupplerAbschaltAutoAktiv = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.entkupplerAbschaltAutoWert = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.fahrstraßeStartVerzögerung = new System.Windows.Forms.NumericUpDown();
             this.rückmeldungAktiv = new System.Windows.Forms.CheckBox();
@@ -42,10 +45,14 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.passwort = new System.Windows.Forms.TextBox();
             this.aktivierungAnlageBearbeiten = new System.Windows.Forms.CheckBox();
+            this.servoSchrittweite = new System.Windows.Forms.NumericUpDown();
+            this.labelServoSchrittweite = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPageAnzeige.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.entkupplerAbschaltAutoWert)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fahrstraßeStartVerzögerung)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.servoSchrittweite)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonSpeichern
@@ -88,6 +95,11 @@
             // 
             // tabPageAnzeige
             // 
+            this.tabPageAnzeige.Controls.Add(this.labelServoSchrittweite);
+            this.tabPageAnzeige.Controls.Add(this.servoSchrittweite);
+            this.tabPageAnzeige.Controls.Add(this.entkupplerAbschaltAutoAktiv);
+            this.tabPageAnzeige.Controls.Add(this.label2);
+            this.tabPageAnzeige.Controls.Add(this.entkupplerAbschaltAutoWert);
             this.tabPageAnzeige.Controls.Add(this.label1);
             this.tabPageAnzeige.Controls.Add(this.fahrstraßeStartVerzögerung);
             this.tabPageAnzeige.Controls.Add(this.rückmeldungAktiv);
@@ -96,8 +108,45 @@
             this.tabPageAnzeige.Name = "tabPageAnzeige";
             this.tabPageAnzeige.Size = new System.Drawing.Size(595, 305);
             this.tabPageAnzeige.TabIndex = 2;
-            this.tabPageAnzeige.Text = "Anzeige";
+            this.tabPageAnzeige.Text = "allg. Einstellungen";
             this.tabPageAnzeige.UseVisualStyleBackColor = true;
+            // 
+            // entkupplerAbschaltAutoAktiv
+            // 
+            this.entkupplerAbschaltAutoAktiv.AutoSize = true;
+            this.entkupplerAbschaltAutoAktiv.Location = new System.Drawing.Point(21, 221);
+            this.entkupplerAbschaltAutoAktiv.Name = "entkupplerAbschaltAutoAktiv";
+            this.entkupplerAbschaltAutoAktiv.Size = new System.Drawing.Size(197, 17);
+            this.entkupplerAbschaltAutoAktiv.TabIndex = 6;
+            this.entkupplerAbschaltAutoAktiv.Text = "Entkuppler automatisch ausschalten";
+            this.entkupplerAbschaltAutoAktiv.UseVisualStyleBackColor = true;
+            this.entkupplerAbschaltAutoAktiv.CheckedChanged += new System.EventHandler(this.entkupplerAbschaltAutoAktiv_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 243);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(101, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Entkuppler Timer (s)";
+            // 
+            // entkupplerAbschaltAutoWert
+            // 
+            this.entkupplerAbschaltAutoWert.Location = new System.Drawing.Point(21, 259);
+            this.entkupplerAbschaltAutoWert.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.entkupplerAbschaltAutoWert.Name = "entkupplerAbschaltAutoWert";
+            this.entkupplerAbschaltAutoWert.Size = new System.Drawing.Size(120, 20);
+            this.entkupplerAbschaltAutoWert.TabIndex = 4;
+            this.entkupplerAbschaltAutoWert.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -192,6 +241,32 @@
             this.aktivierungAnlageBearbeiten.Text = "Bearbeitung Anlage aktivieren";
             this.aktivierungAnlageBearbeiten.UseVisualStyleBackColor = true;
             // 
+            // servoSchrittweite
+            // 
+            this.servoSchrittweite.Location = new System.Drawing.Point(21, 184);
+            this.servoSchrittweite.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.servoSchrittweite.Name = "servoSchrittweite";
+            this.servoSchrittweite.Size = new System.Drawing.Size(120, 20);
+            this.servoSchrittweite.TabIndex = 7;
+            this.servoSchrittweite.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // labelServoSchrittweite
+            // 
+            this.labelServoSchrittweite.AutoSize = true;
+            this.labelServoSchrittweite.Location = new System.Drawing.Point(18, 168);
+            this.labelServoSchrittweite.Name = "labelServoSchrittweite";
+            this.labelServoSchrittweite.Size = new System.Drawing.Size(131, 13);
+            this.labelServoSchrittweite.TabIndex = 8;
+            this.labelServoSchrittweite.Text = "Zubehörservo Schrittweite";
+            // 
             // frmEinstellung
             // 
             this.AcceptButton = this.buttonSpeichern;
@@ -212,9 +287,11 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageAnzeige.ResumeLayout(false);
             this.tabPageAnzeige.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.entkupplerAbschaltAutoWert)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fahrstraßeStartVerzögerung)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.servoSchrittweite)).EndInit();
             this.ResumeLayout(false);
 
     }
@@ -234,5 +311,10 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox passwort;
         private System.Windows.Forms.CheckBox aktivierungAnlageBearbeiten;
+        private System.Windows.Forms.CheckBox entkupplerAbschaltAutoAktiv;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown entkupplerAbschaltAutoWert;
+        private System.Windows.Forms.Label labelServoSchrittweite;
+        private System.Windows.Forms.NumericUpDown servoSchrittweite;
     }
 }

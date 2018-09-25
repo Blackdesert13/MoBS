@@ -23,6 +23,8 @@ namespace MoBaSteuerung.Dialoge {
         private bool _adminAktiviert = false;
         private string _pwd = "";
 
+        
+
         public bool AnlageBearbeitenAktiviert
         {
             get
@@ -61,6 +63,34 @@ namespace MoBaSteuerung.Dialoge {
             }
             set {
                 this.fahrstraßeStartVerzögerung.Value = value;
+            }
+        }
+        
+        public int ServoSchrittweite {
+            get {
+                return (int)this.servoSchrittweite.Value;
+            }
+            set {
+                this.servoSchrittweite.Value = value;
+            }
+        }
+
+        public int EntkupplerAbschaltAutoWert {
+            get {
+                return (int)this.entkupplerAbschaltAutoWert.Value;
+            }
+            set {
+                this.entkupplerAbschaltAutoWert.Value = value;
+            }
+        }
+        
+        public bool EntkupplerAbschaltAutoAktiv {
+            get {
+                return this.entkupplerAbschaltAutoAktiv.Checked;
+            }
+            set {
+                this.entkupplerAbschaltAutoAktiv.Checked = value;
+                this.entkupplerAbschaltAutoWert.Enabled = value;
             }
         }
 
@@ -109,6 +139,10 @@ namespace MoBaSteuerung.Dialoge {
                     AdminAktiviert = true;
             }
 
+        }
+
+        private void entkupplerAbschaltAutoAktiv_CheckedChanged(object sender, EventArgs e) {
+            this.entkupplerAbschaltAutoWert.Enabled = entkupplerAbschaltAutoAktiv.Checked;
         }
     }
 }
