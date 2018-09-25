@@ -674,6 +674,7 @@ namespace MoBaSteuerung {
             anlageDatenStreamReader.Dispose();
             this.zeichnenElemente.FSSLaden();
             zeichnenElemente.FSSAktualisieren();
+            zeichnenElemente.KoppelungenAktivieren();
             this.OnAnlageGrößeInRasterChanged(new Size(65, 35));
         }
 
