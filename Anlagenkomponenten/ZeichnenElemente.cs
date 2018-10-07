@@ -256,6 +256,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 
         public void KoppelungenAktivieren()
         {
+            weicheElemente.KoppelungenAktivieren();
             fssElemente.KoppelungenAktivieren();
         }
 

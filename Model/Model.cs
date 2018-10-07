@@ -625,6 +625,8 @@ namespace MoBaSteuerung {
                             we.Bezeichnung = elem[5];
                             if (elem.Length > 6)
                                 we.Stecker = elem[6];
+                            if (elem.Length > 7)
+                                we.KoppelungsString = elem[7];
                         }
                     }
                 }
