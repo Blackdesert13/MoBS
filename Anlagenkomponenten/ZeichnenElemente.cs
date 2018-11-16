@@ -132,6 +132,19 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         }
 
         /// <summary>
+        /// schaltet alle Gleise ein, für Digitalbetrieb
+        /// </summary>
+        public void GleiseEinschalten()
+        {
+            List<Gleis> items;
+            items = gleisElemente.Elemente;
+            foreach (Gleis item in items)
+            {
+                item.AusgangSchalten(true);
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public ElementListe<Weiche> WeicheElemente {
@@ -254,6 +267,9 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             }
         }
 
+        /// <summary>
+        /// aktiviert die Koppelung nach dem Laden aller Elemente
+        /// </summary>
         public void KoppelungenAktivieren()
         {
             weicheElemente.KoppelungenAktivieren();
