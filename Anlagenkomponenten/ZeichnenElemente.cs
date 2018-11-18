@@ -16,7 +16,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
    /// <summary>
    /// enthält alle Elemente einer Anlage
    /// </summary>
-    public class AnlagenElemente
+    public class AnlagenElemente 
     {
         private ElementListe<Regler> reglerElemente;
         private ElementListe<Anschluss> anschlussElemente;
