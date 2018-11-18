@@ -27,6 +27,8 @@
             this.LabelMenü = new System.Windows.Forms.Label();
             this.PictureBoxMenü = new System.Windows.Forms.PictureBox();
             this.PanelEigenschaften = new System.Windows.Forms.Panel();
+            this.labelStecker = new System.Windows.Forms.Label();
+            this.textBoxStecker = new System.Windows.Forms.TextBox();
             this.buttonSpeichern = new System.Windows.Forms.Button();
             this.textBoxRegler2 = new System.Windows.Forms.TextBox();
             this.textBoxRegler1 = new System.Windows.Forms.TextBox();
@@ -41,8 +43,6 @@
             this.textBoxAusgang = new System.Windows.Forms.TextBox();
             this.textBoxFSS = new System.Windows.Forms.TextBox();
             this.buttonLaden = new System.Windows.Forms.Button();
-            this.textBoxStecker = new System.Windows.Forms.TextBox();
-            this.labelStecker = new System.Windows.Forms.Label();
             this.PanelMenü.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxMenü)).BeginInit();
             this.PanelEigenschaften.SuspendLayout();
@@ -116,6 +116,22 @@
             this.PanelEigenschaften.Size = new System.Drawing.Size(338, 85);
             this.PanelEigenschaften.TabIndex = 1;
             // 
+            // labelStecker
+            // 
+            this.labelStecker.AutoSize = true;
+            this.labelStecker.Location = new System.Drawing.Point(190, 64);
+            this.labelStecker.Name = "labelStecker";
+            this.labelStecker.Size = new System.Drawing.Size(44, 13);
+            this.labelStecker.TabIndex = 15;
+            this.labelStecker.Text = "Stecker";
+            // 
+            // textBoxStecker
+            // 
+            this.textBoxStecker.Location = new System.Drawing.Point(235, 61);
+            this.textBoxStecker.Name = "textBoxStecker";
+            this.textBoxStecker.Size = new System.Drawing.Size(99, 20);
+            this.textBoxStecker.TabIndex = 14;
+            // 
             // buttonSpeichern
             // 
             this.buttonSpeichern.Location = new System.Drawing.Point(3, 33);
@@ -128,14 +144,14 @@
             // 
             // textBoxRegler2
             // 
-            this.textBoxRegler2.Location = new System.Drawing.Point(179, 34);
+            this.textBoxRegler2.Location = new System.Drawing.Point(130, 62);
             this.textBoxRegler2.Name = "textBoxRegler2";
             this.textBoxRegler2.Size = new System.Drawing.Size(37, 20);
             this.textBoxRegler2.TabIndex = 12;
             // 
             // textBoxRegler1
             // 
-            this.textBoxRegler1.Location = new System.Drawing.Point(179, 8);
+            this.textBoxRegler1.Location = new System.Drawing.Point(130, 23);
             this.textBoxRegler1.Name = "textBoxRegler1";
             this.textBoxRegler1.Size = new System.Drawing.Size(37, 20);
             this.textBoxRegler1.TabIndex = 11;
@@ -159,20 +175,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(127, 38);
+            this.label1.Location = new System.Drawing.Point(127, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(91, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Regler2";
+            this.label1.Text = "Regler2 Schließer";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // labelRegler1
             // 
             this.labelRegler1.AutoSize = true;
-            this.labelRegler1.Location = new System.Drawing.Point(127, 12);
+            this.labelRegler1.Location = new System.Drawing.Point(127, 6);
             this.labelRegler1.Name = "labelRegler1";
-            this.labelRegler1.Size = new System.Drawing.Size(44, 13);
+            this.labelRegler1.Size = new System.Drawing.Size(76, 13);
             this.labelRegler1.TabIndex = 7;
-            this.labelRegler1.Text = "Regler1";
+            this.labelRegler1.Text = "Regler1 Öffner";
             // 
             // labelID
             // 
@@ -231,22 +248,6 @@
             this.buttonLaden.Text = "Laden";
             this.buttonLaden.UseVisualStyleBackColor = true;
             this.buttonLaden.Click += new System.EventHandler(this.buttonLaden_Click);
-            // 
-            // textBoxStecker
-            // 
-            this.textBoxStecker.Location = new System.Drawing.Point(264, 61);
-            this.textBoxStecker.Name = "textBoxStecker";
-            this.textBoxStecker.Size = new System.Drawing.Size(71, 20);
-            this.textBoxStecker.TabIndex = 14;
-            // 
-            // labelStecker
-            // 
-            this.labelStecker.AutoSize = true;
-            this.labelStecker.Location = new System.Drawing.Point(214, 64);
-            this.labelStecker.Name = "labelStecker";
-            this.labelStecker.Size = new System.Drawing.Size(44, 13);
-            this.labelStecker.TabIndex = 15;
-            this.labelStecker.Text = "Stecker";
             // 
             // FrmFSS
             // 

@@ -217,7 +217,7 @@ namespace MoBaSteuerung.Elemente {
                         case Elementzustand.Selektiert:
                             farbeStift = Color.FromArgb(transpanz, Color.Yellow);
                             break;
-                        case Elementzustand.Aus:
+                        default:
                             farbeStift = Color.FromArgb(transpanz, Color.Gray);
                             break;
                     }

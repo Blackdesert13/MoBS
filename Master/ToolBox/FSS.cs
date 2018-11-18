@@ -174,5 +174,10 @@ namespace ModellBahnSteuerung.ToolBox
         {
             fssSpeichern();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

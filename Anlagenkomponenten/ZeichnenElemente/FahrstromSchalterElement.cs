@@ -283,22 +283,26 @@ namespace MoBaSteuerung.Elemente
             Color farbePinselInnen = Color.LightGray;
             Color farbeStift = Color.Black;
 
-           if(_regler[0]!=null && _regler[1]!=null)
-           if(this.ElementZustand == Elementzustand.An)
-            {
-                farbePinsel = _regler[0].Farbe; farbePinselInnen = _regler[1].Farbe;
-            }
-            else
-            {
-                farbePinsel = _regler[1].Farbe; farbePinselInnen = _regler[0].Farbe;
-            }
-            SolidBrush pinsel = new SolidBrush(farbePinsel);
-            Pen stift = new Pen(farbeStift, 1);
-            graphics.FillPath(pinsel, this.graphicsPath);
-            graphics.DrawPath(stift, this.graphicsPath);
-            // SolidBrush pinsel1 = new SolidBrush(farbePinselInnen);
-            pinsel.Color = farbePinselInnen;
-            graphics.FillPath(pinsel, this.graphicsPathKreis);
+            if(_regler[0]!=null && _regler[1]!=null)
+                switch (this.ElementZustand)
+                {
+                    case Elementzustand.An:
+                        farbePinsel = _regler[0].Farbe; farbePinselInnen = _regler[1].Farbe;
+                        break;
+                    case Elementzustand.Aus:
+                        farbePinsel = _regler[1].Farbe; farbePinselInnen = _regler[0].Farbe;
+                        break;
+                    case Elementzustand.Selektiert:
+                        farbePinsel = Color.Yellow; farbePinselInnen = Color.Yellow;
+                        break;
+                }
+                SolidBrush pinsel = new SolidBrush(farbePinsel);
+                Pen stift = new Pen(farbeStift, 1);
+                graphics.FillPath(pinsel, this.graphicsPath);
+                graphics.DrawPath(stift, this.graphicsPath);
+                // SolidBrush pinsel1 = new SolidBrush(farbePinselInnen);
+                pinsel.Color = farbePinselInnen;
+                graphics.FillPath(pinsel, this.graphicsPathKreis);
         }
     }
 }
