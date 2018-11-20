@@ -21,6 +21,26 @@ namespace MoBaSteuerung {
     /// Hauptform View
     /// </summary>
     public partial class MoBaStForm : Form {
+
+        public enum WM : uint {
+            DEVICE_CHANGE = 0x0219,             // device change event
+        }
+
+        protected override void WndProc(ref Message m) {
+            switch ((WM)m.Msg) {
+                case WM.DEVICE_CHANGE:
+                    if(_model!= null) {
+                        string result = _model.UpdateComPorts();
+                        if (result != "") {
+                            toolStripStatusLabelInfo.Text = result;
+                        }
+                    }
+                    break;
+            }
+
+            base.WndProc(ref m);
+        }
+
         #region Private Felder
 
         private Controller _controller;
@@ -254,6 +274,7 @@ namespace MoBaSteuerung {
         }
 
         private void frmMoBaSt_FormClosing(object sender, FormClosingEventArgs e) {
+            trennenToolStripMenuItem_Click(null, null);
             e.Cancel = (this.MasterAnlageSpeichern() || this.SlaveVerbindungTrennen());
         }
 
@@ -1091,7 +1112,8 @@ namespace MoBaSteuerung {
                 if (this.Controller.OpenComPort(frm.PortName)) {
                     this.toolStripMenuItemExtrasArduinoVerbinden.Enabled = false;
                     this.toolStripMenuItemExtrasArduinoTrennen.Enabled = true;
-                    MessageBox.Show(this, "Verbindung zur Anlage hergestellt.", "Arduino Verbinden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //MessageBox.Show(this, "Verbindung zur Anlage hergestellt.", "Arduino Verbinden", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.toolStripStatusLabelInfo.Text = "Verbindung zur Anlage hergestellt";
                 }
             }
             else {
@@ -1101,6 +1123,7 @@ namespace MoBaSteuerung {
 
         private void trennenToolStripMenuItem_Click(object sender, EventArgs e) {
             if (this.Controller.CloseComPort()) {
+                this.toolStripStatusLabelInfo.Text = "Verbindung zur Anlage getrennt";
                 this.toolStripMenuItemExtrasArduinoVerbinden.Enabled = true;
                 this.toolStripMenuItemExtrasArduinoTrennen.Enabled = false;
             }
@@ -1348,7 +1371,7 @@ namespace MoBaSteuerung {
                 this.toolStripStatusLabelInfo.Text = "Signal " + _signalNummer;
             }
             else {
-                this.toolStripStatusLabelInfo.Text = "Info";
+                //this.toolStripStatusLabelInfo.Text = "Info";
             }
         }
 

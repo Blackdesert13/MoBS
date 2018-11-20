@@ -65,7 +65,7 @@ namespace MoBaSteuerung {
         }
     }
 
-    public class ArduinoController {
+    public class ArduinoController : Form {
 
         #region events
 
@@ -87,7 +87,7 @@ namespace MoBaSteuerung {
         }
 
 
-        public bool OpenComPort(string name) {
+        public bool OpenComPort(string name, bool showErrorDialog = true) {
             try {
                 ComPort = new SerialPort(name, 9600);
                 _receivedBytes = new List<byte>();
@@ -98,7 +98,8 @@ namespace MoBaSteuerung {
             }
             catch (Exception e) {
                 Debug.Print(e.Message);
-                MessageBox.Show("Der ComPort konnte nicht geöffnet werden.");
+                if(showErrorDialog)
+                    MessageBox.Show("Der ComPort konnte nicht geöffnet werden.");
             }
             return false;
         }
@@ -158,6 +159,8 @@ namespace MoBaSteuerung {
                 Debug.Write("COM Port not open");
             }
         }
+
+
 
         public bool CloseComPort() {
             if (ComPort != null) {

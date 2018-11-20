@@ -21,6 +21,8 @@ using MoBa.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
 namespace MoBaSteuerung {
+
+    public partial class Model : Control { }
     /// <summary>
     /// Anlagenlogik
     /// </summary>
@@ -185,9 +187,13 @@ namespace MoBaSteuerung {
         }
 
         public void BearbeitenDragDropAbschließen(DragDropEffects effect) {
-            foreach (AnlagenElement el in this.AuswahlElemente)
-                ((RasterAnlagenElement)el).DragDropAbschließen();
+            try {
+                foreach (AnlagenElement el in this.AuswahlElemente)
+                    ((RasterAnlagenElement)el).DragDropAbschließen();
+            }
+            catch (Exception e) {
 
+            }
             BearbeitenSelektieren(MouseButtons.Left, false, new Point(-1, -1));
         }
 

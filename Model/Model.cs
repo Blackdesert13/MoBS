@@ -38,6 +38,7 @@ namespace MoBaSteuerung {
         private bool _master = false;
         private int _fahrstraßenStartVerzögerung;
         private int _zubehörServoSchrittweite;
+        private string _connectedComPort = "";
 
         /// <summary>
         /// Dateiname.
@@ -961,6 +962,7 @@ namespace MoBaSteuerung {
 
         public bool OpenComPort(string portName) {
             if (this._ardController.OpenComPort(portName)) {
+                _connectedComPort = portName;
                 if (zeichnenElemente.RückmeldungAktiv)
                     _ardController.SendData(new byte[] { 1, 1, 0, 0, 2 });
                 else
@@ -971,7 +973,15 @@ namespace MoBaSteuerung {
         }
 
         public bool CloseComPort() {
-            return this._ardController.CloseComPort();
+            bool result = this._ardController.CloseComPort();
+            if (!result) {
+                _ardController.BefehlReceived -= _ardController_BefehlReceived;
+                _ardController.Dispose();
+                _ardController = new ArduinoController();
+                _ardController.BefehlReceived += _ardController_BefehlReceived;
+            }
+            _connectedComPort = "";
+            return true;
         }
 
         
@@ -1108,6 +1118,51 @@ namespace MoBaSteuerung {
             }
         }
         #endregion
+
+        public string UpdateComPorts() {
+            string result = "";
+            if (_connectedComPort != "") {
+                string[] ports = _ardController.GetSerialPortNames();
+
+                bool contain = false;
+                foreach (string item in ports) {
+                    if (_connectedComPort == item) {
+                        contain = true;
+                        break;
+                    }
+                }
+                if (!contain) {
+                    try {
+                        if (!_ardController.CloseComPort()) {
+                            _ardController.BefehlReceived -= _ardController_BefehlReceived;
+                            _ardController.Dispose();
+                            _ardController = new ArduinoController();
+                            _ardController.BefehlReceived += _ardController_BefehlReceived;
+                        }
+                    }
+                    catch (Exception e) {
+
+                    }
+                    result = "ComPort " + _connectedComPort + " getrennt";
+                }
+                else {
+                    if (!_ardController.CloseComPort()) {
+                        _ardController.BefehlReceived -= _ardController_BefehlReceived;
+                        _ardController.Dispose();
+                        _ardController = new ArduinoController();
+                        _ardController.BefehlReceived += _ardController_BefehlReceived;
+                    }
+                    if (_ardController.OpenComPort(_connectedComPort, false)) {
+                        result = "ComPort " + _connectedComPort + " neu verbunden";
+                    }
+                    else {
+                        result = "ComPort " + _connectedComPort + " getrennt";
+                    }
+                    
+                }
+            }
+            return result;
+        }
 
         private void EntkupplerAbschaltung(object entkuppler) {
             Entkuppler el = (Entkuppler)entkuppler;

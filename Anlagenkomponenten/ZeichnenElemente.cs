@@ -88,6 +88,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this.infoElemente.Zoom = value;
                 this.entkupplerElemente.Zoom = value;
                 this.fahrstrassenElemente.Zoom = value;
+                this.servoElemente.Zoom = value;
             }
         }
 
@@ -104,7 +105,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this.knotenElemente.AnzeigeTyp = value;
                 this.entkupplerElemente.AnzeigeTyp = value;
                 this.fahrstrassenElemente.AnzeigeTyp = value;
-                
+                this.servoElemente.AnzeigeTyp = value;
             }
         }
 

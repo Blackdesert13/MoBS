@@ -26,6 +26,7 @@ namespace MoBaSteuerung.Elemente {
         private Gleis[] _gleise = new Gleis[2] { null, null };
         private Knoten _knoten;
         private GraphicsPath[] graphicsPathLinien = new GraphicsPath[2] { new GraphicsPath(), new GraphicsPath() };
+        private GraphicsPath graphicsPathUntergrung = new GraphicsPath();
         private bool _grundstellung = false;
 
         /// <summary>
@@ -129,6 +130,8 @@ namespace MoBaSteuerung.Elemente {
                 graphics.DrawPath(stift, graphicsPathLinien[0]);
             else
                 graphics.DrawPath(stift, graphicsPathLinien[1]);
+
+            //graphics.DrawPath(stift, graphicsPathUntergrung);
         }
 
         public override void Berechnung() {
@@ -141,6 +144,9 @@ namespace MoBaSteuerung.Elemente {
                 graphicsPathLinien[i].AddLine(0, 0, (int)(0.7 * Zoom), 0);
                 graphicsPathLinien[i].Transform(matrix);
             }
+            graphicsPathUntergrung.Reset();
+            graphicsPathUntergrung.AddRectangle(graphicsPathLinien[1].GetBounds());
+            graphicsPathUntergrung.AddRectangle(graphicsPathLinien[0].GetBounds());
         }
 
         public override bool MouseClick(Point punkt) {
@@ -158,7 +164,8 @@ namespace MoBaSteuerung.Elemente {
             else if (t1.Height == 0) {
                 t1.Inflate(0, (Single)(this.Zoom * 0.2));
             }
-            return t0.Contains(punkt) || t1.Contains(punkt);
+            //return t0.Contains(punkt) || t1.Contains(punkt);
+            return this.graphicsPathUntergrung.IsVisible(punkt);
         }
     }
 }

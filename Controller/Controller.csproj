@@ -7,7 +7,7 @@
     <ProjectGuid>{BEE15628-43E4-4FEA-9E8F-4440886D4B90}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MoBa.Controller</RootNamespace>
+    <RootNamespace>ModellBahnSteuerung</RootNamespace>
     <AssemblyName>MoBa.Controller</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

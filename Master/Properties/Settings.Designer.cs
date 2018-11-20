@@ -109,7 +109,7 @@ namespace ModellBahnSteuerung.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.188.2")]
         public string MasterName {
             get {
                 return ((string)(this["MasterName"]));
