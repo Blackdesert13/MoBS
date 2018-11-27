@@ -593,6 +593,10 @@ namespace MoBaSteuerung {
             while ((zeile = anlageDatenStreamReader.ReadLine()) != null) {
                 string[] elem = zeile.Split('\t');
 
+                if(elem[0] == "Anschluss") {
+                    new Anschluss(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
+                }
+
                 if (elem[0] == "MCSpeicher") {
                     new MCSpeicher(zeichnenElemente, Constanten.STANDARDRASTER, this.anzeigeTyp, elem);
                 }
@@ -716,6 +720,8 @@ namespace MoBaSteuerung {
             string trennung = "--------------------------------------------------------------------------------------------";
 
             StreamWriter anlageStreamWriter = new StreamWriter(anlageDateiPfadName, false, System.Text.Encoding.UTF8);
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Anschlüsse\tNr.\tBez.\tStecker"
+                                            + this.zeichnenElemente.AnschlussElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Arduinos\tNr.\tLageX\tLageY\tAnl.-Teil"
                                             + this.zeichnenElemente.ListeMCSpeicher.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Servos\tNr.\tLageX\tLageY\tWinkelE\tWinkelA\tSpeed\tManuell\tAusgang\tBeschr.\tBez\tStecker"
