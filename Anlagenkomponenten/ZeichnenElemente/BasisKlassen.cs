@@ -330,20 +330,20 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
             : base(parent, iD, zoom, anzeigeTyp)
         { }
 
-        public virtual void DragDropPositionVerschieben(Point deltaRaster)
-        {
-            this._dragPositionRaster = new Point(this._positionRaster.X, this._positionRaster.Y);
-            this._dragPositionRaster.X += deltaRaster.X;
-            if (this._dragPositionRaster.X < 0)
-                this._dragPositionRaster.X = 0;
+        //public virtual void DragDropPositionVerschieben(Point deltaRaster)
+        //{
+        //    this._dragPositionRaster = new Point(this._positionRaster.X, this._positionRaster.Y);
+        //    this._dragPositionRaster.X += deltaRaster.X;
+        //    if (this._dragPositionRaster.X < 0)
+        //        this._dragPositionRaster.X = 0;
 
-            this._dragPositionRaster.Y += deltaRaster.Y;
-            if (this._dragPositionRaster.Y < 0)
-                this._dragPositionRaster.Y = 0;
+        //    this._dragPositionRaster.Y += deltaRaster.Y;
+        //    if (this._dragPositionRaster.Y < 0)
+        //        this._dragPositionRaster.Y = 0;
 
-            this.Berechnung();
-            this.DragDropElementVerknüpfungenAktualisieren();
-        }
+        //    this.Berechnung();
+        //    this.DragDropElementVerknüpfungenAktualisieren();
+        //}
 
         public virtual void DragDropAbschließen()
         {
@@ -855,9 +855,9 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
         }
 
 
-        public virtual void DragDropElementVerknüpfungenAktualisieren()
-        {
+        //public virtual void DragDropElementVerknüpfungenAktualisieren()
+        //{
 
-        }
+        //}
     }
 }

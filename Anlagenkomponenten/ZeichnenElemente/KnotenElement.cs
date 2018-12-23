@@ -212,21 +212,21 @@ namespace MoBaSteuerung.Elemente {
             return -1;
         }
 
-        public override void DragDropElementVerknüpfungenAktualisieren() {
-            foreach (Gleis gl in this._gleise)
-                if(gl != null) { 
-                    gl.Berechnung();
-                    foreach (Entkuppler entk in gl.Entkuppler)
-                        entk.Berechnung();
-                    if (gl.Schalter != null)
-                        gl.Schalter.Berechnung();
-                    foreach (Signal sn in gl.Signale)
-                        if (sn != null)
-                            sn.Berechnung();
-                }
-            foreach (Weiche we in this._weichen)
-                if (we != null)
-                    we.Berechnung();
-        }
+        //public override void DragDropElementVerknüpfungenAktualisieren() {
+        //    foreach (Gleis gl in this._gleise)
+        //        if(gl != null) { 
+        //            gl.Berechnung();
+        //            foreach (Entkuppler entk in gl.Entkuppler)
+        //                entk.Berechnung();
+        //            if (gl.Schalter != null)
+        //                gl.Schalter.Berechnung();
+        //            foreach (Signal sn in gl.Signale)
+        //                if (sn != null)
+        //                    sn.Berechnung();
+        //        }
+        //    foreach (Weiche we in this._weichen)
+        //        if (we != null)
+        //            we.Berechnung();
+        //}
     }
 }

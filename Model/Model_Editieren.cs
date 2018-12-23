@@ -32,6 +32,7 @@ namespace MoBaSteuerung {
 
         private AnlagenElement _neuesElement;
         private List<AnlagenElement> _auswahlElemente;
+        private EditKommando _aktuellerBefehl = null;
 
 
         #endregion
@@ -69,6 +70,7 @@ namespace MoBaSteuerung {
 
         public bool BearbeitenNeuZeichnen(BearbeitungsModus bearbeitungsModus, MouseButtons button, Point rasterpunkt) {
             if (this._neuesElement != null) {
+                EditKommando command;
                 switch (bearbeitungsModus) {
                     case BearbeitungsModus.Gleis:
                         if (this._neuesElement.GetType().Name == "Knoten") {
@@ -77,42 +79,62 @@ namespace MoBaSteuerung {
                         }
                         else {
                             Gleis gl = (Gleis)this._neuesElement;
-                            Knoten startKnoten = this.zeichnenElemente.SucheKnoten(gl.StartKn.PositionRaster);
-                            Knoten endKnoten = this.zeichnenElemente.SucheKnoten(gl.EndKn.PositionRaster);
-                            if (startKnoten == null)
-                                startKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.StartKn.Zoom,
-                                                                this.anzeigeTyp, gl.StartKn.PositionRaster);
-                            if (endKnoten == null)
-                                endKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.EndKn.Zoom,
-                                                                this.anzeigeTyp, gl.EndKn.PositionRaster);
-                            new Gleis(this.zeichnenElemente, this.zeichnenElemente.GleisElemente.SucheFreieNummer(), _neuesElement.Zoom, this.anzeigeTyp,
-                                        startKnoten, endKnoten);
+                            //Knoten startKnoten = this.zeichnenElemente.SucheKnoten(gl.StartKn.PositionRaster);
+                            //Knoten endKnoten = this.zeichnenElemente.SucheKnoten(gl.EndKn.PositionRaster);
+                            //if (startKnoten == null)
+                            //    startKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.StartKn.Zoom,
+                            //                                    this.anzeigeTyp, gl.StartKn.PositionRaster);
+                            //if (endKnoten == null)
+                            //    endKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.EndKn.Zoom,
+                            //                                    this.anzeigeTyp, gl.EndKn.PositionRaster);
+                            //new Gleis(this.zeichnenElemente, this.zeichnenElemente.GleisElemente.SucheFreieNummer(), _neuesElement.Zoom, this.anzeigeTyp,
+                            //            startKnoten, endKnoten);
+                            command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Gleis, this.ZeichnenElemente
+                                , (object)new object[]{ this.zeichnenElemente.GleisElemente.SucheFreieNummer()
+                                                       , gl.StartKn.PositionRaster, gl.EndKn.PositionRaster });
+                            command.Ausfuehren();
                             NeuesElementVorschauReset();
                             return true;
                         }
                         break;
                     case BearbeitungsModus.Signal:
                         _neuesElement.GleisElementAustragen();
-                        new Signal(this.zeichnenElemente, this.zeichnenElemente.SignalElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                    _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster, ((Signal)_neuesElement).InZeichenRichtung);
+                        //new Signal(this.zeichnenElemente, this.zeichnenElemente.SignalElemente.SucheFreieNummer(), _neuesElement.Zoom,
+                        //            _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster, ((Signal)_neuesElement).InZeichenRichtung);
+                        command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Signal, this.ZeichnenElemente
+                                , (object)new object[] { this.zeichnenElemente.SignalElemente.SucheFreieNummer()
+                                                         , ((RasterAnlagenElement)_neuesElement).PositionRaster, ((Signal)_neuesElement).InZeichenRichtung });
+                        command.Ausfuehren();
                         NeuesElementVorschauReset();
                         return true;
                     case BearbeitungsModus.Entkuppler:
                         _neuesElement.GleisElementAustragen();
-                        new Entkuppler(this.zeichnenElemente, this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                        _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
+                        //new Entkuppler(this.zeichnenElemente, this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer(), _neuesElement.Zoom,
+                        //                _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
+                        command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Entkuppler, this.ZeichnenElemente
+                                , (object)new object[] { this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
+                                                         , ((RasterAnlagenElement)_neuesElement).PositionRaster });
+                        command.Ausfuehren();
                         NeuesElementVorschauReset();
                         return true;
                     case BearbeitungsModus.Schalter:
                         _neuesElement.GleisElementAustragen();
-                        new Schalter(this.zeichnenElemente, this.zeichnenElemente.SchalterElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                      _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
+                        //new Schalter(this.zeichnenElemente, this.zeichnenElemente.SchalterElemente.SucheFreieNummer(), _neuesElement.Zoom,
+                        //              _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
+                        command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Schalter, this.ZeichnenElemente
+                                , (object)new object[] { this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
+                                                         , ((RasterAnlagenElement)_neuesElement).PositionRaster });
+                        command.Ausfuehren();
                         NeuesElementVorschauReset();
                         return true;
                     case BearbeitungsModus.Fss:
                         _neuesElement.GleisElementAustragen();
-                        new FSS(this.zeichnenElemente, this.zeichnenElemente.FssElemente.SucheFreieNummer(), _neuesElement.Zoom,
-                                      _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
+                        //new FSS(this.zeichnenElemente, this.zeichnenElemente.FssElemente.SucheFreieNummer(), _neuesElement.Zoom,
+                        //              _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
+                        command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.FSS, this.ZeichnenElemente
+                                , (object)new object[] { this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
+                                                         , ((RasterAnlagenElement)_neuesElement).PositionRaster });
+                        command.Ausfuehren();
                         NeuesElementVorschauReset();
                         return true;
                 }
@@ -182,18 +204,27 @@ namespace MoBaSteuerung {
         }
 
         public void BearbeitenDragDrop(Point deltaRaster, DragDropEffects effect) {
-            foreach (AnlagenElement el in this.AuswahlElemente)
-                ((RasterAnlagenElement)el).DragDropPositionVerschieben(deltaRaster);
+            if (AuswahlElemente.Count > 0) {
+                if (_aktuellerBefehl == null) {
+                    _aktuellerBefehl = new EditKommando(EditAction.Verschieben, _auswahlElemente[0], ZeichnenElemente, 
+                                                        (object)new object[] {  deltaRaster });
+                    _aktuellerBefehl.Ausfuehren();
+                }
+                else {
+                    _aktuellerBefehl.Ausfuehren((object)new object[] { deltaRaster });
+                }
+            }
+            //foreach (AnlagenElement el in this.AuswahlElemente)
+            //    ((RasterAnlagenElement)el).DragDropPositionVerschieben(deltaRaster);
         }
 
         public void BearbeitenDragDropAbschließen(DragDropEffects effect) {
-            try {
-                foreach (AnlagenElement el in this.AuswahlElemente)
-                    ((RasterAnlagenElement)el).DragDropAbschließen();
-            }
-            catch (Exception e) {
-
-            }
+            //try {
+            //    foreach (AnlagenElement el in this.AuswahlElemente)
+            //        ((RasterAnlagenElement)el).DragDropAbschließen();
+            //}
+            //catch (Exception e) {
+            //}
             BearbeitenSelektieren(MouseButtons.Left, false, new Point(-1, -1));
         }
 
