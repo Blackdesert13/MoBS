@@ -332,15 +332,24 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             // Logging.Log.Schreibe(logString, LogLevel.Info);
             //logString.Insert(Environment.NewLine);
             foreach (FSS x in fssElemente.Elemente)
-            {
-                undefRegler=x.reset();
+            {//reset aller FSS, Regler 1 und 2 auf null
+                undefRegler= undefRegler + x.reset();
                 logString = logString + x.ReglerNummer1 + " "+ x.ReglerNummer2 + " " + x.AktiverReglerNr + "\t";
             }
-            
+           /* foreach(FSS x in fssElemente.Elemente)
+            {
+
+            }*/
+
             while((undefRegler!=0)||(undefRegler != undefRegleralt))
             {
-                undefRegleralt = undefRegler; undefRegler = 0;
-                foreach (FSS x in fssElemente.Elemente) { if (x.AktiverReglerNr == 0) undefRegler++; }
+                undefRegleralt = undefRegler;
+                undefRegler = 0;
+                foreach (FSS x in fssElemente.Elemente)
+                {
+                    undefRegler += x.aktualisieren();
+                    //if (x.AktiverReglerNr == 0) undefRegler++;
+                }
             }
             Logging.Log.Schreibe(logString, LogLevel.Info);
         }

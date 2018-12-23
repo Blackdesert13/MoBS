@@ -227,7 +227,11 @@ namespace MoBaSteuerung.Elemente
             if (_reglerNr[1] < 0) _regler[1] = null;
             return this.aktualisieren();
         }
-
+        /// <summary>
+        /// aktualisiert _regler[0] und _regler[1]
+        /// die Anzahl der undefinierten Regler wird zurückgeliefert
+        /// </summary>
+        /// <returns>Anzahl der undefinierten Regler</returns>
         public int aktualisieren()
         {
             int ergebnis = 0;
@@ -236,10 +240,10 @@ namespace MoBaSteuerung.Elemente
                 if (_fss[0] != null)
                 {
                     int rn = _fss[0].AktiverReglerNr;
-                    if(rn>0) _regler[0] = this.Parent.ReglerElemente.Element(rn);
+                    if(rn>0)
+                        _regler[0] = this.Parent.ReglerElemente.Element(rn);
                     else ergebnis++;
-                }
-                
+                }                
             }
             if (_regler[1] == null)
             {

@@ -767,7 +767,8 @@ namespace MoBaSteuerung {
         /// Alles neu zeichnen im Bedienmodus.
         /// </summary>
         /// <param name="graphics"></param>
-        public void ZeichneElementeBedienen(Graphics graphics) {
+        public void ZeichneElementeBedienen(Graphics graphics)
+        {
             graphics.SmoothingMode = SmoothingMode.HighQuality;
 
             this.zeichnenElemente.GleisElemente.ElementeZeichnen1(graphics);
