@@ -43,6 +43,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 
         private Servo _aktiverServo = null;
         private ServoAction _aktiverServoRichtung = ServoAction.None;
+        private int _zoom;
 
         /// <summary>
         /// enthält alle Elemente der Anlage
@@ -89,7 +90,13 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this.entkupplerElemente.Zoom = value;
                 this.fahrstrassenElemente.Zoom = value;
                 this.servoElemente.Zoom = value;
+                this._zoom = value;
             }
+            get
+            {
+                return this._zoom;
+            }
+
         }
 
         /// <summary>
