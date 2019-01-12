@@ -348,7 +348,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 
             }*/
 
-            while((undefRegler!=0)||(undefRegler != undefRegleralt))
+            while((undefRegler!=0)&&(undefRegler != undefRegleralt))
             {
                 undefRegleralt = undefRegler;
                 undefRegler = 0;
