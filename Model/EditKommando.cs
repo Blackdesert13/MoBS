@@ -80,8 +80,9 @@ namespace MoBaSteuerung {
         public virtual void Ausfuehren(object updateNewValue) {
             switch (_aktion) {
                 case EditAction.Verschieben:
-                    
-                    ((Point)((object[])_neuerWert)[0]).Offset((Point)updateNewValue);
+                    Point pValue = (Point)(((object[])updateNewValue)[0]);
+                    Point pWert = (Point)(((object[])_neuerWert)[0]);
+
                     break;
 
             }

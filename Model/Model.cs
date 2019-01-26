@@ -760,6 +760,7 @@ namespace MoBaSteuerung {
         /// </summary>
         public void AnlageZurücksetzen() {
             NeuesElementVorschauReset();
+            _aktuellerBefehl = null;
             this.zeichnenElemente.AlleLöschen();
         }
 

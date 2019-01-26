@@ -225,6 +225,7 @@ namespace MoBaSteuerung {
             //}
             //catch (Exception e) {
             //}
+            _aktuellerBefehl = null;
             BearbeitenSelektieren(MouseButtons.Left, false, new Point(-1, -1));
         }
 
