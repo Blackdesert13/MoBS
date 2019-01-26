@@ -3,6 +3,7 @@ using MoBaSteuerung.Anlagenkomponenten.Enum;
 using MoBaSteuerung.Elemente;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -78,11 +79,17 @@ namespace MoBaSteuerung {
         #region public Methoden
 
         public virtual void Ausfuehren(object updateNewValue) {
+            
             switch (_aktion) {
                 case EditAction.Verschieben:
                     Point pValue = (Point)(((object[])updateNewValue)[0]);
                     Point pWert = (Point)(((object[])_neuerWert)[0]);
+                    pWert.Offset(pValue);
 
+                    Debug.Print("Update New Value = " + pValue.X + " " + pValue.Y);
+                    Debug.Print("Update New Wert = " + pWert.X + " " + pWert.Y);
+
+                    this._neuerWert = (object)(new object[]{ pWert});
                     break;
 
             }
@@ -129,8 +136,21 @@ namespace MoBaSteuerung {
                     
                     break;
                 case ElementTyp.Knoten:
-                    Point p = (Point)((object[])_neuerWert)[0];
-                    ((Knoten)_element).PositionRaster = new Point(p.X,p.Y);
+                    Point pDiff = (Point)((object[])_neuerWert)[0];
+                    Point pAltW = (Point)this._alterWert;
+                    Knoten k = ((Knoten)_element);
+                    k.PositionRaster = new Point(pDiff.X + pAltW.X, pDiff.Y + pAltW.Y);
+                    k.Berechnung();
+                    foreach(Gleis item in k.Gleise) {
+                        if (item != null) {
+                            item.Berechnung();
+                        }
+                    }
+                    foreach (Weiche item in k.Weichen) {
+                        if (item != null) {
+                            item.Berechnung();
+                        }
+                    }
                     break;
             }
         }

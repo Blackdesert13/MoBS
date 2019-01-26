@@ -122,7 +122,7 @@ namespace MoBaSteuerung {
                         //new Schalter(this.zeichnenElemente, this.zeichnenElemente.SchalterElemente.SucheFreieNummer(), _neuesElement.Zoom,
                         //              _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
                         command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Schalter, this.ZeichnenElemente
-                                , (object)new object[] { this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
+                                , (object)new object[] { this.zeichnenElemente.SchalterElemente.SucheFreieNummer()
                                                          , ((RasterAnlagenElement)_neuesElement).PositionRaster });
                         command.Ausfuehren();
                         NeuesElementVorschauReset();
@@ -132,7 +132,7 @@ namespace MoBaSteuerung {
                         //new FSS(this.zeichnenElemente, this.zeichnenElemente.FssElemente.SucheFreieNummer(), _neuesElement.Zoom,
                         //              _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
                         command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.FSS, this.ZeichnenElemente
-                                , (object)new object[] { this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
+                                , (object)new object[] { this.zeichnenElemente.FssElemente.SucheFreieNummer()
                                                          , ((RasterAnlagenElement)_neuesElement).PositionRaster });
                         command.Ausfuehren();
                         NeuesElementVorschauReset();
@@ -213,6 +213,7 @@ namespace MoBaSteuerung {
                 else {
                     _aktuellerBefehl.Ausfuehren((object)new object[] { deltaRaster });
                 }
+                this.OnAnlageNeuZeichnen();
             }
             //foreach (AnlagenElement el in this.AuswahlElemente)
             //    ((RasterAnlagenElement)el).DragDropPositionVerschieben(deltaRaster);

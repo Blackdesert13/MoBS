@@ -349,6 +349,7 @@ namespace MoBaSteuerung {
             this._model.AnlageLaden(anlageName);
             // Name übergeben
             this._model.AnlageDateiPfadName = anlageName;
+            this._model.Zoom = this.zoom;
             // geladenen Namen zurückgeben
             this.OnFileLoaded(this._model.AnlageDateiPfadName);
 
@@ -419,6 +420,7 @@ namespace MoBaSteuerung {
 
         private void Slave_MasterAnlageDatenEventHandler(byte[] e) {
             this._model.AnlageLaden(e);
+            this._model.Zoom = this.zoom;
             OnViewNeuZeichnen();
         }
 
