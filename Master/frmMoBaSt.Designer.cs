@@ -94,6 +94,7 @@ namespace MoBaSteuerung {
             this.toolStripLabelAbstand2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonElementeExportieren = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonFahrstrassenSuchen = new System.Windows.Forms.ToolStripButton();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.timerZeit = new System.Windows.Forms.Timer(this.components);
@@ -119,7 +120,6 @@ namespace MoBaSteuerung {
             this.toolStripMenuItemFadenkreuzFadenkreuzFarbe = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonElementeEigenschaften = new Master.ToolStripMenuItemCheckable();
             this.toolStripMenuItemBearbeiten = new Master.ToolStripMenuItemCheckable();
-            this.toolStripButtonFahrstrassenSuchen = new System.Windows.Forms.ToolStripButton();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
@@ -586,7 +586,7 @@ namespace MoBaSteuerung {
             this.toolStripContainer.ContentPanel.BackColor = System.Drawing.Color.White;
             this.toolStripContainer.ContentPanel.Controls.Add(this.panelView);
             this.toolStripContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(966, 375);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(966, 400);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // toolStripContainer.LeftToolStripPanel
@@ -611,7 +611,7 @@ namespace MoBaSteuerung {
             this.panelView.Location = new System.Drawing.Point(0, 0);
             this.panelView.Margin = new System.Windows.Forms.Padding(0);
             this.panelView.Name = "panelView";
-            this.panelView.Size = new System.Drawing.Size(966, 375);
+            this.panelView.Size = new System.Drawing.Size(966, 400);
             this.panelView.TabIndex = 6;
             this.panelView.Visible = false;
             this.panelView.VisibleChanged += new System.EventHandler(this.panelView_VisibleChanged);
@@ -624,7 +624,7 @@ namespace MoBaSteuerung {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.vScrollBarView.Location = new System.Drawing.Point(949, 0);
             this.vScrollBarView.Name = "vScrollBarView";
-            this.vScrollBarView.Size = new System.Drawing.Size(17, 400);
+            this.vScrollBarView.Size = new System.Drawing.Size(17, 425);
             this.vScrollBarView.TabIndex = 4;
             this.vScrollBarView.ValueChanged += new System.EventHandler(this.vScrollBarView_ValueChanged);
             // 
@@ -638,7 +638,7 @@ namespace MoBaSteuerung {
             this.panelScrollView.Location = new System.Drawing.Point(0, 0);
             this.panelScrollView.Margin = new System.Windows.Forms.Padding(0);
             this.panelScrollView.Name = "panelScrollView";
-            this.panelScrollView.Size = new System.Drawing.Size(949, 358);
+            this.panelScrollView.Size = new System.Drawing.Size(949, 383);
             this.panelScrollView.TabIndex = 3;
             // 
             // pictureBoxView
@@ -667,7 +667,7 @@ namespace MoBaSteuerung {
             // 
             this.hScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBarView.Location = new System.Drawing.Point(0, 358);
+            this.hScrollBarView.Location = new System.Drawing.Point(0, 383);
             this.hScrollBarView.Name = "hScrollBarView";
             this.hScrollBarView.Size = new System.Drawing.Size(949, 17);
             this.hScrollBarView.TabIndex = 5;
@@ -762,7 +762,7 @@ namespace MoBaSteuerung {
             this.toolStripButtonFahrstrassenSuchen});
             this.toolStripBearbeiten.Location = new System.Drawing.Point(3, 0);
             this.toolStripBearbeiten.Name = "toolStripBearbeiten";
-            this.toolStripBearbeiten.Size = new System.Drawing.Size(613, 25);
+            this.toolStripBearbeiten.Size = new System.Drawing.Size(582, 25);
             this.toolStripBearbeiten.TabIndex = 0;
             this.toolStripBearbeiten.Visible = false;
             // 
@@ -797,6 +797,16 @@ namespace MoBaSteuerung {
             this.toolStripButton1.Size = new System.Drawing.Size(96, 22);
             this.toolStripButton1.Text = "Stecker-Anzeige";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButtonFahrstrassenSuchen
+            // 
+            this.toolStripButtonFahrstrassenSuchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonFahrstrassenSuchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFahrstrassenSuchen.Image")));
+            this.toolStripButtonFahrstrassenSuchen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonFahrstrassenSuchen.Name = "toolStripButtonFahrstrassenSuchen";
+            this.toolStripButtonFahrstrassenSuchen.Size = new System.Drawing.Size(114, 22);
+            this.toolStripButtonFahrstrassenSuchen.Text = "Fahrstraßen suchen";
+            this.toolStripButtonFahrstrassenSuchen.Click += new System.EventHandler(this.toolStripButtonFahrstrassenSuchen_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -982,16 +992,6 @@ namespace MoBaSteuerung {
             this.toolStripMenuItemBearbeiten.Size = new System.Drawing.Size(115, 19);
             this.toolStripMenuItemBearbeiten.Text = "Anlage Bearbeiten";
             this.toolStripMenuItemBearbeiten.Click += new System.EventHandler(this.toolStripMenuItemBearbeiten_Click);
-            // 
-            // toolStripButtonFahrstrassenSuchen
-            // 
-            this.toolStripButtonFahrstrassenSuchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonFahrstrassenSuchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFahrstrassenSuchen.Image")));
-            this.toolStripButtonFahrstrassenSuchen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonFahrstrassenSuchen.Name = "toolStripButtonFahrstrassenSuchen";
-            this.toolStripButtonFahrstrassenSuchen.Size = new System.Drawing.Size(114, 22);
-            this.toolStripButtonFahrstrassenSuchen.Text = "Fahrstraßen suchen";
-            this.toolStripButtonFahrstrassenSuchen.Click += new System.EventHandler(this.toolStripButtonFahrstrassenSuchen_Click);
             // 
             // MoBaStForm
             // 

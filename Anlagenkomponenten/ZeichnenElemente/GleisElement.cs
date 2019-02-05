@@ -232,7 +232,10 @@ namespace MoBaSteuerung.Elemente {
                             farbeStift = Color.FromArgb(transpanz, Color.Blue);
                             break;
                         case Elementzustand.Aus:
-                            farbeStift = Color.FromArgb(transpanz, Color.Gray);
+                            if (this.Ausgang.SpeicherString == "0-0-0")
+                            { farbeStift = Color.FromArgb(transpanz, Color.LightBlue); }//BlueViolet CadetBlue LightBlue
+                            else
+                            { farbeStift = Color.FromArgb(transpanz, Color.Gray); }
                             break;
                     }
                     break;
