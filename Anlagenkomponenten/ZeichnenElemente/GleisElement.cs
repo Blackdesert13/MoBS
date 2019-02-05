@@ -187,7 +187,7 @@ namespace MoBaSteuerung.Elemente {
 				//int transpanz = 255;
 			  if (reglerNr < 0) { regler = Parent.FssElemente.Element(-reglerNr).AktiverRegler(); }
 				if (reglerNr > 0)
-					if (reglerNr != regler.ID) regler = Parent.ReglerElemente.Element(reglerNr);
+					if (regler==null || reglerNr != regler.ID) regler = Parent.ReglerElemente.Element(reglerNr);
 				if (regler != null) {
 					if (_fss != null) regler = _fss.AktiverRegler();
 					Color farbeStift = Color.YellowGreen;
