@@ -650,6 +650,7 @@ namespace MoBaSteuerung {
 				this.toolStripStatusLabelRaster.Visible = false;
 				this.toolStripStatusLabelRasterInfo.Visible = false;
 				this._toolBoxElemente.Hide();
+				this._fahrStraßenEditor.Hide();
 				this.Controller.AnzeigeTyp = AnzeigeTyp.Bedienen;
 				this.Model.BearbeitenSelektionLöschen();
 				this.BearbeitungsModusZeichnenZurücksetzen();
