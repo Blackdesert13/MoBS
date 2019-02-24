@@ -732,11 +732,11 @@ namespace MoBaSteuerung {
                                             + this.zeichnenElemente.KnotenElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Gleise\tNr.\tStartKn\tEndKn\tRegler\tAusgang\tEingang\tBez.\tStecker" 
                                             + this.zeichnenElemente.GleisElemente.SpeicherString);
-            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Weichen\tNr.\tKnoten\tGru-Ste\tAusgang\tBez.\tStecker"
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Weichen\tNr.\tKnoten\tGru-Ste\tAusgang\tBez.\tStecker\tKoppelung"
                                             + this.zeichnenElemente.WeicheElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "GleisSchalter\tNr.\tGleis\tBez."
                                             + this.zeichnenElemente.SchalterElemente.SpeicherString);
-            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker"
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung"
                                             + this.zeichnenElemente.FssElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Entkuppler_\tNr.\tGleis\tAusgang\tBez.\tStecker"
                                             + this.zeichnenElemente.EntkupplerElemente.SpeicherString);
@@ -801,6 +801,7 @@ namespace MoBaSteuerung {
             this.zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
+            this.zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);

@@ -27,6 +27,7 @@
             this.LabelMenü = new System.Windows.Forms.Label();
             this.PictureBoxMenü = new System.Windows.Forms.PictureBox();
             this.PanelEigenschaften = new System.Windows.Forms.Panel();
+            this.buttonKoppelung = new System.Windows.Forms.Button();
             this.labelStecker = new System.Windows.Forms.Label();
             this.textBoxStecker = new System.Windows.Forms.TextBox();
             this.buttonSpeichern = new System.Windows.Forms.Button();
@@ -93,6 +94,7 @@
             // PanelEigenschaften
             // 
             this.PanelEigenschaften.BackColor = System.Drawing.Color.White;
+            this.PanelEigenschaften.Controls.Add(this.buttonKoppelung);
             this.PanelEigenschaften.Controls.Add(this.labelStecker);
             this.PanelEigenschaften.Controls.Add(this.textBoxStecker);
             this.PanelEigenschaften.Controls.Add(this.buttonSpeichern);
@@ -115,6 +117,16 @@
             this.PanelEigenschaften.Name = "PanelEigenschaften";
             this.PanelEigenschaften.Size = new System.Drawing.Size(338, 85);
             this.PanelEigenschaften.TabIndex = 1;
+            // 
+            // buttonKoppelung
+            // 
+            this.buttonKoppelung.Location = new System.Drawing.Point(3, 58);
+            this.buttonKoppelung.Name = "buttonKoppelung";
+            this.buttonKoppelung.Size = new System.Drawing.Size(63, 23);
+            this.buttonKoppelung.TabIndex = 2;
+            this.buttonKoppelung.Text = "Koppelung";
+            this.buttonKoppelung.UseVisualStyleBackColor = true;
+            this.buttonKoppelung.Click += new System.EventHandler(this.buttonKoppelung_Click);
             // 
             // labelStecker
             // 
@@ -248,7 +260,7 @@
             this.buttonLaden.UseVisualStyleBackColor = true;
             this.buttonLaden.Click += new System.EventHandler(this.buttonLaden_Click);
             // 
-            // FrmFSS
+            // 
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -290,5 +302,6 @@
         private System.Windows.Forms.Button buttonSpeichern;
         private System.Windows.Forms.Label labelStecker;
         private System.Windows.Forms.TextBox textBoxStecker;
+        private System.Windows.Forms.Button buttonKoppelung;
     }
 }

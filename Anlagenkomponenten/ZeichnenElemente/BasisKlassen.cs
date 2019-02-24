@@ -415,50 +415,62 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 
         public string KoppelungsString
         {
-            get { return _kopplungsString; }
-            set { _kopplungsString = value; }
+            get
+            {
+                return _kopplungsString;
+            }
+            set
+            {
+                _kopplungsString = value;
+                //_kopplungsBefehlsListe.ListenString = _kopplungsString;
+            }
         }
 
+        public BefehlsListe Koppelung
+        {
+            get { return _kopplungsBefehlsListe; }
+        }
         /// <summary>
         /// 
         /// </summary>
         public void KoppelungAktivieren()
         {
             _kopplungsBefehlsListe = new BefehlsListe(_parent, _ausgang.Stellung,_kopplungsString);
-           // _kopplungsBefehlsListe.AusgangsStellung = _ausgang.Stellung;
-           // _kopplungsBefehlsListe.ListenString = _kopplungsString;
-           /* if (_kopplungsString!= "" && _kopplungsString != null)
-            {
-                
-                string[] bStringArray = _kopplungsString.Split(' ');
-                for (int i = 0; i < bStringArray.Length; i+)
-                {
-                    string[] befehl = bStringArray[i].Split(':');
-                    string[] elName = Regex.Matches(befehl[0], @"[a-zA-Z]+|\d+").Cast<Match>().Select(m => m.Value).ToArray();
-                    Befehl nBefehl = new Befehl();
-                    AnlagenElement el = null;
-                    switch (elName[0])
-                    {
-                        case "Gl":
-                            el = this.Parent.GleisElemente.Element(Convert.ToInt16(elName[1]));
-                            break;
-                        case "Sn":
-                            el = this.Parent.SignalElemente.Element(Convert.ToInt16(elName[1]));
-                            break;
-                        case "We":
-                            el = this.Parent.WeicheElemente.Element(Convert.ToInt16(elName[1]));
-                            break;
-                        case "Fss":
-                            el = this.Parent.FssElemente.Element(Convert.ToInt16(elName[1]));
-                            break;
-                        default:
-                            break;
-                    }
-                    nBefehl.Element = el;
-                    nBefehl.Attribut = befehl[1];
-                }
-            }*/
-       
+            _kopplungsBefehlsListe.ListenString = _kopplungsString;
+            // _kopplungsBefehlsListe.AusgangsStellung = _ausgang.Stellung;
+            // _kopplungsBefehlsListe.ListenString = _kopplungsString;
+            /* if (_kopplungsString!= "" && _kopplungsString != null)
+             {
+
+                 string[] bStringArray = _kopplungsString.Split(' ');
+                 for (int i = 0; i < bStringArray.Length; i+)
+                 {
+                     string[] befehl = bStringArray[i].Split(':');
+                     string[] elName = Regex.Matches(befehl[0], @"[a-zA-Z]+|\d+").Cast<Match>().Select(m => m.Value).ToArray();
+                     Befehl nBefehl = new Befehl();
+                     AnlagenElement el = null;
+                     switch (elName[0])
+                     {
+                         case "Gl":
+                             el = this.Parent.GleisElemente.Element(Convert.ToInt16(elName[1]));
+                             break;
+                         case "Sn":
+                             el = this.Parent.SignalElemente.Element(Convert.ToInt16(elName[1]));
+                             break;
+                         case "We":
+                             el = this.Parent.WeicheElemente.Element(Convert.ToInt16(elName[1]));
+                             break;
+                         case "Fss":
+                             el = this.Parent.FssElemente.Element(Convert.ToInt16(elName[1]));
+                             break;
+                         default:
+                             break;
+                     }
+                     nBefehl.Element = el;
+                     nBefehl.Attribut = befehl[1];
+                 }
+             }*/
+
             /*
             //private bool EinlesenBefehlsliste(List<Befehl>list, string[] spString) {
             for (int i = 1; i < spString.Length; i++) {
@@ -501,7 +513,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
                     string[] befehlString = x.Split(':');
                     Befehl neuerBefehl;
                 }*/
-            
+
         }
 
         /// <summary>
@@ -733,6 +745,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
             this._anzeigenTyp = anzeigeTyp;
             this._passiv = false;
             this._bezeichnung = "";
+            this._kopplungsBefehlsListe = null;
         }
 
         

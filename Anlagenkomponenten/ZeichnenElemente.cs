@@ -112,6 +112,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this.knotenElemente.AnzeigeTyp = value;
                 this.entkupplerElemente.AnzeigeTyp = value;
                 this.fahrstrassenElemente.AnzeigeTyp = value;
+                this.infoElemente.AnzeigeTyp = value;
                 this.servoElemente.AnzeigeTyp = value;
             }
         }

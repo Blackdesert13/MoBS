@@ -95,16 +95,38 @@ namespace MoBaSteuerung.Elemente
 
         public override void ElementZeichnen(Graphics graphics)
         {
-           // Color farbeStift = Color.Black;
-            Pen stift = new Pen(Color.Black, 1);
-            SolidBrush pinsel = new SolidBrush(Color.White);
-            SolidBrush pinsel1 = new SolidBrush(Color.Black);
-            try { 
-                graphics.FillPath(pinsel, this.graphicsPathHintergrund);
-                graphics.FillPath(pinsel1, this.graphicsPathText);
+            // Color farbeStift = Color.Black;
+            if (this.AnzeigenTyp == AnzeigeTyp.Bedienen)
+            {
+                Pen stift = new Pen(Color.Black, 1);
+                SolidBrush pinsel = new SolidBrush(Color.White);
+                SolidBrush pinsel1 = new SolidBrush(Color.Black);
+                try
+                {
+                    graphics.FillPath(pinsel, this.graphicsPathHintergrund);
+                    graphics.FillPath(pinsel1, this.graphicsPathText);
+                }
+                catch (Exception e)
+                {
+                    Debug.Print(e.Message);
+                }
             }
-            catch(Exception e){
-                Debug.Print(e.Message);
+            if (this.AnzeigenTyp == AnzeigeTyp.Bearbeiten)
+            {
+                Text = Convert.ToString(ID);
+                Pen stift = new Pen(Color.Black, 1);
+                SolidBrush pinsel = new SolidBrush(Color.White);
+                SolidBrush pinsel1 = new SolidBrush(Color.Black);
+                try
+                {
+                    graphics.DrawPath(stift, this.graphicsPathHintergrund);
+                    graphics.FillPath(pinsel, this.graphicsPathHintergrund);
+                    graphics.FillPath(pinsel1, this.graphicsPathText);
+                }
+                catch (Exception e)
+                {
+                    Debug.Print(e.Message);
+                }
             }
             //graphics.DrawPath(stift, this.graphicsPathText);
         }

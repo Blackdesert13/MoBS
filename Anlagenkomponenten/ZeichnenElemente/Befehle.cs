@@ -32,6 +32,14 @@ namespace MoBaSteuerung.Elemente
             set { _listenString = value; }
         }
 
+
+        /// <summary>
+        /// übernimmt eine neue Befehls-Liste aus einem String und aktiviert diese gleich
+        /// </summary>
+        /// <param name="ListensString"></param>
+        public void ListeNeu(string ListensString) { }
+
+
         /// <summary>
         /// 
         /// </summary>

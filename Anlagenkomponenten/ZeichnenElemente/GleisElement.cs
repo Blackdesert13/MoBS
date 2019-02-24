@@ -161,7 +161,9 @@ namespace MoBaSteuerung.Elemente {
 			Bezeichnung = elem[7];
 			if (elem.Length > 8)
 				Stecker = elem[8];
-			reglerNr = Convert.ToInt32(elem[4]);
+            if (elem.Length > 9)
+                KoppelungsString = elem[9];
+            reglerNr = Convert.ToInt32(elem[4]);
 			if (reglerNr > 0) { regler = parent.ReglerElemente.Element(Convert.ToInt32(elem[4])); }
 			StartKn = Parent.KnotenElemente.Element(Convert.ToInt32(start[0]));
 			EndKn = Parent.KnotenElemente.Element(Convert.ToInt32(end[0]));

@@ -174,5 +174,14 @@ namespace ModellBahnSteuerung.ToolBox
         {
             fssSpeichern();
         }
+
+        private void buttonKoppelung_Click(object sender, EventArgs e)
+        {
+            if (_fss != null)
+            {
+                FrmBefehlsliste frmBefehlsliste = new FrmBefehlsliste(_fss.Koppelung, _fss.KurzBezeichnung + "-Koppelung");
+
+            }
+        }
     }
 }

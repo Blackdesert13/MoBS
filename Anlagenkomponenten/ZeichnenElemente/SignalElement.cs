@@ -228,6 +228,9 @@ namespace MoBaSteuerung.Elemente {
                         graphics.FillPath(Brushes.Yellow, this.graphicsPathHintergrund);
                     break;
                 case AnzeigeTyp.Bedienen:
+                    //if (infoFenster != null)
+                     //   infoFenster.Text = zug.Anzeige;
+
                     graphics.FillPath(Brushes.White, this.graphicsPathHintergrund);
                     if (Passiv) {
                         transpanz = 128;
