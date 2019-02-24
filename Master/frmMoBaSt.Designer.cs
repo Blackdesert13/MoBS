@@ -20,243 +20,6 @@ namespace MoBaSteuerung {
 
 		#region Vom Windows Form-Designer generierter Code
 
-<<<<<<< .mine
-        /// <summary>
-        /// Erforderliche Methode für die Designerunterstützung.
-        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
-        /// </summary>
-        private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoBaStForm));
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelRaster = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelRasterInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelZoom = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelZoomInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAbstand1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelMinus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAbstand2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelPlus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAbstand3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelZeit = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItemDatei = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiNeu = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiLaden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiSchließen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiSpeichern = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiSpeichernUnter = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiVerbinden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiTrennen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiZuletztGeöfnetteAnlage = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiZuletztVerbundeneMaster = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiBeenden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemZoom = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemZoomPlus = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemZoomMinus = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorZoom1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemZoomZurücksetzen = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemBearbeiten = new Master.ToolStripMenuItemCheckable();
-            this.zugEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtras = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasServer = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasServerStart = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasServerStop = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtraArduino = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasArduinoVerbinden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasArduinoTrennen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorExtras1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemExtrasEinstellungen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemHilfe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemHilfeHilfe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorHilfe1 = new System.Windows.Forms.ToolStripSeparator();
-            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemHilfeInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
-            this.panelView = new System.Windows.Forms.Panel();
-            this.vScrollBarView = new System.Windows.Forms.VScrollBar();
-            this.panelScrollView = new System.Windows.Forms.Panel();
-            this.pictureBoxView = new System.Windows.Forms.PictureBox();
-            this.hScrollBarView = new System.Windows.Forms.HScrollBar();
-            this.toolStripElemente = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonElementGleis = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementSignal = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementEntkuppler = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementSchalter = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementFss = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBearbeiten = new System.Windows.Forms.ToolStrip();
-			this.toolStripSplitButtonCheckableGitter = new Master.ToolStripSplitButtonCheckable();
-			this.toolStripMenuItemGitterGitterLinie = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemGitterGitterLinieVersetzt = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemGitterGitterPunkt = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemGitterGitterPunktVersetzt = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparatorGitterGitter1 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripMenuItemGitterGitterFarbe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLabelAbstand1 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSplitButtonCheckableFadenkreuz = new Master.ToolStripSplitButtonCheckable();
-			this.toolStripMenuItemFadenkreuzFadenkreuzLinie = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemFadenkreuzFadenkreuzPunkt = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparatorFadenkreuzFadenkreuz1 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripMenuItemFadenkreuzFadenkreuzFarbe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripLabelAbstand2 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripButtonElementeEigenschaften = new Master.ToolStripMenuItemCheckable();
-			this.toolStripButtonFahrstrassenEditor = new Master.ToolStripMenuItemCheckable();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButtonElementeExportieren = new System.Windows.Forms.ToolStripButton();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.timerZeit = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStripAuswahlRechteck = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemAufheben = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorAuswahl1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDrehen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemSpiegeln = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorAuswahl2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemLöschen = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.statusStrip.SuspendLayout();
-            this.menuStrip.SuspendLayout();
-            this.toolStripContainer.ContentPanel.SuspendLayout();
-            this.toolStripContainer.LeftToolStripPanel.SuspendLayout();
-            this.toolStripContainer.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainer.SuspendLayout();
-            this.panelView.SuspendLayout();
-            this.panelScrollView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxView)).BeginInit();
-            this.toolStripElemente.SuspendLayout();
-            this.toolStripBearbeiten.SuspendLayout();
-            this.contextMenuStripAuswahlRechteck.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-||||||| .r74
-        /// <summary>
-        /// Erforderliche Methode für die Designerunterstützung.
-        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
-        /// </summary>
-        private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoBaStForm));
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelRaster = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelRasterInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelZoom = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelZoomInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAbstand1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelMinus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAbstand2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelPlus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAbstand3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelZeit = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItemDatei = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiNeu = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiLaden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiSchließen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiSpeichern = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiSpeichernUnter = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiVerbinden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiTrennen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiZuletztGeöfnetteAnlage = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemDateiZuletztVerbundeneMaster = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorDatei5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDateiBeenden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemZoom = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemZoomPlus = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemZoomMinus = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorZoom1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemZoomZurücksetzen = new System.Windows.Forms.ToolStripMenuItem();
-            this.zugEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtras = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasServer = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasServerStart = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasServerStop = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtraArduino = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasArduinoVerbinden = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemExtrasArduinoTrennen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorExtras1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemExtrasEinstellungen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemHilfe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemHilfeHilfe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorHilfe1 = new System.Windows.Forms.ToolStripSeparator();
-            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemHilfeInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
-            this.panelView = new System.Windows.Forms.Panel();
-            this.vScrollBarView = new System.Windows.Forms.VScrollBar();
-            this.panelScrollView = new System.Windows.Forms.Panel();
-            this.pictureBoxView = new System.Windows.Forms.PictureBox();
-            this.hScrollBarView = new System.Windows.Forms.HScrollBar();
-            this.toolStripElemente = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonElementGleis = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementSignal = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementEntkuppler = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementSchalter = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonElementFss = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBearbeiten = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabelAbstand1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabelAbstand2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButtonElementeExportieren = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonFahrstrassenSuchen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.timerZeit = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStripAuswahlRechteck = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemAufheben = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorAuswahl1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDrehen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemSpiegeln = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorAuswahl2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemLöschen = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.toolStripSplitButtonCheckableGitter = new Master.ToolStripSplitButtonCheckable();
-            this.toolStripMenuItemGitterGitterLinie = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemGitterGitterLinieVersetzt = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemGitterGitterPunkt = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemGitterGitterPunktVersetzt = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorGitterGitter1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemGitterGitterFarbe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSplitButtonCheckableFadenkreuz = new Master.ToolStripSplitButtonCheckable();
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorFadenkreuzFadenkreuz1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonElementeEigenschaften = new Master.ToolStripMenuItemCheckable();
-            this.toolStripMenuItemBearbeiten = new Master.ToolStripMenuItemCheckable();
-            this.statusStrip.SuspendLayout();
-            this.menuStrip.SuspendLayout();
-            this.toolStripContainer.ContentPanel.SuspendLayout();
-            this.toolStripContainer.LeftToolStripPanel.SuspendLayout();
-            this.toolStripContainer.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainer.SuspendLayout();
-            this.panelView.SuspendLayout();
-            this.panelScrollView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxView)).BeginInit();
-            this.toolStripElemente.SuspendLayout();
-            this.toolStripBearbeiten.SuspendLayout();
-            this.contextMenuStripAuswahlRechteck.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-=======
 		/// <summary>
 		/// Erforderliche Methode für die Designerunterstützung.
 		/// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
@@ -374,18 +137,17 @@ namespace MoBaSteuerung {
 			// statusStrip
 			// 
 			this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
->>>>>>> .r76
-            this.toolStripStatusLabelInfo,
-            this.toolStripStatusLabelRaster,
-            this.toolStripStatusLabelRasterInfo,
-            this.toolStripStatusLabelZoom,
-            this.toolStripStatusLabelZoomInfo,
-            this.toolStripStatusLabelAbstand1,
-            this.toolStripStatusLabelMinus,
-            this.toolStripStatusLabelAbstand2,
-            this.toolStripStatusLabelPlus,
-            this.toolStripStatusLabelAbstand3,
-            this.toolStripStatusLabelZeit});
+						this.toolStripStatusLabelInfo,
+						this.toolStripStatusLabelRaster,
+						this.toolStripStatusLabelRasterInfo,
+						this.toolStripStatusLabelZoom,
+						this.toolStripStatusLabelZoomInfo,
+						this.toolStripStatusLabelAbstand1,
+						this.toolStripStatusLabelMinus,
+						this.toolStripStatusLabelAbstand2,
+						this.toolStripStatusLabelPlus,
+						this.toolStripStatusLabelAbstand3,
+						this.toolStripStatusLabelZeit});
 			this.statusStrip.Location = new System.Drawing.Point(0, 426);
 			this.statusStrip.Name = "statusStrip";
 			this.statusStrip.Size = new System.Drawing.Size(966, 24);
@@ -410,9 +172,9 @@ namespace MoBaSteuerung {
 			// 
 			// toolStripStatusLabelRasterInfo
 			// 
-			this.toolStripStatusLabelRasterInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+			this.toolStripStatusLabelRasterInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
 			this.toolStripStatusLabelRasterInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
 			this.toolStripStatusLabelRasterInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.toolStripStatusLabelRasterInfo.Name = "toolStripStatusLabelRasterInfo";
@@ -431,9 +193,9 @@ namespace MoBaSteuerung {
 			// 
 			// toolStripStatusLabelZoomInfo
 			// 
-			this.toolStripStatusLabelZoomInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+			this.toolStripStatusLabelZoomInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
+						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
 			this.toolStripStatusLabelZoomInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
 			this.toolStripStatusLabelZoomInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.toolStripStatusLabelZoomInfo.Enabled = false;
@@ -501,12 +263,12 @@ namespace MoBaSteuerung {
 			// menuStrip
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemDatei,
-            this.toolStripMenuItemZoom,
-            this.toolStripMenuItemBearbeiten,
-            this.zugEditorToolStripMenuItem,
-            this.toolStripMenuItemExtras,
-            this.toolStripMenuItemHilfe});
+						this.toolStripMenuItemDatei,
+						this.toolStripMenuItemZoom,
+						this.toolStripMenuItemBearbeiten,
+						this.zugEditorToolStripMenuItem,
+						this.toolStripMenuItemExtras,
+						this.toolStripMenuItemHilfe});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(966, 26);
@@ -516,21 +278,21 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemDatei
 			// 
 			this.toolStripMenuItemDatei.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemDateiNeu,
-            this.toolStripMenuItemDateiLaden,
-            this.toolStripSeparatorDatei1,
-            this.toolStripMenuItemDateiSchließen,
-            this.toolStripSeparatorDatei2,
-            this.toolStripMenuItemDateiSpeichern,
-            this.toolStripMenuItemDateiSpeichernUnter,
-            this.toolStripSeparatorDatei3,
-            this.toolStripMenuItemDateiVerbinden,
-            this.toolStripMenuItemDateiTrennen,
-            this.toolStripSeparatorDatei4,
-            this.toolStripMenuItemDateiZuletztGeöfnetteAnlage,
-            this.toolStripMenuItemDateiZuletztVerbundeneMaster,
-            this.toolStripSeparatorDatei5,
-            this.toolStripMenuItemDateiBeenden});
+						this.toolStripMenuItemDateiNeu,
+						this.toolStripMenuItemDateiLaden,
+						this.toolStripSeparatorDatei1,
+						this.toolStripMenuItemDateiSchließen,
+						this.toolStripSeparatorDatei2,
+						this.toolStripMenuItemDateiSpeichern,
+						this.toolStripMenuItemDateiSpeichernUnter,
+						this.toolStripSeparatorDatei3,
+						this.toolStripMenuItemDateiVerbinden,
+						this.toolStripMenuItemDateiTrennen,
+						this.toolStripSeparatorDatei4,
+						this.toolStripMenuItemDateiZuletztGeöfnetteAnlage,
+						this.toolStripMenuItemDateiZuletztVerbundeneMaster,
+						this.toolStripSeparatorDatei5,
+						this.toolStripMenuItemDateiBeenden});
 			this.toolStripMenuItemDatei.Name = "toolStripMenuItemDatei";
 			this.toolStripMenuItemDatei.Size = new System.Drawing.Size(46, 22);
 			this.toolStripMenuItemDatei.Text = "&Datei";
@@ -539,8 +301,8 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripMenuItemDateiNeu.Image = global::ModellBahnSteuerung.Properties.Resources.NewFile_16x;
 			this.toolStripMenuItemDateiNeu.Name = "toolStripMenuItemDateiNeu";
-			this.toolStripMenuItemDateiNeu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.N)));
+			this.toolStripMenuItemDateiNeu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+						| System.Windows.Forms.Keys.N)));
 			this.toolStripMenuItemDateiNeu.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiNeu.Text = "&Neu";
 			this.toolStripMenuItemDateiNeu.Click += new System.EventHandler(this.toolStripMenuItemDateiNeu_Click);
@@ -549,8 +311,8 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripMenuItemDateiLaden.Image = global::ModellBahnSteuerung.Properties.Resources.OpenFileFromProject_16x;
 			this.toolStripMenuItemDateiLaden.Name = "toolStripMenuItemDateiLaden";
-			this.toolStripMenuItemDateiLaden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.O)));
+			this.toolStripMenuItemDateiLaden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+						| System.Windows.Forms.Keys.O)));
 			this.toolStripMenuItemDateiLaden.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiLaden.Text = "&Laden";
 			this.toolStripMenuItemDateiLaden.Click += new System.EventHandler(this.toolStripMenuItemDateiLaden_Click);
@@ -599,8 +361,8 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemDateiVerbinden
 			// 
 			this.toolStripMenuItemDateiVerbinden.Name = "toolStripMenuItemDateiVerbinden";
-			this.toolStripMenuItemDateiVerbinden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.V)));
+			this.toolStripMenuItemDateiVerbinden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+						| System.Windows.Forms.Keys.V)));
 			this.toolStripMenuItemDateiVerbinden.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiVerbinden.Text = "&Verbinden";
 			this.toolStripMenuItemDateiVerbinden.Click += new System.EventHandler(this.toolStripMenuItemDateiVerbinden_Click);
@@ -609,8 +371,8 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripMenuItemDateiTrennen.Enabled = false;
 			this.toolStripMenuItemDateiTrennen.Name = "toolStripMenuItemDateiTrennen";
-			this.toolStripMenuItemDateiTrennen.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.T)));
+			this.toolStripMenuItemDateiTrennen.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+						| System.Windows.Forms.Keys.T)));
 			this.toolStripMenuItemDateiTrennen.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiTrennen.Text = "&Trennen";
 			this.toolStripMenuItemDateiTrennen.Click += new System.EventHandler(this.toolStripMenuItemDateiTrennen_Click);
@@ -651,111 +413,10 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemZoom
 			// 
 			this.toolStripMenuItemZoom.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemZoomPlus,
-            this.toolStripMenuItemZoomMinus,
-            this.toolStripSeparatorZoom1,
-            this.toolStripMenuItemZoomZurücksetzen});
-<<<<<<< .mine
-            this.toolStripMenuItemZoom.Enabled = false;
-            this.toolStripMenuItemZoom.Name = "toolStripMenuItemZoom";
-            this.toolStripMenuItemZoom.Size = new System.Drawing.Size(51, 22);
-            this.toolStripMenuItemZoom.Text = "&Zoom";
-            // 
-            // toolStripMenuItemZoomPlus
-            // 
-            this.toolStripMenuItemZoomPlus.Image = global::ModellBahnSteuerung.Properties.Resources.Plus;
-            this.toolStripMenuItemZoomPlus.Name = "toolStripMenuItemZoomPlus";
-            this.toolStripMenuItemZoomPlus.Size = new System.Drawing.Size(144, 22);
-            this.toolStripMenuItemZoomPlus.Text = "&Plus";
-            this.toolStripMenuItemZoomPlus.Click += new System.EventHandler(this.toolStripMenuItemPlus_Click);
-            // 
-            // toolStripMenuItemZoomMinus
-            // 
-            this.toolStripMenuItemZoomMinus.Image = global::ModellBahnSteuerung.Properties.Resources.Minus;
-            this.toolStripMenuItemZoomMinus.Name = "toolStripMenuItemZoomMinus";
-            this.toolStripMenuItemZoomMinus.Size = new System.Drawing.Size(144, 22);
-            this.toolStripMenuItemZoomMinus.Text = "&Minus";
-            this.toolStripMenuItemZoomMinus.Click += new System.EventHandler(this.toolStripMenuItemMinus_Click);
-            // 
-            // toolStripSeparatorZoom1
-            // 
-            this.toolStripSeparatorZoom1.Name = "toolStripSeparatorZoom1";
-            this.toolStripSeparatorZoom1.Size = new System.Drawing.Size(141, 6);
-            // 
-            // toolStripMenuItemZoomZurücksetzen
-            // 
-            this.toolStripMenuItemZoomZurücksetzen.Image = global::ModellBahnSteuerung.Properties.Resources.Raster;
-            this.toolStripMenuItemZoomZurücksetzen.Name = "toolStripMenuItemZoomZurücksetzen";
-            this.toolStripMenuItemZoomZurücksetzen.Size = new System.Drawing.Size(144, 22);
-            this.toolStripMenuItemZoomZurücksetzen.Text = "&Zurücksetzen";
-            this.toolStripMenuItemZoomZurücksetzen.Click += new System.EventHandler(this.toolStripMenuItemZurücksetzen_Click);
-            // 
-			// toolStripMenuItemBearbeiten
-			// 
-			this.toolStripMenuItemBearbeiten.CheckOnClick = true;
-			this.toolStripMenuItemBearbeiten.Enabled = false;
-			this.toolStripMenuItemBearbeiten.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
-			this.toolStripMenuItemBearbeiten.Name = "toolStripMenuItemBearbeiten";
-			this.toolStripMenuItemBearbeiten.Size = new System.Drawing.Size(115, 19);
-			this.toolStripMenuItemBearbeiten.Text = "Anlage Bearbeiten";
-			this.toolStripMenuItemBearbeiten.Click += new System.EventHandler(this.toolStripMenuItemBearbeiten_Click);
-			// 
-            // zugEditorToolStripMenuItem
-            // 
-            this.zugEditorToolStripMenuItem.Name = "zugEditorToolStripMenuItem";
-            this.zugEditorToolStripMenuItem.Size = new System.Drawing.Size(76, 22);
-            this.zugEditorToolStripMenuItem.Text = "Zug-Editor";
-            this.zugEditorToolStripMenuItem.Click += new System.EventHandler(this.zugEditorToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItemExtras
-            // 
-            this.toolStripMenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-||||||| .r74
-            this.toolStripMenuItemZoom.Enabled = false;
-            this.toolStripMenuItemZoom.Name = "toolStripMenuItemZoom";
-            this.toolStripMenuItemZoom.Size = new System.Drawing.Size(51, 22);
-            this.toolStripMenuItemZoom.Text = "&Zoom";
-            // 
-            // toolStripMenuItemZoomPlus
-            // 
-            this.toolStripMenuItemZoomPlus.Image = global::ModellBahnSteuerung.Properties.Resources.Plus;
-            this.toolStripMenuItemZoomPlus.Name = "toolStripMenuItemZoomPlus";
-            this.toolStripMenuItemZoomPlus.Size = new System.Drawing.Size(144, 22);
-            this.toolStripMenuItemZoomPlus.Text = "&Plus";
-            this.toolStripMenuItemZoomPlus.Click += new System.EventHandler(this.toolStripMenuItemPlus_Click);
-            // 
-            // toolStripMenuItemZoomMinus
-            // 
-            this.toolStripMenuItemZoomMinus.Image = global::ModellBahnSteuerung.Properties.Resources.Minus;
-            this.toolStripMenuItemZoomMinus.Name = "toolStripMenuItemZoomMinus";
-            this.toolStripMenuItemZoomMinus.Size = new System.Drawing.Size(144, 22);
-            this.toolStripMenuItemZoomMinus.Text = "&Minus";
-            this.toolStripMenuItemZoomMinus.Click += new System.EventHandler(this.toolStripMenuItemMinus_Click);
-            // 
-            // toolStripSeparatorZoom1
-            // 
-            this.toolStripSeparatorZoom1.Name = "toolStripSeparatorZoom1";
-            this.toolStripSeparatorZoom1.Size = new System.Drawing.Size(141, 6);
-            // 
-            // toolStripMenuItemZoomZurücksetzen
-            // 
-            this.toolStripMenuItemZoomZurücksetzen.Image = global::ModellBahnSteuerung.Properties.Resources.Raster;
-            this.toolStripMenuItemZoomZurücksetzen.Name = "toolStripMenuItemZoomZurücksetzen";
-            this.toolStripMenuItemZoomZurücksetzen.Size = new System.Drawing.Size(144, 22);
-            this.toolStripMenuItemZoomZurücksetzen.Text = "&Zurücksetzen";
-            this.toolStripMenuItemZoomZurücksetzen.Click += new System.EventHandler(this.toolStripMenuItemZurücksetzen_Click);
-            // 
-            // zugEditorToolStripMenuItem
-            // 
-            this.zugEditorToolStripMenuItem.Name = "zugEditorToolStripMenuItem";
-            this.zugEditorToolStripMenuItem.Size = new System.Drawing.Size(76, 22);
-            this.zugEditorToolStripMenuItem.Text = "Zug-Editor";
-            this.zugEditorToolStripMenuItem.Click += new System.EventHandler(this.zugEditorToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItemExtras
-            // 
-            this.toolStripMenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-=======
+						this.toolStripMenuItemZoomPlus,
+						this.toolStripMenuItemZoomMinus,
+						this.toolStripSeparatorZoom1,
+						this.toolStripMenuItemZoomZurücksetzen});
 			this.toolStripMenuItemZoom.Enabled = false;
 			this.toolStripMenuItemZoom.Name = "toolStripMenuItemZoom";
 			this.toolStripMenuItemZoom.Size = new System.Drawing.Size(51, 22);
@@ -810,11 +471,10 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemExtras
 			// 
 			this.toolStripMenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
->>>>>>> .r76
-            this.toolStripMenuItemExtrasServer,
-            this.toolStripMenuItemExtraArduino,
-            this.toolStripSeparatorExtras1,
-            this.toolStripMenuItemExtrasEinstellungen});
+						this.toolStripMenuItemExtrasServer,
+						this.toolStripMenuItemExtraArduino,
+						this.toolStripSeparatorExtras1,
+						this.toolStripMenuItemExtrasEinstellungen});
 			this.toolStripMenuItemExtras.Name = "toolStripMenuItemExtras";
 			this.toolStripMenuItemExtras.Size = new System.Drawing.Size(49, 22);
 			this.toolStripMenuItemExtras.Text = "E&xtras";
@@ -822,8 +482,8 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemExtrasServer
 			// 
 			this.toolStripMenuItemExtrasServer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemExtrasServerStart,
-            this.toolStripMenuItemExtrasServerStop});
+						this.toolStripMenuItemExtrasServerStart,
+						this.toolStripMenuItemExtrasServerStop});
 			this.toolStripMenuItemExtrasServer.Enabled = false;
 			this.toolStripMenuItemExtrasServer.Name = "toolStripMenuItemExtrasServer";
 			this.toolStripMenuItemExtrasServer.Size = new System.Drawing.Size(145, 22);
@@ -849,8 +509,8 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemExtraArduino
 			// 
 			this.toolStripMenuItemExtraArduino.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemExtrasArduinoVerbinden,
-            this.toolStripMenuItemExtrasArduinoTrennen});
+						this.toolStripMenuItemExtrasArduinoVerbinden,
+						this.toolStripMenuItemExtrasArduinoTrennen});
 			this.toolStripMenuItemExtraArduino.Name = "toolStripMenuItemExtraArduino";
 			this.toolStripMenuItemExtraArduino.Size = new System.Drawing.Size(145, 22);
 			this.toolStripMenuItemExtraArduino.Text = "Arduino";
@@ -886,174 +546,11 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemHilfe
 			// 
 			this.toolStripMenuItemHilfe.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemHilfeHilfe,
-            this.toolStripSeparatorHilfe1,
-            this.logToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.toolStripMenuItemHilfeInfo});
-<<<<<<< .mine
-            this.toolStripMenuItemHilfe.Name = "toolStripMenuItemHilfe";
-            this.toolStripMenuItemHilfe.Size = new System.Drawing.Size(44, 22);
-            this.toolStripMenuItemHilfe.Text = "&Hilfe";
-            // 
-            // toolStripMenuItemHilfeHilfe
-            // 
-            this.toolStripMenuItemHilfeHilfe.Image = global::ModellBahnSteuerung.Properties.Resources.Help;
-            this.toolStripMenuItemHilfeHilfe.Name = "toolStripMenuItemHilfeHilfe";
-            this.toolStripMenuItemHilfeHilfe.Size = new System.Drawing.Size(149, 22);
-            this.toolStripMenuItemHilfeHilfe.Text = "&Hilfe anzeigen";
-            this.toolStripMenuItemHilfeHilfe.Click += new System.EventHandler(this.toolStripMenuItemHilfeHilfe_Click);
-            // 
-            // toolStripSeparatorHilfe1
-            // 
-            this.toolStripSeparatorHilfe1.Name = "toolStripSeparatorHilfe1";
-            this.toolStripSeparatorHilfe1.Size = new System.Drawing.Size(146, 6);
-            // 
-            // logToolStripMenuItem
-            // 
-            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.logToolStripMenuItem.Text = "Log anzeigen";
-            this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click_1);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
-            // 
-            // toolStripMenuItemHilfeInfo
-            // 
-            this.toolStripMenuItemHilfeInfo.Image = global::ModellBahnSteuerung.Properties.Resources.Info;
-            this.toolStripMenuItemHilfeInfo.Name = "toolStripMenuItemHilfeInfo";
-            this.toolStripMenuItemHilfeInfo.Size = new System.Drawing.Size(149, 22);
-            this.toolStripMenuItemHilfeInfo.Text = "&Info über ...";
-            this.toolStripMenuItemHilfeInfo.Click += new System.EventHandler(this.toolStripMenuItemHilfeInfo_Click);
-            // 
-            // toolStripContainer
-            // 
-            // 
-            // toolStripContainer.ContentPanel
-            // 
-            this.toolStripContainer.ContentPanel.BackColor = System.Drawing.Color.White;
-            this.toolStripContainer.ContentPanel.Controls.Add(this.panelView);
-            this.toolStripContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
-			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(966, 375);
-            this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            // 
-            // toolStripContainer.LeftToolStripPanel
-            // 
-            this.toolStripContainer.LeftToolStripPanel.Controls.Add(this.toolStripElemente);
-            this.toolStripContainer.Location = new System.Drawing.Point(0, 26);
-            this.toolStripContainer.Name = "toolStripContainer";
-            this.toolStripContainer.Size = new System.Drawing.Size(966, 400);
-            this.toolStripContainer.TabIndex = 2;
-            this.toolStripContainer.Text = "toolStripContainer1";
-            // 
-            // toolStripContainer.TopToolStripPanel
-            // 
-            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripBearbeiten);
-            // 
-            // panelView
-            // 
-            this.panelView.Controls.Add(this.vScrollBarView);
-            this.panelView.Controls.Add(this.panelScrollView);
-            this.panelView.Controls.Add(this.hScrollBarView);
-            this.panelView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelView.Location = new System.Drawing.Point(0, 0);
-            this.panelView.Margin = new System.Windows.Forms.Padding(0);
-            this.panelView.Name = "panelView";
-			this.panelView.Size = new System.Drawing.Size(966, 375);
-            this.panelView.TabIndex = 6;
-            this.panelView.Visible = false;
-            this.panelView.VisibleChanged += new System.EventHandler(this.panelView_VisibleChanged);
-            this.panelView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseDoubleClick);
-            this.panelView.Resize += new System.EventHandler(this.panelView_Resize);
-            // 
-            // vScrollBarView
-            // 
-            this.vScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-||||||| .r74
-            this.toolStripMenuItemHilfe.Name = "toolStripMenuItemHilfe";
-            this.toolStripMenuItemHilfe.Size = new System.Drawing.Size(44, 22);
-            this.toolStripMenuItemHilfe.Text = "&Hilfe";
-            // 
-            // toolStripMenuItemHilfeHilfe
-            // 
-            this.toolStripMenuItemHilfeHilfe.Image = global::ModellBahnSteuerung.Properties.Resources.Help;
-            this.toolStripMenuItemHilfeHilfe.Name = "toolStripMenuItemHilfeHilfe";
-            this.toolStripMenuItemHilfeHilfe.Size = new System.Drawing.Size(149, 22);
-            this.toolStripMenuItemHilfeHilfe.Text = "&Hilfe anzeigen";
-            this.toolStripMenuItemHilfeHilfe.Click += new System.EventHandler(this.toolStripMenuItemHilfeHilfe_Click);
-            // 
-            // toolStripSeparatorHilfe1
-            // 
-            this.toolStripSeparatorHilfe1.Name = "toolStripSeparatorHilfe1";
-            this.toolStripSeparatorHilfe1.Size = new System.Drawing.Size(146, 6);
-            // 
-            // logToolStripMenuItem
-            // 
-            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.logToolStripMenuItem.Text = "Log anzeigen";
-            this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click_1);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
-            // 
-            // toolStripMenuItemHilfeInfo
-            // 
-            this.toolStripMenuItemHilfeInfo.Image = global::ModellBahnSteuerung.Properties.Resources.Info;
-            this.toolStripMenuItemHilfeInfo.Name = "toolStripMenuItemHilfeInfo";
-            this.toolStripMenuItemHilfeInfo.Size = new System.Drawing.Size(149, 22);
-            this.toolStripMenuItemHilfeInfo.Text = "&Info über ...";
-            this.toolStripMenuItemHilfeInfo.Click += new System.EventHandler(this.toolStripMenuItemHilfeInfo_Click);
-            // 
-            // toolStripContainer
-            // 
-            // 
-            // toolStripContainer.ContentPanel
-            // 
-            this.toolStripContainer.ContentPanel.BackColor = System.Drawing.Color.White;
-            this.toolStripContainer.ContentPanel.Controls.Add(this.panelView);
-            this.toolStripContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(966, 400);
-            this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            // 
-            // toolStripContainer.LeftToolStripPanel
-            // 
-            this.toolStripContainer.LeftToolStripPanel.Controls.Add(this.toolStripElemente);
-            this.toolStripContainer.Location = new System.Drawing.Point(0, 26);
-            this.toolStripContainer.Name = "toolStripContainer";
-            this.toolStripContainer.Size = new System.Drawing.Size(966, 400);
-            this.toolStripContainer.TabIndex = 2;
-            this.toolStripContainer.Text = "toolStripContainer1";
-            // 
-            // toolStripContainer.TopToolStripPanel
-            // 
-            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.toolStripBearbeiten);
-            // 
-            // panelView
-            // 
-            this.panelView.Controls.Add(this.vScrollBarView);
-            this.panelView.Controls.Add(this.panelScrollView);
-            this.panelView.Controls.Add(this.hScrollBarView);
-            this.panelView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelView.Location = new System.Drawing.Point(0, 0);
-            this.panelView.Margin = new System.Windows.Forms.Padding(0);
-            this.panelView.Name = "panelView";
-            this.panelView.Size = new System.Drawing.Size(966, 400);
-            this.panelView.TabIndex = 6;
-            this.panelView.Visible = false;
-            this.panelView.VisibleChanged += new System.EventHandler(this.panelView_VisibleChanged);
-            this.panelView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panelView_MouseDoubleClick);
-            this.panelView.Resize += new System.EventHandler(this.panelView_Resize);
-            // 
-            // vScrollBarView
-            // 
-            this.vScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-=======
+						this.toolStripMenuItemHilfeHilfe,
+						this.toolStripSeparatorHilfe1,
+						this.logToolStripMenuItem,
+						this.toolStripSeparator1,
+						this.toolStripMenuItemHilfeInfo});
 			this.toolStripMenuItemHilfe.Name = "toolStripMenuItemHilfe";
 			this.toolStripMenuItemHilfe.Size = new System.Drawing.Size(44, 22);
 			this.toolStripMenuItemHilfe.Text = "&Hilfe";
@@ -1133,30 +630,8 @@ namespace MoBaSteuerung {
 			// 
 			// vScrollBarView
 			// 
-			this.vScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
->>>>>>> .r76
-            | System.Windows.Forms.AnchorStyles.Right)));
-<<<<<<< .mine
-            this.vScrollBarView.Location = new System.Drawing.Point(949, 0);
-            this.vScrollBarView.Name = "vScrollBarView";
-			this.vScrollBarView.Size = new System.Drawing.Size(17, 400);
-            this.vScrollBarView.TabIndex = 4;
-            this.vScrollBarView.ValueChanged += new System.EventHandler(this.vScrollBarView_ValueChanged);
-            // 
-            // panelScrollView
-            // 
-            this.panelScrollView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-||||||| .r74
-            this.vScrollBarView.Location = new System.Drawing.Point(949, 0);
-            this.vScrollBarView.Name = "vScrollBarView";
-            this.vScrollBarView.Size = new System.Drawing.Size(17, 425);
-            this.vScrollBarView.TabIndex = 4;
-            this.vScrollBarView.ValueChanged += new System.EventHandler(this.vScrollBarView_ValueChanged);
-            // 
-            // panelScrollView
-            // 
-            this.panelScrollView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-=======
+			this.vScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.vScrollBarView.Location = new System.Drawing.Point(949, 0);
 			this.vScrollBarView.Name = "vScrollBarView";
 			this.vScrollBarView.Size = new System.Drawing.Size(17, 400);
@@ -1165,79 +640,9 @@ namespace MoBaSteuerung {
 			// 
 			// panelScrollView
 			// 
-			this.panelScrollView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
->>>>>>> .r76
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-<<<<<<< .mine
-            this.panelScrollView.BackColor = System.Drawing.Color.White;
-            this.panelScrollView.Controls.Add(this.pictureBoxView);
-            this.panelScrollView.Location = new System.Drawing.Point(0, 0);
-            this.panelScrollView.Margin = new System.Windows.Forms.Padding(0);
-            this.panelScrollView.Name = "panelScrollView";
-			this.panelScrollView.Size = new System.Drawing.Size(949, 358);
-            this.panelScrollView.TabIndex = 3;
-            // 
-            // pictureBoxView
-            // 
-            this.pictureBoxView.BackColor = System.Drawing.Color.White;
-            this.pictureBoxView.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxView.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBoxView.Name = "pictureBoxView";
-            this.pictureBoxView.Size = new System.Drawing.Size(400, 200);
-            this.pictureBoxView.TabIndex = 0;
-            this.pictureBoxView.TabStop = false;
-            this.pictureBoxView.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBoxView_DragDrop);
-            this.pictureBoxView.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBoxView_DragEnter);
-            this.pictureBoxView.DragOver += new System.Windows.Forms.DragEventHandler(this.pictureBoxView_DragOver);
-            this.pictureBoxView.DragLeave += new System.EventHandler(this.pictureBoxView_DragLeave);
-            this.pictureBoxView.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxView_Paint);
-            this.pictureBoxView.DoubleClick += new System.EventHandler(this.pictureBoxView_DoubleClick);
-            this.pictureBoxView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseClick);
-            this.pictureBoxView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseDown);
-            this.pictureBoxView.MouseEnter += new System.EventHandler(this.pictureBoxView_MouseEnter);
-            this.pictureBoxView.MouseLeave += new System.EventHandler(this.pictureBoxView_MouseLeave);
-            this.pictureBoxView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseMove);
-            this.pictureBoxView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseUp);
-            // 
-            // hScrollBarView
-            // 
-            this.hScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-||||||| .r74
-            this.panelScrollView.BackColor = System.Drawing.Color.White;
-            this.panelScrollView.Controls.Add(this.pictureBoxView);
-            this.panelScrollView.Location = new System.Drawing.Point(0, 0);
-            this.panelScrollView.Margin = new System.Windows.Forms.Padding(0);
-            this.panelScrollView.Name = "panelScrollView";
-            this.panelScrollView.Size = new System.Drawing.Size(949, 383);
-            this.panelScrollView.TabIndex = 3;
-            // 
-            // pictureBoxView
-            // 
-            this.pictureBoxView.BackColor = System.Drawing.Color.White;
-            this.pictureBoxView.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxView.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBoxView.Name = "pictureBoxView";
-            this.pictureBoxView.Size = new System.Drawing.Size(400, 200);
-            this.pictureBoxView.TabIndex = 0;
-            this.pictureBoxView.TabStop = false;
-            this.pictureBoxView.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBoxView_DragDrop);
-            this.pictureBoxView.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBoxView_DragEnter);
-            this.pictureBoxView.DragOver += new System.Windows.Forms.DragEventHandler(this.pictureBoxView_DragOver);
-            this.pictureBoxView.DragLeave += new System.EventHandler(this.pictureBoxView_DragLeave);
-            this.pictureBoxView.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxView_Paint);
-            this.pictureBoxView.DoubleClick += new System.EventHandler(this.pictureBoxView_DoubleClick);
-            this.pictureBoxView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseClick);
-            this.pictureBoxView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseDown);
-            this.pictureBoxView.MouseEnter += new System.EventHandler(this.pictureBoxView_MouseEnter);
-            this.pictureBoxView.MouseLeave += new System.EventHandler(this.pictureBoxView_MouseLeave);
-            this.pictureBoxView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseMove);
-            this.pictureBoxView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxView_MouseUp);
-            // 
-            // hScrollBarView
-            // 
-            this.hScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-=======
+			this.panelScrollView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.panelScrollView.BackColor = System.Drawing.Color.White;
 			this.panelScrollView.Controls.Add(this.pictureBoxView);
 			this.panelScrollView.Location = new System.Drawing.Point(0, 0);
@@ -1270,32 +675,8 @@ namespace MoBaSteuerung {
 			// 
 			// hScrollBarView
 			// 
-			this.hScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
->>>>>>> .r76
-            | System.Windows.Forms.AnchorStyles.Right)));
-<<<<<<< .mine
-			this.hScrollBarView.Location = new System.Drawing.Point(0, 358);
-            this.hScrollBarView.Name = "hScrollBarView";
-            this.hScrollBarView.Size = new System.Drawing.Size(949, 17);
-            this.hScrollBarView.TabIndex = 5;
-            this.hScrollBarView.ValueChanged += new System.EventHandler(this.hScrollBarView_ValueChanged);
-            // 
-            // toolStripElemente
-            // 
-            this.toolStripElemente.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripElemente.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-||||||| .r74
-            this.hScrollBarView.Location = new System.Drawing.Point(0, 383);
-            this.hScrollBarView.Name = "hScrollBarView";
-            this.hScrollBarView.Size = new System.Drawing.Size(949, 17);
-            this.hScrollBarView.TabIndex = 5;
-            this.hScrollBarView.ValueChanged += new System.EventHandler(this.hScrollBarView_ValueChanged);
-            // 
-            // toolStripElemente
-            // 
-            this.toolStripElemente.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripElemente.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-=======
+			this.hScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.hScrollBarView.Location = new System.Drawing.Point(0, 358);
 			this.hScrollBarView.Name = "hScrollBarView";
 			this.hScrollBarView.Size = new System.Drawing.Size(949, 17);
@@ -1306,12 +687,11 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripElemente.Dock = System.Windows.Forms.DockStyle.None;
 			this.toolStripElemente.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
->>>>>>> .r76
-            this.toolStripButtonElementGleis,
-            this.toolStripButtonElementSignal,
-            this.toolStripButtonElementEntkuppler,
-            this.toolStripButtonElementSchalter,
-            this.toolStripButtonElementFss});
+						this.toolStripButtonElementGleis,
+						this.toolStripButtonElementSignal,
+						this.toolStripButtonElementEntkuppler,
+						this.toolStripButtonElementSchalter,
+						this.toolStripButtonElementFss});
 			this.toolStripElemente.Location = new System.Drawing.Point(0, 3);
 			this.toolStripElemente.Name = "toolStripElemente";
 			this.toolStripElemente.Size = new System.Drawing.Size(142, 25);
@@ -1382,148 +762,14 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripBearbeiten.Dock = System.Windows.Forms.DockStyle.None;
 			this.toolStripBearbeiten.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSplitButtonCheckableGitter,
-            this.toolStripLabelAbstand1,
-            this.toolStripSplitButtonCheckableFadenkreuz,
-            this.toolStripLabelAbstand2,
-            this.toolStripButtonElementeEigenschaften,
-            this.toolStripButtonFahrstrassenEditor,
-            this.toolStripButton1,
-<<<<<<< .mine
-            this.toolStripButtonElementeExportieren});
-            this.toolStripBearbeiten.Location = new System.Drawing.Point(3, 0);
-            this.toolStripBearbeiten.Name = "toolStripBearbeiten";
-			this.toolStripBearbeiten.Size = new System.Drawing.Size(616, 25);
-            this.toolStripBearbeiten.TabIndex = 0;
-            this.toolStripBearbeiten.Visible = false;
-            // 
-            // toolStripSplitButtonCheckableGitter
-            // 
-            this.toolStripSplitButtonCheckableGitter.Checked = false;
-            this.toolStripSplitButtonCheckableGitter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-||||||| .r74
-            this.toolStripButtonFahrstrassenSuchen});
-            this.toolStripBearbeiten.Location = new System.Drawing.Point(3, 0);
-            this.toolStripBearbeiten.Name = "toolStripBearbeiten";
-            this.toolStripBearbeiten.Size = new System.Drawing.Size(582, 25);
-            this.toolStripBearbeiten.TabIndex = 0;
-            this.toolStripBearbeiten.Visible = false;
-            // 
-            // toolStripLabelAbstand1
-            // 
-            this.toolStripLabelAbstand1.AutoSize = false;
-            this.toolStripLabelAbstand1.Name = "toolStripLabelAbstand1";
-            this.toolStripLabelAbstand1.Size = new System.Drawing.Size(5, 22);
-            // 
-            // toolStripLabelAbstand2
-            // 
-            this.toolStripLabelAbstand2.AutoSize = false;
-            this.toolStripLabelAbstand2.Name = "toolStripLabelAbstand2";
-            this.toolStripLabelAbstand2.Size = new System.Drawing.Size(5, 22);
-            // 
-            // toolStripButtonElementeExportieren
-            // 
-            this.toolStripButtonElementeExportieren.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonElementeExportieren.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementeExportieren.Image")));
-            this.toolStripButtonElementeExportieren.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonElementeExportieren.Name = "toolStripButtonElementeExportieren";
-            this.toolStripButtonElementeExportieren.Size = new System.Drawing.Size(70, 22);
-            this.toolStripButtonElementeExportieren.Text = "Exportieren";
-            this.toolStripButtonElementeExportieren.Click += new System.EventHandler(this.toolStripButtonElementeExportieren_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(96, 22);
-            this.toolStripButton1.Text = "Stecker-Anzeige";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButtonFahrstrassenSuchen
-            // 
-            this.toolStripButtonFahrstrassenSuchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonFahrstrassenSuchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFahrstrassenSuchen.Image")));
-            this.toolStripButtonFahrstrassenSuchen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonFahrstrassenSuchen.Name = "toolStripButtonFahrstrassenSuchen";
-            this.toolStripButtonFahrstrassenSuchen.Size = new System.Drawing.Size(114, 22);
-            this.toolStripButtonFahrstrassenSuchen.Text = "Fahrstraßen suchen";
-            this.toolStripButtonFahrstrassenSuchen.Click += new System.EventHandler(this.toolStripButtonFahrstrassenSuchen_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
-            // 
-            // timerZeit
-            // 
-            this.timerZeit.Interval = 1000;
-            this.timerZeit.Tick += new System.EventHandler(this.TimerZeit_Tick);
-            // 
-            // contextMenuStripAuswahlRechteck
-            // 
-            this.contextMenuStripAuswahlRechteck.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemAufheben,
-            this.toolStripSeparatorAuswahl1,
-            this.toolStripMenuItemDrehen,
-            this.toolStripMenuItemSpiegeln,
-            this.toolStripSeparatorAuswahl2,
-            this.toolStripMenuItemLöschen});
-            this.contextMenuStripAuswahlRechteck.Name = "contextMenuStripAuswahlRechteck";
-            this.contextMenuStripAuswahlRechteck.Size = new System.Drawing.Size(127, 104);
-            // 
-            // toolStripMenuItemAufheben
-            // 
-            this.toolStripMenuItemAufheben.Name = "toolStripMenuItemAufheben";
-            this.toolStripMenuItemAufheben.Size = new System.Drawing.Size(126, 22);
-            this.toolStripMenuItemAufheben.Text = "Aufheben";
-            this.toolStripMenuItemAufheben.Click += new System.EventHandler(this.toolStripMenuItemAufheben_Click);
-            // 
-            // toolStripSeparatorAuswahl1
-            // 
-            this.toolStripSeparatorAuswahl1.Name = "toolStripSeparatorAuswahl1";
-            this.toolStripSeparatorAuswahl1.Size = new System.Drawing.Size(123, 6);
-            // 
-            // toolStripMenuItemDrehen
-            // 
-            this.toolStripMenuItemDrehen.Name = "toolStripMenuItemDrehen";
-            this.toolStripMenuItemDrehen.Size = new System.Drawing.Size(126, 22);
-            this.toolStripMenuItemDrehen.Text = "Drehen";
-            this.toolStripMenuItemDrehen.Click += new System.EventHandler(this.toolStripMenuItemDrehen_Click);
-            // 
-            // toolStripMenuItemSpiegeln
-            // 
-            this.toolStripMenuItemSpiegeln.Name = "toolStripMenuItemSpiegeln";
-            this.toolStripMenuItemSpiegeln.Size = new System.Drawing.Size(126, 22);
-            this.toolStripMenuItemSpiegeln.Text = "Spiegeln";
-            this.toolStripMenuItemSpiegeln.Click += new System.EventHandler(this.toolStripMenuItemSpiegeln_Click);
-            // 
-            // toolStripSeparatorAuswahl2
-            // 
-            this.toolStripSeparatorAuswahl2.Name = "toolStripSeparatorAuswahl2";
-            this.toolStripSeparatorAuswahl2.Size = new System.Drawing.Size(123, 6);
-            // 
-            // toolStripMenuItemLöschen
-            // 
-            this.toolStripMenuItemLöschen.Name = "toolStripMenuItemLöschen";
-            this.toolStripMenuItemLöschen.Size = new System.Drawing.Size(126, 22);
-            this.toolStripMenuItemLöschen.Text = "Löschen";
-            this.toolStripMenuItemLöschen.Click += new System.EventHandler(this.toolStripMenuItemAuswahlRechteckLöschen_Click);
-            // 
-            // toolStripSplitButtonCheckableGitter
-            // 
-            this.toolStripSplitButtonCheckableGitter.Checked = false;
-            this.toolStripSplitButtonCheckableGitter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-=======
-            this.toolStripButtonElementeExportieren});
+						this.toolStripSplitButtonCheckableGitter,
+						this.toolStripLabelAbstand1,
+						this.toolStripSplitButtonCheckableFadenkreuz,
+						this.toolStripLabelAbstand2,
+						this.toolStripButtonElementeEigenschaften,
+						this.toolStripButtonFahrstrassenEditor,
+						this.toolStripButton1,
+						this.toolStripButtonElementeExportieren});
 			this.toolStripBearbeiten.Location = new System.Drawing.Point(3, 0);
 			this.toolStripBearbeiten.Name = "toolStripBearbeiten";
 			this.toolStripBearbeiten.Size = new System.Drawing.Size(616, 25);
@@ -1534,122 +780,12 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripSplitButtonCheckableGitter.Checked = false;
 			this.toolStripSplitButtonCheckableGitter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
->>>>>>> .r76
-            this.toolStripMenuItemGitterGitterLinie,
-            this.toolStripMenuItemGitterGitterLinieVersetzt,
-            this.toolStripMenuItemGitterGitterPunkt,
-            this.toolStripMenuItemGitterGitterPunktVersetzt,
-            this.toolStripSeparatorGitterGitter1,
-            this.toolStripMenuItemGitterGitterFarbe});
-<<<<<<< .mine
-            this.toolStripSplitButtonCheckableGitter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButtonCheckableGitter.Name = "toolStripSplitButtonCheckableGitter";
-            this.toolStripSplitButtonCheckableGitter.Size = new System.Drawing.Size(52, 22);
-            this.toolStripSplitButtonCheckableGitter.Text = "&Gitter";
-            this.toolStripSplitButtonCheckableGitter.ButtonClick += new System.EventHandler(this.toolStripSplitButtonCheckableGitter_ButtonClick);
-            // 
-            // toolStripMenuItemGitterGitterLinie
-            // 
-            this.toolStripMenuItemGitterGitterLinie.Name = "toolStripMenuItemGitterGitterLinie";
-            this.toolStripMenuItemGitterGitterLinie.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterLinie.Text = "&Linie";
-            this.toolStripMenuItemGitterGitterLinie.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterLinie_Click);
-            // 
-            // toolStripMenuItemGitterGitterLinieVersetzt
-            // 
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Name = "toolStripMenuItemGitterGitterLinieVersetzt";
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Text = "&Linie versetzt";
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterLinieVersetzt_Click);
-            // 
-            // toolStripMenuItemGitterGitterPunkt
-            // 
-            this.toolStripMenuItemGitterGitterPunkt.Name = "toolStripMenuItemGitterGitterPunkt";
-            this.toolStripMenuItemGitterGitterPunkt.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterPunkt.Text = "&Punkt";
-            this.toolStripMenuItemGitterGitterPunkt.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterPunkt_Click);
-            // 
-            // toolStripMenuItemGitterGitterPunktVersetzt
-            // 
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Name = "toolStripMenuItemGitterGitterPunktVersetzt";
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Text = "&Punkt versetzt";
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterPunktVersetzt_Click);
-            // 
-            // toolStripSeparatorGitterGitter1
-            // 
-            this.toolStripSeparatorGitterGitter1.Name = "toolStripSeparatorGitterGitter1";
-            this.toolStripSeparatorGitterGitter1.Size = new System.Drawing.Size(145, 6);
-            // 
-            // toolStripMenuItemGitterGitterFarbe
-            // 
-            this.toolStripMenuItemGitterGitterFarbe.Name = "toolStripMenuItemGitterGitterFarbe";
-            this.toolStripMenuItemGitterGitterFarbe.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterFarbe.Text = "&Farbe";
-            this.toolStripMenuItemGitterGitterFarbe.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterFarbe_Click);
-            // 
-			// toolStripLabelAbstand1
-			// 
-			this.toolStripLabelAbstand1.AutoSize = false;
-			this.toolStripLabelAbstand1.Name = "toolStripLabelAbstand1";
-			this.toolStripLabelAbstand1.Size = new System.Drawing.Size(5, 22);
-			// 
-            // toolStripSplitButtonCheckableFadenkreuz
-            // 
-            this.toolStripSplitButtonCheckableFadenkreuz.Checked = false;
-            this.toolStripSplitButtonCheckableFadenkreuz.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-||||||| .r74
-            this.toolStripSplitButtonCheckableGitter.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButtonCheckableGitter.Name = "toolStripSplitButtonCheckableGitter";
-            this.toolStripSplitButtonCheckableGitter.Size = new System.Drawing.Size(52, 22);
-            this.toolStripSplitButtonCheckableGitter.Text = "&Gitter";
-            this.toolStripSplitButtonCheckableGitter.ButtonClick += new System.EventHandler(this.toolStripSplitButtonCheckableGitter_ButtonClick);
-            // 
-            // toolStripMenuItemGitterGitterLinie
-            // 
-            this.toolStripMenuItemGitterGitterLinie.Name = "toolStripMenuItemGitterGitterLinie";
-            this.toolStripMenuItemGitterGitterLinie.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterLinie.Text = "&Linie";
-            this.toolStripMenuItemGitterGitterLinie.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterLinie_Click);
-            // 
-            // toolStripMenuItemGitterGitterLinieVersetzt
-            // 
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Name = "toolStripMenuItemGitterGitterLinieVersetzt";
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Text = "&Linie versetzt";
-            this.toolStripMenuItemGitterGitterLinieVersetzt.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterLinieVersetzt_Click);
-            // 
-            // toolStripMenuItemGitterGitterPunkt
-            // 
-            this.toolStripMenuItemGitterGitterPunkt.Name = "toolStripMenuItemGitterGitterPunkt";
-            this.toolStripMenuItemGitterGitterPunkt.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterPunkt.Text = "&Punkt";
-            this.toolStripMenuItemGitterGitterPunkt.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterPunkt_Click);
-            // 
-            // toolStripMenuItemGitterGitterPunktVersetzt
-            // 
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Name = "toolStripMenuItemGitterGitterPunktVersetzt";
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Text = "&Punkt versetzt";
-            this.toolStripMenuItemGitterGitterPunktVersetzt.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterPunktVersetzt_Click);
-            // 
-            // toolStripSeparatorGitterGitter1
-            // 
-            this.toolStripSeparatorGitterGitter1.Name = "toolStripSeparatorGitterGitter1";
-            this.toolStripSeparatorGitterGitter1.Size = new System.Drawing.Size(145, 6);
-            // 
-            // toolStripMenuItemGitterGitterFarbe
-            // 
-            this.toolStripMenuItemGitterGitterFarbe.Name = "toolStripMenuItemGitterGitterFarbe";
-            this.toolStripMenuItemGitterGitterFarbe.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItemGitterGitterFarbe.Text = "&Farbe";
-            this.toolStripMenuItemGitterGitterFarbe.Click += new System.EventHandler(this.toolStripMenuItemGitterGitterFarbe_Click);
-            // 
-            // toolStripSplitButtonCheckableFadenkreuz
-            // 
-            this.toolStripSplitButtonCheckableFadenkreuz.Checked = false;
-            this.toolStripSplitButtonCheckableFadenkreuz.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-=======
+						this.toolStripMenuItemGitterGitterLinie,
+						this.toolStripMenuItemGitterGitterLinieVersetzt,
+						this.toolStripMenuItemGitterGitterPunkt,
+						this.toolStripMenuItemGitterGitterPunktVersetzt,
+						this.toolStripSeparatorGitterGitter1,
+						this.toolStripMenuItemGitterGitterFarbe});
 			this.toolStripSplitButtonCheckableGitter.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripSplitButtonCheckableGitter.Name = "toolStripSplitButtonCheckableGitter";
 			this.toolStripSplitButtonCheckableGitter.Size = new System.Drawing.Size(52, 22);
@@ -1706,293 +842,10 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripSplitButtonCheckableFadenkreuz.Checked = false;
 			this.toolStripSplitButtonCheckableFadenkreuz.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
->>>>>>> .r76
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie,
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt,
-            this.toolStripSeparatorFadenkreuzFadenkreuz1,
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe});
-<<<<<<< .mine
-            this.toolStripSplitButtonCheckableFadenkreuz.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButtonCheckableFadenkreuz.Name = "toolStripSplitButtonCheckableFadenkreuz";
-            this.toolStripSplitButtonCheckableFadenkreuz.Size = new System.Drawing.Size(83, 22);
-            this.toolStripSplitButtonCheckableFadenkreuz.Text = "Fadenkreuz";
-            this.toolStripSplitButtonCheckableFadenkreuz.ButtonClick += new System.EventHandler(this.toolStripSplitButtonCheckableFadenkreuz_ButtonClick);
-            // 
-            // toolStripMenuItemFadenkreuzFadenkreuzLinie
-            // 
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Name = "toolStripMenuItemFadenkreuzFadenkreuzLinie";
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Text = "&Linie";
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Click += new System.EventHandler(this.toolStripMenuItemFadenkreuzFadenkreuzLinie_Click);
-            // 
-            // toolStripMenuItemFadenkreuzFadenkreuzPunkt
-            // 
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Name = "toolStripMenuItemFadenkreuzFadenkreuzPunkt";
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Text = "&Punkt";
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Click += new System.EventHandler(this.toolStripMenuItemFadenkreuzFadenkreuzPunkt_Click);
-            // 
-            // toolStripSeparatorFadenkreuzFadenkreuz1
-            // 
-            this.toolStripSeparatorFadenkreuzFadenkreuz1.Name = "toolStripSeparatorFadenkreuzFadenkreuz1";
-            this.toolStripSeparatorFadenkreuzFadenkreuz1.Size = new System.Drawing.Size(102, 6);
-            // 
-            // toolStripMenuItemFadenkreuzFadenkreuzFarbe
-            // 
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Name = "toolStripMenuItemFadenkreuzFadenkreuzFarbe";
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Text = "&Farbe";
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Click += new System.EventHandler(this.toolStripMenuItemFadenkreuzFadenkreuzFarbe_Click);
-            // 
-			// toolStripLabelAbstand2
-			// 
-			this.toolStripLabelAbstand2.AutoSize = false;
-			this.toolStripLabelAbstand2.Name = "toolStripLabelAbstand2";
-			this.toolStripLabelAbstand2.Size = new System.Drawing.Size(5, 22);
-			// 
-            // toolStripButtonElementeEigenschaften
-            // 
-            this.toolStripButtonElementeEigenschaften.CheckOnClick = true;
-            this.toolStripButtonElementeEigenschaften.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonElementeEigenschaften.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementeEigenschaften.Image")));
-            this.toolStripButtonElementeEigenschaften.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonElementeEigenschaften.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
-            this.toolStripButtonElementeEigenschaften.Name = "toolStripButtonElementeEigenschaften";
-            this.toolStripButtonElementeEigenschaften.Size = new System.Drawing.Size(145, 22);
-            this.toolStripButtonElementeEigenschaften.Text = "Elemente Eigenschaften";
-            this.toolStripButtonElementeEigenschaften.Click += new System.EventHandler(this.toolStripButtonElementeEigenschaften_Click);
-            // 
-			// toolStripButtonFahrstrassenEditor
-			// 
-			this.toolStripButtonFahrstrassenEditor.CheckOnClick = true;
-			this.toolStripButtonFahrstrassenEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripButtonFahrstrassenEditor.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFahrstrassenEditor.Image")));
-			this.toolStripButtonFahrstrassenEditor.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButtonFahrstrassenEditor.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
-			this.toolStripButtonFahrstrassenEditor.Name = "toolStripButtonFahrstrassenEditor";
-			this.toolStripButtonFahrstrassenEditor.Size = new System.Drawing.Size(117, 22);
-			this.toolStripButtonFahrstrassenEditor.Text = "Fahrstraßen-Editor";
-			this.toolStripButtonFahrstrassenEditor.Click += new System.EventHandler(this.toolStripButtonFahrstrassenEditor_Click);
-			// 
-			// toolStripButton1
-			// 
-			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(96, 22);
-			this.toolStripButton1.Text = "Stecker-Anzeige";
-			this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-			// 
-			// toolStripButtonElementeExportieren
-			// 
-			this.toolStripButtonElementeExportieren.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripButtonElementeExportieren.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementeExportieren.Image")));
-			this.toolStripButtonElementeExportieren.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButtonElementeExportieren.Name = "toolStripButtonElementeExportieren";
-			this.toolStripButtonElementeExportieren.Size = new System.Drawing.Size(70, 22);
-			this.toolStripButtonElementeExportieren.Text = "Exportieren";
-			this.toolStripButtonElementeExportieren.Click += new System.EventHandler(this.toolStripButtonElementeExportieren_Click);
-			// 
-			// toolStripMenuItem1
-			// 
-			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-			this.toolStripMenuItem1.Text = "toolStripMenuItem1";
-			// 
-			// toolStripMenuItem2
-			// 
-			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-			this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-			this.toolStripMenuItem2.Text = "toolStripMenuItem2";
-			// 
-			// timerZeit
-			// 
-			this.timerZeit.Interval = 1000;
-			this.timerZeit.Tick += new System.EventHandler(this.TimerZeit_Tick);
-			// 
-			// contextMenuStripAuswahlRechteck
-			// 
-			this.contextMenuStripAuswahlRechteck.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemAufheben,
-            this.toolStripSeparatorAuswahl1,
-            this.toolStripMenuItemDrehen,
-            this.toolStripMenuItemSpiegeln,
-            this.toolStripSeparatorAuswahl2,
-            this.toolStripMenuItemLöschen});
-			this.contextMenuStripAuswahlRechteck.Name = "contextMenuStripAuswahlRechteck";
-			this.contextMenuStripAuswahlRechteck.Size = new System.Drawing.Size(127, 104);
-			// 
-			// toolStripMenuItemAufheben
-			// 
-			this.toolStripMenuItemAufheben.Name = "toolStripMenuItemAufheben";
-			this.toolStripMenuItemAufheben.Size = new System.Drawing.Size(126, 22);
-			this.toolStripMenuItemAufheben.Text = "Aufheben";
-			this.toolStripMenuItemAufheben.Click += new System.EventHandler(this.toolStripMenuItemAufheben_Click);
-			// 
-			// toolStripSeparatorAuswahl1
-			// 
-			this.toolStripSeparatorAuswahl1.Name = "toolStripSeparatorAuswahl1";
-			this.toolStripSeparatorAuswahl1.Size = new System.Drawing.Size(123, 6);
-			// 
-			// toolStripMenuItemDrehen
-			// 
-			this.toolStripMenuItemDrehen.Name = "toolStripMenuItemDrehen";
-			this.toolStripMenuItemDrehen.Size = new System.Drawing.Size(126, 22);
-			this.toolStripMenuItemDrehen.Text = "Drehen";
-			this.toolStripMenuItemDrehen.Click += new System.EventHandler(this.toolStripMenuItemDrehen_Click);
-			// 
-			// toolStripMenuItemSpiegeln
-			// 
-			this.toolStripMenuItemSpiegeln.Name = "toolStripMenuItemSpiegeln";
-			this.toolStripMenuItemSpiegeln.Size = new System.Drawing.Size(126, 22);
-			this.toolStripMenuItemSpiegeln.Text = "Spiegeln";
-			this.toolStripMenuItemSpiegeln.Click += new System.EventHandler(this.toolStripMenuItemSpiegeln_Click);
-			// 
-			// toolStripSeparatorAuswahl2
-            // 
-			this.toolStripSeparatorAuswahl2.Name = "toolStripSeparatorAuswahl2";
-			this.toolStripSeparatorAuswahl2.Size = new System.Drawing.Size(123, 6);
-			// 
-			// toolStripMenuItemLöschen
-			// 
-			this.toolStripMenuItemLöschen.Name = "toolStripMenuItemLöschen";
-			this.toolStripMenuItemLöschen.Size = new System.Drawing.Size(126, 22);
-			this.toolStripMenuItemLöschen.Text = "Löschen";
-			this.toolStripMenuItemLöschen.Click += new System.EventHandler(this.toolStripMenuItemAuswahlRechteckLöschen_Click);
-            // 
-            // MoBaStForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(966, 450);
-            this.Controls.Add(this.toolStripContainer);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.menuStrip);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
-            this.MainMenuStrip = this.menuStrip;
-            this.Name = "MoBaStForm";
-            this.Text = "Modellbahnsteuerung";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMoBaSt_FormClosing);
-            this.Load += new System.EventHandler(this.MoBaStForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoBaStForm_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MoBaStForm_KeyUp);
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            this.toolStripContainer.ContentPanel.ResumeLayout(false);
-            this.toolStripContainer.LeftToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer.LeftToolStripPanel.PerformLayout();
-            this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer.TopToolStripPanel.PerformLayout();
-            this.toolStripContainer.ResumeLayout(false);
-            this.toolStripContainer.PerformLayout();
-            this.panelView.ResumeLayout(false);
-            this.panelScrollView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxView)).EndInit();
-            this.toolStripElemente.ResumeLayout(false);
-            this.toolStripElemente.PerformLayout();
-            this.toolStripBearbeiten.ResumeLayout(false);
-            this.toolStripBearbeiten.PerformLayout();
-            this.contextMenuStripAuswahlRechteck.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-||||||| .r74
-            this.toolStripSplitButtonCheckableFadenkreuz.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButtonCheckableFadenkreuz.Name = "toolStripSplitButtonCheckableFadenkreuz";
-            this.toolStripSplitButtonCheckableFadenkreuz.Size = new System.Drawing.Size(83, 22);
-            this.toolStripSplitButtonCheckableFadenkreuz.Text = "Fadenkreuz";
-            this.toolStripSplitButtonCheckableFadenkreuz.ButtonClick += new System.EventHandler(this.toolStripSplitButtonCheckableFadenkreuz_ButtonClick);
-            // 
-            // toolStripMenuItemFadenkreuzFadenkreuzLinie
-            // 
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Name = "toolStripMenuItemFadenkreuzFadenkreuzLinie";
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Text = "&Linie";
-            this.toolStripMenuItemFadenkreuzFadenkreuzLinie.Click += new System.EventHandler(this.toolStripMenuItemFadenkreuzFadenkreuzLinie_Click);
-            // 
-            // toolStripMenuItemFadenkreuzFadenkreuzPunkt
-            // 
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Name = "toolStripMenuItemFadenkreuzFadenkreuzPunkt";
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Text = "&Punkt";
-            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt.Click += new System.EventHandler(this.toolStripMenuItemFadenkreuzFadenkreuzPunkt_Click);
-            // 
-            // toolStripSeparatorFadenkreuzFadenkreuz1
-            // 
-            this.toolStripSeparatorFadenkreuzFadenkreuz1.Name = "toolStripSeparatorFadenkreuzFadenkreuz1";
-            this.toolStripSeparatorFadenkreuzFadenkreuz1.Size = new System.Drawing.Size(102, 6);
-            // 
-            // toolStripMenuItemFadenkreuzFadenkreuzFarbe
-            // 
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Name = "toolStripMenuItemFadenkreuzFadenkreuzFarbe";
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Size = new System.Drawing.Size(105, 22);
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Text = "&Farbe";
-            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe.Click += new System.EventHandler(this.toolStripMenuItemFadenkreuzFadenkreuzFarbe_Click);
-            // 
-            // toolStripButtonElementeEigenschaften
-            // 
-            this.toolStripButtonElementeEigenschaften.CheckOnClick = true;
-            this.toolStripButtonElementeEigenschaften.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonElementeEigenschaften.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementeEigenschaften.Image")));
-            this.toolStripButtonElementeEigenschaften.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonElementeEigenschaften.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
-            this.toolStripButtonElementeEigenschaften.Name = "toolStripButtonElementeEigenschaften";
-            this.toolStripButtonElementeEigenschaften.Size = new System.Drawing.Size(145, 22);
-            this.toolStripButtonElementeEigenschaften.Text = "Elemente Eigenschaften";
-            this.toolStripButtonElementeEigenschaften.Click += new System.EventHandler(this.toolStripButtonElementeEigenschaften_Click);
-            // 
-            // toolStripMenuItemBearbeiten
-            // 
-            this.toolStripMenuItemBearbeiten.CheckOnClick = true;
-            this.toolStripMenuItemBearbeiten.Enabled = false;
-            this.toolStripMenuItemBearbeiten.Margin = new System.Windows.Forms.Padding(0, 1, 0, 2);
-            this.toolStripMenuItemBearbeiten.Name = "toolStripMenuItemBearbeiten";
-            this.toolStripMenuItemBearbeiten.Size = new System.Drawing.Size(115, 19);
-            this.toolStripMenuItemBearbeiten.Text = "Anlage Bearbeiten";
-            this.toolStripMenuItemBearbeiten.Click += new System.EventHandler(this.toolStripMenuItemBearbeiten_Click);
-            // 
-            // MoBaStForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(966, 450);
-            this.Controls.Add(this.toolStripContainer);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.menuStrip);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
-            this.MainMenuStrip = this.menuStrip;
-            this.Name = "MoBaStForm";
-            this.Text = "Modellbahnsteuerung";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMoBaSt_FormClosing);
-            this.Load += new System.EventHandler(this.MoBaStForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoBaStForm_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MoBaStForm_KeyUp);
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            this.toolStripContainer.ContentPanel.ResumeLayout(false);
-            this.toolStripContainer.LeftToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer.LeftToolStripPanel.PerformLayout();
-            this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer.TopToolStripPanel.PerformLayout();
-            this.toolStripContainer.ResumeLayout(false);
-            this.toolStripContainer.PerformLayout();
-            this.panelView.ResumeLayout(false);
-            this.panelScrollView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxView)).EndInit();
-            this.toolStripElemente.ResumeLayout(false);
-            this.toolStripElemente.PerformLayout();
-            this.toolStripBearbeiten.ResumeLayout(false);
-            this.toolStripBearbeiten.PerformLayout();
-            this.contextMenuStripAuswahlRechteck.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-=======
+						this.toolStripMenuItemFadenkreuzFadenkreuzLinie,
+						this.toolStripMenuItemFadenkreuzFadenkreuzPunkt,
+						this.toolStripSeparatorFadenkreuzFadenkreuz1,
+						this.toolStripMenuItemFadenkreuzFadenkreuzFarbe});
 			this.toolStripSplitButtonCheckableFadenkreuz.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripSplitButtonCheckableFadenkreuz.Name = "toolStripSplitButtonCheckableFadenkreuz";
 			this.toolStripSplitButtonCheckableFadenkreuz.Size = new System.Drawing.Size(83, 22);
@@ -2095,12 +948,12 @@ namespace MoBaSteuerung {
 			// contextMenuStripAuswahlRechteck
 			// 
 			this.contextMenuStripAuswahlRechteck.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemAufheben,
-            this.toolStripSeparatorAuswahl1,
-            this.toolStripMenuItemDrehen,
-            this.toolStripMenuItemSpiegeln,
-            this.toolStripSeparatorAuswahl2,
-            this.toolStripMenuItemLöschen});
+						this.toolStripMenuItemAufheben,
+						this.toolStripSeparatorAuswahl1,
+						this.toolStripMenuItemDrehen,
+						this.toolStripMenuItemSpiegeln,
+						this.toolStripSeparatorAuswahl2,
+						this.toolStripMenuItemLöschen});
 			this.contextMenuStripAuswahlRechteck.Name = "contextMenuStripAuswahlRechteck";
 			this.contextMenuStripAuswahlRechteck.Size = new System.Drawing.Size(127, 104);
 			// 
@@ -2180,7 +1033,6 @@ namespace MoBaSteuerung {
 			this.contextMenuStripAuswahlRechteck.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
->>>>>>> .r76
 
 		}
 
@@ -2277,20 +1129,8 @@ namespace MoBaSteuerung {
 		private ToolStripMenuItem zugEditorToolStripMenuItem;
 		private ToolStripButton toolStripButtonElementFss;
 		private ToolStripButton toolStripButtonElementeExportieren;
-<<<<<<< .mine
-        private ToolStripButton toolStripButton1;
-        private FontDialog fontDialog1;
-		private Master.ToolStripMenuItemCheckable toolStripButtonFahrstrassenEditor;
-    }
-||||||| .r74
-        private ToolStripButton toolStripButton1;
-        private FontDialog fontDialog1;
-        private ToolStripButton toolStripButtonFahrstrassenSuchen;
-    }
-=======
 		private ToolStripButton toolStripButton1;
 		private FontDialog fontDialog1;
 		private Master.ToolStripMenuItemCheckable toolStripButtonFahrstrassenEditor;
 	}
->>>>>>> .r76
 }
