@@ -106,6 +106,12 @@
     <Compile Include="FahrstrassenEditor\FahrstrassenEditor.Designer.cs">
       <DependentUpon>FahrstrassenEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBefehlsliste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBefehlsliste.Designer.cs">
+      <DependentUpon>FrmBefehlsliste.cs</DependentUpon>
+    </Compile>
     <Compile Include="SteckerAnzeige.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +200,9 @@
     <Compile Include="ZugEditor\frmZugEditor.Designer.cs">
       <DependentUpon>frmZugEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmBefehlsliste.resx">
+      <DependentUpon>FrmBefehlsliste.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialoge\frmArduino.resx">
       <DependentUpon>frmArduino.cs</DependentUpon>
     </EmbeddedResource>
