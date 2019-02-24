@@ -100,6 +100,12 @@
     <Compile Include="Dialoge\frmInfo.Designer.cs">
       <DependentUpon>frmInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FahrstrassenEditor\FahrstrassenEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FahrstrassenEditor\FahrstrassenEditor.Designer.cs">
+      <DependentUpon>FahrstrassenEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="SteckerAnzeige.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialoge\frmInfo.resx">
       <DependentUpon>frmInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FahrstrassenEditor\FahrstrassenEditor.resx">
+      <DependentUpon>FahrstrassenEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SteckerAnzeige.resx">
       <DependentUpon>SteckerAnzeige.cs</DependentUpon>

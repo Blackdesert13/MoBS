@@ -15,6 +15,7 @@ using MoBaSteuerung.Elemente;
 using System.Collections.Generic;
 using ModellBahnSteuerung;
 using System.Diagnostics;
+using ModellBahnSteuerung.FahrstrassenEditor;
 
 namespace MoBaSteuerung {
 	/// <summary>
@@ -46,6 +47,8 @@ namespace MoBaSteuerung {
 		private Controller _controller;
 		private Model _model;
 		private ToolBoxElemente _toolBoxElemente;
+		private FahrstrassenEditor _fahrStraßenEditor;
+		private int _signalNummer = -1;
 		private DateTime timeZeit;
 		private string _adminPwd = "MoBS_Mek49";
 		private bool _adminAktiviert = false;
@@ -255,6 +258,15 @@ namespace MoBaSteuerung {
 			}
 		}
 
+		private void InitializeFahrstrassenEditor() {
+			this._fahrStraßenEditor = new FahrstrassenEditor(Model);
+			this._fahrStraßenEditor.FormClosing += FahrStraßenEditor_FormClosing; ;
+			this._fahrStraßenEditor.Location = this.Location;
+			this._fahrStraßenEditor.Opacity = 0;
+			this._fahrStraßenEditor.Show(this);
+		}
+
+
 		private void InitializeToolBoxElemente() {
 			this._toolBoxElemente = new ToolBox.ToolBoxElemente(Model);
 			this._toolBoxElemente.FormClosing += ToolBoxElemente_FormClosing;
@@ -270,6 +282,7 @@ namespace MoBaSteuerung {
 		private void MoBaStForm_Load(object sender, EventArgs e) {
 			// ToolBox für die Eigenschaften der Elemente
 			this.InitializeToolBoxElemente();
+			this.InitializeFahrstrassenEditor();
 		}
 
 		private void frmMoBaSt_FormClosing(object sender, FormClosingEventArgs e) {
@@ -347,6 +360,10 @@ namespace MoBaSteuerung {
 		}
 
 		#endregion
+
+		private void FahrStraßenEditor_FormClosing(object sender, FormClosingEventArgs e) {
+			this.toolStripButtonFahrstrassenEditor.Checked = false;
+		}
 
 		#region Menü Events
 
@@ -615,6 +632,10 @@ namespace MoBaSteuerung {
 				this.toolStripStatusLabelRasterInfo.Visible = true;
 				if (this.toolStripButtonElementeEigenschaften.Checked) {
 					this._toolBoxElemente.Show();
+					this.Focus();
+				}
+				if (this.toolStripButtonFahrstrassenEditor.Checked) {
+					this._fahrStraßenEditor.Show();
 					this.Focus();
 				}
 				this.Controller.AnzeigeTyp = AnzeigeTyp.Bearbeiten;
@@ -1091,6 +1112,7 @@ namespace MoBaSteuerung {
 
 			this.toolStripButtonElementeEigenschaften.Checked = false;
 			this._toolBoxElemente.Hide();
+			this._fahrStraßenEditor.Hide();
 		}
 
 		private Image MenüFarbe(Color color) {
@@ -1196,8 +1218,6 @@ namespace MoBaSteuerung {
 			else
 				this.bearbeitungsModus = BearbeitungsModus.Selektieren;
 		}
-
-		private int _signalNummer = -1;
 
 
 		protected override bool ProcessDialogKey(Keys keyData) {
@@ -1439,8 +1459,14 @@ namespace MoBaSteuerung {
 
 		}
 
-		private void toolStripButtonFahrstrassenSuchen_Click(object sender, EventArgs e) {
-			this._model.FahrstrassenSuchen();
+		private void toolStripButtonFahrstrassenEditor_Click(object sender, EventArgs e) {
+			if (this.toolStripButtonFahrstrassenEditor.Checked) {
+				this._fahrStraßenEditor.Show();
+				this.Focus();
+			}
+			else {
+				this._fahrStraßenEditor.Hide();
+			}
 		}
 	}
 }
