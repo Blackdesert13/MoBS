@@ -105,5 +105,20 @@ namespace ModellBahnSteuerung.ToolBox
             throw new NotImplementedException();
         }
 
+        private void buttonKoppelung_Click(object sender, EventArgs e)
+        {
+            if (_schalter != null)
+            {
+                FrmBefehlsliste frmBefehlsliste = new FrmBefehlsliste(_schalter.Koppelung, _schalter.KurzBezeichnung + "-Koppelung");
+                if (frmBefehlsliste.ShowDialog(this) == DialogResult.OK)
+                {
+                    // string[][] t =  frm.auslesen();
+                }
+                else
+                {
+                }
+
+            }
+        }
     }
 }

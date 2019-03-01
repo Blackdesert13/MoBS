@@ -185,5 +185,21 @@ namespace ModellBahnSteuerung.ToolBox
         {
             _weiche.Grundstellung = !_weiche.Grundstellung;
         }
+
+        private void buttonKoppelung_Click(object sender, EventArgs e)
+        {
+            if (_weiche != null)
+            {
+                FrmBefehlsliste frmBefehlsliste = new FrmBefehlsliste(_weiche.Koppelung, _weiche.KurzBezeichnung + "-Koppelung");
+                if (frmBefehlsliste.ShowDialog(this) == DialogResult.OK)
+                {
+                    // string[][] t =  frm.auslesen();
+                }
+                else
+                {
+                }
+
+            }
+        }
     }
 }

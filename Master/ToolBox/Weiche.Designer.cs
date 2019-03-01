@@ -32,6 +32,8 @@
             this.LabelMenü = new System.Windows.Forms.Label();
             this.PictureBoxMenü = new System.Windows.Forms.PictureBox();
             this.PanelEigenschaften = new System.Windows.Forms.Panel();
+            this.labelStecker = new System.Windows.Forms.Label();
+            this.textBoxStecker = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonSpeichern = new System.Windows.Forms.Button();
@@ -48,8 +50,7 @@
             this.labelKnoten = new System.Windows.Forms.Label();
             this.textBoxWeiche = new System.Windows.Forms.TextBox();
             this.buttonMC = new System.Windows.Forms.Button();
-            this.textBoxStecker = new System.Windows.Forms.TextBox();
-            this.labelStecker = new System.Windows.Forms.Label();
+            this.buttonKoppelung = new System.Windows.Forms.Button();
             this.PanelMenü.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxMenü)).BeginInit();
             this.PanelEigenschaften.SuspendLayout();
@@ -100,6 +101,7 @@
             // PanelEigenschaften
             // 
             this.PanelEigenschaften.BackColor = System.Drawing.Color.White;
+            this.PanelEigenschaften.Controls.Add(this.buttonKoppelung);
             this.PanelEigenschaften.Controls.Add(this.labelStecker);
             this.PanelEigenschaften.Controls.Add(this.textBoxStecker);
             this.PanelEigenschaften.Controls.Add(this.label1);
@@ -124,6 +126,22 @@
             this.PanelEigenschaften.Name = "PanelEigenschaften";
             this.PanelEigenschaften.Size = new System.Drawing.Size(338, 85);
             this.PanelEigenschaften.TabIndex = 1;
+            // 
+            // labelStecker
+            // 
+            this.labelStecker.AutoSize = true;
+            this.labelStecker.Location = new System.Drawing.Point(167, 50);
+            this.labelStecker.Name = "labelStecker";
+            this.labelStecker.Size = new System.Drawing.Size(44, 13);
+            this.labelStecker.TabIndex = 17;
+            this.labelStecker.Text = "Stecker";
+            // 
+            // textBoxStecker
+            // 
+            this.textBoxStecker.Location = new System.Drawing.Point(214, 47);
+            this.textBoxStecker.Name = "textBoxStecker";
+            this.textBoxStecker.Size = new System.Drawing.Size(74, 20);
+            this.textBoxStecker.TabIndex = 16;
             // 
             // label1
             // 
@@ -272,21 +290,15 @@
             this.buttonMC.Text = "MC";
             this.buttonMC.UseVisualStyleBackColor = true;
             // 
-            // textBoxStecker
+            // buttonKoppelung
             // 
-            this.textBoxStecker.Location = new System.Drawing.Point(214, 47);
-            this.textBoxStecker.Name = "textBoxStecker";
-            this.textBoxStecker.Size = new System.Drawing.Size(74, 20);
-            this.textBoxStecker.TabIndex = 16;
-            // 
-            // labelStecker
-            // 
-            this.labelStecker.AutoSize = true;
-            this.labelStecker.Location = new System.Drawing.Point(167, 50);
-            this.labelStecker.Name = "labelStecker";
-            this.labelStecker.Size = new System.Drawing.Size(44, 13);
-            this.labelStecker.TabIndex = 17;
-            this.labelStecker.Text = "Stecker";
+            this.buttonKoppelung.Location = new System.Drawing.Point(270, 23);
+            this.buttonKoppelung.Name = "buttonKoppelung";
+            this.buttonKoppelung.Size = new System.Drawing.Size(67, 23);
+            this.buttonKoppelung.TabIndex = 18;
+            this.buttonKoppelung.Text = "Koppelung";
+            this.buttonKoppelung.UseVisualStyleBackColor = true;
+            this.buttonKoppelung.Click += new System.EventHandler(this.buttonKoppelung_Click);
             // 
             // FrmWeiche
             // 
@@ -332,5 +344,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label labelStecker;
         private System.Windows.Forms.TextBox textBoxStecker;
+        private System.Windows.Forms.Button buttonKoppelung;
     }
 }

@@ -22,7 +22,8 @@ namespace MoBaSteuerung.Elemente {
                 return "Schalter"
                     + "\t" + ID
                     + "\t" + AnschlussGleis.ID + " " + Gleisposition
-                    + "\t";
+                    + "\t" + Bezeichnung
+                    + "\t" + KoppelungsString;
             }
         }
 
@@ -64,6 +65,7 @@ namespace MoBaSteuerung.Elemente {
         {
             string[] glAnschl = elem[2].Split(' ');
             Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
+            if (elem.Length > 4) KoppelungsString = elem[4];
             if (gl != null) {
                 PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
                 Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
@@ -74,7 +76,6 @@ namespace MoBaSteuerung.Elemente {
 
                     Parent.SchalterElemente.Hinzufügen(this);
                     graphicsPath = new GraphicsPath();
-
                     this.Berechnung();
                 }
             }

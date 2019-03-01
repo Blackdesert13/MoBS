@@ -32,6 +32,10 @@ namespace MoBaSteuerung.Elemente
             set { _listenString = value; }
         }
 
+        public List<Befehl> BefListe
+        {
+            get { return _liste; }
+        }
 
         /// <summary>
         /// übernimmt eine neue Befehls-Liste aus einem String und aktiviert diese gleich
@@ -51,8 +55,7 @@ namespace MoBaSteuerung.Elemente
             {
                 string[] stringArray = _listenString.Split(' ');
                 for(int i=0; i<stringArray.Length; i++)
-                {
-                    
+                {              
                     string[] befehl = stringArray[i].Split(':');
                     string[] elName = Regex.Matches(befehl[0], @"[a-zA-Z]+|\d+").Cast<Match>().Select(m => m.Value).ToArray();
                     AnlagenElement el = null;
@@ -68,7 +71,7 @@ namespace MoBaSteuerung.Elemente
                         case "We":
                             el = this._parent.WeicheElemente.Element(Convert.ToInt16(elName[1]));
                             break;
-                        case "FSS":
+                        case "Fss":
                             el = this._parent.FssElemente.Element(Convert.ToInt16(elName[1]));
                             break;
                         default:

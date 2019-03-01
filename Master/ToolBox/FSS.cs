@@ -180,6 +180,13 @@ namespace ModellBahnSteuerung.ToolBox
             if (_fss != null)
             {
                 FrmBefehlsliste frmBefehlsliste = new FrmBefehlsliste(_fss.Koppelung, _fss.KurzBezeichnung + "-Koppelung");
+                if (frmBefehlsliste.ShowDialog(this) == DialogResult.OK)
+                {
+                    // string[][] t =  frm.auslesen();
+                }
+                else
+                {
+                }
 
             }
         }

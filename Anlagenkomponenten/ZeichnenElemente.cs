@@ -283,6 +283,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         {
             weicheElemente.KoppelungenAktivieren();
             fssElemente.KoppelungenAktivieren();
+            gleisElemente.KoppelungenAktivieren();
+            schalterElemente.KoppelungenAktivieren();
         }
 
         public Servo AktiverServo {

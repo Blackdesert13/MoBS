@@ -374,9 +374,9 @@ namespace MoBaSteuerung {
 
             if (el != null) {
                 bool action = el.AusgangToggeln();
-                if (elementName == "FSS")
-                    zeichnenElemente.FSSAktualisieren();
-                else if(elementName == "Entkuppler") {
+                //if (elementName == "FSS")
+                zeichnenElemente.FSSAktualisieren();
+                if(elementName == "Entkuppler") {
                     if(el.ElementZustand == Elementzustand.An && EntkupplerAbschaltAutoAktiv) {
                         Thread entkupplerAbschalt = new Thread(this.EntkupplerAbschaltung);
                         entkupplerAbschalt.Start(el);
@@ -734,7 +734,7 @@ namespace MoBaSteuerung {
                                             + this.zeichnenElemente.GleisElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Weichen\tNr.\tKnoten\tGru-Ste\tAusgang\tBez.\tStecker\tKoppelung"
                                             + this.zeichnenElemente.WeicheElemente.SpeicherString);
-            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "GleisSchalter\tNr.\tGleis\tBez."
+            anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "GleisSchalter\tNr.\tGleis\tBez.\tKoppelung"
                                             + this.zeichnenElemente.SchalterElemente.SpeicherString);
             anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung"
                                             + this.zeichnenElemente.FssElemente.SpeicherString);

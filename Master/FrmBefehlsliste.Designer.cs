@@ -65,6 +65,7 @@
             this.buttonUebernahme.TabIndex = 1;
             this.buttonUebernahme.Text = "Übernehmen";
             this.buttonUebernahme.UseVisualStyleBackColor = true;
+            this.buttonUebernahme.Click += new System.EventHandler(this.buttonUebernahme_Click);
             // 
             // labelName
             // 

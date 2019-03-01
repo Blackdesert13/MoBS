@@ -46,7 +46,8 @@ namespace MoBaSteuerung.Elemente {
 						+ "\t" + Ausgang.SpeicherString
 						+ "\t" + Eingang.SpeicherString
 						+ "\t" + Bezeichnung
-						+ "\t" + Stecker;
+						+ "\t" + Stecker
+                        + "\t" + KoppelungsString;
 			}
 		}
 
