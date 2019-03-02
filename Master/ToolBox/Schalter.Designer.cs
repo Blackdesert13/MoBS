@@ -32,6 +32,7 @@
             this.LabelMenü = new System.Windows.Forms.Label();
             this.PictureBoxMenü = new System.Windows.Forms.PictureBox();
             this.PanelEigenschaften = new System.Windows.Forms.Panel();
+            this.buttonKoppelung = new System.Windows.Forms.Button();
             this.buttonLöschen = new System.Windows.Forms.Button();
             this.Ausgang_TB = new System.Windows.Forms.TextBox();
             this.Ausgang_label = new System.Windows.Forms.Label();
@@ -44,7 +45,7 @@
             this.labelGleis = new System.Windows.Forms.Label();
             this.textBoxSchalter = new System.Windows.Forms.TextBox();
             this.buttonMC = new System.Windows.Forms.Button();
-            this.buttonKoppelung = new System.Windows.Forms.Button();
+            this.buttonLaden = new System.Windows.Forms.Button();
             this.PanelMenü.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxMenü)).BeginInit();
             this.PanelEigenschaften.SuspendLayout();
@@ -95,6 +96,7 @@
             // PanelEigenschaften
             // 
             this.PanelEigenschaften.BackColor = System.Drawing.Color.White;
+            this.PanelEigenschaften.Controls.Add(this.buttonLaden);
             this.PanelEigenschaften.Controls.Add(this.buttonKoppelung);
             this.PanelEigenschaften.Controls.Add(this.buttonLöschen);
             this.PanelEigenschaften.Controls.Add(this.Ausgang_TB);
@@ -115,9 +117,19 @@
             this.PanelEigenschaften.Size = new System.Drawing.Size(262, 86);
             this.PanelEigenschaften.TabIndex = 1;
             // 
+            // buttonKoppelung
+            // 
+            this.buttonKoppelung.Location = new System.Drawing.Point(169, 62);
+            this.buttonKoppelung.Name = "buttonKoppelung";
+            this.buttonKoppelung.Size = new System.Drawing.Size(89, 23);
+            this.buttonKoppelung.TabIndex = 12;
+            this.buttonKoppelung.Text = "Koppelung";
+            this.buttonKoppelung.UseVisualStyleBackColor = true;
+            this.buttonKoppelung.Click += new System.EventHandler(this.buttonKoppelung_Click);
+            // 
             // buttonLöschen
             // 
-            this.buttonLöschen.Location = new System.Drawing.Point(3, 24);
+            this.buttonLöschen.Location = new System.Drawing.Point(3, 40);
             this.buttonLöschen.Name = "buttonLöschen";
             this.buttonLöschen.Size = new System.Drawing.Size(58, 23);
             this.buttonLöschen.TabIndex = 5;
@@ -213,22 +225,21 @@
             // 
             // buttonMC
             // 
-            this.buttonMC.Location = new System.Drawing.Point(3, 60);
+            this.buttonMC.Location = new System.Drawing.Point(3, 62);
             this.buttonMC.Name = "buttonMC";
             this.buttonMC.Size = new System.Drawing.Size(58, 23);
             this.buttonMC.TabIndex = 6;
             this.buttonMC.Text = "MC";
             this.buttonMC.UseVisualStyleBackColor = true;
             // 
-            // buttonKoppelung
+            // buttonLaden
             // 
-            this.buttonKoppelung.Location = new System.Drawing.Point(169, 62);
-            this.buttonKoppelung.Name = "buttonKoppelung";
-            this.buttonKoppelung.Size = new System.Drawing.Size(89, 23);
-            this.buttonKoppelung.TabIndex = 12;
-            this.buttonKoppelung.Text = "Koppelung";
-            this.buttonKoppelung.UseVisualStyleBackColor = true;
-            this.buttonKoppelung.Click += new System.EventHandler(this.buttonKoppelung_Click);
+            this.buttonLaden.Location = new System.Drawing.Point(3, 18);
+            this.buttonLaden.Name = "buttonLaden";
+            this.buttonLaden.Size = new System.Drawing.Size(58, 23);
+            this.buttonLaden.TabIndex = 13;
+            this.buttonLaden.Text = "Laden";
+            this.buttonLaden.UseVisualStyleBackColor = true;
             // 
             // FrmSchalter
             // 
@@ -268,5 +279,6 @@
     private System.Windows.Forms.Label Ausgang_label;
     private System.Windows.Forms.Button buttonLöschen;
         private System.Windows.Forms.Button buttonKoppelung;
+        private System.Windows.Forms.Button buttonLaden;
     }
 }
