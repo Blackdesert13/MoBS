@@ -375,7 +375,7 @@ namespace MoBaSteuerung {
             if (el != null) {
                 bool action = el.AusgangToggeln();
                 //if (elementName == "FSS")
-                zeichnenElemente.FSSAktualisieren();
+                    zeichnenElemente.FSSAktualisieren();
                 if(elementName == "Entkuppler") {
                     if(el.ElementZustand == Elementzustand.An && EntkupplerAbschaltAutoAktiv) {
                         Thread entkupplerAbschalt = new Thread(this.EntkupplerAbschaltung);
@@ -794,9 +794,9 @@ namespace MoBaSteuerung {
         public void ZeichneElementeBearbeiten(Graphics graphics) {
             graphics.SmoothingMode = SmoothingMode.HighQuality;
 
-            this.zeichnenElemente.FahrstarssenElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
+            this.zeichnenElemente.FahrstarssenElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.KnotenElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
             this.zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
@@ -909,7 +909,7 @@ namespace MoBaSteuerung {
         /// <summary>
         /// 
         /// </summary>
-        protected virtual void OnAnlageNeuZeichnen() {
+        public virtual void OnAnlageNeuZeichnen() {
             if (this.AnlageNeuZeichnen != null) {
                 this.AnlageNeuZeichnen();
             }

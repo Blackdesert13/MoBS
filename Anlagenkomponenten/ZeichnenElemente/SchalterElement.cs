@@ -76,6 +76,7 @@ namespace MoBaSteuerung.Elemente {
 
                     Parent.SchalterElemente.Hinzufügen(this);
                     graphicsPath = new GraphicsPath();
+
                     this.Berechnung();
                 }
             }

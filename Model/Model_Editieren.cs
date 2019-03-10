@@ -281,5 +281,35 @@ namespace MoBaSteuerung {
 			}
 		}
 
+		public void FahrstrassenSuchenVonSignal()
+		{
+			int altCount = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count;
+			int startindexNeu = altCount;
+			foreach (AnlagenElement el in _auswahlElemente) {
+				if(el is Signal) {
+					Signal sig = (Signal)el;
+					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen(sig);
+
+					for(int i = startindexNeu; i < zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count; i++) {
+						FahrstrasseN fssNeu = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen[i];
+						for(int j = 0; j < altCount; j++) {
+							FahrstrasseN fssAlt = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen[j];
+							if(fssAlt.IstGleich(fssNeu)) {
+								i--;
+								zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Remove(fssNeu);
+								break;
+							}
+							
+						}
+					}
+
+				}
+			}
+
+			
+
+
+		}
+
 	}
 }

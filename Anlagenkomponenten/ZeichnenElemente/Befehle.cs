@@ -55,7 +55,8 @@ namespace MoBaSteuerung.Elemente
             {
                 string[] stringArray = _listenString.Split(' ');
                 for(int i=0; i<stringArray.Length; i++)
-                {              
+                {
+                    
                     string[] befehl = stringArray[i].Split(':');
                     string[] elName = Regex.Matches(befehl[0], @"[a-zA-Z]+|\d+").Cast<Match>().Select(m => m.Value).ToArray();
                     AnlagenElement el = null;
