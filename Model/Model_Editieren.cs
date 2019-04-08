@@ -281,14 +281,14 @@ namespace MoBaSteuerung {
 			}
 		}
 
-		public void FahrstrassenSuchenVonSignal()
+		public void FahrstrassenSuchenVonSignal(List<int> stopGleise = null)
 		{
 			int altCount = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count;
 			int startindexNeu = altCount;
 			foreach (AnlagenElement el in _auswahlElemente) {
 				if(el is Signal) {
 					Signal sig = (Signal)el;
-					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen(sig);
+					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen2(sig);
 
 					for(int i = startindexNeu; i < zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count; i++) {
 						FahrstrasseN fssNeu = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen[i];

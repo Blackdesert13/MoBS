@@ -99,7 +99,13 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 
 		private void fahrstraßenSuchenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_model.FahrstrassenSuchenVonSignal();
+			List<int> stopGleise = new List<int>();
+			string[] gleise = this.textBox1.Text.Split(',');
+			foreach(string gleis in gleise) {
+				stopGleise.Add(Convert.ToInt32(gleis));
+			}
+
+			_model.FahrstrassenSuchenVonSignal(stopGleise);
 			AktualisierenTabelle();
 			this.propertyGrid1.SelectedObject = _fahrstrassenAnzeige;
 		}

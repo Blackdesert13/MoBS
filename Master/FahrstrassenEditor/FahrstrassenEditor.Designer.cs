@@ -45,6 +45,7 @@
 			this.ColumnStartBefehle = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ColumnEndBefehle = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabPagePropertyGrid = new System.Windows.Forms.TabPage();
+			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPageTabelle.SuspendLayout();
@@ -114,6 +115,7 @@
 			// 
 			// tabPageTabelle
 			// 
+			this.tabPageTabelle.Controls.Add(this.textBox1);
 			this.tabPageTabelle.Controls.Add(this.numericUpDown1);
 			this.tabPageTabelle.Controls.Add(this.label1);
 			this.tabPageTabelle.Controls.Add(this.comboBox1);
@@ -128,7 +130,7 @@
 			// 
 			// numericUpDown1
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(196, 7);
+			this.numericUpDown1.Location = new System.Drawing.Point(160, 7);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -153,7 +155,7 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(49, 7);
+			this.label1.Location = new System.Drawing.Point(13, 7);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(44, 15);
 			this.label1.TabIndex = 2;
@@ -166,7 +168,7 @@
             "kein Filter",
             "Start-Signal",
             "Ziel-Signal"});
-			this.comboBox1.Location = new System.Drawing.Point(99, 6);
+			this.comboBox1.Location = new System.Drawing.Point(63, 6);
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(80, 21);
 			this.comboBox1.TabIndex = 1;
@@ -272,6 +274,13 @@
 			this.tabPagePropertyGrid.Text = "PropertyGrid";
 			this.tabPagePropertyGrid.UseVisualStyleBackColor = true;
 			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(317, 6);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(100, 20);
+			this.textBox1.TabIndex = 4;
+			// 
 			// FahrstrassenEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,5 +326,6 @@
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.TextBox textBox1;
 	}
 }

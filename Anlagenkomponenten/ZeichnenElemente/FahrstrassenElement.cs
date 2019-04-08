@@ -752,6 +752,22 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 
+		public int SucheFahrstrassen2(Signal startsignal, List<int> stopGleise = null)
+		{
+			if (stopGleise == null) {
+				stopGleise = new List<int>();
+				//stopGleise.Add(29);
+			}
+			List<AnlagenElement> pfad = new List<AnlagenElement> { startsignal, startsignal.AnschlussGleis };
+			if (startsignal.InZeichenRichtung)
+				pfad.Add(startsignal.AnschlussGleis.EndKn);
+			else
+				pfad.Add(startsignal.AnschlussGleis.StartKn);
+			List<List<AnlagenElement>> fahrStrassen = new List<List<AnlagenElement>>();
+			SucheZielSignale2(pfad, startsignal.InZeichenRichtung,stopGleise,fahrStrassen);
+			return 0;
+		}
+
 		public int SucheFahrstrassen(Signal startsignal) {
 			List<AnlagenElement> el = new List<AnlagenElement> { startsignal, startsignal.AnschlussGleis };
 			if (startsignal.InZeichenRichtung)
@@ -774,6 +790,113 @@ namespace MoBaSteuerung.Elemente {
 			return false;
 		}
 
+		private void SucheZielSignale2(List<AnlagenElement> pfad, bool dirStart,List<int> stopGleise, List<List<AnlagenElement>> fahrstrassen){
+			if (!KnotenDoppeltInFahrstrasse(pfad)) { // Kreis?
+				int anz = pfad.Count;
+				Knoten lastKn = (Knoten)pfad[anz - 1];
+				Gleis lastGl = (Gleis)pfad[anz - 2];
+
+				int anschl = lastKn.GetGleisAnschlussNr(lastGl);
+				int offs = 0;
+				if (anschl >= 0) {
+					if (anschl < 2)
+						offs = 2;
+					Gleis nextGl;
+					bool vergl;
+					
+					if (lastKn.Gleise[offs + 1] == null && lastKn.Gleise[offs] == null) {
+						//Ende Stumpfgleis erreicht -> Rückwärtssuche nach Zielsignal
+						//Todo: Suche Zielsignal für Fahrstrasse in Stumpfgleis
+						for(int i = anz - 1; anz > 0; i--) {
+							if(pfad[i] is Knoten) {
+								Knoten kn = (Knoten)pfad[i];
+								
+								if (kn.Weichen[0] != null || kn.Weichen[1] != null) {
+									break;
+								}
+							}
+							else if(pfad[i] is Gleis) {
+								Gleis gl = (Gleis)pfad[i];
+								Knoten kn = (Knoten)pfad[i+1];
+
+								if ((dirStart && gl.StartKn == kn) || (!dirStart && gl.EndKn == kn))
+									vergl = false;
+								else
+									vergl = true;
+
+								bool found = false;
+								foreach (Signal sn in gl.Signale) {
+									if (sn != null) {
+										if( (sn.InZeichenRichtung ^ vergl) == dirStart ){
+											pfad.Add(sn);
+											List<AnlagenElement> fs = new List<AnlagenElement>(pfad);
+											fahrstrassen.Add(fs);
+											found = true;
+											break;
+										}
+									}
+								}
+
+								if (found) {
+									break;
+								}
+							}
+							else {
+
+							}
+						}
+					}
+					else {
+						//"Durchgangsgleis"
+						for (int i = 0; i < 2; i++) {
+							if (lastKn.Gleise[offs + i] != null) {
+								nextGl = lastKn.Gleise[offs + i];
+
+								if (stopGleise.Contains(nextGl.ID))
+									continue;
+
+								if ((dirStart && nextGl.StartKn == lastKn) || (!dirStart && nextGl.EndKn == lastKn))
+									vergl = false;
+								else
+									vergl = true;
+
+								foreach (Signal sn in nextGl.Signale) {
+									if (sn != null) {
+										if ((sn.InZeichenRichtung ^ vergl) == dirStart) {
+											pfad.Add(nextGl);
+											pfad.Add(sn);
+											List<AnlagenElement> fs = new List<AnlagenElement>(pfad);
+											fahrstrassen.Add(fs);
+											goto escape;
+										}
+									}
+								}
+
+								pfad.Add(nextGl);
+								if (vergl) {
+									if (!dirStart)
+										pfad.Add(nextGl.EndKn);
+									else
+										pfad.Add(nextGl.StartKn);
+								}
+								else {
+									if (dirStart)
+										pfad.Add(nextGl.EndKn);
+									else
+										pfad.Add(nextGl.StartKn);
+								}
+								SucheZielSignale2(pfad, dirStart, stopGleise, fahrstrassen);
+
+								escape:
+								pfad.RemoveRange(pfad.Count - 2, 2);
+							}
+						}
+					}
+
+				}
+			}
+		}
+
 		private void SucheZielSignale(List<AnlagenElement> pfad, bool dirStart) {
 			if (!KnotenDoppeltInFahrstrasse(pfad)) {
 				int anz = pfad.Count;
@@ -793,7 +916,7 @@ namespace MoBaSteuerung.Elemente {
 								vergl = false;
 							else
 								vergl = true;
-							foreach (Signal sn in nextGl.Signale)
+							foreach (Signal sn in nextGl.Signale) {
 								if (sn != null)
 									if ((sn.InZeichenRichtung ^ vergl) == dirStart) {
 										pfad.Add(nextGl);
@@ -801,6 +924,7 @@ namespace MoBaSteuerung.Elemente {
 										_gespeicherteFahrstrassen.Add(new FahrstrasseN(pfad.ToArray()));
 										goto escape;
 									}
+							}
 							pfad.Add(nextGl);
 							if (vergl)
 								if (!dirStart)
