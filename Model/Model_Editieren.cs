@@ -288,7 +288,7 @@ namespace MoBaSteuerung {
 			foreach (AnlagenElement el in _auswahlElemente) {
 				if(el is Signal) {
 					Signal sig = (Signal)el;
-					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen2(sig);
+					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen2(sig, stopGleise);
 
 					for(int i = startindexNeu; i < zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count; i++) {
 						FahrstrasseN fssNeu = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen[i];
