@@ -284,25 +284,31 @@ namespace MoBaSteuerung {
 		public void FahrstrassenSuchenVonSignal(List<int> stopGleise = null)
 		{
 			int altCount = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count;
-			int startindexNeu = altCount;
 			foreach (AnlagenElement el in _auswahlElemente) {
 				if(el is Signal) {
 					Signal sig = (Signal)el;
-					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen2(sig, stopGleise);
+					List<List<AnlagenElement>> fahrStrassenNeu = new List<List<AnlagenElement>>();
 
-					for(int i = startindexNeu; i < zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count; i++) {
-						FahrstrasseN fssNeu = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen[i];
-						for(int j = 0; j < altCount; j++) {
-							FahrstrasseN fssAlt = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen[j];
-							if(fssAlt.IstGleich(fssNeu)) {
-								i--;
-								zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Remove(fssNeu);
-								break;
+					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen2(sig, fahrStrassenNeu, stopGleise);
+
+					foreach(FahrstrasseN fss in zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen) {
+						for(int i = 0; i < fahrStrassenNeu.Count;) {
+							List<AnlagenElement> fssNeu = fahrStrassenNeu[i];
+							if (fss.IstGleich(fssNeu.ToArray())) {
+								fahrStrassenNeu.RemoveAt(i);
+							}
+							else {
+								i++;
 							}
 							
 						}
 					}
 
+					foreach(List<AnlagenElement> listeElemente in fahrStrassenNeu) {
+						zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Add(
+							new FahrstrasseN(listeElemente.ToArray())
+						);
+					}
 				}
 			}
 

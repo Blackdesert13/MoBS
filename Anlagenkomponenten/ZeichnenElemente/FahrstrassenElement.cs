@@ -627,6 +627,21 @@ namespace MoBaSteuerung.Elemente {
 				_gespeicherteFahrstrassen = value;
 			}
 		}
+		
+		/// <summary>
+		/// Sucht in der Elementenliste die erste nicht belegte Nummer
+		/// </summary>
+		/// <returns>Gibt die erste freie Nummer in der Liste zurück</returns>
+		public int SucheFreieNummer()
+		{
+			int i = 0;
+			FahrstrasseN el = null;
+			do {
+				i++;
+				el = this.Fahrstrasse(i);
+			} while (el != null);
+			return i;
+		}
 
 		/// <summary>
 		/// zum Speichern in der Anlagen-Datei
@@ -752,7 +767,7 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 
-		public int SucheFahrstrassen2(Signal startsignal, List<int> stopGleise = null)
+		public int SucheFahrstrassen2(Signal startsignal, List<List<AnlagenElement>> fahrstrassen, List<int> stopGleise = null)
 		{
 			if (stopGleise == null) {
 				stopGleise = new List<int>();
@@ -763,8 +778,9 @@ namespace MoBaSteuerung.Elemente {
 				pfad.Add(startsignal.AnschlussGleis.EndKn);
 			else
 				pfad.Add(startsignal.AnschlussGleis.StartKn);
-			List<List<AnlagenElement>> fahrStrassen = new List<List<AnlagenElement>>();
-			SucheZielSignale2(pfad, startsignal.InZeichenRichtung,stopGleise,fahrStrassen);
+			
+			SucheZielSignale2(pfad, startsignal.InZeichenRichtung, stopGleise, fahrstrassen);
+
 			return 0;
 		}
 
@@ -831,6 +847,7 @@ namespace MoBaSteuerung.Elemente {
 											pfad.Add(sn);
 											List<AnlagenElement> fs = new List<AnlagenElement>(pfad);
 											fahrstrassen.Add(fs);
+											pfad.RemoveAt(pfad.Count - 1);
 											found = true;
 											break;
 										}
@@ -1088,7 +1105,7 @@ namespace MoBaSteuerung.Elemente {
 
 
 		public FahrstrasseN(AnlagenElement[] elementListe)
-		: base(elementListe[0].Parent, elementListe[0].Parent.FahrstarssenElemente.GespeicherteFahrstrassen.Count + 1, elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
+		: base(elementListe[0].Parent, elementListe[0].Parent.FahrstarssenElemente.SucheFreieNummer(), elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
 			_listeElemente = elementListe;
 			_startSignal = (Signal)elementListe[0];
 			_endSignal = (Signal)elementListe[elementListe.Length - 1];
@@ -1235,18 +1252,20 @@ namespace MoBaSteuerung.Elemente {
 								break;
 							}
 						}
-						vergl = (Gleis)_listeElemente[i + 1];
-						for (int j = 0; j < 4; j++) {
-							if (vergl == (Gleis)kn.Gleise[j]) {
-								if (j < 2)
-									we = kn.Weichen[0];
-								else
-									we = kn.Weichen[1];
+						if (_listeElemente[i + 1] is Gleis) {
+							vergl = (Gleis)_listeElemente[i + 1];
+							for (int j = 0; j < 4; j++) {
+								if (vergl == (Gleis)kn.Gleise[j]) {
+									if (j < 2)
+										we = kn.Weichen[0];
+									else
+										we = kn.Weichen[1];
 
-								if (we != null) {
-									_startBefehle.Add(new Befehl(we, ((j % 2) == 0) ^ we.Grundstellung));
+									if (we != null) {
+										_startBefehle.Add(new Befehl(we, ((j % 2) == 0) ^ we.Grundstellung));
+									}
+									break;
 								}
-								break;
 							}
 						}
 						break;
@@ -1422,6 +1441,63 @@ namespace MoBaSteuerung.Elemente {
 				}
 			}
 
+			return true;
+		}
+
+		public bool IstGleich(AnlagenElement[] fssNeu)
+		{
+
+			//Init Vergleich Knotenliste; Vergleich Start- und Zielsignal
+			int i = 0;
+			int j = 0;
+			if (this.ListeElemente[0] is Signal) {
+				i++;
+			}
+			if (fssNeu[0] is Signal) {
+				if(this.StartSignal.ID != ((Signal)fssNeu[0]).ID) {
+					return false;
+				}
+				j++;
+			}
+			if (fssNeu[fssNeu.Length - 1] is Signal) {
+				if (this.EndSignal.ID != fssNeu[fssNeu.Length - 1].ID) {
+					return false;
+				}
+			}
+
+			
+
+			//Vergleich der Knotenliste
+			for (; i < this.ListeElemente.Length; i++) {
+				if(this.ListeElemente[i] is Knoten) {
+					while(!(fssNeu[j] is Knoten) && j < fssNeu.Length) {
+						j++;
+					}
+
+					if(j < fssNeu.Length) {
+						if(fssNeu[j].ID != this.ListeElemente[i].ID) {
+							return false;
+						}
+						j++;
+					}
+					else {
+						//this ist längere Fahrstraße?
+						for (; i < this.ListeElemente.Length; i++) {
+							if (this.ListeElemente[i] is Knoten) {
+								return false;
+							}
+						}
+						return true;
+					}
+				}
+			
+			}
+			//this ist kürzere Fahrstraße?
+			for (; j < this.ListeElemente.Length; j++) {
+				if (fssNeu[j] is Knoten) {
+					return false;
+				}
+			}
 			return true;
 		}
 	}

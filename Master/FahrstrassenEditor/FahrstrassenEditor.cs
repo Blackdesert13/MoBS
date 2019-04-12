@@ -102,7 +102,14 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 			List<int> stopGleise = new List<int>();
 			string[] gleise = this.textBox1.Text.Split(',');
 			foreach(string gleis in gleise) {
-				stopGleise.Add(Convert.ToInt32(gleis));
+				try {
+					int num = Convert.ToInt32(gleis);
+					stopGleise.Add(num);
+				}
+				catch (Exception exception) {
+
+				}
+				
 			}
 
 			_model.FahrstrassenSuchenVonSignal(stopGleise);
