@@ -39,7 +39,7 @@ namespace MoBaSteuerung.Elemente {
                  + "\t" + _knoten.ID + " " + _knoten.GetWeichenAnschlussNr(this)
                  + "\t" + Grundstellung.ToString()
                  + "\t" + Ausgang.SpeicherString
-                 + "\t" + Bezeichnung 
+                 + "\t" + Bezeichnung
                  + "\t" + Stecker
                  + "\t" + (Koppelung != null?Koppelung.ListenString:"");// KoppelungsString; 
             }

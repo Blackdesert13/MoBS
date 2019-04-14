@@ -32,15 +32,19 @@ namespace MoBaSteuerung.Elemente {
 		/// </summary>
 		public override string SpeicherString {
 			get {
-				return "FSS"
-						+ "\t" + ID
-						+ "\t" + AnschlussGleis.ID + " " + Gleisposition
-						+ "\t" + _reglerNr[0]
-						+ "\t" + _reglerNr[1]
-						+ "\t" + Ausgang.SpeicherString
-						+ "\t" + Bezeichnung
-						+ "\t" + Stecker
-            + "\t" + Koppelung.ListenString;//KoppelungsString;
+                string erg =
+                        "FSS"
+                        + "\t" + ID
+                        + "\t" + AnschlussGleis.ID + " " + Gleisposition
+                        + "\t" + _reglerNr[0]
+                        + "\t" + _reglerNr[1]
+                        + "\t" + Ausgang.SpeicherString
+                        + "\t" + Bezeichnung
+                        + "\t" + Stecker
+                        + "\t";
+                if (Koppelung == null) { erg = erg + ""; }
+                else { erg = erg + Koppelung.ListenString; }//KoppelungsString;
+                return erg;
 			}
 		}
 

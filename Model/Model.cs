@@ -375,7 +375,7 @@ namespace MoBaSteuerung {
             if (el != null) {
                 bool action = el.AusgangToggeln();
                 //if (elementName == "FSS")
-                    zeichnenElemente.FSSAktualisieren();
+                zeichnenElemente.FSSAktualisieren();
                 if(elementName == "Entkuppler") {
                     if(el.ElementZustand == Elementzustand.An && EntkupplerAbschaltAutoAktiv) {
                         Thread entkupplerAbschalt = new Thread(this.EntkupplerAbschaltung);

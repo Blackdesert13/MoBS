@@ -130,21 +130,26 @@ namespace MoBaSteuerung.Elemente {
                     break;
             }
         }
-
+        /// <summary>
+        /// berechnet die Zeichnen-Graphik
+        /// </summary>
         public override void Berechnung() {
             Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
             this.graphicsPath.Reset();
             this.graphicsPath.AddEllipse(new RectangleF(Position.X - 0.225f * Zoom, Position.Y - 0.225f * Zoom, 0.45f * Zoom, 0.45f * Zoom));
-            //Matrix matrix = new Matrix();
-            //matrix.Translate(Position.X * this.Zoom, Position.Y * this.Zoom);
-            //matrix.Scale(this.Zoom, this.Zoom);
-            //this.graphicsPath.Transform(matrix);
         }
 
         public override bool MouseClick(Point punkt) {
             return this.graphicsPath.GetBounds().Contains(punkt);
         }
 
+        /// <summary>
+        /// fügt ein Gleis an einer bestimmten Position ein (beim Gleis neu erstellen) und
+        /// erzeugt neue Weichen falls nötig
+        /// </summary>
+        /// <param name="track"></param>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public bool AttachTrack(Gleis track, int position) {
             if (_gleise[position] == null) {
                 _gleise[position] = track;

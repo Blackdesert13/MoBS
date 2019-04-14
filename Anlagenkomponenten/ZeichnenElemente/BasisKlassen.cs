@@ -412,6 +412,12 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
         private bool _selektiert;
         private BefehlsListe _kopplungsBefehlsListe;
         private string _kopplungsString;
+        private bool _fehler = false;
+
+        /// <summary>
+        /// Fehler nach der Prüfung
+        /// </summary>
+        public bool Fehler { get { return _fehler; } set { _fehler = value; } }
 
         public string KoppelungsString
         {

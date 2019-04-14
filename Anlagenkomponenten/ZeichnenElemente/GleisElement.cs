@@ -47,7 +47,7 @@ namespace MoBaSteuerung.Elemente {
 						+ "\t" + Eingang.SpeicherString
 						+ "\t" + Bezeichnung
 						+ "\t" + Stecker
-            + "\t" + KoppelungsString;
+                        + "\t" + KoppelungsString;
 			}
 		}
 
@@ -164,6 +164,7 @@ namespace MoBaSteuerung.Elemente {
 				Stecker = elem[8];
             if (elem.Length > 9)
                 KoppelungsString = elem[9];
+            reglerNr = 0;
             reglerNr = Convert.ToInt32(elem[4]);
 			if (reglerNr > 0) { regler = parent.ReglerElemente.Element(Convert.ToInt32(elem[4])); }
 			StartKn = Parent.KnotenElemente.Element(Convert.ToInt32(start[0]));
@@ -181,20 +182,50 @@ namespace MoBaSteuerung.Elemente {
 				if (_fss.AktiverReglerNr != regler.ID) regler = Parent.ReglerElemente.Element(_fss.AktiverReglerNr);
 			}
 		}
-		/// <summary>
+		public bool Pruefung()
+        {
+            string fehlermeldung;
+            
+            int dx = Math.Abs( StartKn.PositionRaster.X - EndKn.PositionRaster.X);
+            int dy = Math.Abs(StartKn.PositionRaster.Y - EndKn.PositionRaster.Y);
+            Fehler = false;
+
+            if ((dx != 0)&&(dy != 0))
+            {
+                if (dx != dy) Fehler = true;
+                fehlermeldung = "Gl" + Convert.ToString(ID) + ":Winkelfehler";
+            }
+           
+            return Fehler;
+        }
+        /// <summary>
 		/// zeichnet die Regler-Farbe des Gleises
 		/// </summary>
 		/// <param name="graphics"></param>
 		public override void ElementZeichnen1(Graphics graphics) {
 			if (this.AnzeigenTyp == AnzeigeTyp.Bedienen) {
 				//int transpanz = 255;
-			  if (reglerNr < 0) { regler = Parent.FssElemente.Element(-reglerNr).AktiverRegler(); }
+			    if (reglerNr < 0)
+                {
+                    if ((_fss == null) || (_fss.ID != -reglerNr))
+                    {
+                        _fss = Parent.FssElemente.Element(-reglerNr);
+                        
+                    }
+                    if (_fss != null)
+                    {
+                        regler = Parent.FssElemente.Element(-reglerNr).AktiverRegler();
+                    }
+                    else
+                    {
+                        byte tb = 0;
+                    }
+                }
 				if (reglerNr > 0)
 					if (regler==null || reglerNr != regler.ID) regler = Parent.ReglerElemente.Element(reglerNr);
-				if (regler != null) {
-					if (_fss != null) regler = _fss.AktiverRegler();
-					Color farbeStift = Color.YellowGreen;
-					farbeStift = regler.Farbe;//farbeStift = Color.FromArgb(transpanz, Color.Azure);
+                if ((reglerNr != 0) && (regler != null))
+                {
+					Color farbeStift = regler.Farbe;//farbeStift = Color.FromArgb(transpanz, Color.Azure);
 					Pen stiftGleis = new Pen(farbeStift, Convert.ToSingle(this.Zoom * 0.75));
 					stiftGleis.EndCap = LineCap.Round;
 					stiftGleis.StartCap = LineCap.Round;
