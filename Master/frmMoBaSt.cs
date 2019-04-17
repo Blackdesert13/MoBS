@@ -1157,6 +1157,7 @@ namespace MoBaSteuerung {
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementEntkuppler.Checked = false;
 			toolStripButtonElementSignal.Checked = false;
+			toolStripButtonElementInfoElement.Checked = false;
 			this.Controller.NeuesElementVorschauReset();
 			if (toolStripButtonElementSchalter.Checked)
 				this.bearbeitungsModus = BearbeitungsModus.Schalter;
@@ -1171,9 +1172,25 @@ namespace MoBaSteuerung {
 			toolStripButtonElementSchalter.Checked = false;
 			toolStripButtonElementEntkuppler.Checked = false;
 			toolStripButtonElementSignal.Checked = false;
+			toolStripButtonElementInfoElement.Checked = false;
 			this.Controller.NeuesElementVorschauReset();
 			if (toolStripButtonElementFss.Checked)
 				this.bearbeitungsModus = BearbeitungsModus.Fss;
+			else
+				this.bearbeitungsModus = BearbeitungsModus.Selektieren;
+		}
+
+		private void toolStripButtonElementInfoElement_Click(object sender, EventArgs e) {
+			this._model.BearbeitenSelektionLöschen();
+			pictureBoxView.Invalidate();
+			toolStripButtonElementFss.Checked = false;
+			toolStripButtonElementGleis.Checked = false;
+			toolStripButtonElementSchalter.Checked = false;
+			toolStripButtonElementSignal.Checked = false;
+			toolStripButtonElementEntkuppler.Checked = false;
+			this.Controller.NeuesElementVorschauReset();
+			if (toolStripButtonElementInfoElement.Checked)
+				this.bearbeitungsModus = BearbeitungsModus.InfoElement;
 			else
 				this.bearbeitungsModus = BearbeitungsModus.Selektieren;
 		}
@@ -1185,6 +1202,7 @@ namespace MoBaSteuerung {
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementSchalter.Checked = false;
 			toolStripButtonElementSignal.Checked = false;
+			toolStripButtonElementInfoElement.Checked = false;
 			this.Controller.NeuesElementVorschauReset();
 			if (toolStripButtonElementEntkuppler.Checked)
 				this.bearbeitungsModus = BearbeitungsModus.Entkuppler;
@@ -1199,6 +1217,7 @@ namespace MoBaSteuerung {
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementSchalter.Checked = false;
 			toolStripButtonElementEntkuppler.Checked = false;
+			toolStripButtonElementInfoElement.Checked = false;
 			this.Controller.NeuesElementVorschauReset();
 			if (toolStripButtonElementSignal.Checked)
 				this.bearbeitungsModus = BearbeitungsModus.Signal;
@@ -1213,6 +1232,7 @@ namespace MoBaSteuerung {
 			toolStripButtonElementSchalter.Checked = false;
 			toolStripButtonElementEntkuppler.Checked = false;
 			toolStripButtonElementSignal.Checked = false;
+			toolStripButtonElementInfoElement.Checked = false;
 			this.Controller.NeuesElementVorschauReset();
 			if (toolStripButtonElementGleis.Checked)
 				this.bearbeitungsModus = BearbeitungsModus.Gleis;
@@ -1372,6 +1392,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementSchalter.Checked = false;
 			this.toolStripButtonElementSignal.Checked = false;
 			this.toolStripButtonElementEntkuppler.Checked = false;
+			this.toolStripButtonElementInfoElement.Checked = false;
 			this.bearbeitungsModus = BearbeitungsModus.Selektieren;
 		}
 
@@ -1469,5 +1490,7 @@ namespace MoBaSteuerung {
 				this._fahrStraßenEditor.Hide();
 			}
 		}
+
+
 	}
 }

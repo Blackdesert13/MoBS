@@ -90,6 +90,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementEntkuppler = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonElementSchalter = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonElementFss = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButtonElementInfoElement = new System.Windows.Forms.ToolStripButton();
 			this.toolStripBearbeiten = new System.Windows.Forms.ToolStrip();
 			this.toolStripSplitButtonCheckableGitter = new Master.ToolStripSplitButtonCheckable();
 			this.toolStripMenuItemGitterGitterLinie = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,17 +138,17 @@ namespace MoBaSteuerung {
 			// statusStrip
 			// 
 			this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripStatusLabelInfo,
-						this.toolStripStatusLabelRaster,
-						this.toolStripStatusLabelRasterInfo,
-						this.toolStripStatusLabelZoom,
-						this.toolStripStatusLabelZoomInfo,
-						this.toolStripStatusLabelAbstand1,
-						this.toolStripStatusLabelMinus,
-						this.toolStripStatusLabelAbstand2,
-						this.toolStripStatusLabelPlus,
-						this.toolStripStatusLabelAbstand3,
-						this.toolStripStatusLabelZeit});
+            this.toolStripStatusLabelInfo,
+            this.toolStripStatusLabelRaster,
+            this.toolStripStatusLabelRasterInfo,
+            this.toolStripStatusLabelZoom,
+            this.toolStripStatusLabelZoomInfo,
+            this.toolStripStatusLabelAbstand1,
+            this.toolStripStatusLabelMinus,
+            this.toolStripStatusLabelAbstand2,
+            this.toolStripStatusLabelPlus,
+            this.toolStripStatusLabelAbstand3,
+            this.toolStripStatusLabelZeit});
 			this.statusStrip.Location = new System.Drawing.Point(0, 426);
 			this.statusStrip.Name = "statusStrip";
 			this.statusStrip.Size = new System.Drawing.Size(966, 24);
@@ -172,9 +173,9 @@ namespace MoBaSteuerung {
 			// 
 			// toolStripStatusLabelRasterInfo
 			// 
-			this.toolStripStatusLabelRasterInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+			this.toolStripStatusLabelRasterInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
 			this.toolStripStatusLabelRasterInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
 			this.toolStripStatusLabelRasterInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.toolStripStatusLabelRasterInfo.Name = "toolStripStatusLabelRasterInfo";
@@ -193,9 +194,9 @@ namespace MoBaSteuerung {
 			// 
 			// toolStripStatusLabelZoomInfo
 			// 
-			this.toolStripStatusLabelZoomInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-						| System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+			this.toolStripStatusLabelZoomInfo.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
 			this.toolStripStatusLabelZoomInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
 			this.toolStripStatusLabelZoomInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.toolStripStatusLabelZoomInfo.Enabled = false;
@@ -263,12 +264,12 @@ namespace MoBaSteuerung {
 			// menuStrip
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemDatei,
-						this.toolStripMenuItemZoom,
-						this.toolStripMenuItemBearbeiten,
-						this.zugEditorToolStripMenuItem,
-						this.toolStripMenuItemExtras,
-						this.toolStripMenuItemHilfe});
+            this.toolStripMenuItemDatei,
+            this.toolStripMenuItemZoom,
+            this.toolStripMenuItemBearbeiten,
+            this.zugEditorToolStripMenuItem,
+            this.toolStripMenuItemExtras,
+            this.toolStripMenuItemHilfe});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(966, 26);
@@ -278,21 +279,21 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemDatei
 			// 
 			this.toolStripMenuItemDatei.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemDateiNeu,
-						this.toolStripMenuItemDateiLaden,
-						this.toolStripSeparatorDatei1,
-						this.toolStripMenuItemDateiSchließen,
-						this.toolStripSeparatorDatei2,
-						this.toolStripMenuItemDateiSpeichern,
-						this.toolStripMenuItemDateiSpeichernUnter,
-						this.toolStripSeparatorDatei3,
-						this.toolStripMenuItemDateiVerbinden,
-						this.toolStripMenuItemDateiTrennen,
-						this.toolStripSeparatorDatei4,
-						this.toolStripMenuItemDateiZuletztGeöfnetteAnlage,
-						this.toolStripMenuItemDateiZuletztVerbundeneMaster,
-						this.toolStripSeparatorDatei5,
-						this.toolStripMenuItemDateiBeenden});
+            this.toolStripMenuItemDateiNeu,
+            this.toolStripMenuItemDateiLaden,
+            this.toolStripSeparatorDatei1,
+            this.toolStripMenuItemDateiSchließen,
+            this.toolStripSeparatorDatei2,
+            this.toolStripMenuItemDateiSpeichern,
+            this.toolStripMenuItemDateiSpeichernUnter,
+            this.toolStripSeparatorDatei3,
+            this.toolStripMenuItemDateiVerbinden,
+            this.toolStripMenuItemDateiTrennen,
+            this.toolStripSeparatorDatei4,
+            this.toolStripMenuItemDateiZuletztGeöfnetteAnlage,
+            this.toolStripMenuItemDateiZuletztVerbundeneMaster,
+            this.toolStripSeparatorDatei5,
+            this.toolStripMenuItemDateiBeenden});
 			this.toolStripMenuItemDatei.Name = "toolStripMenuItemDatei";
 			this.toolStripMenuItemDatei.Size = new System.Drawing.Size(46, 22);
 			this.toolStripMenuItemDatei.Text = "&Datei";
@@ -301,8 +302,8 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripMenuItemDateiNeu.Image = global::ModellBahnSteuerung.Properties.Resources.NewFile_16x;
 			this.toolStripMenuItemDateiNeu.Name = "toolStripMenuItemDateiNeu";
-			this.toolStripMenuItemDateiNeu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-						| System.Windows.Forms.Keys.N)));
+			this.toolStripMenuItemDateiNeu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
 			this.toolStripMenuItemDateiNeu.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiNeu.Text = "&Neu";
 			this.toolStripMenuItemDateiNeu.Click += new System.EventHandler(this.toolStripMenuItemDateiNeu_Click);
@@ -311,8 +312,8 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripMenuItemDateiLaden.Image = global::ModellBahnSteuerung.Properties.Resources.OpenFileFromProject_16x;
 			this.toolStripMenuItemDateiLaden.Name = "toolStripMenuItemDateiLaden";
-			this.toolStripMenuItemDateiLaden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-						| System.Windows.Forms.Keys.O)));
+			this.toolStripMenuItemDateiLaden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
 			this.toolStripMenuItemDateiLaden.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiLaden.Text = "&Laden";
 			this.toolStripMenuItemDateiLaden.Click += new System.EventHandler(this.toolStripMenuItemDateiLaden_Click);
@@ -361,8 +362,8 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemDateiVerbinden
 			// 
 			this.toolStripMenuItemDateiVerbinden.Name = "toolStripMenuItemDateiVerbinden";
-			this.toolStripMenuItemDateiVerbinden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-						| System.Windows.Forms.Keys.V)));
+			this.toolStripMenuItemDateiVerbinden.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.V)));
 			this.toolStripMenuItemDateiVerbinden.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiVerbinden.Text = "&Verbinden";
 			this.toolStripMenuItemDateiVerbinden.Click += new System.EventHandler(this.toolStripMenuItemDateiVerbinden_Click);
@@ -371,8 +372,8 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripMenuItemDateiTrennen.Enabled = false;
 			this.toolStripMenuItemDateiTrennen.Name = "toolStripMenuItemDateiTrennen";
-			this.toolStripMenuItemDateiTrennen.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-						| System.Windows.Forms.Keys.T)));
+			this.toolStripMenuItemDateiTrennen.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.T)));
 			this.toolStripMenuItemDateiTrennen.Size = new System.Drawing.Size(254, 22);
 			this.toolStripMenuItemDateiTrennen.Text = "&Trennen";
 			this.toolStripMenuItemDateiTrennen.Click += new System.EventHandler(this.toolStripMenuItemDateiTrennen_Click);
@@ -413,10 +414,10 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemZoom
 			// 
 			this.toolStripMenuItemZoom.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemZoomPlus,
-						this.toolStripMenuItemZoomMinus,
-						this.toolStripSeparatorZoom1,
-						this.toolStripMenuItemZoomZurücksetzen});
+            this.toolStripMenuItemZoomPlus,
+            this.toolStripMenuItemZoomMinus,
+            this.toolStripSeparatorZoom1,
+            this.toolStripMenuItemZoomZurücksetzen});
 			this.toolStripMenuItemZoom.Enabled = false;
 			this.toolStripMenuItemZoom.Name = "toolStripMenuItemZoom";
 			this.toolStripMenuItemZoom.Size = new System.Drawing.Size(51, 22);
@@ -471,10 +472,10 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemExtras
 			// 
 			this.toolStripMenuItemExtras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemExtrasServer,
-						this.toolStripMenuItemExtraArduino,
-						this.toolStripSeparatorExtras1,
-						this.toolStripMenuItemExtrasEinstellungen});
+            this.toolStripMenuItemExtrasServer,
+            this.toolStripMenuItemExtraArduino,
+            this.toolStripSeparatorExtras1,
+            this.toolStripMenuItemExtrasEinstellungen});
 			this.toolStripMenuItemExtras.Name = "toolStripMenuItemExtras";
 			this.toolStripMenuItemExtras.Size = new System.Drawing.Size(49, 22);
 			this.toolStripMenuItemExtras.Text = "E&xtras";
@@ -482,8 +483,8 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemExtrasServer
 			// 
 			this.toolStripMenuItemExtrasServer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemExtrasServerStart,
-						this.toolStripMenuItemExtrasServerStop});
+            this.toolStripMenuItemExtrasServerStart,
+            this.toolStripMenuItemExtrasServerStop});
 			this.toolStripMenuItemExtrasServer.Enabled = false;
 			this.toolStripMenuItemExtrasServer.Name = "toolStripMenuItemExtrasServer";
 			this.toolStripMenuItemExtrasServer.Size = new System.Drawing.Size(145, 22);
@@ -509,8 +510,8 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemExtraArduino
 			// 
 			this.toolStripMenuItemExtraArduino.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemExtrasArduinoVerbinden,
-						this.toolStripMenuItemExtrasArduinoTrennen});
+            this.toolStripMenuItemExtrasArduinoVerbinden,
+            this.toolStripMenuItemExtrasArduinoTrennen});
 			this.toolStripMenuItemExtraArduino.Name = "toolStripMenuItemExtraArduino";
 			this.toolStripMenuItemExtraArduino.Size = new System.Drawing.Size(145, 22);
 			this.toolStripMenuItemExtraArduino.Text = "Arduino";
@@ -546,11 +547,11 @@ namespace MoBaSteuerung {
 			// toolStripMenuItemHilfe
 			// 
 			this.toolStripMenuItemHilfe.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemHilfeHilfe,
-						this.toolStripSeparatorHilfe1,
-						this.logToolStripMenuItem,
-						this.toolStripSeparator1,
-						this.toolStripMenuItemHilfeInfo});
+            this.toolStripMenuItemHilfeHilfe,
+            this.toolStripSeparatorHilfe1,
+            this.logToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.toolStripMenuItemHilfeInfo});
 			this.toolStripMenuItemHilfe.Name = "toolStripMenuItemHilfe";
 			this.toolStripMenuItemHilfe.Size = new System.Drawing.Size(44, 22);
 			this.toolStripMenuItemHilfe.Text = "&Hilfe";
@@ -596,7 +597,7 @@ namespace MoBaSteuerung {
 			this.toolStripContainer.ContentPanel.BackColor = System.Drawing.Color.White;
 			this.toolStripContainer.ContentPanel.Controls.Add(this.panelView);
 			this.toolStripContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
-			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(966, 375);
+			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(933, 400);
 			this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			// 
 			// toolStripContainer.LeftToolStripPanel
@@ -621,7 +622,7 @@ namespace MoBaSteuerung {
 			this.panelView.Location = new System.Drawing.Point(0, 0);
 			this.panelView.Margin = new System.Windows.Forms.Padding(0);
 			this.panelView.Name = "panelView";
-			this.panelView.Size = new System.Drawing.Size(966, 375);
+			this.panelView.Size = new System.Drawing.Size(933, 400);
 			this.panelView.TabIndex = 6;
 			this.panelView.Visible = false;
 			this.panelView.VisibleChanged += new System.EventHandler(this.panelView_VisibleChanged);
@@ -630,25 +631,25 @@ namespace MoBaSteuerung {
 			// 
 			// vScrollBarView
 			// 
-			this.vScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.vScrollBarView.Location = new System.Drawing.Point(949, 0);
+			this.vScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.vScrollBarView.Location = new System.Drawing.Point(916, 0);
 			this.vScrollBarView.Name = "vScrollBarView";
-			this.vScrollBarView.Size = new System.Drawing.Size(17, 400);
+			this.vScrollBarView.Size = new System.Drawing.Size(17, 425);
 			this.vScrollBarView.TabIndex = 4;
 			this.vScrollBarView.ValueChanged += new System.EventHandler(this.vScrollBarView_ValueChanged);
 			// 
 			// panelScrollView
 			// 
-			this.panelScrollView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.panelScrollView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelScrollView.BackColor = System.Drawing.Color.White;
 			this.panelScrollView.Controls.Add(this.pictureBoxView);
 			this.panelScrollView.Location = new System.Drawing.Point(0, 0);
 			this.panelScrollView.Margin = new System.Windows.Forms.Padding(0);
 			this.panelScrollView.Name = "panelScrollView";
-			this.panelScrollView.Size = new System.Drawing.Size(949, 358);
+			this.panelScrollView.Size = new System.Drawing.Size(916, 383);
 			this.panelScrollView.TabIndex = 3;
 			// 
 			// pictureBoxView
@@ -675,11 +676,11 @@ namespace MoBaSteuerung {
 			// 
 			// hScrollBarView
 			// 
-			this.hScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.hScrollBarView.Location = new System.Drawing.Point(0, 358);
+			this.hScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.hScrollBarView.Location = new System.Drawing.Point(0, 383);
 			this.hScrollBarView.Name = "hScrollBarView";
-			this.hScrollBarView.Size = new System.Drawing.Size(949, 17);
+			this.hScrollBarView.Size = new System.Drawing.Size(916, 17);
 			this.hScrollBarView.TabIndex = 5;
 			this.hScrollBarView.ValueChanged += new System.EventHandler(this.hScrollBarView_ValueChanged);
 			// 
@@ -687,14 +688,15 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripElemente.Dock = System.Windows.Forms.DockStyle.None;
 			this.toolStripElemente.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripButtonElementGleis,
-						this.toolStripButtonElementSignal,
-						this.toolStripButtonElementEntkuppler,
-						this.toolStripButtonElementSchalter,
-						this.toolStripButtonElementFss});
+            this.toolStripButtonElementGleis,
+            this.toolStripButtonElementSignal,
+            this.toolStripButtonElementEntkuppler,
+            this.toolStripButtonElementSchalter,
+            this.toolStripButtonElementFss,
+            this.toolStripButtonElementInfoElement});
 			this.toolStripElemente.Location = new System.Drawing.Point(0, 3);
 			this.toolStripElemente.Name = "toolStripElemente";
-			this.toolStripElemente.Size = new System.Drawing.Size(142, 25);
+			this.toolStripElemente.Size = new System.Drawing.Size(33, 162);
 			this.toolStripElemente.TabIndex = 0;
 			this.toolStripElemente.Visible = false;
 			// 
@@ -705,7 +707,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementGleis.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementGleis.Image")));
 			this.toolStripButtonElementGleis.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementGleis.Name = "toolStripButtonElementGleis";
-			this.toolStripButtonElementGleis.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButtonElementGleis.Size = new System.Drawing.Size(31, 19);
 			this.toolStripButtonElementGleis.Text = "G";
 			this.toolStripButtonElementGleis.ToolTipText = "Gleis";
 			this.toolStripButtonElementGleis.Click += new System.EventHandler(this.toolStripButtonElementGleis_Click);
@@ -717,7 +719,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementSignal.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementSignal.Image")));
 			this.toolStripButtonElementSignal.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementSignal.Name = "toolStripButtonElementSignal";
-			this.toolStripButtonElementSignal.Size = new System.Drawing.Size(27, 22);
+			this.toolStripButtonElementSignal.Size = new System.Drawing.Size(31, 19);
 			this.toolStripButtonElementSignal.Text = "Sig";
 			this.toolStripButtonElementSignal.ToolTipText = "Signal";
 			this.toolStripButtonElementSignal.Click += new System.EventHandler(this.toolStripButtonElementSignal_Click);
@@ -729,7 +731,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementEntkuppler.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementEntkuppler.Image")));
 			this.toolStripButtonElementEntkuppler.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementEntkuppler.Name = "toolStripButtonElementEntkuppler";
-			this.toolStripButtonElementEntkuppler.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButtonElementEntkuppler.Size = new System.Drawing.Size(31, 19);
 			this.toolStripButtonElementEntkuppler.Text = "E";
 			this.toolStripButtonElementEntkuppler.ToolTipText = "Entkuppler";
 			this.toolStripButtonElementEntkuppler.Click += new System.EventHandler(this.toolStripButtonElementEntkuppler_Click);
@@ -741,7 +743,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementSchalter.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementSchalter.Image")));
 			this.toolStripButtonElementSchalter.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementSchalter.Name = "toolStripButtonElementSchalter";
-			this.toolStripButtonElementSchalter.Size = new System.Drawing.Size(30, 22);
+			this.toolStripButtonElementSchalter.Size = new System.Drawing.Size(31, 19);
 			this.toolStripButtonElementSchalter.Text = "Sch";
 			this.toolStripButtonElementSchalter.ToolTipText = "Schalter";
 			this.toolStripButtonElementSchalter.Click += new System.EventHandler(this.toolStripButtonElementSchalter_Click);
@@ -753,26 +755,37 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementFss.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementFss.Image")));
 			this.toolStripButtonElementFss.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementFss.Name = "toolStripButtonElementFss";
-			this.toolStripButtonElementFss.Size = new System.Drawing.Size(27, 22);
+			this.toolStripButtonElementFss.Size = new System.Drawing.Size(31, 19);
 			this.toolStripButtonElementFss.Text = "Fss";
 			this.toolStripButtonElementFss.ToolTipText = "Fahrstromschalter";
 			this.toolStripButtonElementFss.Click += new System.EventHandler(this.toolStripButtonElementFss_Click);
+			// 
+			// toolStripButtonElementInfoElement
+			// 
+			this.toolStripButtonElementInfoElement.CheckOnClick = true;
+			this.toolStripButtonElementInfoElement.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.toolStripButtonElementInfoElement.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementInfoElement.Image")));
+			this.toolStripButtonElementInfoElement.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButtonElementInfoElement.Name = "toolStripButtonElementInfoElement";
+			this.toolStripButtonElementInfoElement.Size = new System.Drawing.Size(31, 19);
+			this.toolStripButtonElementInfoElement.Text = "Info";
+			this.toolStripButtonElementInfoElement.Click += new System.EventHandler(this.toolStripButtonElementInfoElement_Click);
 			// 
 			// toolStripBearbeiten
 			// 
 			this.toolStripBearbeiten.Dock = System.Windows.Forms.DockStyle.None;
 			this.toolStripBearbeiten.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripSplitButtonCheckableGitter,
-						this.toolStripLabelAbstand1,
-						this.toolStripSplitButtonCheckableFadenkreuz,
-						this.toolStripLabelAbstand2,
-						this.toolStripButtonElementeEigenschaften,
-						this.toolStripButtonFahrstrassenEditor,
-						this.toolStripButton1,
-						this.toolStripButtonElementeExportieren});
+            this.toolStripSplitButtonCheckableGitter,
+            this.toolStripLabelAbstand1,
+            this.toolStripSplitButtonCheckableFadenkreuz,
+            this.toolStripLabelAbstand2,
+            this.toolStripButtonElementeEigenschaften,
+            this.toolStripButtonFahrstrassenEditor,
+            this.toolStripButton1,
+            this.toolStripButtonElementeExportieren});
 			this.toolStripBearbeiten.Location = new System.Drawing.Point(3, 0);
 			this.toolStripBearbeiten.Name = "toolStripBearbeiten";
-			this.toolStripBearbeiten.Size = new System.Drawing.Size(616, 25);
+			this.toolStripBearbeiten.Size = new System.Drawing.Size(585, 25);
 			this.toolStripBearbeiten.TabIndex = 0;
 			this.toolStripBearbeiten.Visible = false;
 			// 
@@ -780,12 +793,12 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripSplitButtonCheckableGitter.Checked = false;
 			this.toolStripSplitButtonCheckableGitter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemGitterGitterLinie,
-						this.toolStripMenuItemGitterGitterLinieVersetzt,
-						this.toolStripMenuItemGitterGitterPunkt,
-						this.toolStripMenuItemGitterGitterPunktVersetzt,
-						this.toolStripSeparatorGitterGitter1,
-						this.toolStripMenuItemGitterGitterFarbe});
+            this.toolStripMenuItemGitterGitterLinie,
+            this.toolStripMenuItemGitterGitterLinieVersetzt,
+            this.toolStripMenuItemGitterGitterPunkt,
+            this.toolStripMenuItemGitterGitterPunktVersetzt,
+            this.toolStripSeparatorGitterGitter1,
+            this.toolStripMenuItemGitterGitterFarbe});
 			this.toolStripSplitButtonCheckableGitter.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripSplitButtonCheckableGitter.Name = "toolStripSplitButtonCheckableGitter";
 			this.toolStripSplitButtonCheckableGitter.Size = new System.Drawing.Size(52, 22);
@@ -842,10 +855,10 @@ namespace MoBaSteuerung {
 			// 
 			this.toolStripSplitButtonCheckableFadenkreuz.Checked = false;
 			this.toolStripSplitButtonCheckableFadenkreuz.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemFadenkreuzFadenkreuzLinie,
-						this.toolStripMenuItemFadenkreuzFadenkreuzPunkt,
-						this.toolStripSeparatorFadenkreuzFadenkreuz1,
-						this.toolStripMenuItemFadenkreuzFadenkreuzFarbe});
+            this.toolStripMenuItemFadenkreuzFadenkreuzLinie,
+            this.toolStripMenuItemFadenkreuzFadenkreuzPunkt,
+            this.toolStripSeparatorFadenkreuzFadenkreuz1,
+            this.toolStripMenuItemFadenkreuzFadenkreuzFarbe});
 			this.toolStripSplitButtonCheckableFadenkreuz.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripSplitButtonCheckableFadenkreuz.Name = "toolStripSplitButtonCheckableFadenkreuz";
 			this.toolStripSplitButtonCheckableFadenkreuz.Size = new System.Drawing.Size(83, 22);
@@ -948,12 +961,12 @@ namespace MoBaSteuerung {
 			// contextMenuStripAuswahlRechteck
 			// 
 			this.contextMenuStripAuswahlRechteck.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-						this.toolStripMenuItemAufheben,
-						this.toolStripSeparatorAuswahl1,
-						this.toolStripMenuItemDrehen,
-						this.toolStripMenuItemSpiegeln,
-						this.toolStripSeparatorAuswahl2,
-						this.toolStripMenuItemLöschen});
+            this.toolStripMenuItemAufheben,
+            this.toolStripSeparatorAuswahl1,
+            this.toolStripMenuItemDrehen,
+            this.toolStripMenuItemSpiegeln,
+            this.toolStripSeparatorAuswahl2,
+            this.toolStripMenuItemLöschen});
 			this.contextMenuStripAuswahlRechteck.Name = "contextMenuStripAuswahlRechteck";
 			this.contextMenuStripAuswahlRechteck.Size = new System.Drawing.Size(127, 104);
 			// 
@@ -1132,5 +1145,6 @@ namespace MoBaSteuerung {
 		private ToolStripButton toolStripButton1;
 		private FontDialog fontDialog1;
 		private Master.ToolStripMenuItemCheckable toolStripButtonFahrstrassenEditor;
+		private ToolStripButton toolStripButtonElementInfoElement;
 	}
 }

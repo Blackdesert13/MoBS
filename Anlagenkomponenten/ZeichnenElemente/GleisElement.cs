@@ -28,7 +28,7 @@ namespace MoBaSteuerung.Elemente {
 		private int _length;
 		private Signal[] _signale = new Signal[2];
 		private List<Entkuppler> _entkuppler = new List<Entkuppler> { };
-		// private List<InfoFenster>
+		private List<InfoFenster> _infoFelder = new List<InfoFenster> { };
 		private Schalter _schalter = null;
 		private Adresse _eingang;
 		private GraphicsPath graphicsPath;
@@ -111,6 +111,17 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
+		public List<InfoFenster> InfoFelder
+		{
+			get {
+				return _infoFelder;
+			}
+
+			set {
+				_infoFelder = value;
+			}
+		}
+
 		public Gleis(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten startKnoten, Knoten endKnoten)
 				: base(parent, 0, zoom, anzeigeTyp) {
 			graphicsPath = new GraphicsPath();
@@ -141,6 +152,8 @@ namespace MoBaSteuerung.Elemente {
 			EndKn.AttachTrack(this);
 			Parent.GleisElemente.Hinzufügen(this);
 		}
+
+
 
 		/// <summary>
 		/// 
@@ -353,6 +366,11 @@ namespace MoBaSteuerung.Elemente {
 					if (el.PositionRaster == element.PositionRaster)
 						return false;
 			}
+			foreach (RasterAnlagenElement el in InfoFelder) {
+				if (el != null)
+					if (el.PositionRaster == element.PositionRaster)
+						return false;
+			}
 			if (Schalter != null)
 				if (Schalter.PositionRaster == element.PositionRaster)
 					return false;
@@ -451,6 +469,30 @@ namespace MoBaSteuerung.Elemente {
 				}
 			}
 			return false;
+		}
+
+		public bool GleisElementAnschluss(InfoFenster infoFenster)
+		{
+			if (this.InfoFelder != null) {
+				if (PunktAufGleis(infoFenster.Position)) {
+					if (RasterPositionFrei(infoFenster)) {
+						int glPos = RasterLengthFromStartkn(infoFenster.PositionRaster);
+						if (((glPos * this.Zoom) > 0) && ((glPos * this.Zoom) < _length)) {
+							this.InfoFelder.Add(infoFenster);
+
+							infoFenster.Gleisposition = glPos;
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+
+		}
+
+		public bool GleisElementAustragen(InfoFenster infoFenster)
+		{
+			return this.InfoFelder.Remove(infoFenster);
 		}
 
 		/// <summary>

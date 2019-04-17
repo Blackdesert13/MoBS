@@ -210,8 +210,9 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 		private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
 			int column = e.ColumnIndex;
 			if(column > 2) {
-				DataRow row = _tabelle.Rows[e.RowIndex];
-				int id = (int)row[0];
+				DataGridViewRow row = ((DataGridView)sender).Rows[e.RowIndex];
+				DataGridViewCell idCell = row.Cells[0];
+				int id = (int)idCell.Value;
 
 				FahrstrasseN fs = null;
 				foreach(FahrstrasseN el in _fahrstrassenAnzeige.Fahrstrassen) {
@@ -225,11 +226,11 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 					BefehlsListe bListe = null;
 					Form frm = null;
 					if (column == 3) {
-						bListe = new BefehlsListe(_model.ZeichnenElemente, false, (string)row[3]);
+						bListe = new BefehlsListe(_model.ZeichnenElemente, false, (string)row.Cells[3].Value);
 						frm = new FrmBefehlsliste(bListe, "Start Befehle");
 					}
 					else if (column == 4) {
-						bListe = new BefehlsListe(_model.ZeichnenElemente, false, (string)row[4]);
+						bListe = new BefehlsListe(_model.ZeichnenElemente, false, (string)row.Cells[4].Value);
 						frm = new FrmBefehlsliste(bListe, "End Befehle");
 					}
 
@@ -237,10 +238,10 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 						frm.ShowDialog();
 						string newValue = bListe.ListenString.Trim().Replace(";", "");
 						if (column == 3) {
-							row[3] = newValue.Replace(" ", "; ");
+							row.Cells[3].Value = newValue.Replace(" ", "; ");
 						}
 						else if (column == 4) {
-							row[4] = newValue.Replace(" ", "; "); ;
+							row.Cells[4].Value = newValue.Replace(" ", "; "); ;
 						}
 					}
 				}

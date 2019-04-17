@@ -22,7 +22,8 @@ public enum ElementTyp {
 	Signal,
 	Schalter,
 	Entkuppler,
-	FSS
+	FSS,
+	InfoElement
 }
 
 namespace MoBaSteuerung {
@@ -72,6 +73,10 @@ namespace MoBaSteuerung {
 			else if (element is FSS) {
 				_elementTyp = ElementTyp.FSS;
 				_alterWert = ((FSS)element).PositionRaster;
+			}
+			else if (element is InfoFenster) {
+				_elementTyp = ElementTyp.InfoElement;
+				_alterWert = ((InfoFenster)element).PositionRaster;
 			}
 			_aktion = aktion;
 			_element = element;
@@ -140,55 +145,61 @@ namespace MoBaSteuerung {
 		#region private Methoden
 
 		private bool Ausfuehren_Verschieben() {
-			object[] parameter = (object[])_neuerWert;
-			Point pDiff = (Point)((object[])_neuerWert)[0];
-			Point pAltW = (Point)this._alterWert;
-			switch (_elementTyp) {
-				case ElementTyp.Gleis:
+			try {
+				object[] parameter = (object[])_neuerWert;
+				Point pDiff = (Point)((object[])_neuerWert)[0];
+				Point pAltW = (Point)this._alterWert;
+				switch (_elementTyp) {
+					case ElementTyp.Gleis:
 
-					break;
-				case ElementTyp.Signal:
-				case ElementTyp.Entkuppler:
-				case ElementTyp.FSS:
-				case ElementTyp.Schalter:
-					GleisRasterAnlagenElement element = (GleisRasterAnlagenElement)_element;
-					element.PositionRaster = new Point(pDiff.X + pAltW.X, pDiff.Y + pAltW.Y);
-					element.BearbeitenAktualisierenNeuZeichnen();
-					if (element.AnschlussGleis == null) {
-						return false;
-					}
-					break;
-				case ElementTyp.Knoten:
-					Knoten k = ((Knoten)_element);
-					k.PositionRaster = new Point(pDiff.X + pAltW.X, pDiff.Y + pAltW.Y);
-					k.Berechnung();
-					foreach (Gleis item in k.Gleise) {
-						if (item != null) {
-							item.Berechnung();
-							if (item.Schalter != null) {
-								item.Schalter.Berechnung();
-							}
-							if (item.Fss != null) {
-								item.Fss.Berechnung();
-							}
-							foreach (Entkuppler el in item.Entkuppler) {
-								if (el != null) {
-									el.Berechnung();
+						break;
+					case ElementTyp.Signal:
+					case ElementTyp.Entkuppler:
+					case ElementTyp.FSS:
+					case ElementTyp.Schalter:
+					case ElementTyp.InfoElement:
+						GleisRasterAnlagenElement element = (GleisRasterAnlagenElement)_element;
+						element.PositionRaster = new Point(pDiff.X + pAltW.X, pDiff.Y + pAltW.Y);
+						element.BearbeitenAktualisierenNeuZeichnen();
+						if (element.AnschlussGleis == null) {
+							return false;
+						}
+						break;
+					case ElementTyp.Knoten:
+						Knoten k = ((Knoten)_element);
+						k.PositionRaster = new Point(pDiff.X + pAltW.X, pDiff.Y + pAltW.Y);
+						k.Berechnung();
+						foreach (Gleis item in k.Gleise) {
+							if (item != null) {
+								item.Berechnung();
+								if (item.Schalter != null) {
+									item.Schalter.Berechnung();
 								}
-							}
-							foreach (Signal el in item.Signale) {
-								if (el != null) {
-									el.Berechnung();
+								if (item.Fss != null) {
+									item.Fss.Berechnung();
+								}
+								foreach (Entkuppler el in item.Entkuppler) {
+									if (el != null) {
+										el.Berechnung();
+									}
+								}
+								foreach (Signal el in item.Signale) {
+									if (el != null) {
+										el.Berechnung();
+									}
 								}
 							}
 						}
-					}
-					foreach (Weiche item in k.Weichen) {
-						if (item != null) {
-							item.Berechnung();
+						foreach (Weiche item in k.Weichen) {
+							if (item != null) {
+								item.Berechnung();
+							}
 						}
-					}
-					break;
+						break;
+				}
+			}
+			catch (Exception exception) {
+
 			}
 			return true;
 		}
@@ -205,6 +216,7 @@ namespace MoBaSteuerung {
 				case ElementTyp.Entkuppler:
 				case ElementTyp.FSS:
 				case ElementTyp.Schalter:
+				case ElementTyp.InfoElement:
 					GleisRasterAnlagenElement element = (GleisRasterAnlagenElement)_element;
 					element.PositionRaster = new Point(pAltW.X, pAltW.Y);
 					element.BearbeitenAktualisierenNeuZeichnen();
@@ -275,6 +287,10 @@ namespace MoBaSteuerung {
 				case ElementTyp.Schalter:
 					new Schalter(_anlagenElemente, (int)parameter[0], _anlagenElemente.Zoom,
 								  AnzeigeTyp.Bearbeiten, (Point)parameter[1]);
+					break;
+				case ElementTyp.InfoElement:
+					new InfoFenster(_anlagenElemente, (int)parameter[0], _anlagenElemente.Zoom,
+									AnzeigeTyp.Bearbeiten, (Point)parameter[1]);
 					break;
 			}
 			return true;
@@ -366,6 +382,11 @@ namespace MoBaSteuerung {
 					Schalter schalter = (Schalter)_element;
 					_anlagenElemente.SchalterElemente.Löschen(schalter);
 					schalter.AnschlussGleis.GleisElementAustragen(schalter);
+					break;
+				case ElementTyp.InfoElement:
+					InfoFenster infoFenster= (InfoFenster)_element;
+					_anlagenElemente.InfoElemente.Löschen(infoFenster);
+					infoFenster.AnschlussGleis.GleisElementAustragen(infoFenster);
 					break;
 				case ElementTyp.Knoten:
 

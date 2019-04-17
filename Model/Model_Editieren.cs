@@ -79,16 +79,6 @@ namespace MoBaSteuerung {
 						}
 						else {
 							Gleis gl = (Gleis)this._neuesElement;
-							//Knoten startKnoten = this.zeichnenElemente.SucheKnoten(gl.StartKn.PositionRaster);
-							//Knoten endKnoten = this.zeichnenElemente.SucheKnoten(gl.EndKn.PositionRaster);
-							//if (startKnoten == null)
-							//    startKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.StartKn.Zoom,
-							//                                    this.anzeigeTyp, gl.StartKn.PositionRaster);
-							//if (endKnoten == null)
-							//    endKnoten = new Knoten(this.zeichnenElemente, this.zeichnenElemente.KnotenElemente.SucheFreieNummer(), gl.EndKn.Zoom,
-							//                                    this.anzeigeTyp, gl.EndKn.PositionRaster);
-							//new Gleis(this.zeichnenElemente, this.zeichnenElemente.GleisElemente.SucheFreieNummer(), _neuesElement.Zoom, this.anzeigeTyp,
-							//            startKnoten, endKnoten);
 							command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Gleis, this.ZeichnenElemente
 									, (object)new object[]{ this.zeichnenElemente.GleisElemente.SucheFreieNummer()
 																											 , gl.StartKn.PositionRaster, gl.EndKn.PositionRaster });
@@ -99,8 +89,6 @@ namespace MoBaSteuerung {
 						break;
 					case BearbeitungsModus.Signal:
 						_neuesElement.GleisElementAustragen();
-						//new Signal(this.zeichnenElemente, this.zeichnenElemente.SignalElemente.SucheFreieNummer(), _neuesElement.Zoom,
-						//            _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster, ((Signal)_neuesElement).InZeichenRichtung);
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Signal, this.ZeichnenElemente
 										, (object)new object[] { this.zeichnenElemente.SignalElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster, ((Signal)_neuesElement).InZeichenRichtung });
@@ -109,8 +97,6 @@ namespace MoBaSteuerung {
 						return true;
 					case BearbeitungsModus.Entkuppler:
 						_neuesElement.GleisElementAustragen();
-						//new Entkuppler(this.zeichnenElemente, this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer(), _neuesElement.Zoom,
-						//                _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Entkuppler, this.ZeichnenElemente
 										, (object)new object[] { this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
@@ -119,8 +105,6 @@ namespace MoBaSteuerung {
 						return true;
 					case BearbeitungsModus.Schalter:
 						_neuesElement.GleisElementAustragen();
-						//new Schalter(this.zeichnenElemente, this.zeichnenElemente.SchalterElemente.SucheFreieNummer(), _neuesElement.Zoom,
-						//              _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Schalter, this.ZeichnenElemente
 										, (object)new object[] { this.zeichnenElemente.SchalterElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
@@ -129,10 +113,16 @@ namespace MoBaSteuerung {
 						return true;
 					case BearbeitungsModus.Fss:
 						_neuesElement.GleisElementAustragen();
-						//new FSS(this.zeichnenElemente, this.zeichnenElemente.FssElemente.SucheFreieNummer(), _neuesElement.Zoom,
-						//              _neuesElement.AnzeigenTyp, ((RasterAnlagenElement)_neuesElement).PositionRaster);
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.FSS, this.ZeichnenElemente
 										, (object)new object[] { this.zeichnenElemente.FssElemente.SucheFreieNummer()
+																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
+						command.Ausfuehren();
+						NeuesElementVorschauReset();
+						return true;
+					case BearbeitungsModus.InfoElement:
+						_neuesElement.GleisElementAustragen();
+						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.InfoElement, this.ZeichnenElemente
+										, (object)new object[] { this.zeichnenElemente.InfoElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
 						command.Ausfuehren();
 						NeuesElementVorschauReset();
@@ -162,6 +152,9 @@ namespace MoBaSteuerung {
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			foreach (FSS el in zeichnenElemente.FssElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (InfoFenster el in zeichnenElemente.InfoElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			foreach (Gleis el in zeichnenElemente.GleisElemente.Elemente)
