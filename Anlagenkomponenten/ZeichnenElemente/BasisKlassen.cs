@@ -307,7 +307,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
             set
             {
                 _positionRaster = value;
-                //this.Position = new Point(value.X * this.Zoom, value.Y * this.Zoom);
+                this.Position = new Point(value.X * this.Zoom, value.Y * this.Zoom);
             }
         }
 
