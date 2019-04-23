@@ -270,7 +270,6 @@ namespace MoBaSteuerung.Elemente {
 							farbeStift = Color.FromArgb(transpanz, Color.Gray);
 							break;
 					}
-
 					break;
 				case AnzeigeTyp.Bedienen:
 					if (Passiv) {
@@ -281,37 +280,39 @@ namespace MoBaSteuerung.Elemente {
 							farbeStift = Color.FromArgb(transpanz, Color.Blue);
 							break;
 						case Elementzustand.Aus:
-              if (this.Ausgang.SpeicherString == "0-0-0"){
-                farbeStift = Color.FromArgb(transpanz, Color.LightBlue); //BlueViolet CadetBlue LightBlue
-              }
-              else{ 
-                farbeStift = Color.FromArgb(transpanz, Color.Gray); 
-               }
-							break;
+                            if (this.Ausgang.SpeicherString == "0-0-0"){
+                                farbeStift = Color.FromArgb(transpanz, Color.LightBlue); //BlueViolet CadetBlue LightBlue
+                            }
+                            else{ 
+                                farbeStift = Color.FromArgb(transpanz, Color.Gray); 
+                            }
+					        break;
 					}
-					break;
+                    //if (_eingang.SpeicherString != "0-0-0") {
+                    if(_eingang.Stellung);
+                    //}
+                    string test1 = _eingang.SpeicherString;
+                    break;
 			}
-
-
-
-			Pen stiftGleis = new Pen(farbeStift, 1);
+            Pen stiftGleis = new Pen(farbeStift, 1);
 			stiftGleis.EndCap = LineCap.Round;
 			stiftGleis.StartCap = LineCap.Round;
 			stiftGleis.Width = Convert.ToSingle(this.Zoom * 0.5);
-
 			graphics.DrawPath(stiftGleis, this.graphicsPath);
-
-			if (Parent.RückmeldungAnzeigen && Eingang.RueckmeldungAbfragen()) {
+            //zum Test _eingang.Stellung = true;
+            if (_eingang.Stellung && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
+            //if (Parent.RückmeldungAnzeigen && Eingang.RueckmeldungAbfragen()) 
+            {
 				this.farbeLinien = Color.Orange;
 				Pen stift = new Pen(this.farbeLinien);
 				stift.EndCap = LineCap.Round;
 				stift.StartCap = LineCap.Round;
 				stift.DashStyle = DashStyle.Dash;
 				stift.DashPattern = new float[2] { 2, 2 };
-				stift.Width = Convert.ToSingle(this.Zoom * 0.3);
+				stift.Width = Convert.ToSingle(this.Zoom * 0.4);
 				graphics.DrawPath(stift, this.graphicsPath);
 			}
-		}
+        }
 
 
 		public override void Berechnung() {
@@ -544,6 +545,20 @@ namespace MoBaSteuerung.Elemente {
 			}
 			return false;
 		}
+        
+        /// <summary>
+        /// gibt die Belegung des Gleises zurück
+        /// </summary>
+        /// <returns></returns>
+        public  bool GleisBelegung()
+        {
+            if (_eingang.Stellung) return true;
+            if (_signale[0] != null)
+            { if (_signale[0].Zug != 0) return true; }
+            if (_signale[1] != null)
+            { if (_signale[1].Zug != 0) return true; }
+            return false;
+        }
 
 		public override bool MouseClick(Point p) {
 			return this.PunktAufGleis(p);

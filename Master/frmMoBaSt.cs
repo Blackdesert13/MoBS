@@ -1491,6 +1491,11 @@ namespace MoBaSteuerung {
 			}
 		}
 
+       
 
-	}
+        private void pictureBoxView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+    }
 }

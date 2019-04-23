@@ -69,7 +69,7 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 
 
 		public void AktualisierenTabelle(){
-			_fahrstrassenAnzeige.Fahrstrassen = _model.ZeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen;
+			_fahrstrassenAnzeige.Fahrstrassen = _model.ZeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen;
 
 			_tabelle = new DataTable();
 			_tabelle.Columns.Add("ID", typeof(int));
@@ -124,14 +124,14 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				int id = (int)row.Cells[0].Value;
 				if(id != _ausgewählteFahrstrasse) {
 					_ausgewählteFahrstrasse = id;
-					foreach(FahrstrasseN el in _model.ZeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen) {
+					foreach(FahrstrasseN el in _model.ZeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen) {
 						el.Selektiert = false;
 					}
-					_model.ZeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen.Clear();
-					FahrstrasseN fahrstrasse = _model.ZeichnenElemente.FahrstarssenElemente.Fahrstrasse(_ausgewählteFahrstrasse);
+					_model.ZeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
+					FahrstrasseN fahrstrasse = _model.ZeichnenElemente.FahrstrassenElemente.Fahrstrasse(_ausgewählteFahrstrasse);
 					if (fahrstrasse != null) {
 						fahrstrasse.Selektiert = true;
-						_model.ZeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen.Add(fahrstrasse);
+						_model.ZeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Add(fahrstrasse);
 						_model.OnAnlageNeuZeichnen();
 					}
 
@@ -147,10 +147,10 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				AktualisierenTabelle();
 			}
 			else {
-				foreach (FahrstrasseN el in _model.ZeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen) {
+				foreach (FahrstrasseN el in _model.ZeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen) {
 					el.Selektiert = false;
 				}
-				_model.ZeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen.Clear();
+				_model.ZeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
 				_model.OnAnlageNeuZeichnen();
 				_ausgewählteFahrstrasse = -1;
 			}

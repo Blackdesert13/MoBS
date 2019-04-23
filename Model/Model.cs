@@ -331,7 +331,7 @@ namespace MoBaSteuerung
 		/// <returns></returns>
 		public List<AnlagenElement> BedienenMouseClick(Point p)
 		{
-			zeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen.Clear();
+			zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
 			List<AnlagenElement> elemList = SucheElementAufPunkt(p);
 			return elemList;
 		}
@@ -368,7 +368,7 @@ namespace MoBaSteuerung
 					el = zeichnenElemente.WeicheElemente.Element(nr);
 					break;
 				case "Fahrstrasse":
-					el = zeichnenElemente.FahrstarssenElemente.Fahrstrasse(nr);
+					el = zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
 					if (!((Fahrstrasse)el).IsAktiv) {
 						Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
 						fahrstraßenStartThread.Start(el);
@@ -505,13 +505,13 @@ namespace MoBaSteuerung
 		public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal)
 		{
 			List<AnlagenElement> el = new List<AnlagenElement>();
-			if (zeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen.Count == 0) {
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstarssenElemente.AktiveFahrstrassen)
+			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen)
 					if (signal == fs.StartSignal || signal == fs.EndSignal) {
 						el.Add(fs);
 						return el;
 					}
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen) {
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 					if (fs.StartSignal == signal && fs.AdressenFrei())
 						el.Add(fs);
 				}
@@ -519,14 +519,14 @@ namespace MoBaSteuerung
 				return el;
 			}
 			else {
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen)
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
 					if (fs.EndSignal == signal) {
-						zeichnenElemente.FahrstarssenElemente.AlleLöschenAuswahl();
+						zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 						el.Add(fs);
 						//zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
 						return el;
 					}
-				zeichnenElemente.FahrstarssenElemente.AlleLöschenAuswahl();
+				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 				OnAnlageNeuZeichnen();
 			}
 			return null;
@@ -542,7 +542,7 @@ namespace MoBaSteuerung
 			MemoryStream stream = new MemoryStream(anlagenZustandsDaten);
 			this.zeichnenElemente.AnlagenZustand = (Anlagenzustand)formatter.Deserialize(stream);
 
-			this.zeichnenElemente.FahrstarssenElemente.AktiveFahrstrassenAktualisieren(this.zeichnenElemente.AnlagenZustand);
+			this.zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassenAktualisieren(this.zeichnenElemente.AnlagenZustand);
 		}
 
 		/// <summary>
@@ -699,7 +699,7 @@ namespace MoBaSteuerung
 
 		public void FahrstrassenAuswahl(List<AnlagenElement> el)
 		{
-			this.zeichnenElemente.FahrstarssenElemente.HinzufügenAuswahl(el);
+			this.zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(el);
 		}
 
 
@@ -757,12 +757,12 @@ namespace MoBaSteuerung
 																			+ this.zeichnenElemente.EntkupplerElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Infos\tNr.\tGleis\tLage\tBez"
 																			+ this.zeichnenElemente.InfoElemente.SpeicherString);
-			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker"
-																			+ this.zeichnenElemente.SignalElemente.SpeicherString);
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker\tAutostart"
+                                                                            + this.zeichnenElemente.SignalElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "HStelln\tNr.\tInfFeld\tBez"
 																			+ this.zeichnenElemente.HaltestellenElemente.SpeicherString);
 
-			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + this.zeichnenElemente.FahrstarssenElemente.SpeicherString);
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + this.zeichnenElemente.FahrstrassenElemente.SpeicherString);
 
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Züge\tNr.\tSignal\tLok\tTyp\tGeschw\tBez"
 																		 + this.zeichnenElemente.ZugElemente.SpeicherString);
@@ -787,11 +787,11 @@ namespace MoBaSteuerung
 		public void ZeichneElementeBedienen(Graphics graphics)
 		{
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
-
+            this.zeichnenElemente.FSSAktualisieren();
 			this.zeichnenElemente.GleisElemente.ElementeZeichnen1(graphics);
 			this.zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.FahrstarssenElemente.ElementeZeichnen(graphics);
+			this.zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
 			//this.zeichnenElemente.KnotenElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
@@ -813,7 +813,7 @@ namespace MoBaSteuerung
 
 			this.zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.FahrstarssenElemente.ElementeZeichnen(graphics);
+			this.zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.KnotenElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
@@ -1026,8 +1026,8 @@ namespace MoBaSteuerung
 		/// <returns>Gibt TRUE zurück, wenn eine Auswahl gelöscht wurde</returns>
 		public bool BedienenAuswahlLöschen()
 		{
-			if (zeichnenElemente.FahrstarssenElemente.AuswahlFahrstrassen.Count > 0) {
-				zeichnenElemente.FahrstarssenElemente.AlleLöschenAuswahl();
+			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count > 0) {
+				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 				return true;
 			}
 			return false;

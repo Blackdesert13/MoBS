@@ -267,24 +267,24 @@ namespace MoBaSteuerung {
 		}
 
 		public void FahrstrassenSuchen() {
-			zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Clear();
-			zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen = new List<FahrstrasseN>();
+			zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Clear();
+			zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen = new List<FahrstrasseN>();
 			foreach (Signal sn in zeichnenElemente.SignalElemente.Elemente) {
-				zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen(sn);
+				zeichnenElemente.FahrstrassenElemente.SucheFahrstrassen(sn);
 			}
 		}
 
 		public void FahrstrassenSuchenVonSignal(List<int> stopGleise = null)
 		{
-			int altCount = zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Count;
+			int altCount = zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Count;
 			foreach (AnlagenElement el in _auswahlElemente) {
 				if(el is Signal) {
 					Signal sig = (Signal)el;
 					List<List<AnlagenElement>> fahrStrassenNeu = new List<List<AnlagenElement>>();
 
-					zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen2(sig, fahrStrassenNeu, stopGleise);
+					zeichnenElemente.FahrstrassenElemente.SucheFahrstrassen2(sig, fahrStrassenNeu, stopGleise);
 
-					foreach(FahrstrasseN fss in zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen) {
+					foreach(FahrstrasseN fss in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 						for(int i = 0; i < fahrStrassenNeu.Count;) {
 							List<AnlagenElement> fssNeu = fahrStrassenNeu[i];
 							if (fss.IstGleich(fssNeu.ToArray())) {
@@ -298,7 +298,7 @@ namespace MoBaSteuerung {
 					}
 
 					foreach(List<AnlagenElement> listeElemente in fahrStrassenNeu) {
-						zeichnenElemente.FahrstarssenElemente.GespeicherteFahrstrassen.Add(
+						zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Add(
 							new FahrstrasseN(listeElemente.ToArray())
 						);
 					}

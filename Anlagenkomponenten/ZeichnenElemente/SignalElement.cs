@@ -27,7 +27,7 @@ namespace MoBaSteuerung.Elemente {
         private InfoFenster infoFenster = null;
         //private int zugNr = 0;
         private Zug zug ;
-
+        private bool autoStart;
         /// <summary>
         /// zum Speichern in der Anlagen-Datei
         /// </summary>
@@ -42,7 +42,8 @@ namespace MoBaSteuerung.Elemente {
                      + "\t" + infoNr
                      + "\t" + Ausgang.SpeicherString
                      + "\t" + Bezeichnung
-                     + "\t" + Stecker;
+                     + "\t" + Stecker 
+                     + "\t" + autoStart;
             }
         }
         /// <summary>
@@ -109,7 +110,7 @@ namespace MoBaSteuerung.Elemente {
             if (elem.Length > 7)
                 Stecker = elem[7];
             Ausgang = new Adresse(parent);
-
+            if (elem.Length > 8) autoStart = Convert.ToBoolean( elem[8]);
             Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
             if (gl != null) {
                 PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
@@ -228,8 +229,11 @@ namespace MoBaSteuerung.Elemente {
                         graphics.FillPath(Brushes.Yellow, this.graphicsPathHintergrund);
                     break;
                 case AnzeigeTyp.Bedienen:
-                    //if (infoFenster != null)
-                     //   infoFenster.Text = zug.Anzeige;
+                    if (infoFenster != null)
+                    {
+                        if (zug == null) { infoFenster.Text = ""; }
+                            else { infoFenster.Text = zug.Anzeige; }
+                    }
 
                     graphics.FillPath(Brushes.White, this.graphicsPathHintergrund);
                     if (Passiv) {

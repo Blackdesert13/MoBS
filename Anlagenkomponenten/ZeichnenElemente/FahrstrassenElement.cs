@@ -344,7 +344,7 @@ namespace MoBaSteuerung.Elemente {
 
 
         public Fahrstrasse(AnlagenElement[] elementListe)
-        : base(elementListe[0].Parent, elementListe[0].Parent.FahrstarssenElemente.GespeicherteFahrstrassen.Count + 1, elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
+        : base(elementListe[0].Parent, elementListe[0].Parent.FahrstrassenElemente.GespeicherteFahrstrassen.Count + 1, elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
             _listeElemente = elementListe;
             _startSignal = (Signal)elementListe[0];
             _endSignal = (Signal)elementListe[elementListe.Length - 1];
@@ -556,6 +556,7 @@ namespace MoBaSteuerung.Elemente {
                     if (adr.Stellung != adr.AdresseAbfragen())
                         return false;
                 }
+                
             }
             return true;
         }
@@ -581,7 +582,7 @@ namespace MoBaSteuerung.Elemente {
                 }
                 this.Selektiert = false;
                 this.Ausgang.AusgangToggeln();
-                Parent.FahrstarssenElemente.AktiveFahrstrassenAktualisieren(Parent.AnlagenZustand);
+                Parent.FahrstrassenElemente.AktiveFahrstrassenAktualisieren(Parent.AnlagenZustand);
                 return true;
             }
             return false;
@@ -1105,7 +1106,7 @@ namespace MoBaSteuerung.Elemente {
 
 
         public FahrstrasseN(AnlagenElement[] elementListe)
-		: base(elementListe[0].Parent, elementListe[0].Parent.FahrstarssenElemente.SucheFreieNummer(), elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
+		: base(elementListe[0].Parent, elementListe[0].Parent.FahrstrassenElemente.SucheFreieNummer(), elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
             _listeElemente = elementListe;
             _startSignal = (Signal)elementListe[0];
             _endSignal = (Signal)elementListe[elementListe.Length - 1];
@@ -1158,7 +1159,7 @@ namespace MoBaSteuerung.Elemente {
             else
                 return;
 
-            parent.FahrstarssenElemente.GespeicherteFahrstrassen.Add(this);
+            parent.FahrstrassenElemente.GespeicherteFahrstrassen.Add(this);
             Berechnung();
         }
 
@@ -1358,6 +1359,11 @@ namespace MoBaSteuerung.Elemente {
                     if (adr.SchaltZustand != adr.Element.Ausgang.AdresseAbfragen())
                         return false;
                 }
+                if(adr.Element is Gleis)
+                {
+                    Gleis gl = (Gleis)adr.Element;
+                    if (gl.GleisBelegung()) return false;
+                }
             }
             return true;
         }
@@ -1387,7 +1393,7 @@ namespace MoBaSteuerung.Elemente {
                 }
                 this.Selektiert = false;
                 this.Ausgang.AusgangToggeln();
-                Parent.FahrstarssenElemente.AktiveFahrstrassenAktualisieren(Parent.AnlagenZustand);
+                Parent.FahrstrassenElemente.AktiveFahrstrassenAktualisieren(Parent.AnlagenZustand);
                 return true;
             }
             return false;

@@ -242,7 +242,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             get { return zugElemente; }
         }
 
-        public FahrstrassenNElemente FahrstarssenElemente {
+        public FahrstrassenNElemente FahrstrassenElemente {
             get {
                 return fahrstrassenElemente;
             }
