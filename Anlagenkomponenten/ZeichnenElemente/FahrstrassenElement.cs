@@ -1352,17 +1352,26 @@ namespace MoBaSteuerung.Elemente {
         /// </summary>
         /// <returns></returns>
         public bool AdressenFrei() {
-           // if (_endSignal.Zug > 0)
-             //   return false;
+            // if (_endSignal.Zug > 0)
+            bool startGl = true;
             foreach (Befehl adr in _startBefehle) {
-                if (adr.Element.IsLocked) {
-                    if (adr.SchaltZustand != adr.Element.Ausgang.AdresseAbfragen())
-                        return false;
-                }
-                if(adr.Element is Gleis)
+                if (startGl)
                 {
-                    Gleis gl = (Gleis)adr.Element;
-                    if (gl.GleisBelegung()) return false;
+                    if(adr.Element is Signal)
+                        startGl = false;
+                }
+                else
+                {
+                    if (adr.Element.IsLocked)
+                    {
+                        if (adr.SchaltZustand != adr.Element.Ausgang.AdresseAbfragen())
+                            return false;
+                    }
+                    if (adr.Element is Gleis)
+                    {
+                        Gleis gl = (Gleis)adr.Element;
+                        if (gl.GleisBelegung()) return false;
+                    }
                 }
             }
             return true;
