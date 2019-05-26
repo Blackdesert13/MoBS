@@ -44,10 +44,8 @@ namespace MoBaSteuerung.Elemente
             }
         }
 
-        public override string InfoString
-        {
-            get
-            {
+        public override string InfoString {
+            get {
                 return "Regler " + this.ID;
             }
         }
@@ -56,7 +54,7 @@ namespace MoBaSteuerung.Elemente
         {
             set { }
         }
-
+        
         #endregion//Properties
 
         public Regler(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)
@@ -98,6 +96,7 @@ namespace MoBaSteuerung.Elemente
 
         public override void ElementZeichnen(Graphics graphics)
         {
+            //int transpanz = 255;
             Color farbePinsel =  fuellFarbe;// Color.Transparent;
             Color farbeStift = Color.Black;//Transparent;
             SolidBrush pinsel = new SolidBrush(farbePinsel);

@@ -11,379 +11,363 @@ using MoBaSteuerung.ZeichnenElemente;
 
 namespace MoBaSteuerung.Elemente {
 
-    /// <summary>
-    /// Signal
-    /// </summary>
-    public class Signal : GleisRasterAnlagenElement {
-        #region private Felder
-        private GraphicsPath _graphicsPathHintergrund;
-        private GraphicsPath _graphicsPathKreis;
-        private GraphicsPath _graphicsPathLinien;
-        private GraphicsPath _graphicsPathText;
+	/// <summary>
+	/// Signal
+	/// </summary>
+	public class Signal : GleisRasterAnlagenElement {
+		#region private Felder
+		private GraphicsPath _graphicsPathHintergrund;
+		private GraphicsPath _graphicsPathKreis;
+		private GraphicsPath _graphicsPathLinien;
+		private GraphicsPath _graphicsPathText;
 
-        private Color _farbe;
-        private StringFormat _stringFormat;
- 
-        private bool _inZeichenRichtung = false; 
-        private InfoFenster _infoFenster = null;
-        private Zug zug ;
-        private bool _autoStart;
-        private int _zugLaengeMax;
-        //private DateTime _zeitAnkunft;
+		private Color _farbe;
+		private StringFormat _stringFormat;
 
-        #endregion //private Felder
+		private bool _inZeichenRichtung = false;
+		private InfoFenster _infoFenster = null;
+		private Zug zug;
+		private bool _autoStart;
+		private int _zugLaengeMax;
+		//private DateTime _zeitAnkunft;
 
-        #region Properties Eigenschaften
-        /// <summary>
-        /// zum Speichern in der Anlagen-Datei
-        /// </summary>
-        public override string SpeicherString {
-            get {
-                int infoNr = 0;
-                if ( _infoFenster != null) { infoNr = _infoFenster.ID; }
-                return "Signal"
-                     + "\t" + ID
-                     + "\t" + AnschlussGleis.ID + " " + Gleisposition
-                     + "\t" + InZeichenRichtung.ToString()
-                     + "\t" + infoNr
-                     + "\t" + Ausgang.SpeicherString
-                     + "\t" + Bezeichnung
-                     + "\t" + Stecker
-                     + "\t" + _autoStart 
-                     + "\t" + _zugLaengeMax;
-            }
-        }
-        /// <summary>
-        /// InfoString zur Anzeige
-        /// </summary>
-        public override string InfoString {
-            get {
-                return "Signal " + this.ID;
-            }
-        }
-        public string Anzeige
-        {
-            set
-            {
-                if (_infoFenster != null)
-                {
-                    _infoFenster.Text = value;
-                }
-            }
-        }
-        /// <summary>
-        /// max. Zugänge am Signal
-        /// </summary>
-        public int ZugLaengeMax
-        {
-            set { _zugLaengeMax = value; }
-            get { return _zugLaengeMax; }
-        }
+		#endregion //private Felder
 
-        public Zug Zug { get { return zug; } }
+		#region Properties Eigenschaften
+		/// <summary>
+		/// zum Speichern in der Anlagen-Datei
+		/// </summary>
+		public override string SpeicherString {
+			get {
+				int infoNr = 0;
+				if (_infoFenster != null) { infoNr = _infoFenster.ID; }
+				return "Signal"
+						 + "\t" + ID
+						 + "\t" + AnschlussGleis.ID + " " + Gleisposition
+						 + "\t" + InZeichenRichtung.ToString()
+						 + "\t" + infoNr
+						 + "\t" + Ausgang.SpeicherString
+						 + "\t" + Bezeichnung
+						 + "\t" + Stecker
+						 + "\t" + _autoStart
+						 + "\t" + _zugLaengeMax;
+			}
+		}
+		/// <summary>
+		/// InfoString zur Anzeige
+		/// </summary>
+		public override string InfoString {
+			get {
+				return "Signal " + this.ID;
+			}
+		}
+		public string Anzeige {
+			set {
+				if (_infoFenster != null) {
+					_infoFenster.Text = value;
+				}
+			}
+		}
+		/// <summary>
+		/// max. Zugänge am Signal
+		/// </summary>
+		public int ZugLaengeMax {
+			set { _zugLaengeMax = value; }
+			get { return _zugLaengeMax; }
+		}
+
+		public Zug Zug { get { return zug; } }
 
 
-        public int ZugNr
-        {
-            set
-            {
-                int nZug = value;
-                if (nZug == 0)
-                {
-                    zug = null;
-                    _infoFenster.Text = "";//"Sn" + ID;
-                }
-                else
-                {
-                    zug = Parent.ZugElemente.Element(nZug);
-                    if (_infoFenster != null)
-                        _infoFenster.Text = zug.Anzeige;
-                }
-            }
-            get
-            {
-                if (zug != null)
-                { return zug.ID; }
-                else { return 0; }
-            }
-        }
+		public int ZugNr {
+			set {
+				int nZug = value;
+				if (nZug == 0) {
+					zug = null;
+					if (_infoFenster != null) {
+						_infoFenster.Text = "";//"Sn" + ID;
+					}
+				}
+				else {
+					zug = Parent.ZugElemente.Element(nZug);
+					if (_infoFenster != null)
+						_infoFenster.Text = zug.Anzeige;
+				}
+			}
+			get {
+				if (zug != null) { return zug.ID; }
+				else { return 0; }
+			}
+		}
 
-        /// <summary>
-        /// wechselt die Farbe grün-rot
-        /// </summary>
-        public bool Durchfahrt
-        {
-            set
-            {
-                if (value)
-                {
-                    this._farbe = Color.Green;
-                }
-                else
-                {
-                    this._farbe = Color.Red;
-                }
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool InZeichenRichtung
-        {
-            get
-            {
-                return _inZeichenRichtung;
-            }
+		/// <summary>
+		/// wechselt die Farbe grün-rot
+		/// </summary>
+		public bool Durchfahrt {
+			set {
+				if (value) {
+					this._farbe = Color.Green;
+				}
+				else {
+					this._farbe = Color.Red;
+				}
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool InZeichenRichtung {
+			get {
+				return _inZeichenRichtung;
+			}
 
-            set
-            {
-                _inZeichenRichtung = value;
-            }
-        }
+			set {
+				_inZeichenRichtung = value;
+			}
+		}
 
 
 
-        #endregion //Properties
+		#endregion //Properties
 
-        #region Konstruktoren
-        public Signal(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition, bool inZeichenRichtung)
-         : base(parent, 0, zoom, anzeigeTyp) {
-            KurzBezeichnung = "Sn";
-            PositionRaster = rasterPosition;
-            Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
-            this._inZeichenRichtung = inZeichenRichtung;
+		#region Konstruktoren
+		public Signal(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition, bool inZeichenRichtung)
+		 : base(parent, 0, zoom, anzeigeTyp) {
+			KurzBezeichnung = "Sn";
+			PositionRaster = rasterPosition;
+			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
+			this._inZeichenRichtung = inZeichenRichtung;
 
-            this._graphicsPathHintergrund = new GraphicsPath();
-            this._graphicsPathKreis = new GraphicsPath();
-            this._graphicsPathLinien = new GraphicsPath();
+			this._graphicsPathHintergrund = new GraphicsPath();
+			this._graphicsPathKreis = new GraphicsPath();
+			this._graphicsPathLinien = new GraphicsPath();
 
-            this._farbe = Color.Red;
+			this._farbe = Color.Red;
 
-            this.Berechnung();
-        }
+			this.Berechnung();
+		}
 
-        public Signal(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition, bool inZeichenRichtung)
-         : base(parent, iD, zoom, anzeigeTyp) {
-            KurzBezeichnung = "Sn";
-            PositionRaster = rasterPosition;
-            Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
-            Ausgang = new Adresse(parent);
-            this._inZeichenRichtung = inZeichenRichtung;
+		public Signal(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition, bool inZeichenRichtung)
+		 : base(parent, iD, zoom, anzeigeTyp) {
+			KurzBezeichnung = "Sn";
+			PositionRaster = rasterPosition;
+			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
+			Ausgang = new Adresse(parent);
+			this._inZeichenRichtung = inZeichenRichtung;
 
-            foreach (Gleis gl in Parent.GleisElemente.Elemente) {
-                if (gl.GleisElementAnschluss(this)) {
-                    AnschlussGleis = gl;
-                    Parent.SignalElemente.Hinzufügen(this);
+			foreach (Gleis gl in Parent.GleisElemente.Elemente) {
+				if (gl.GleisElementAnschluss(this)) {
+					AnschlussGleis = gl;
+					Parent.SignalElemente.Hinzufügen(this);
 
-                    this._stringFormat = new StringFormat();
-                    this._stringFormat.Alignment = StringAlignment.Center;
-                    this._stringFormat.LineAlignment = StringAlignment.Center;
+					this._stringFormat = new StringFormat();
+					this._stringFormat.Alignment = StringAlignment.Center;
+					this._stringFormat.LineAlignment = StringAlignment.Center;
 
-                    this._graphicsPathHintergrund = new GraphicsPath();
-                    this._graphicsPathKreis = new GraphicsPath();
-                    this._graphicsPathLinien = new GraphicsPath();
-                    this._graphicsPathText = new GraphicsPath();
+					this._graphicsPathHintergrund = new GraphicsPath();
+					this._graphicsPathKreis = new GraphicsPath();
+					this._graphicsPathLinien = new GraphicsPath();
+					this._graphicsPathText = new GraphicsPath();
 
-                    this._farbe = Color.Red;
+					this._farbe = Color.Red;
 
-                    this.Berechnung();
+					this.Berechnung();
 
-                    break;
-                }
-            }
-        }
+					break;
+				}
+			}
+		}
 
-        public Signal(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)
-            : base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp) {
-            string[] glAnschl = elem[2].Split(' ');
-            KurzBezeichnung = "Sn";
-            Bezeichnung = elem[6];
-            if (elem.Length > 7)
-                Stecker = elem[7];
-            Ausgang = new Adresse(parent);
-            if (elem.Length > 8) _autoStart = Convert.ToBoolean( elem[8]);
-            if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
-            Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
-            if (gl != null) {
-                PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
-                Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
-                InZeichenRichtung = Convert.ToBoolean(elem[3]);
+		public Signal(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)
+				: base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp) {
+			string[] glAnschl = elem[2].Split(' ');
+			KurzBezeichnung = "Sn";
+			Bezeichnung = elem[6];
+			if (elem.Length > 7)
+				Stecker = elem[7];
+			Ausgang = new Adresse(parent);
 
-                if (gl.GleisElementAnschluss(this)) {
-                    Ausgang.SpeicherString = elem[5];
-                    AnschlussGleis = gl;
-                    Parent.SignalElemente.Hinzufügen(this);
+			if (elem.Length > 8) _autoStart = Convert.ToBoolean(elem[8]);
+			if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
 
-                    this._stringFormat = new StringFormat();
-                    this._stringFormat.Alignment = StringAlignment.Center;
-                    this._stringFormat.LineAlignment = StringAlignment.Center;
+			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
+			if (gl != null) {
+				PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
+				Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
+				InZeichenRichtung = Convert.ToBoolean(elem[3]);
 
-                    this._graphicsPathHintergrund = new GraphicsPath();
-                    this._graphicsPathKreis = new GraphicsPath();
-                    this._graphicsPathLinien = new GraphicsPath();
-                    this._graphicsPathText = new GraphicsPath();
+				if (gl.GleisElementAnschluss(this)) {
+					Ausgang.SpeicherString = elem[5];
+					AnschlussGleis = gl;
+					Parent.SignalElemente.Hinzufügen(this);
 
-                    this._farbe = Color.Red;
+					this._stringFormat = new StringFormat();
+					this._stringFormat.Alignment = StringAlignment.Center;
+					this._stringFormat.LineAlignment = StringAlignment.Center;
 
-                    this.Berechnung();
-                }
-            }
-            infoFensterLaden(Convert.ToInt16(elem[4]));
-        }
-        #endregion //Konstruktoren
+					this._graphicsPathHintergrund = new GraphicsPath();
+					this._graphicsPathKreis = new GraphicsPath();
+					this._graphicsPathLinien = new GraphicsPath();
+					this._graphicsPathText = new GraphicsPath();
 
-        private void infoFensterLaden(int Nummer)
-        {
-            _infoFenster = this.Parent.InfoElemente.Element(Nummer);
-        }
+					this._farbe = Color.Red;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="graphics"></param>
-        public override void ElementZeichnen(Graphics graphics) {
-            int transpanz = 255;
-            Color farbePinsel = Color.Transparent;
-            Color farbeStift = Color.Transparent;
+					this.Berechnung();
+				}
+			}
+			infoFensterLaden(Convert.ToInt16(elem[4]));
+		}
+		#endregion //Konstruktoren
 
-            switch (this.AnzeigenTyp) {
-                case AnzeigeTyp.Bearbeiten:
-                    if (AnschlussGleis == null) {
-                        transpanz = 128;
-                    }
-                    farbePinsel = Color.FromArgb(transpanz, Color.Red);
-                    farbeStift = Color.FromArgb(transpanz, Color.Black);
-                    if(this.ElementZustand == Elementzustand.Selektiert)
-                        graphics.FillPath(Brushes.Yellow, this._graphicsPathHintergrund);
-                    break;
-                case AnzeigeTyp.Bedienen:
-                    if (_infoFenster != null)
-                    {
-                        if (zug == null) { _infoFenster.Text = ""; }
-                            else { _infoFenster.Text = zug.Anzeige; }
-                    }
+		private void infoFensterLaden(int Nummer) {
+			_infoFenster = this.Parent.InfoElemente.Element(Nummer);
+		}
 
-                    graphics.FillPath(Brushes.White, this._graphicsPathHintergrund);
-                    if (Passiv) {
-                        transpanz = 128;
-                    }
-                    if (this.ElementZustand == Elementzustand.An)
-                        farbePinsel = Color.FromArgb(transpanz, Color.Green);
-                    else
-                        farbePinsel = Color.FromArgb(transpanz, Color.Red);
-                    farbeStift = Color.FromArgb(transpanz, Color.Black);
-                    break;
-            }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="graphics"></param>
+		public override void ElementZeichnen(Graphics graphics) {
+			int transpanz = 255;
+			Color farbePinsel = Color.Transparent;
+			Color farbeStift = Color.Transparent;
 
-            SolidBrush pinsel = new SolidBrush(farbePinsel);
-            Pen stift = new Pen(farbeStift, 1);
+			switch (this.AnzeigenTyp) {
+				case AnzeigeTyp.Bearbeiten:
+					if (AnschlussGleis == null) {
+						transpanz = 128;
+					}
+					farbePinsel = Color.FromArgb(transpanz, Color.Red);
+					farbeStift = Color.FromArgb(transpanz, Color.Black);
+					if (this.ElementZustand == Elementzustand.Selektiert)
+						graphics.FillPath(Brushes.Yellow, this._graphicsPathHintergrund);
+					break;
+				case AnzeigeTyp.Bedienen:
+					if (_infoFenster != null) {
+						if (zug == null) { _infoFenster.Text = ""; }
+						else { _infoFenster.Text = zug.Anzeige; }
+					}
 
+					graphics.FillPath(Brushes.White, this._graphicsPathHintergrund);
+					if (Passiv) {
+						transpanz = 128;
+					}
+					if (this.ElementZustand == Elementzustand.An)
+						farbePinsel = Color.FromArgb(transpanz, Color.Green);
+					else
+						farbePinsel = Color.FromArgb(transpanz, Color.Red);
+					farbeStift = Color.FromArgb(transpanz, Color.Black);
+					break;
+			}
 
-
-            graphics.FillPath(pinsel, this._graphicsPathKreis);
-            graphics.DrawPath(Pens.Black, this._graphicsPathKreis);
-            graphics.DrawPath(Pens.Black, this._graphicsPathLinien);
-
-            if (this.AnzeigenTyp == AnzeigeTyp.Bedienen)
-                graphics.DrawPath(Pens.Black, this._graphicsPathText);
-        }
-
-        /// <summary>
-        /// berechnet die Grafik
-        /// </summary>
-        public override void Berechnung() {
-            //Stopwatch watch = new Stopwatch();
-            //watch.Start();
-            if (AnschlussGleis != null)
-                PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition);
-
-            int winkel = 0;
-            if (AnschlussGleis != null)
-                winkel = AnschlussGleis.GetDirection(InZeichenRichtung) * 45;
-
-            Matrix matrix = new Matrix();
-            matrix.Translate(this.PositionRaster.X * this.Zoom, this.PositionRaster.Y * this.Zoom);
-            matrix.Scale(this.Zoom, this.Zoom);
-            matrix.Rotate(-winkel);
-
-            this._graphicsPathHintergrund.Reset();
-            this._graphicsPathHintergrund.AddEllipse(new RectangleF(-0.5f, -0.5f, 1f, 1f));
-            this._graphicsPathHintergrund.Transform(matrix);
-
-            this._graphicsPathKreis.Reset();
-            this._graphicsPathKreis.AddEllipse(new RectangleF(0f, 0f, 0.5f, 0.5f));
-            this._graphicsPathKreis.Transform(matrix);
-
-            this._graphicsPathLinien.Reset();
-            this._graphicsPathLinien.AddLines(new PointF[] { new PointF(0.0f, 0.25f), new PointF(-0.5f, 0.25f), new PointF(-0.5f, 0.5f), new PointF(-0.5f, 0.0f) });
-            this._graphicsPathLinien.Transform(matrix);
-
-            if (this.AnzeigenTyp == AnzeigeTyp.Bedienen) {
-                Matrix matrixText = new Matrix();
-                matrixText.Translate(this.PositionRaster.X * this.Zoom, this.PositionRaster.Y * this.Zoom);
-                matrixText.Scale(this.Zoom, this.Zoom);
-                this._graphicsPathText.Reset();
-                this._graphicsPathText.AddString(ID.ToString(), new FontFamily("Arial"), 0, 0.5f, this.DrehenUmPunkt(new PointF(0, 0), new PointF(0, -0.25f), winkel), this._stringFormat);
-                this._graphicsPathText.Transform(matrixText);
-            }
-
-            //watch.Stop();
-            //double diff = watch.Elapsed.TotalMilliseconds;
-
-        }
+			SolidBrush pinsel = new SolidBrush(farbePinsel);
+			Pen stift = new Pen(farbeStift, 1);
 
 
-        public override bool MouseClick(Point punkt) {
-            return this._graphicsPathHintergrund.GetBounds().Contains(punkt);
-        }
 
-        /// <summary>
-        /// Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
-        /// und wenn diese Position noch frei ist, wird dieses Element mit dem Gleis verknüpft.
-        /// </summary>
-        /// <returns>Gibt TRUE zurück, wenn dieses Objekt in einem Gleis eingetragen werden konnte</returns>
-        public override bool AnschlussGleisSuchen() {
-            foreach (Gleis gl in Parent.GleisElemente.Elemente) {
-                if (gl.GleisElementAnschluss(this)) {
-                    this.AnschlussGleis = gl;
-                    return true;
-                }
-            }
-            return false;
-        }
+			graphics.FillPath(pinsel, this._graphicsPathKreis);
+			graphics.DrawPath(Pens.Black, this._graphicsPathKreis);
+			graphics.DrawPath(Pens.Black, this._graphicsPathLinien);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override bool BearbeitenAktualisierenNeuZeichnen() {
-            GleisElementAustragen();
-            bool aktualisierungNotwendig = AnschlussGleisSuchen();
-            base.BearbeitenAktualisierenNeuZeichnen();
-            return aktualisierungNotwendig;
-        }
+			if (this.AnzeigenTyp == AnzeigeTyp.Bedienen)
+				graphics.DrawPath(Pens.Black, this._graphicsPathText);
+		}
+
+		/// <summary>
+		/// berechnet die Grafik
+		/// </summary>
+		public override void Berechnung() {
+			//Stopwatch watch = new Stopwatch();
+			//watch.Start();
+			if (AnschlussGleis != null)
+				PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition);
+
+			int winkel = 0;
+			if (AnschlussGleis != null)
+				winkel = AnschlussGleis.GetDirection(InZeichenRichtung) * 45;
+
+			Matrix matrix = new Matrix();
+			matrix.Translate(this.PositionRaster.X * this.Zoom, this.PositionRaster.Y * this.Zoom);
+			matrix.Scale(this.Zoom, this.Zoom);
+			matrix.Rotate(-winkel);
+
+			this._graphicsPathHintergrund.Reset();
+			this._graphicsPathHintergrund.AddEllipse(new RectangleF(-0.5f, -0.5f, 1f, 1f));
+			this._graphicsPathHintergrund.Transform(matrix);
+
+			this._graphicsPathKreis.Reset();
+			this._graphicsPathKreis.AddEllipse(new RectangleF(0f, 0f, 0.5f, 0.5f));
+			this._graphicsPathKreis.Transform(matrix);
+
+			this._graphicsPathLinien.Reset();
+			this._graphicsPathLinien.AddLines(new PointF[] { new PointF(0.0f, 0.25f), new PointF(-0.5f, 0.25f), new PointF(-0.5f, 0.5f), new PointF(-0.5f, 0.0f) });
+			this._graphicsPathLinien.Transform(matrix);
+
+			if (this.AnzeigenTyp == AnzeigeTyp.Bedienen) {
+				Matrix matrixText = new Matrix();
+				matrixText.Translate(this.PositionRaster.X * this.Zoom, this.PositionRaster.Y * this.Zoom);
+				matrixText.Scale(this.Zoom, this.Zoom);
+				this._graphicsPathText.Reset();
+				this._graphicsPathText.AddString(ID.ToString(), new FontFamily("Arial"), 0, 0.5f, this.DrehenUmPunkt(new PointF(0, 0), new PointF(0, -0.25f), winkel), this._stringFormat);
+				this._graphicsPathText.Transform(matrixText);
+			}
+
+			//watch.Stop();
+			//double diff = watch.Elapsed.TotalMilliseconds;
+
+		}
 
 
-        public override bool GleisElementAustragen() {
-            if (AnschlussGleis != null) {
-                AnschlussGleis.GleisElementAustragen(this);
-                this.AnschlussGleis = null;
-                return true;
-            }
-            return false;
-        }
+		public override bool MouseClick(Point punkt) {
+			return this._graphicsPathHintergrund.GetBounds().Contains(punkt);
+		}
 
-        /// <summary>
-        /// Überträgt den Zug auf das neue Signal
-        /// </summary>
-        /// <param name="NeuesSignal"></param>
-        public void ZugWechsel(int NeuesSignal)
-        {
-            int neueSignalNr = NeuesSignal;
-            if (zug != null) {
-                zug.AnkunftsZeit = DateTime.Now;
-                zug.SignalNummer = neueSignalNr;
-           }
-        }
-    }
+		/// <summary>
+		/// Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
+		/// und wenn diese Position noch frei ist, wird dieses Element mit dem Gleis verknüpft.
+		/// </summary>
+		/// <returns>Gibt TRUE zurück, wenn dieses Objekt in einem Gleis eingetragen werden konnte</returns>
+		public override bool AnschlussGleisSuchen() {
+			foreach (Gleis gl in Parent.GleisElemente.Elemente) {
+				if (gl.GleisElementAnschluss(this)) {
+					this.AnschlussGleis = gl;
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override bool BearbeitenAktualisierenNeuZeichnen() {
+			GleisElementAustragen();
+			bool aktualisierungNotwendig = AnschlussGleisSuchen();
+			base.BearbeitenAktualisierenNeuZeichnen();
+			return aktualisierungNotwendig;
+		}
+
+
+		public override bool GleisElementAustragen() {
+			if (AnschlussGleis != null) {
+				AnschlussGleis.GleisElementAustragen(this);
+				this.AnschlussGleis = null;
+				return true;
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Überträgt den Zug auf das neue Signal
+		/// </summary>
+		/// <param name="NeuesSignal"></param>
+		public void ZugWechsel(int NeuesSignal) {
+			int neueSignalNr = NeuesSignal;
+			if (zug != null) {
+				zug.AnkunftsZeit = DateTime.Now;
+				zug.SignalNummer = neueSignalNr;
+			}
+		}
+	}
 }

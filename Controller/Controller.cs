@@ -248,7 +248,7 @@ namespace MoBaSteuerung
 			}
 		}
 
-		public bool BedienenMouseClick(Point p, MouseButtons button)
+		public bool BedienenMouseClick(Point p, MouseButtons button, Keys modifierKeys)
 		{
 			List<Elemente.AnlagenElement> el;
 			switch (button) {
@@ -272,12 +272,16 @@ namespace MoBaSteuerung
 					}
 					break;
 				case MouseButtons.Right:
+					bool shift = false;
+					if (modifierKeys == Keys.Shift) {
+						shift = true;
+					}
 
 					el = _model.BedienenMouseRightClick(p);
 					if (el != null) {
 						if (el.Count > 0)
 							if (el[0].GetType().Name == "Signal") {
-								return FahrstrassenSignal(el[0].ID);
+								return FahrstrassenSignal(el[0].ID, shift);
 							}
 						//if (el.Count == 1) {
 						//	if (((FahrstrasseN)el[0]).StartSignal.ID == signalNummer)
@@ -295,15 +299,15 @@ namespace MoBaSteuerung
 			return false;
 		}
 
-		public bool FahrstrassenSignal(int signalNummer)
+		public bool FahrstrassenSignal(int signalNummer, bool shift)
 		{
-			List<Elemente.AnlagenElement> el = _model.FahrstrassenSignal(signalNummer);
+			List<Elemente.AnlagenElement> el = _model.FahrstrassenSignal(signalNummer,shift);
 			if (el != null) {
 				if (el.Count == 1) {
 					if (((FahrstrasseN)el[0]).StartSignal.ID == signalNummer)
-						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.StartSignal);
+						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.StartSignal,shift);
 					else if (((FahrstrasseN)el[0]).EndSignal.ID == signalNummer)
-						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal);
+						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal, shift);
 				}
 				else {
 					this._model.FahrstrassenAuswahl(el);
@@ -313,7 +317,7 @@ namespace MoBaSteuerung
 			return false;
 		}
 
-		public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signal)
+		public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signal, bool verlaengern)
 		{
 			bool action = false;
 			if (this.AppTyp == AppTyp.Master) {

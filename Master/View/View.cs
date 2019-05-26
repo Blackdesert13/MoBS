@@ -406,7 +406,7 @@ namespace MoBaSteuerung
 					break;
 				case AnzeigeTyp.Bedienen:
 					//neuZeichnen = this.BedienenMouseClick();
-					neuZeichnen = this.Controller.BedienenMouseClick(e.Location, e.Button);
+					neuZeichnen = this.Controller.BedienenMouseClick(e.Location, e.Button, Control.ModifierKeys);
 					break;
 			}
 			if (neuZeichnen) this.pictureBoxView.Invalidate();

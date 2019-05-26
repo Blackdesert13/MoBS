@@ -20,140 +20,110 @@ using MoBaSteuerung.ZeichnenElemente;
 using MoBa.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
-namespace MoBaSteuerung
-{
-    //hier nur Methoden zum Anlage laden und Speichern
+namespace MoBaSteuerung {
+	//hier nur Methoden zum Anlage laden und Speichern
 
-    /// <summary>
-    /// Anlagenlogik
-    /// </summary>
-    public partial class Model : Control
-    {
-        public void FahrstrassenAuswahl(List<AnlagenElement> el)
-        {
-            this.zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(el);
-        }
-        /*   /// <summary>
-        /// Überträgt den Zug auf das neue Signal
-        /// </summary>
-        /// <param name="NeuesSignal"></param>
-        public void ZugWechsel(int NeuesSignal)
-        {
-            int neueSignalNr = NeuesSignal;
-            if (zug != null)
-                zug.SignalNummer = neueSignalNr;
-        }*/
-        public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp)
-        {
-            if (el != null)
-            {
-                if (!el.IsAktiv)
-                {
-                    Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
-                    fahrstraßenStartThread.Start(el);
-                }
-                bool action = el.AusgangToggeln(signalTyp);
-                if (action && _ardController.IsPortOpen())
-                    OnAnlagenZustandAdresseChanged(el.Ausgang);
-                return action;
-            }
-            return false;
-        }
+	/// <summary>
+	/// Anlagenlogik
+	/// </summary>
+	public partial class Model : Control {
 
-        private void FahrstraßeStarten(object fahrstraße)
-        {
-            FahrstrasseN fs = (FahrstrasseN)fahrstraße;
-            Adresse adrStartGleis = fs.adrStartGleis;
-            Thread.Sleep(this.FahrstraßenStartVerzögerung);
-            if (adrStartGleis != null && fs.IsAktiv)
-            {
-                adrStartGleis.AusgangSchalten();
-                //adrStartGleis.IsLocked = true;
+		public void FahrstrassenAuswahl(List<AnlagenElement> el) {
+			this.zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(el);
+		}
 
-                this.OnAnlageNeuZeichnen();
-                this.OnAnlagenzustandChanged();
-                if (_ardController.IsPortOpen())
-                    this.OnAnlagenZustandAdresseChanged(adrStartGleis);
-            }
-        }
+		/*   /// <summary>
+		/// Überträgt den Zug auf das neue Signal
+		/// </summary>
+		/// <param name="NeuesSignal"></param>
+		public void ZugWechsel(int NeuesSignal)
+		{
+				int neueSignalNr = NeuesSignal;
+				if (zug != null)
+						zug.SignalNummer = neueSignalNr;
+		}*/
+		private void FahrstraßeStarten(object fahrstraße) {
+			FahrstrasseN fs = (FahrstrasseN)fahrstraße;
+			//Adresse adrStartGleis = fs.adrStartGleis;
+			Thread.Sleep(this.FahrstraßenStartVerzögerung);
+			if (/*adrStartGleis != null && */fs.IsAktiv) {
+				fs.StartGleisEinschalten();
+				//adrStartGleis.IsLocked = true;
 
-        /// <summary>
-        /// Behandeln eine Rechtsklicks bein Bedienen 
-        /// (Fahrstrassen suchen/aktivieren)
-        /// </summary>
-        /// <param name="p">Position des Klicks</param>
-        /// <returns></returns>
-        public List<AnlagenElement> BedienenMouseRightClick(Point p)
-        {
-            List<AnlagenElement> elemList = SucheElementAufPunkt(p);
-            return elemList;
-            if (elemList.Count > 0)
-                if (elemList[0].GetType().Name == "Signal")
-                {
-                    return FahrstrassenSignalSchalten((Signal)elemList[0]);
-                }
-            return null;
-        }
+				this.OnAnlageNeuZeichnen();
+				this.OnAnlagenzustandChanged();
+				if (_ardController.IsPortOpen())
+					this.OnAnlagenZustandAdresseChanged(null);
+			}
+		}
 
-        /// <summary>
-        /// Schalten einer Fahrstraße über Tastatur
-        /// </summary>
-        /// <param name="signalNummer"></param>
-        /// <returns></returns>
-        public List<AnlagenElement> FahrstrassenSignal(int signalNummer)
-        {
-            Signal sn = zeichnenElemente.SignalElemente.Element(signalNummer);
-            if (sn != null)
-            {
-                return FahrstrassenSignalSchalten(sn);
-            }
-            return null;
-        }
+		/// <summary>
+		/// Behandeln eine Rechtsklicks bein Bedienen 
+		/// (Fahrstrassen suchen/aktivieren)
+		/// </summary>
+		/// <param name="p">Position des Klicks</param>
+		/// <returns></returns>
+		public List<AnlagenElement> BedienenMouseRightClick(Point p) {
+			List<AnlagenElement> elemList = SucheElementAufPunkt(p);
+			return elemList;
+			if (elemList.Count > 0)
+				if (elemList[0].GetType().Name == "Signal") {
+					return FahrstrassenSignalSchalten((Signal)elemList[0]);
+				}
+			return null;
+		}
+
+		/// <summary>
+		/// Schalten einer Fahrstraße über Tastatur
+		/// </summary>
+		/// <param name="signalNummer"></param>
+		/// <returns></returns>
+		public List<AnlagenElement> FahrstrassenSignal(int signalNummer) {
+			Signal sn = zeichnenElemente.SignalElemente.Element(signalNummer);
+			if (sn != null) {
+				return FahrstrassenSignalSchalten(sn);
+			}
+			return null;
+		}
 
 
-        /// <summary>
-        /// Fahrstrasse über Signal schalten.<para/>
-        /// Wenn Fahrstraßen in der Vorauswahl sind, wird überprüft ob das ausgewählte Signal ein gültiges Zielsignal ist <para/>
-        /// und die Fahrstrasse zurück gegeben und die Vorauswahl gelöscht.<para/>
-        /// Ist keine Fahrstraße in der Vorauswahl wird überprüft ob das Signal zu einer aktiven Fahrstrasse gehört und <para/>
-        /// diese zurückgegeben. Ist dies nicht der Fall werden alle verfügbaren Fahrstrassen, welche von diesem <para/>
-        /// Signal ausgehen zurückgegeben.
-        /// </summary>
-        /// <param name="signal">Startsignal</param>
-        /// <returns></returns>
-        public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal)
-        {
-            List<AnlagenElement> el = new List<AnlagenElement>();
-            if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0)
-            {
-                foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen)
-                    if (signal == fs.StartSignal || signal == fs.EndSignal)
-                    {
-                        el.Add(fs);
-                        return el;
-                    }
-                foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen)
-                {
-                    if (fs.StartSignal == signal && fs.AdressenFrei())
-                        el.Add(fs);
-                }
-                //zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
-                return el;
-            }
-            else
-            {
-                foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
-                    if (fs.EndSignal == signal)
-                    {
-                        zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
-                        el.Add(fs);
-                        //zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
-                        return el;
-                    }
-                zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
-                OnAnlageNeuZeichnen();
-            }
-            return null;
-        }
-    }
+		/// <summary>
+		/// Fahrstrasse über Signal schalten.<para/>
+		/// Wenn Fahrstraßen in der Vorauswahl sind, wird überprüft ob das ausgewählte Signal ein gültiges Zielsignal ist <para/>
+		/// und die Fahrstrasse zurück gegeben und die Vorauswahl gelöscht.<para/>
+		/// Ist keine Fahrstraße in der Vorauswahl wird überprüft ob das Signal zu einer aktiven Fahrstrasse gehört und <para/>
+		/// diese zurückgegeben. Ist dies nicht der Fall werden alle verfügbaren Fahrstrassen, welche von diesem <para/>
+		/// Signal ausgehen zurückgegeben.
+		/// </summary>
+		/// <param name="signal">Startsignal</param>
+		/// <returns></returns>
+		public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal) {
+			List<AnlagenElement> el = new List<AnlagenElement>();
+			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen)
+					if (signal == fs.StartSignal || signal == fs.EndSignal) {
+						el.Add(fs);
+						return el;
+					}
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+					if (fs.StartSignal == signal && fs.AdressenFrei())
+						el.Add(fs);
+				}
+				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
+				return el;
+			}
+			else {
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
+					if (fs.EndSignal == signal) {
+						zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+						el.Add(fs);
+						//zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
+						return el;
+					}
+				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+				OnAnlageNeuZeichnen();
+			}
+			return null;
+		}
+	}
 }

@@ -111,9 +111,7 @@ namespace MoBaSteuerung.Elemente
 		/// </summary>
 		public string Text
 		{
-			set {
-                txt = value; Berechnung();
-            }
+			set { txt = value; Berechnung(); }
 		}
 
 		/// <summary>

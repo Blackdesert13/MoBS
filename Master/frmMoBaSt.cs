@@ -54,6 +54,7 @@ namespace MoBaSteuerung {
 		private bool _adminAktiviert = false;
 		private bool _anlageBearbeitenAktiviert = true;
 		private ServoAction _servoKeyAction = ServoAction.None;
+		private bool _shiftPressed = false;
 
 		#endregion
 
@@ -1295,7 +1296,12 @@ namespace MoBaSteuerung {
 					}
 					break;
 				case AnzeigeTyp.Bedienen:
-					if (e.KeyData == (Keys.NumPad0 | Keys.Control) || e.KeyData == (Keys.D0 | Keys.Control)) {
+					if(e.KeyData == (Keys.Shift | Keys.ShiftKey)) {
+						return;
+					}
+					if ((e.KeyData == (Keys.NumPad0 | Keys.Control) || e.KeyData == (Keys.D0 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad0 | Keys.Shift) || e.KeyData == (Keys.D0 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 0;
 						}
@@ -1303,7 +1309,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 0;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad1 | Keys.Control) || e.KeyData == (Keys.D1 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad1 | Keys.Control) || e.KeyData == (Keys.D1 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad1 | Keys.Shift) || e.KeyData == (Keys.D1 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 1;
 						}
@@ -1311,7 +1319,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 1;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad2 | Keys.Control) || e.KeyData == (Keys.D2 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad2 | Keys.Control) || e.KeyData == (Keys.D2 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad2 | Keys.Shift) || e.KeyData == (Keys.D2 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 2;
 						}
@@ -1319,7 +1329,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 2;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad3 | Keys.Control) || e.KeyData == (Keys.D3 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad3 | Keys.Control) || e.KeyData == (Keys.D3 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad3 | Keys.Shift) || e.KeyData == (Keys.D3 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 3;
 						}
@@ -1327,7 +1339,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 3;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad4 | Keys.Control) || e.KeyData == (Keys.D4 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad4 | Keys.Control) || e.KeyData == (Keys.D4 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad4 | Keys.Shift) || e.KeyData == (Keys.D4 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 4;
 						}
@@ -1335,7 +1349,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 4;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad5 | Keys.Control) || e.KeyData == (Keys.D5 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad5 | Keys.Control) || e.KeyData == (Keys.D5 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad5 | Keys.Shift) || e.KeyData == (Keys.D5 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 5;
 						}
@@ -1343,7 +1359,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 5;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad6 | Keys.Control) || e.KeyData == (Keys.D6 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad6 | Keys.Control) || e.KeyData == (Keys.D6 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad6 | Keys.Shift) || e.KeyData == (Keys.D6 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 6;
 						}
@@ -1351,7 +1369,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 6;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad7 | Keys.Control) || e.KeyData == (Keys.D7 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad7 | Keys.Control) || e.KeyData == (Keys.D7 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad7 | Keys.Shift) || e.KeyData == (Keys.D7 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 7;
 						}
@@ -1359,7 +1379,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 7;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad8 | Keys.Control) || e.KeyData == (Keys.D8 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad8 | Keys.Control) || e.KeyData == (Keys.D8 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad8 | Keys.Shift) || e.KeyData == (Keys.D8 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 8;
 						}
@@ -1367,7 +1389,9 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 8;
 						}
 					}
-					if (e.KeyData == (Keys.NumPad9 | Keys.Control) || e.KeyData == (Keys.D9 | Keys.Control)) {
+					if ((e.KeyData == (Keys.NumPad9 | Keys.Control) || e.KeyData == (Keys.D9 | Keys.Control))
+						|| (e.KeyData == (Keys.NumPad9 | Keys.Shift) || e.KeyData == (Keys.D9 | Keys.Shift))
+					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 9;
 						}
@@ -1397,8 +1421,13 @@ namespace MoBaSteuerung {
 		}
 
 		private void MoBaStForm_KeyUp(object sender, KeyEventArgs e) {
-			if (e.KeyData == (Keys.ControlKey)) {
-				if (this.Controller.FahrstrassenSignal(_signalNummer))
+			if (e.KeyData == Keys.ControlKey) {
+				if (this.Controller.FahrstrassenSignal(_signalNummer,false))
+					this.pictureBoxView.Invalidate();
+				_signalNummer = -1;
+			}
+			if (e.KeyData == Keys.ShiftKey) {
+				if (this.Controller.FahrstrassenSignal(_signalNummer,true))
 					this.pictureBoxView.Invalidate();
 				_signalNummer = -1;
 			}
@@ -1424,7 +1453,7 @@ namespace MoBaSteuerung {
 			frmZugEditor frm = new frmZugEditor(this.Controller.ZeichnenElemente);
 			if (frm.ShowDialog(this) == DialogResult.OK) {
 			//model.
-                // string[][] t =  frm.auslesen();
+				// string[][] t =  frm.auslesen();
 			}
 			else {
 			}
@@ -1492,16 +1521,6 @@ namespace MoBaSteuerung {
 			}
 		}
 
-       
 
-        private void pictureBoxView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void pictureBoxView_Click(object sender, EventArgs e)
-        {
-
-        }
-    }
+	}
 }

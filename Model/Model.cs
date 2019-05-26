@@ -20,14 +20,12 @@ using MoBaSteuerung.ZeichnenElemente;
 using MoBa.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
-namespace MoBaSteuerung
-{
+namespace MoBaSteuerung {
 	/// <summary>
 	/// Anlagenlogik
 	/// </summary>
-	public partial class Model : Control
-	{
-    
+	public partial class Model : Control {
+
 		#region Private Felder
 
 		private AnzeigeTyp anzeigeTyp;
@@ -53,28 +51,25 @@ namespace MoBaSteuerung
 		/// </summary>
 		private bool istAnlageSpeichernErforderlich;
 
-        #endregion
-        #region Öffentliche Eigenschaften (Properties)
-        public int FahrstraßenStartVerzögerung
-        {
-            get
-            {
-                return _fahrstraßenStartVerzögerung;
-            }
+		#endregion
 
-            set
-            {
-                _fahrstraßenStartVerzögerung = value;
-            }
-        }
-        public int EntkupplerAbschaltAutoWert
-		{
+		#region Öffentliche Eigenschaften (Properties)
+		public int FahrstraßenStartVerzögerung {
+			get {
+				return _fahrstraßenStartVerzögerung;
+			}
+
+			set {
+				_fahrstraßenStartVerzögerung = value;
+			}
+		}
+
+		public int EntkupplerAbschaltAutoWert {
 			get { return this.ZeichnenElemente.EntkupplerAbschaltAutoWert; }
 			set { this.ZeichnenElemente.EntkupplerAbschaltAutoWert = value; }
 		}
 
-		public bool EntkupplerAbschaltAutoAktiv
-		{
+		public bool EntkupplerAbschaltAutoAktiv {
 			get { return this.ZeichnenElemente.EntkupplerAbschaltAutoAktiv; }
 			set { this.ZeichnenElemente.EntkupplerAbschaltAutoAktiv = value; }
 		}
@@ -87,8 +82,7 @@ namespace MoBaSteuerung
 		/// <summary>
 		/// Speichern erforderlich.
 		/// </summary>
-		public bool IstAnlageSpeichernErforderlich
-		{
+		public bool IstAnlageSpeichernErforderlich {
 			set {
 				this.istAnlageSpeichernErforderlich = value;
 			}
@@ -100,8 +94,7 @@ namespace MoBaSteuerung
 		/// <summary>
 		/// Anlagen Datei Name
 		/// </summary>
-		public string AnlageDateiName
-		{
+		public string AnlageDateiName {
 			get {
 				return this.anlageDateiName;
 			}
@@ -110,8 +103,7 @@ namespace MoBaSteuerung
 		/// <summary>
 		/// Anlage Datei Pfad Name
 		/// </summary>
-		public string AnlageDateiPfadName
-		{
+		public string AnlageDateiPfadName {
 			get {
 				return this.anlageDateiPfadName;
 			}
@@ -131,8 +123,7 @@ namespace MoBaSteuerung
 		/// <summary>
 		/// Art der Anzeige (Bedienen, Bearbeiten)
 		/// </summary>
-		public AnzeigeTyp Anzeigetyp
-		{
+		public AnzeigeTyp Anzeigetyp {
 			set {
 				this.anzeigeTyp = value;
 				this.zeichnenElemente.AnzeigeTyp = this.anzeigeTyp;
@@ -142,86 +133,72 @@ namespace MoBaSteuerung
 		/// <summary>
 		/// 
 		/// </summary>
-		public Int32 Zoom
-        { set { this.zeichnenElemente.Zoom = value; } }
+		public Int32 Zoom { set { this.zeichnenElemente.Zoom = value; } }
 
 		/// <summary>
 		/// Server
 		/// </summary>
-		public bool Master
-		{
-			get {return _master;}
-			set {_master = value;}
+		public bool Master {
+			get { return _master; }
+			set { _master = value; }
 		}
 
-        /// <summary>
-        /// Gibt an ob Rückmeldung mit dargestellt werden soll
-        /// </summary>
-        public bool RückmeldungAnzeigen
-        {
-            set
-            {
-                this.zeichnenElemente.RückmeldungAnzeigen = value;
-                OnAnlageNeuZeichnen();
-            }
-            get
-            {
-                return this.zeichnenElemente.RückmeldungAnzeigen;
-            }
-        }
+		/// <summary>
+		/// Gibt an ob Rückmeldung mit dargestellt werden soll
+		/// </summary>
+		public bool RückmeldungAnzeigen {
+			set {
+				this.zeichnenElemente.RückmeldungAnzeigen = value;
+				OnAnlageNeuZeichnen();
+			}
+			get {
+				return this.zeichnenElemente.RückmeldungAnzeigen;
+			}
+		}
 
-        public bool RückmeldungAktiv
-        {
-            set
-            {
-                if (value != this.zeichnenElemente.RückmeldungAktiv)
-                {
-                    if (value)
-                        _ardController.SendData(new byte[] { 1, 1, 0, 0, 2 });
-                    else
-                        _ardController.SendData(new byte[] { 1, 2, 0, 0, 3 });
-                }
-                this.zeichnenElemente.RückmeldungAktiv = value;
-            }
-            get
-            {
-                return this.zeichnenElemente.RückmeldungAktiv;
-            }
-        }
+		public bool RückmeldungAktiv {
+			set {
+				if (value != this.zeichnenElemente.RückmeldungAktiv) {
+					if (value)
+						_ardController.SendData(new byte[] { 1, 1, 0, 0, 2 });
+					else
+						_ardController.SendData(new byte[] { 1, 2, 0, 0, 3 });
+				}
+				this.zeichnenElemente.RückmeldungAktiv = value;
+			}
+			get {
+				return this.zeichnenElemente.RückmeldungAktiv;
+			}
+		}
 
-        public List<AnlagenElement> AuswahlElemente
-        {
-            get
-            {
-                return _auswahlElemente;
-            }
+		public List<AnlagenElement> AuswahlElemente {
+			get {
+				return _auswahlElemente;
+			}
 
-            set
-            {
-                _auswahlElemente = value;
-            }
-        }
+			set {
+				_auswahlElemente = value;
+			}
+		}
 
-        public int ZubehörServoSchrittweite
-        {
-            get
-            {
-                return _zubehörServoSchrittweite;
-            }
+		public int ZubehörServoSchrittweite {
+			get {
+				return _zubehörServoSchrittweite;
+			}
 
-            set
-            {
-                _zubehörServoSchrittweite = value;
-            }
-        }
-        #endregion       
-        #region Konstruktor(en)
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Model()
-		{
+			set {
+				_zubehörServoSchrittweite = value;
+			}
+		}
+		#endregion
+
+
+		#region Konstruktor(en)
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Model() {
 			this.zeichnenElemente = new AnlagenElemente();
 			this._ardController = new ArduinoController();
 			this.AuswahlElemente = new List<AnlagenElement>();
@@ -232,118 +209,110 @@ namespace MoBaSteuerung
 			this.FahrstraßenStartVerzögerung = 1000;
 			this.ZubehörServoSchrittweite = 1;
 		}
-        #endregion//Konstruktor(en)
-        
-        #region Mausclick-Befehle
-        public int BedienenMouseDoubleClick(Point location)
-        {
-            //TODO:
-            //Zeichenelemente auf punkt suchen (Methode: SucheElementAufPunkt)
-            //Zugnummer/Signalnummer auslesen, zurückgeben
-            return 0;
-        }
-        /// <summary>
-        /// Behandeln eines MausClicks beim Bedienen
-        /// </summary>
-        /// <param name="p">Position des Mausklicks</param>
-        /// <returns></returns>
-        public List<AnlagenElement> BedienenMouseClick(Point p)
-        {
-            zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
-            List<AnlagenElement> elemList = SucheElementAufPunkt(p);
-            return elemList;
-        }
-        #endregion//Mausclick-Befehle
-        #region Servo
-        public bool ServoBewegungManuell(int servo, ServoAction action)
-        {
-            Servo s = this.ZeichnenElemente.ServoElemente.Element(servo);
-            if (s != null)
-            {
-                byte[] befehl = new byte[5];
-                befehl[0] = (byte)s.Ausgang.ArdNr;
-                befehl[1] = 72;
-                befehl[2] = (byte)(s.Ausgang.AdressenNr * 2 + s.Ausgang.BitNr);
-                if (action == ServoAction.LinksClick || action == ServoAction.RechtsClick)
-                {
-                    befehl[2] |= 0x080;
-                    befehl[3] = (byte)ZubehörServoSchrittweite;
-                    if (action == ServoAction.LinksClick)
-                    {
-                        befehl[3] = (byte)-befehl[3];
-                    }
-                }
-                else if (action == ServoAction.RechtsHold || action == ServoAction.LinksHold || action == ServoAction.HoldStop)
-                {
-                    befehl[2] |= 0x40;
-                    switch (action)
-                    {
-                        case ServoAction.RechtsHold:
-                            befehl[3] = 255;
-                            break;
-                        case ServoAction.LinksHold:
-                            befehl[3] = 1;
-                            break;
-                        case ServoAction.HoldStop:
-                            befehl[3] = 0;
-                            break;
-                    }
-                }
-                befehl[4] = (byte)((befehl[0] + befehl[1] + befehl[2] + befehl[3]) % 256);
-                _ardController.SendData(befehl);
-            }
-            return false;
-        }
-        #endregion//Servo
+		#endregion//Konstruktor(en)
 
-        #region Öffentliche Methoden
-        /// <summary>
-        /// Sucht nach Anlagenelementen, auf welche geclickt wurde
-        /// </summary>
-        /// <param name="punkt">Position des Clicks</param>
-        /// <returns></returns>
-        private List<AnlagenElement> SucheElementAufPunkt(Point punkt)
-        {
-            List<AnlagenElement> elemList = new List<AnlagenElement> { };
-            foreach (Entkuppler el in zeichnenElemente.EntkupplerElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Schalter el in zeichnenElemente.SchalterElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (FSS el in zeichnenElemente.FssElemente.Elemente)
-                if (el.MouseClick(punkt))
-                {
-                    elemList.Add(el);
-                }
-            foreach (Signal el in zeichnenElemente.SignalElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Servo el in zeichnenElemente.ServoElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Weiche el in zeichnenElemente.WeicheElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
-            foreach (Gleis el in zeichnenElemente.GleisElemente.Elemente)
-                if (el.MouseClick(punkt))
-                    elemList.Add(el);
+		#region Mausclick-Befehle
+		public int BedienenMouseDoubleClick(Point location) {
+			//TODO:
+			//Zeichenelemente auf punkt suchen (Methode: SucheElementAufPunkt)
+			//Zugnummer/Signalnummer auslesen, zurückgeben
+			return 0;
+		}
 
-            if (this.ZeichnenElemente.AktiverServoAction != ServoAction.None && this.ZeichnenElemente.AktiverServo != null)
-            {
-                OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, this.ZeichnenElemente.AktiverServoAction);
-                this.ZeichnenElemente.AktiverServoAction = ServoAction.None;
-            }
+		/// <summary>
+		/// Behandeln eines MausClicks beim Bedienen
+		/// </summary>
+		/// <param name="p">Position des Mausklicks</param>
+		/// <returns></returns>
+		public List<AnlagenElement> BedienenMouseClick(Point p) {
+			zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
+			List<AnlagenElement> elemList = SucheElementAufPunkt(p);
+			return elemList;
+		}
 
-            return elemList;
-        }
-        /// <summary>
-        /// Liest ankommende Befehle vom ArduinoController und verarbeitet diese weiters
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="a"></param>
-        private void _ardController_BefehlReceived(object sender, BefehlEventArgs a)
-		{
+		#endregion//Mausclick-Befehle
+
+
+		#region Servo
+		public bool ServoBewegungManuell(int servo, ServoAction action) {
+			Servo s = this.ZeichnenElemente.ServoElemente.Element(servo);
+			if (s != null) {
+				byte[] befehl = new byte[5];
+				befehl[0] = (byte)s.Ausgang.ArdNr;
+				befehl[1] = 72;
+				befehl[2] = (byte)(s.Ausgang.AdressenNr * 2 + s.Ausgang.BitNr);
+				if (action == ServoAction.LinksClick || action == ServoAction.RechtsClick) {
+					befehl[2] |= 0x080;
+					befehl[3] = (byte)ZubehörServoSchrittweite;
+					if (action == ServoAction.LinksClick) {
+						befehl[3] = (byte)-befehl[3];
+					}
+				}
+				else if (action == ServoAction.RechtsHold || action == ServoAction.LinksHold || action == ServoAction.HoldStop) {
+					befehl[2] |= 0x40;
+					switch (action) {
+						case ServoAction.RechtsHold:
+							befehl[3] = 255;
+							break;
+						case ServoAction.LinksHold:
+							befehl[3] = 1;
+							break;
+						case ServoAction.HoldStop:
+							befehl[3] = 0;
+							break;
+					}
+				}
+				befehl[4] = (byte)((befehl[0] + befehl[1] + befehl[2] + befehl[3]) % 256);
+				_ardController.SendData(befehl);
+			}
+			return false;
+		}
+		#endregion//Servo
+
+		#region Öffentliche Methoden
+		/// <summary>
+		/// Sucht nach Anlagenelementen, auf welche geclickt wurde
+		/// </summary>
+		/// <param name="punkt">Position des Clicks</param>
+		/// <returns></returns>
+		private List<AnlagenElement> SucheElementAufPunkt(Point punkt) {
+			List<AnlagenElement> elemList = new List<AnlagenElement> { };
+			foreach (Entkuppler el in zeichnenElemente.EntkupplerElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Schalter el in zeichnenElemente.SchalterElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (FSS el in zeichnenElemente.FssElemente.Elemente)
+				if (el.MouseClick(punkt)) {
+					elemList.Add(el);
+				}
+			foreach (Signal el in zeichnenElemente.SignalElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Servo el in zeichnenElemente.ServoElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Weiche el in zeichnenElemente.WeicheElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Gleis el in zeichnenElemente.GleisElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+
+			if (this.ZeichnenElemente.AktiverServoAction != ServoAction.None && this.ZeichnenElemente.AktiverServo != null) {
+				OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, this.ZeichnenElemente.AktiverServoAction);
+				this.ZeichnenElemente.AktiverServoAction = ServoAction.None;
+			}
+
+			return elemList;
+		}
+		/// <summary>
+		/// Liest ankommende Befehle vom ArduinoController und verarbeitet diese weiters
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="a"></param>
+		private void _ardController_BefehlReceived(object sender, BefehlEventArgs a) {
 			byte[] befehl = a.Befehl;
 			string befehlS = String.Empty;
 			foreach (byte b in befehl)
@@ -405,15 +374,14 @@ namespace MoBaSteuerung
 				}
 			}
 		}
-        #endregion //Mausclick-Befehle
-        
-        /// <summary>
-        /// Wenn Zustand in einer Adresse geändert wurde, wird dieser über den ArduinoController gesendet.
-        /// Wird keine Adresse an die Methode übergeben, werden alle Adressen ausgegeben.
-        /// </summary>
-        /// <param name="adresse">Adresse in der sich ein Zustand geändert hat</param>
-        private void Model_AnlagenzustandAdresseChanged(Adresse adresse)
-		{
+		#endregion //Mausclick-Befehle
+
+		/// <summary>
+		/// Wenn Zustand in einer Adresse geändert wurde, wird dieser über den ArduinoController gesendet.
+		/// Wird keine Adresse an die Methode übergeben, werden alle Adressen ausgegeben.
+		/// </summary>
+		/// <param name="adresse">Adresse in der sich ein Zustand geändert hat</param>
+		private void Model_AnlagenzustandAdresseChanged(Adresse adresse) {
 			if (adresse != null && adresse.ArdNr > 1) {
 				byte[] befehl = this.zeichnenElemente.AnlagenZustand.GetBefehl(adresse.ArdNr, adresse.AdressenNr);
 				if (befehl != null) {
@@ -430,14 +398,13 @@ namespace MoBaSteuerung
 			}
 		}
 
-        /// <summary>
-        /// Umschalten eines Elementes
-        /// </summary>
-        /// <param name="elementName">Elementtyp</param>
-        /// <param name="nr">ID des Elementes, welches geschaltet werden soll</param>
-        /// <returns></returns>
-        public bool ElementToggeln(string elementName, int nr)
-		{
+		/// <summary>
+		/// Umschalten eines Elementes
+		/// </summary>
+		/// <param name="elementName">Elementtyp</param>
+		/// <param name="nr">ID des Elementes, welches geschaltet werden soll</param>
+		/// <returns></returns>
+		public bool ElementToggeln(string elementName, int nr) {
 			AnlagenElement el = null;
 			switch (elementName) {
 				case "Servo":
@@ -487,16 +454,99 @@ namespace MoBaSteuerung
 
 			return false;
 		}
- 
+
+		
+
+		public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signalTyp) {
+			if (el != null) {
+				bool verlaengern = el.StartSignal.IsLocked;
+				if (!el.IsAktiv && !verlaengern) {
+					Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
+					fahrstraßenStartThread.Start(el);
+				}
+				bool action = el.AusgangToggeln(signalTyp, verlaengern);
+				if (action && _ardController.IsPortOpen())
+					OnAnlagenZustandAdresseChanged(el.Ausgang);
+				return action;
+			}
+			return false;
+		}
+		
+		/// <summary>
+		/// Schalten einer Fahrstraße über Tastatur
+		/// </summary>
+		/// <param name="signalNummer"></param>
+		/// <returns></returns>
+		public List<AnlagenElement> FahrstrassenSignal(int signalNummer, bool verlaengern) {
+			Signal sn = zeichnenElemente.SignalElemente.Element(signalNummer);
+			if (sn != null) {
+				return FahrstrassenSignalSchalten(sn, verlaengern);
+			}
+			return null;
+		}
+
+
+		/// <summary>
+		/// Fahrstrasse über Signal schalten.<para/>
+		/// Wenn Fahrstraßen in der Vorauswahl sind, wird überprüft ob das ausgewählte Signal ein gültiges Zielsignal ist <para/>
+		/// und die Fahrstrasse zurück gegeben und die Vorauswahl gelöscht.<para/>
+		/// Ist keine Fahrstraße in der Vorauswahl wird überprüft ob das Signal zu einer aktiven Fahrstrasse gehört und <para/>
+		/// diese zurückgegeben. Ist dies nicht der Fall werden alle verfügbaren Fahrstrassen, welche von diesem <para/>
+		/// Signal ausgehen zurückgegeben.
+		/// </summary>
+		/// <param name="signal">Startsignal</param>
+		/// <returns></returns>
+		public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal, bool verlaengern) {
+			List<AnlagenElement> el = new List<AnlagenElement>();
+			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
+
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen) {
+					if (signal == fs.StartSignal || signal == fs.EndSignal) {
+						el.Add(fs);
+					}
+				}
+
+				if (el.Count > 0) {
+					if (!verlaengern || el.Count != 1) {
+						//Todo: modifizieren Liste?
+						return el;
+					}
+					if (((FahrstrasseN)el[0]).StartSignal == signal) {
+						return el;
+					}
+					el.Clear();
+				}
+
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+					if (fs.StartSignal == signal && fs.AdressenFrei())
+						el.Add(fs);
+				}
+				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
+				return el;
+			}
+			else {
+				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
+					if (fs.EndSignal == signal) {
+						zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+						el.Add(fs);
+						//zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
+						return el;
+					}
+				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+				OnAnlageNeuZeichnen();
+			}
+			return null;
+		}
+
+		
 		/// <summary>
 		/// Alles neu zeichnen im Bedienmodus
 		/// </summary>
 		/// <param name="graphics"></param>
-		public void ZeichneElementeBedienen(Graphics graphics)
-		{
+		public void ZeichneElementeBedienen(Graphics graphics) {
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
-            this.zeichnenElemente.FSSAktualisieren();
-            this.zeichnenElemente.ZuegeAktualisieren();
+			this.zeichnenElemente.FSSAktualisieren();
+			this.zeichnenElemente.ZuegeAktualisieren();
 			this.zeichnenElemente.GleisElemente.ElementeZeichnen1(graphics);
 			this.zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
 			this.zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
@@ -516,8 +566,7 @@ namespace MoBaSteuerung
 		/// Alles neu zeichnen im Bearbeitungsmodus.
 		/// </summary>
 		/// <param name="graphics"></param>
-		public void ZeichneElementeBearbeiten(Graphics graphics)
-		{
+		public void ZeichneElementeBearbeiten(Graphics graphics) {
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
 
 			this.zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
@@ -544,8 +593,7 @@ namespace MoBaSteuerung
 		/// </summary>
 		/// <param name="graphicsPath"></param>
 		/// <returns></returns>
-		public bool AuswahlRechteckElemente(GraphicsPath graphicsPath)
-		{
+		public bool AuswahlRechteckElemente(GraphicsPath graphicsPath) {
 			// ToDo sind Elemente im Auswahlrechteck
 
 
@@ -556,8 +604,7 @@ namespace MoBaSteuerung
 		/// 
 		/// </summary>
 		/// <param name="graphicsPath"></param>
-		public void AuswahlRechteckVerschieben(GraphicsPath graphicsPath)
-		{
+		public void AuswahlRechteckVerschieben(GraphicsPath graphicsPath) {
 			//To Do Verschieben.
 
 		}
@@ -566,15 +613,13 @@ namespace MoBaSteuerung
 		/// 
 		/// </summary>
 		/// <param name="graphicsPath"></param>
-		public void AuswahlRechteckElementeLöschen(GraphicsPath graphicsPath)
-		{
+		public void AuswahlRechteckElementeLöschen(GraphicsPath graphicsPath) {
 			//To Do löschen.
 
 		}
 
 
-		public string StringBereinigen(string EingangsString)
-		{
+		public string StringBereinigen(string EingangsString) {
 			string startString = EingangsString;// null;//"  AA A";
 
 			string ergebnis = "";
@@ -593,72 +638,60 @@ namespace MoBaSteuerung
 
 			return ergebnis;
 		}
-        
-        #region ComPort
-        public string UpdateComPorts()
-        {
-            string result = "";
-            if (_connectedComPort != "")
-            {
-                string[] ports = _ardController.GetSerialPortNames();
 
-                bool contain = false;
-                foreach (string item in ports)
-                {
-                    if (_connectedComPort == item)
-                    {
-                        contain = true;
-                        break;
-                    }
-                }
-                if (!contain)
-                {
-                    try
-                    {
-                        if (!_ardController.CloseComPort())
-                        {
-                            _ardController.BefehlReceived -= _ardController_BefehlReceived;
-                            _ardController.Dispose();
-                            _ardController = new ArduinoController();
-                            _ardController.BefehlReceived += _ardController_BefehlReceived;
-                        }
-                    }
-                    catch (Exception e)
-                    {
+		#region ComPort
+		public string UpdateComPorts() {
+			string result = "";
+			if (_connectedComPort != "") {
+				string[] ports = _ardController.GetSerialPortNames();
 
-                    }
-                    result = "ComPort " + _connectedComPort + " getrennt";
-                }
-                else
-                {
-                    if (!_ardController.CloseComPort())
-                    {
-                        _ardController.BefehlReceived -= _ardController_BefehlReceived;
-                        _ardController.Dispose();
-                        _ardController = new ArduinoController();
-                        _ardController.BefehlReceived += _ardController_BefehlReceived;
-                    }
-                    if (_ardController.OpenComPort(_connectedComPort, false))
-                    {
-                        result = "ComPort " + _connectedComPort + " neu verbunden";
-                    }
-                    else
-                    {
-                        result = "ComPort " + _connectedComPort + " getrennt";
-                    }
+				bool contain = false;
+				foreach (string item in ports) {
+					if (_connectedComPort == item) {
+						contain = true;
+						break;
+					}
+				}
+				if (!contain) {
+					try {
+						if (!_ardController.CloseComPort()) {
+							_ardController.BefehlReceived -= _ardController_BefehlReceived;
+							_ardController.Dispose();
+							_ardController = new ArduinoController();
+							_ardController.BefehlReceived += _ardController_BefehlReceived;
+						}
+					}
+					catch (Exception e) {
 
-                }
-            }
-            return result;
-        }
-        #endregion//ComPort
-        #region Events
-        #region EeventHandler
+					}
+					result = "ComPort " + _connectedComPort + " getrennt";
+				}
+				else {
+					if (!_ardController.CloseComPort()) {
+						_ardController.BefehlReceived -= _ardController_BefehlReceived;
+						_ardController.Dispose();
+						_ardController = new ArduinoController();
+						_ardController.BefehlReceived += _ardController_BefehlReceived;
+					}
+					if (_ardController.OpenComPort(_connectedComPort, false)) {
+						result = "ComPort " + _connectedComPort + " neu verbunden";
+					}
+					else {
+						result = "ComPort " + _connectedComPort + " getrennt";
+					}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public event ViewNeuZeichnenEventHandler AnlageNeuZeichnen;
+				}
+			}
+			return result;
+		}
+		#endregion//ComPort
+		#region Events
+		#region EeventHandler
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public event ViewNeuZeichnenEventHandler AnlageNeuZeichnen;
 
 
 		/// <summary>
@@ -684,25 +717,25 @@ namespace MoBaSteuerung
 		public event ServoBewegungEventHandler ZubehoerServoAction;
 
 		#endregion
+
+
+
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual void OnAnlageNeuZeichnen()
-		{
+		public virtual void OnAnlageNeuZeichnen() {
 			if (this.AnlageNeuZeichnen != null) {
 				this.AnlageNeuZeichnen();
 			}
 		}
 
-		protected virtual void OnArduinoRueckmeldungReceived()
-		{
+		protected virtual void OnArduinoRueckmeldungReceived() {
 			if (this.ArduinoRueckmeldungReceived != null) {
 				this.ArduinoRueckmeldungReceived();
 			}
 		}
 
-		protected virtual void OnZubehoerServoAction(int servo, ServoAction richtung)
-		{
+		protected virtual void OnZubehoerServoAction(int servo, ServoAction richtung) {
 			if (this.ZubehoerServoAction != null) {
 				this.ZubehoerServoAction(servo, richtung);
 			}
@@ -711,8 +744,7 @@ namespace MoBaSteuerung
 		/// <summary>
 		/// 
 		/// </summary>
-		protected virtual void OnAnlagenZustandAdresseChanged(Adresse adresse)
-		{
+		protected virtual void OnAnlagenZustandAdresseChanged(Adresse adresse) {
 			if (this.AnlagenzustandAdresseChanged != null) {
 				this.AnlagenzustandAdresseChanged(adresse);
 			}
@@ -722,15 +754,13 @@ namespace MoBaSteuerung
 		/// Wird ausgelösst, wenn die Größe geändert wurde.
 		/// </summary>
 		/// <param name="e"></param>
-		protected virtual void OnAnlageGrößeInRasterChanged(Size e)
-		{
+		protected virtual void OnAnlageGrößeInRasterChanged(Size e) {
 			if (this.AnlageGrößeInRasterChanged != null) {
 				this.AnlageGrößeInRasterChanged(e);
 			}
 		}
 
-		protected virtual void OnAnlagenzustandChanged()
-		{
+		protected virtual void OnAnlagenzustandChanged() {
 			if (this.AnlagenzustandChanged != null) {
 				this.AnlagenzustandChanged();
 			}
@@ -740,8 +770,7 @@ namespace MoBaSteuerung
 		/// liefert die Zugliste
 		/// </summary>
 		/// <returns></returns>
-		public ElementListe<Zug> GetZugListe()
-		{
+		public ElementListe<Zug> GetZugListe() {
 			return zeichnenElemente.ZugElemente;
 		}
 
@@ -749,13 +778,11 @@ namespace MoBaSteuerung
 		/// liefert alle verfügbaren Portnamen
 		/// </summary>
 		/// <returns></returns>
-		public string[] GetSerialPortNames()
-		{
+		public string[] GetSerialPortNames() {
 			return _ardController.GetSerialPortNames();
 		}
 
-		public bool OpenComPort(string portName)
-		{
+		public bool OpenComPort(string portName) {
 			if (this._ardController.OpenComPort(portName)) {
 				_connectedComPort = portName;
 				if (zeichnenElemente.RückmeldungAktiv)
@@ -767,8 +794,7 @@ namespace MoBaSteuerung
 			return false;
 		}
 
-		public bool CloseComPort()
-		{
+		public bool CloseComPort() {
 			bool result = this._ardController.CloseComPort();
 			if (!result) {
 				_ardController.BefehlReceived -= _ardController_BefehlReceived;
@@ -786,8 +812,7 @@ namespace MoBaSteuerung
 		/// Löscht die gegenwärtige Auswahl (Selektion) im Bedienmodus, gegenwärtig können dies nur Fahrstraßen sein
 		/// </summary>
 		/// <returns>Gibt TRUE zurück, wenn eine Auswahl gelöscht wurde</returns>
-		public bool BedienenAuswahlLöschen()
-		{
+		public bool BedienenAuswahlLöschen() {
 			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count > 0) {
 				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 				return true;
@@ -796,8 +821,7 @@ namespace MoBaSteuerung
 		}
 
 
-		public bool NeuesElementVorschau(BearbeitungsModus bearbeitungsModus, Point letzterRasterpunkt, int zoom)
-		{
+		public bool NeuesElementVorschau(BearbeitungsModus bearbeitungsModus, Point letzterRasterpunkt, int zoom) {
 			if (this._neuesElement == null) {
 				switch (bearbeitungsModus) {
 					case BearbeitungsModus.Gleis:
@@ -851,22 +875,19 @@ namespace MoBaSteuerung
 		#endregion
 
 
-        public void BedienenServoManuell(ServoAction action)
-        {
-            Debug.Print("Servo Action " + action);
-            if (this.zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen())
-            {
-                OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, action);
-                //if (keyData == Keys.Left) {
-                //    OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, ServoAction.LinksClick);
-                //}
-                //else if(keyData == Keys.Right) {
-                //    OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, ServoAction.RechtsClick);
-                //}
-            }
-        }
-        private void EntkupplerAbschaltung(object entkuppler)
-		{
+		public void BedienenServoManuell(ServoAction action) {
+			Debug.Print("Servo Action " + action);
+			if (this.zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen()) {
+				OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, action);
+				//if (keyData == Keys.Left) {
+				//    OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, ServoAction.LinksClick);
+				//}
+				//else if(keyData == Keys.Right) {
+				//    OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, ServoAction.RechtsClick);
+				//}
+			}
+		}
+		private void EntkupplerAbschaltung(object entkuppler) {
 			Entkuppler el = (Entkuppler)entkuppler;
 			Thread.Sleep(this.EntkupplerAbschaltAutoWert * 1000);
 			if (el.ElementZustand == Elementzustand.An) {
