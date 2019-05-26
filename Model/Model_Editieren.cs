@@ -21,8 +21,8 @@ using MoBa.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
 namespace MoBaSteuerung {
+    //hier nur Methoden zum editieren
 
-	public partial class Model : Control { }
 	/// <summary>
 	/// Anlagenlogik
 	/// </summary>

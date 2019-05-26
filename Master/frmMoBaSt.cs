@@ -1423,7 +1423,8 @@ namespace MoBaSteuerung {
 		private void zugEditorToolStripMenuItem_Click(object sender, EventArgs e) {
 			frmZugEditor frm = new frmZugEditor(this.Controller.ZeichnenElemente);
 			if (frm.ShowDialog(this) == DialogResult.OK) {
-				// string[][] t =  frm.auslesen();
+			//model.
+                // string[][] t =  frm.auslesen();
 			}
 			else {
 			}
@@ -1494,6 +1495,11 @@ namespace MoBaSteuerung {
        
 
         private void pictureBoxView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pictureBoxView_Click(object sender, EventArgs e)
         {
 
         }

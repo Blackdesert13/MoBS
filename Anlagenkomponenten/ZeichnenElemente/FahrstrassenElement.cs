@@ -9,6 +9,7 @@ using MoBaSteuerung.Anlagenkomponenten.Enum;
 using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 using System.Text.RegularExpressions;
 using System.Linq;
+using MoBaSteuerung.ZeichnenElemente;
 
 namespace MoBaSteuerung.Elemente {
 
@@ -599,6 +600,58 @@ namespace MoBaSteuerung.Elemente {
         private List<FahrstrasseN> _aktiveFahrstrassen;
         private List<FahrstrasseN> _auswahlFahrstrassen;
         private List<FahrstrasseN> _gespeicherteFahrstrassen;
+        #region Properties
+
+        /// <summary>
+        /// zum Speichern in der Anlagen-Datei
+        /// </summary>
+        public string SpeicherString
+        {
+            get
+            {
+                string spString = "FahrstraßenN"
+                                + "\t" + "Nr."
+                                + "\t" + "Start"
+                                + "\t" + "Ziel";
+                foreach (FahrstrasseN x in this.GespeicherteFahrstrassen)
+                {
+                    spString += Environment.NewLine + x.SpeicherString;
+                }
+                return spString;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Int32 Zoom
+        {
+            set
+            {
+                foreach (FahrstrasseN item in this._gespeicherteFahrstrassen)
+                {
+                    item.Zoom = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AnzeigeTyp AnzeigeTyp
+        {
+            set
+            {
+                foreach (FahrstrasseN item in this._aktiveFahrstrassen)
+                {
+                    item.AnzeigenTyp = value;
+                }
+                foreach (FahrstrasseN item in this._auswahlFahrstrassen)
+                {
+                    item.AnzeigenTyp = value;
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -628,12 +681,13 @@ namespace MoBaSteuerung.Elemente {
                 _gespeicherteFahrstrassen = value;
             }
         }
+        #endregion //Properties
 
         /// <summary>
-		/// Sucht in der Elementenliste die erste nicht belegte Nummer
-		/// </summary>
-		/// <returns>Gibt die erste freie Nummer in der Liste zurück</returns>
-		public int SucheFreieNummer()
+        /// Sucht in der Elementenliste die erste nicht belegte Nummer
+        /// </summary>
+        /// <returns>Gibt die erste freie Nummer in der Liste zurück</returns>
+        public int SucheFreieNummer()
 		{
 			int i = 0;
 			FahrstrasseN el = null;
@@ -643,49 +697,6 @@ namespace MoBaSteuerung.Elemente {
 			} while (el != null);
 			return i;
 		}
-
-		/// <summary>
-        /// zum Speichern in der Anlagen-Datei
-        /// </summary>
-        public string SpeicherString {
-            get {
-                string spString = "FahrstraßenN"
-                                + "\t" + "Nr."
-                                + "\t" + "Start"
-                                + "\t" + "Ziel";
-                foreach (FahrstrasseN x in this.GespeicherteFahrstrassen) {
-                    spString += Environment.NewLine + x.SpeicherString;
-                }
-                return spString;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Int32 Zoom {
-            set {
-                foreach (FahrstrasseN item in this._gespeicherteFahrstrassen) {
-                    item.Zoom = value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public AnzeigeTyp AnzeigeTyp {
-            set {
-                foreach (FahrstrasseN item in this._aktiveFahrstrassen) {
-                    item.AnzeigenTyp = value;
-                }
-                foreach (FahrstrasseN item in this._auswahlFahrstrassen) {
-                    item.AnzeigenTyp = value;
-                }
-            }
-        }
-
-
 
         /// <summary>
         /// 
@@ -728,7 +739,7 @@ namespace MoBaSteuerung.Elemente {
 
 
         /// <summary>
-        /// 
+        /// FahrstrasseNeu ist die aktuelle Fahrstrasse
         /// </summary>
         /// <param name="iD"></param>
         /// <returns></returns>
@@ -1348,15 +1359,22 @@ namespace MoBaSteuerung.Elemente {
         }
 
         /// <summary>
-        /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung
+        /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
         /// </summary>
         /// <returns></returns>
         public bool AdressenFrei() {
-            // if (_endSignal.Zug > 0)
+            //Prüfung der Zuglänge am Zielsignal
+
+            if(_endSignal.ZugLaengeMax>0) //(_endSignal.l > 0)
+            {
+                if (_startSignal.Zug.Laenge > _endSignal.ZugLaengeMax)
+                    return false;             
+            }
             bool startGl = true;
-            foreach (Befehl adr in _startBefehle) {
+            foreach (Befehl adr in _startBefehle)//prüft  alle Elemente in der Startbefehlsliste
+            {
                 if (startGl)
-                {
+                {//
                     if(adr.Element is Signal)
                         startGl = false;
                 }

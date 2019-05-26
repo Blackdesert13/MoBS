@@ -31,10 +31,13 @@ namespace ModellBahnSteuerung.ZugEditor
                 string[] zeile = {
                     Convert.ToString(x.ID),
                     Convert.ToString(x.SignalNummer),
-                    x.Lok,
                     x.ZugTyp,
-                    x.Geschwindigkeit,
-                    x.Bezeichnung };
+                    x.Lok,
+                    x.Bezeichnung,
+                    Convert.ToString( x.AnkunftsZeit),//A-Zeit
+                    Convert.ToString( x.Geschwindigkeit),
+                    Convert.ToString( x.DigitalAdresse),
+                    };
                 dataGridView1.Rows.Add(zeile);
             }
         }
@@ -57,7 +60,7 @@ namespace ModellBahnSteuerung.ZugEditor
                 elem[6] = (string)zeile.Cells[5].Value;
                 if (elem[1] != null) { Zug zug = new Zug(pa, 0, AnzeigeTyp.Bedienen, elem); }               
             }
-
+            pa.ZugDateiSpeichern();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

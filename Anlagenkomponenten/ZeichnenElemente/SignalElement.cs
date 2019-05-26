@@ -15,26 +15,32 @@ namespace MoBaSteuerung.Elemente {
     /// Signal
     /// </summary>
     public class Signal : GleisRasterAnlagenElement {
-        private GraphicsPath graphicsPathHintergrund;
-        private GraphicsPath graphicsPathKreis;
-        private GraphicsPath graphicsPathLinien;
-        private GraphicsPath graphicsPathText;
+        #region private Felder
+        private GraphicsPath _graphicsPathHintergrund;
+        private GraphicsPath _graphicsPathKreis;
+        private GraphicsPath _graphicsPathLinien;
+        private GraphicsPath _graphicsPathText;
 
-        private Color farbe;
-        private StringFormat stringFormat;
+        private Color _farbe;
+        private StringFormat _stringFormat;
  
         private bool _inZeichenRichtung = false; 
-        private InfoFenster infoFenster = null;
-        //private int zugNr = 0;
+        private InfoFenster _infoFenster = null;
         private Zug zug ;
-        private bool autoStart;
+        private bool _autoStart;
+        private int _zugLaengeMax;
+        //private DateTime _zeitAnkunft;
+
+        #endregion //private Felder
+
+        #region Properties Eigenschaften
         /// <summary>
         /// zum Speichern in der Anlagen-Datei
         /// </summary>
         public override string SpeicherString {
             get {
                 int infoNr = 0;
-                if ( infoFenster != null) { infoNr = infoFenster.ID; }
+                if ( _infoFenster != null) { infoNr = _infoFenster.ID; }
                 return "Signal"
                      + "\t" + ID
                      + "\t" + AnschlussGleis.ID + " " + Gleisposition
@@ -42,8 +48,9 @@ namespace MoBaSteuerung.Elemente {
                      + "\t" + infoNr
                      + "\t" + Ausgang.SpeicherString
                      + "\t" + Bezeichnung
-                     + "\t" + Stecker 
-                     + "\t" + autoStart;
+                     + "\t" + Stecker
+                     + "\t" + _autoStart 
+                     + "\t" + _zugLaengeMax;
             }
         }
         /// <summary>
@@ -54,7 +61,91 @@ namespace MoBaSteuerung.Elemente {
                 return "Signal " + this.ID;
             }
         }
+        public string Anzeige
+        {
+            set
+            {
+                if (_infoFenster != null)
+                {
+                    _infoFenster.Text = value;
+                }
+            }
+        }
+        /// <summary>
+        /// max. Zugänge am Signal
+        /// </summary>
+        public int ZugLaengeMax
+        {
+            set { _zugLaengeMax = value; }
+            get { return _zugLaengeMax; }
+        }
 
+        public Zug Zug { get { return zug; } }
+
+
+        public int ZugNr
+        {
+            set
+            {
+                int nZug = value;
+                if (nZug == 0)
+                {
+                    zug = null;
+                    _infoFenster.Text = "";//"Sn" + ID;
+                }
+                else
+                {
+                    zug = Parent.ZugElemente.Element(nZug);
+                    if (_infoFenster != null)
+                        _infoFenster.Text = zug.Anzeige;
+                }
+            }
+            get
+            {
+                if (zug != null)
+                { return zug.ID; }
+                else { return 0; }
+            }
+        }
+
+        /// <summary>
+        /// wechselt die Farbe grün-rot
+        /// </summary>
+        public bool Durchfahrt
+        {
+            set
+            {
+                if (value)
+                {
+                    this._farbe = Color.Green;
+                }
+                else
+                {
+                    this._farbe = Color.Red;
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool InZeichenRichtung
+        {
+            get
+            {
+                return _inZeichenRichtung;
+            }
+
+            set
+            {
+                _inZeichenRichtung = value;
+            }
+        }
+
+
+
+        #endregion //Properties
+
+        #region Konstruktoren
         public Signal(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition, bool inZeichenRichtung)
          : base(parent, 0, zoom, anzeigeTyp) {
             KurzBezeichnung = "Sn";
@@ -62,11 +153,11 @@ namespace MoBaSteuerung.Elemente {
             Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
             this._inZeichenRichtung = inZeichenRichtung;
 
-            this.graphicsPathHintergrund = new GraphicsPath();
-            this.graphicsPathKreis = new GraphicsPath();
-            this.graphicsPathLinien = new GraphicsPath();
+            this._graphicsPathHintergrund = new GraphicsPath();
+            this._graphicsPathKreis = new GraphicsPath();
+            this._graphicsPathLinien = new GraphicsPath();
 
-            this.farbe = Color.Red;
+            this._farbe = Color.Red;
 
             this.Berechnung();
         }
@@ -84,16 +175,16 @@ namespace MoBaSteuerung.Elemente {
                     AnschlussGleis = gl;
                     Parent.SignalElemente.Hinzufügen(this);
 
-                    this.stringFormat = new StringFormat();
-                    this.stringFormat.Alignment = StringAlignment.Center;
-                    this.stringFormat.LineAlignment = StringAlignment.Center;
+                    this._stringFormat = new StringFormat();
+                    this._stringFormat.Alignment = StringAlignment.Center;
+                    this._stringFormat.LineAlignment = StringAlignment.Center;
 
-                    this.graphicsPathHintergrund = new GraphicsPath();
-                    this.graphicsPathKreis = new GraphicsPath();
-                    this.graphicsPathLinien = new GraphicsPath();
-                    this.graphicsPathText = new GraphicsPath();
+                    this._graphicsPathHintergrund = new GraphicsPath();
+                    this._graphicsPathKreis = new GraphicsPath();
+                    this._graphicsPathLinien = new GraphicsPath();
+                    this._graphicsPathText = new GraphicsPath();
 
-                    this.farbe = Color.Red;
+                    this._farbe = Color.Red;
 
                     this.Berechnung();
 
@@ -110,7 +201,8 @@ namespace MoBaSteuerung.Elemente {
             if (elem.Length > 7)
                 Stecker = elem[7];
             Ausgang = new Adresse(parent);
-            if (elem.Length > 8) autoStart = Convert.ToBoolean( elem[8]);
+            if (elem.Length > 8) _autoStart = Convert.ToBoolean( elem[8]);
+            if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
             Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
             if (gl != null) {
                 PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
@@ -122,92 +214,28 @@ namespace MoBaSteuerung.Elemente {
                     AnschlussGleis = gl;
                     Parent.SignalElemente.Hinzufügen(this);
 
-                    this.stringFormat = new StringFormat();
-                    this.stringFormat.Alignment = StringAlignment.Center;
-                    this.stringFormat.LineAlignment = StringAlignment.Center;
+                    this._stringFormat = new StringFormat();
+                    this._stringFormat.Alignment = StringAlignment.Center;
+                    this._stringFormat.LineAlignment = StringAlignment.Center;
 
-                    this.graphicsPathHintergrund = new GraphicsPath();
-                    this.graphicsPathKreis = new GraphicsPath();
-                    this.graphicsPathLinien = new GraphicsPath();
-                    this.graphicsPathText = new GraphicsPath();
+                    this._graphicsPathHintergrund = new GraphicsPath();
+                    this._graphicsPathKreis = new GraphicsPath();
+                    this._graphicsPathLinien = new GraphicsPath();
+                    this._graphicsPathText = new GraphicsPath();
 
-                    this.farbe = Color.Red;
+                    this._farbe = Color.Red;
 
                     this.Berechnung();
                 }
             }
             infoFensterLaden(Convert.ToInt16(elem[4]));
         }
+        #endregion //Konstruktoren
 
         private void infoFensterLaden(int Nummer)
         {
-            infoFenster = this.Parent.InfoElemente.Element(Nummer);
+            _infoFenster = this.Parent.InfoElemente.Element(Nummer);
         }
-
-        public string Anzeige {
-            set
-            {
-                if(infoFenster != null)
-                {
-                    infoFenster.Text = value;
-                }
-            }
-        }
-
-        /*public void ZugErmitteln()
-        {
-        }*/
-
-        public int Zug {
-            set
-            {
-                int nZug = value;
-                if(nZug == 0)
-                {
-                    zug = null;
-                    infoFenster.Text = "";//"Sn" + ID;
-                }
-                else
-                {
-                    zug = Parent.ZugElemente.Element(nZug);
-                    if(infoFenster != null)
-                        infoFenster.Text = zug.Anzeige;
-                }
-            }
-			get
-            {
-                if (zug != null)
-                { return zug.ID; }
-                else { return 0; }
-			}
-        }
-
-        /// <summary>
-        /// wechselt die Farbe grün-rot
-        /// </summary>
-        public bool Durchfahrt {
-            set {
-                if (value) {
-                    this.farbe = Color.Green;
-                }
-                else {
-                    this.farbe = Color.Red;
-                }
-            }
-        }
-
-
-        public bool InZeichenRichtung {
-            get {
-                return _inZeichenRichtung;
-            }
-
-            set {
-                _inZeichenRichtung = value;
-            }
-        }
-
-
 
         /// <summary>
         /// 
@@ -226,16 +254,16 @@ namespace MoBaSteuerung.Elemente {
                     farbePinsel = Color.FromArgb(transpanz, Color.Red);
                     farbeStift = Color.FromArgb(transpanz, Color.Black);
                     if(this.ElementZustand == Elementzustand.Selektiert)
-                        graphics.FillPath(Brushes.Yellow, this.graphicsPathHintergrund);
+                        graphics.FillPath(Brushes.Yellow, this._graphicsPathHintergrund);
                     break;
                 case AnzeigeTyp.Bedienen:
-                    if (infoFenster != null)
+                    if (_infoFenster != null)
                     {
-                        if (zug == null) { infoFenster.Text = ""; }
-                            else { infoFenster.Text = zug.Anzeige; }
+                        if (zug == null) { _infoFenster.Text = ""; }
+                            else { _infoFenster.Text = zug.Anzeige; }
                     }
 
-                    graphics.FillPath(Brushes.White, this.graphicsPathHintergrund);
+                    graphics.FillPath(Brushes.White, this._graphicsPathHintergrund);
                     if (Passiv) {
                         transpanz = 128;
                     }
@@ -252,12 +280,12 @@ namespace MoBaSteuerung.Elemente {
 
 
 
-            graphics.FillPath(pinsel, this.graphicsPathKreis);
-            graphics.DrawPath(Pens.Black, this.graphicsPathKreis);
-            graphics.DrawPath(Pens.Black, this.graphicsPathLinien);
+            graphics.FillPath(pinsel, this._graphicsPathKreis);
+            graphics.DrawPath(Pens.Black, this._graphicsPathKreis);
+            graphics.DrawPath(Pens.Black, this._graphicsPathLinien);
 
             if (this.AnzeigenTyp == AnzeigeTyp.Bedienen)
-                graphics.DrawPath(Pens.Black, this.graphicsPathText);
+                graphics.DrawPath(Pens.Black, this._graphicsPathText);
         }
 
         /// <summary>
@@ -278,25 +306,25 @@ namespace MoBaSteuerung.Elemente {
             matrix.Scale(this.Zoom, this.Zoom);
             matrix.Rotate(-winkel);
 
-            this.graphicsPathHintergrund.Reset();
-            this.graphicsPathHintergrund.AddEllipse(new RectangleF(-0.5f, -0.5f, 1f, 1f));
-            this.graphicsPathHintergrund.Transform(matrix);
+            this._graphicsPathHintergrund.Reset();
+            this._graphicsPathHintergrund.AddEllipse(new RectangleF(-0.5f, -0.5f, 1f, 1f));
+            this._graphicsPathHintergrund.Transform(matrix);
 
-            this.graphicsPathKreis.Reset();
-            this.graphicsPathKreis.AddEllipse(new RectangleF(0f, 0f, 0.5f, 0.5f));
-            this.graphicsPathKreis.Transform(matrix);
+            this._graphicsPathKreis.Reset();
+            this._graphicsPathKreis.AddEllipse(new RectangleF(0f, 0f, 0.5f, 0.5f));
+            this._graphicsPathKreis.Transform(matrix);
 
-            this.graphicsPathLinien.Reset();
-            this.graphicsPathLinien.AddLines(new PointF[] { new PointF(0.0f, 0.25f), new PointF(-0.5f, 0.25f), new PointF(-0.5f, 0.5f), new PointF(-0.5f, 0.0f) });
-            this.graphicsPathLinien.Transform(matrix);
+            this._graphicsPathLinien.Reset();
+            this._graphicsPathLinien.AddLines(new PointF[] { new PointF(0.0f, 0.25f), new PointF(-0.5f, 0.25f), new PointF(-0.5f, 0.5f), new PointF(-0.5f, 0.0f) });
+            this._graphicsPathLinien.Transform(matrix);
 
             if (this.AnzeigenTyp == AnzeigeTyp.Bedienen) {
                 Matrix matrixText = new Matrix();
                 matrixText.Translate(this.PositionRaster.X * this.Zoom, this.PositionRaster.Y * this.Zoom);
                 matrixText.Scale(this.Zoom, this.Zoom);
-                this.graphicsPathText.Reset();
-                this.graphicsPathText.AddString(ID.ToString(), new FontFamily("Arial"), 0, 0.5f, this.DrehenUmPunkt(new PointF(0, 0), new PointF(0, -0.25f), winkel), this.stringFormat);
-                this.graphicsPathText.Transform(matrixText);
+                this._graphicsPathText.Reset();
+                this._graphicsPathText.AddString(ID.ToString(), new FontFamily("Arial"), 0, 0.5f, this.DrehenUmPunkt(new PointF(0, 0), new PointF(0, -0.25f), winkel), this._stringFormat);
+                this._graphicsPathText.Transform(matrixText);
             }
 
             //watch.Stop();
@@ -306,7 +334,7 @@ namespace MoBaSteuerung.Elemente {
 
 
         public override bool MouseClick(Point punkt) {
-            return this.graphicsPathHintergrund.GetBounds().Contains(punkt);
+            return this._graphicsPathHintergrund.GetBounds().Contains(punkt);
         }
 
         /// <summary>
@@ -352,8 +380,10 @@ namespace MoBaSteuerung.Elemente {
         public void ZugWechsel(int NeuesSignal)
         {
             int neueSignalNr = NeuesSignal;
-            if(zug!=null)
+            if (zug != null) {
+                zug.AnkunftsZeit = DateTime.Now;
                 zug.SignalNummer = neueSignalNr;
+           }
         }
     }
 }

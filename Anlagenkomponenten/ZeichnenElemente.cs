@@ -9,15 +9,17 @@ using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 using System.Drawing;
 using MoBaSteuerung.ZeichnenElemente;
 using MoBa.Elemente;
+using System.IO;
 
 namespace MoBaSteuerung.Anlagenkomponenten {
 
 
-   /// <summary>
-   /// enthält alle Elemente einer Anlage
-   /// </summary>
-    public class AnlagenElemente 
+    /// <summary>
+    /// enthält alle Elemente einer Anlage
+    /// </summary>
+    public class AnlagenElemente
     {
+        #region private Felder
         private ElementListe<Regler> reglerElemente;
         private ElementListe<Anschluss> anschlussElemente;
         private ElementListe<Servo> servoElemente;
@@ -34,7 +36,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         private FahrstrassenNElemente fahrstrassenElemente;
         private ElementListe<Zug> zugElemente;
         private Anlagenzustand anlagenZustand;
-        
+
 
         private bool _rückmeldungAnzeigen;
         private bool _rückmeldungAktiv;
@@ -44,23 +46,25 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         private Servo _aktiverServo = null;
         private ServoAction _aktiverServoRichtung = ServoAction.None;
         private int _zoom;
-
+        private string zugDateiPfadName;
+        #endregion //private Felder
         /// <summary>
         /// enthält alle Elemente der Anlage
         /// </summary>
-        public AnlagenElemente() {
+        public AnlagenElemente()
+        {
 
-            this.reglerElemente   = new ElementListe<Regler>();
+            this.reglerElemente = new ElementListe<Regler>();
             this.anschlussElemente = new ElementListe<Anschluss>();
-            this.servoElemente    = new ElementListe<Servo>();
-            this.knotenElemente   = new ElementListe<Knoten>();
-            this.gleisElemente    = new ElementListe<Gleis>();
-            this.weicheElemente   = new ElementListe<Weiche>();
-            this.signalElemente   = new ElementListe<Signal>();
+            this.servoElemente = new ElementListe<Servo>();
+            this.knotenElemente = new ElementListe<Knoten>();
+            this.gleisElemente = new ElementListe<Gleis>();
+            this.weicheElemente = new ElementListe<Weiche>();
+            this.signalElemente = new ElementListe<Signal>();
             this.schalterElemente = new ElementListe<Schalter>();
-            this.fssElemente      = new ElementListe<FSS>();           
+            this.fssElemente = new ElementListe<FSS>();
             this.entkupplerElemente = new ElementListe<Entkuppler>();
-            this.infoElemente       = new ElementListe<InfoFenster>();
+            this.infoElemente = new ElementListe<InfoFenster>();
             this.haltestellenElemente = new ElementListe<Haltestelle>();
 
             this.listeMCSpeicher = new ElementListe<MCSpeicher.MCSpeicher>();
@@ -74,6 +78,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             this.EntkupplerAbschaltAutoWert = 3;
         }
 
+        public string ZugDateiPfadName{set { zugDateiPfadName = value; } }
+            
         /// <summary>
         /// 
         /// </summary>
@@ -203,7 +209,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         }
 
         /// <summary>
-        /// liefert die Infofenster-Liste
+        /// liefert die Haltestellen-Liste
         /// </summary>
         public ElementListe<Haltestelle> HaltestellenElemente
         {
@@ -328,6 +334,20 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             }
         }
 
+        /// <summary>
+        /// speichert die gegenwärtige Zug-Liste der Anlage in einer Datei
+        /// </summary>
+        /// <param name="zugDateiPfadName">Der Pfad zu der zu speichernden Zugdatei</param>
+        public void ZugDateiSpeichern()//string zugDateiPfadName)
+        {
+            StreamWriter zugStreamWriter = new StreamWriter(zugDateiPfadName + ".zug", false, System.Text.Encoding.UTF8);
+
+            zugStreamWriter.WriteLine(Environment.NewLine + "Züge\tNr.\tSignal\tLok\tTyp\tGeschw\tBez"
+                                                                         + this.ZugElemente.SpeicherString);
+            zugStreamWriter.Flush();
+            zugStreamWriter.Dispose();
+        }
+
         public void FSSAktualisieren()
         {
             //Logging.Log.Schreibe("123", LogLevel.Info);
@@ -424,22 +444,35 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             ergebnis.AddRange(anschlussElemente.SteckerSuchen(stecker));
             return ergebnis;
         }
-
         /// <summary>
+        /// Züge werden in die Signale neu eingetragen
+        /// </summary>
+        public void ZuegeAktualisieren()
+        {
+            foreach (Signal x in signalElemente.Elemente) x.ZugNr = 0;
+            foreach (Zug x in zugElemente.Elemente)
+            {
+                if (x.SignalNummer != 0)
+                {
+                    signalElemente.Element(x.SignalNummer).ZugNr = x.ID;
+                }
+            }
+        }
+       /* /// <summary>
         /// belegt alle Signale mit den Zügen neu(in Arbeit)
         /// </summary>
         public void ZuegeAktualisieren()
         {
             foreach(Signal s in signalElemente.Elemente)
             {
-                s.Zug = 0;
+                s.ZugNr = 0;
             }
             foreach(Zug z in zugElemente.Elemente)
             {
-                if(z.SignalNummer != 0) { signalElemente.Element(z.SignalNummer).Zug = z.ID; }
+                if(z.SignalNummer != 0) { signalElemente.Element(z.SignalNummer).ZugNr = z.ID; }
             }
 
-        }
+        }*/
        
         /// <summary>
         /// verknüpft FSS untereinander

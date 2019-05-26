@@ -54,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArduinoController.cs" />
+    <Compile Include="Model_Fahrstrassen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Model_LadenSpeichern.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EditKommando.cs" />
     <Compile Include="Model.cs">
       <SubType>Component</SubType>

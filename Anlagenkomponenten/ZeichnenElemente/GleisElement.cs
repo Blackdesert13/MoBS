@@ -554,9 +554,9 @@ namespace MoBaSteuerung.Elemente {
         {
             if (_eingang.Stellung) return true;
             if (_signale[0] != null)
-            { if (_signale[0].Zug != 0) return true; }
+            { if (_signale[0].ZugNr != 0) return true; }
             if (_signale[1] != null)
-            { if (_signale[1].Zug != 0) return true; }
+            { if (_signale[1].ZugNr != 0) return true; }
             return false;
         }
 
