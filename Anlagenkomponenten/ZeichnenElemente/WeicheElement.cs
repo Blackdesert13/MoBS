@@ -23,7 +23,7 @@ namespace MoBaSteuerung.Elemente {
         private GraphicsPath[] graphicsPathLinien = new GraphicsPath[2] { new GraphicsPath(), new GraphicsPath() };
         private GraphicsPath graphicsPathUntergrung = new GraphicsPath();
         private bool _grundstellung = false;
-       
+
         #region Properties
         /// <summary>
         /// zum Speichern in der Anlagen-Datei
@@ -50,11 +50,13 @@ namespace MoBaSteuerung.Elemente {
         public bool Grundstellung {
             get { return _grundstellung; }
             set { _grundstellung = value;}
-        }
+            }
 
         public Knoten Knoten { get { return _knoten; } }
-        
+
         #endregion //Properties
+
+
         /// <summary>
         /// zum Laden aus der Text-Datei
         /// </summary>

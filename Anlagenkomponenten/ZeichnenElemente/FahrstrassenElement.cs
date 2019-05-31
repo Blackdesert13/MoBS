@@ -1010,7 +1010,7 @@ namespace MoBaSteuerung.Elemente {
 										+ "\t" + EndSignal.ID
 										+ "\tFalse"
 										+ "\tFalse";
-				txt += Environment.NewLine + " BefehlStart" + this.AuslesenBefehlsliste(_startBefehle);
+				txt += Environment.NewLine + " BefehlStart" + StartBefehleString;
 
 				txt += Environment.NewLine + " BefehlZiel" + this.AuslesenBefehlsliste(_endBefehle);
 
@@ -1046,12 +1046,18 @@ namespace MoBaSteuerung.Elemente {
 
 		public string StartBefehleString {
 			get {
-				return this.AuslesenBefehlsliste(_startBefehle);
+				string value = "";
+				if(_startGleise != null)
+					value += this.AuslesenBefehlsliste(_startGleise);
+				value += this.AuslesenBefehlsliste(_startBefehle);
+				return value;
 			}
-			set {
+			set { 
 				string[] spString = value.Trim().Split(';');
 				_startBefehle = new List<Befehl>();
+				_startGleise = null;
 				this.EinlesenBefehlsliste(_startBefehle, spString, true);
+				StartGleiseAktualisieren();
 			}
 		}
 
@@ -1321,34 +1327,45 @@ namespace MoBaSteuerung.Elemente {
 			graphics.DrawPath(stift, _fahrstrLinie);
 		}
 
-
-		public override void Berechnung() {
-			_fahrstrLinie.Reset();
-
-			if (_startGleise == null) {
+		private void StartGleiseAktualisieren()
+		{
+			if (_startGleise == null)
+			{
 				_startGleise = new List<Befehl>();
-				for (int i = 0; i < _startBefehle.Count;) {
+				for (int i = 0; i < _startBefehle.Count;)
+				{
 					Befehl befehl = _startBefehle[0];
-					if (befehl.Element is Signal) {
+					if (befehl.Element is Signal)
+					{
 						break;
 					}
 					_startBefehle.Remove(befehl);
 					_startGleise.Add(befehl);
 				}
-				if(_startGleise.Count == 0) {
+				if (_startGleise.Count == 0)
+				{
 					Befehl befehl = null;
-					foreach (Befehl element in _startBefehle) {
-						if(element.Element is Gleis) {
+					foreach (Befehl element in _startBefehle)
+					{
+						if (element.Element is Gleis)
+						{
 							befehl = element;
 							break;
 						}
 					}
-					if(befehl != null) {
+					if (befehl != null)
+					{
 						_startBefehle.Remove(befehl);
 						_startGleise.Add(befehl);
 					}
 				}
 			}
+		}
+
+		public override void Berechnung() {
+			_fahrstrLinie.Reset();
+
+			StartGleiseAktualisieren();
 
 			List<Point> punkte = new List<Point> { };
 			punkte.Add(_startSignal.PositionRaster);
@@ -1387,18 +1404,27 @@ namespace MoBaSteuerung.Elemente {
 			// if (_endSignal.Zug > 0)
 			//   return false;
 			foreach (Befehl adr in _startBefehle) {
-				if(adr.Element is Signal || adr.Element is Knoten) {
+				if(adr.Element is Signal) {
+					if(adr.Element == this.EndSignal && adr.Element.IsLocked){
+						return false;
+					}
 					continue;
+				}
+
+				if (adr.Element is Knoten) {
+					continue;
+				}
+				if (adr.Element is Gleis)
+				{
+					Gleis gl = (Gleis)adr.Element;
+					if (gl.GleisBelegung())
+						return false;
 				}
 				if (adr.Element.IsLocked) {
 					if (adr.SchaltZustand != adr.Element.Ausgang.AdresseAbfragen())
 						return false;
 				}
-				if (adr.Element is Gleis)
-                    {
-                        Gleis gl = (Gleis)adr.Element;
-                        if (gl.GleisBelegung()) return false;
-                    }
+				
 			}
 			return true;
 		}
@@ -1419,6 +1445,17 @@ namespace MoBaSteuerung.Elemente {
 					}
 				}
 				else {
+					FahrstrasseN fsAnkommend = null;
+					foreach(FahrstrasseN el in Parent.FahrstrassenElemente.AktiveFahrstrassen) {
+						if(el.EndSignal == this.StartSignal) {
+							fsAnkommend = el;
+							break;
+						}
+					}
+					if(fsAnkommend != null) {
+						fsAnkommend.AusgangToggeln(FahrstrassenSignalTyp.ZielSignal, verlaengern);
+					}
+
 					foreach (Befehl adr in _startBefehle) {
 						adr.Element.IsLocked = false;
 					}
@@ -1433,7 +1470,7 @@ namespace MoBaSteuerung.Elemente {
 				}
 				this.Selektiert = false;
 				this.Ausgang.AusgangToggeln();
-                Parent.FahrstrassenElemente.AktiveFahrstrassenAktualisieren(Parent.AnlagenZustand);
+        Parent.FahrstrassenElemente.AktiveFahrstrassenAktualisieren(Parent.AnlagenZustand);
 				return true;
 			}
 			return false;

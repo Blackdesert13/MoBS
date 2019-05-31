@@ -15,6 +15,7 @@ namespace MoBaSteuerung.Elemente {
         //private Rectangle _mausRechteck = new Rectangle();
         private GraphicsPath _passivZeichen;
         private GraphicsPath _aktivZeichen;
+
         #region Properties
         /// <summary>
         /// zum Speichern in der Anlagen-Datei

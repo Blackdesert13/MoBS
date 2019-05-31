@@ -10,7 +10,6 @@ using System.Drawing;
 using MoBaSteuerung.ZeichnenElemente;
 using MoBa.Elemente;
 using System.IO;
-using ModellBahnSteuerung.Elemente;
 
 namespace MoBaSteuerung.Anlagenkomponenten {
 
@@ -45,14 +44,14 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		private ServoAction _aktiverServoRichtung = ServoAction.None;
 		private int _zoom;
 		private string zugDateiPfadName;
-        #endregion //private Felder
-        
+		#endregion //private Felder
+
         #region Properties
-        public string ZugDateiPfadName { set { zugDateiPfadName = value; } }
-    
-        /// <summary>
-        /// 
-        /// </summary>
+		public string ZugDateiPfadName { set { zugDateiPfadName = value; } }
+
+		/// <summary>
+		/// 
+		/// </summary>
         public Int32 Zoom
         {
             set
@@ -62,24 +61,24 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this._knotenElemente.Zoom = value;
                 this._gleisElemente.Zoom = value;
                 this._weicheElemente.Zoom = value;
-                this.signalElemente.Zoom = value;
-                this.schalterElemente.Zoom = value;
+				this.signalElemente.Zoom = value;
+				this.schalterElemente.Zoom = value;
                 this._fssElemente.Zoom = value;
-                this.infoElemente.Zoom = value;
+				this.infoElemente.Zoom = value;
                 this._entkupplerElemente.Zoom = value;
                 this._fahrstrassenElemente.Zoom = value;
-                this.servoElemente.Zoom = value;
-                this._zoom = value;
-            }
+				this.servoElemente.Zoom = value;
+				this._zoom = value;
+			}
             get
             {
-                return this._zoom;
-            }
-        }
+				return this._zoom;
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
+		/// <summary>
+		/// 
+		/// </summary>
         public AnzeigeTyp AnzeigeTyp
         {
             set
@@ -87,123 +86,123 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this._ssgElemente.AnzeigeTyp = value;
                 this._gleisElemente.AnzeigeTyp = value;
                 this._weicheElemente.AnzeigeTyp = value;
-                this.signalElemente.AnzeigeTyp = value;
-                this.schalterElemente.AnzeigeTyp = value;
+				this.signalElemente.AnzeigeTyp = value;
+				this.schalterElemente.AnzeigeTyp = value;
                 this._fssElemente.AnzeigeTyp = value;
                 this._knotenElemente.AnzeigeTyp = value;
                 this._entkupplerElemente.AnzeigeTyp = value;
                 this._fahrstrassenElemente.AnzeigeTyp = value;
-                this.infoElemente.AnzeigeTyp = value;
-                this.servoElemente.AnzeigeTyp = value;
-            }
-        }
+				this.infoElemente.AnzeigeTyp = value;
+				this.servoElemente.AnzeigeTyp = value;
+			}
+		}
         public ElementListe<Regler> ReglerElemente { get { return this._reglerElemente; } }
         public ElementListe<StartSignalGruppe> SsgElemente { get { return this._ssgElemente; } }
         public ElementListe<Anschluss> AnschlussElemente { get { return this._anschlussElemente; } }
         public ElementListe<Servo> ServoElemente { get { return this.servoElemente; } }
-        /// <summary>
-        /// Liste aller Gleise
-        /// </summary>
+		/// <summary>
+		/// Liste aller Gleise
+		/// </summary>
         public ElementListe<Gleis> GleisElemente { get { return this._gleisElemente; } }
         public ElementListe<MCSpeicher.MCSpeicher> ListeMCSpeicher
         {
             get
             {
                 return _listeMCSpeicher;
-            }
-        }
+			}
+		}
 
         public ElementListe<Zug> ZugElemente
         {
             get { return _zugElemente; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
+		}
+		/// <summary>
+		/// 
+		/// </summary>
         public ElementListe<Weiche> WeicheElemente
         {
             get
             {
                 return this._weicheElemente;
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
+		/// <summary>
+		/// 
+		/// </summary>
         public ElementListe<Signal> SignalElemente
         {
             get
             {
-                return this.signalElemente;
-            }
-        }
+				return this.signalElemente;
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
+		/// <summary>
+		/// 
+		/// </summary>
         public ElementListe<Schalter> SchalterElemente
         {
             get
             {
-                return this.schalterElemente;
-            }
-        }
+				return this.schalterElemente;
+			}
+		}
 
-        /// <summary>
-        /// liefert die Fahrstromschalter-Liste
-        /// </summary>
+		/// <summary>
+		/// liefert die Fahrstromschalter-Liste
+		/// </summary>
         public ElementListe<FSS> FssElemente
         {
             get
             {
                 return this._fssElemente;
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// liefert die Infofenster-Liste
-        /// </summary>
+		/// <summary>
+		/// liefert die Infofenster-Liste
+		/// </summary>
         public ElementListe<InfoFenster> InfoElemente
         {
             get
             {
-                return this.infoElemente;
-            }
-        }
+				return this.infoElemente;
+			}
+		}
 
-        /// <summary>
-        /// liefert die Haltestellen-Liste
-        /// </summary>
+		/// <summary>
+		/// liefert die Haltestellen-Liste
+		/// </summary>
         public ElementListe<Haltestelle> HaltestellenElemente
         {
             get
             {
-                return this.haltestellenElemente;
-            }
-        }
+				return this.haltestellenElemente;
+			}
+		}
 
-        /// <summary>
-        /// liefert die Knoten-Liste
-        /// </summary>
+		/// <summary>
+		/// liefert die Knoten-Liste
+		/// </summary>
         public ElementListe<Knoten> KnotenElemente
         {
             get
             {
                 return this._knotenElemente;
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// 
-        /// </summary>
+		/// <summary>
+		/// 
+		/// </summary>
         public ElementListe<Entkuppler> EntkupplerElemente
         {
             get
             {
                 return this._entkupplerElemente;
-            }
-        }
+			}
+		}
 
 
 
@@ -213,47 +212,51 @@ namespace MoBaSteuerung.Anlagenkomponenten {
             get
             {
                 return _fahrstrassenElemente;
-            }
-        }
+			}
+		}
 
         public Anlagenzustand AnlagenZustand
         {
             get
             {
                 return _anlagenZustand;
-            }
+			}
             set
             {
                 _anlagenZustand = value;
-            }
-        }
+			}
+		}
 
         public bool RückmeldungAnzeigen
         {
             get
             {
-                return this._rückmeldungAnzeigen;
-            }
+				return this._rückmeldungAnzeigen;
+			}
             set
             {
-                this._rückmeldungAnzeigen = value;
-            }
-        }
+				this._rückmeldungAnzeigen = value;
+			}
+		}
 
         public bool RückmeldungAktiv
         {
             get
             {
-                return _rückmeldungAktiv;
-            }
+				return _rückmeldungAktiv;
+			}
 
             set
             {
-                _rückmeldungAktiv = value;
-            }
-        }
+				_rückmeldungAktiv = value;
+			}
+		}
+
         #endregion //Properties
+
+
         #region Konstruktoren
+
         /// <summary>
         /// enthält alle Elemente der Anlage
         /// </summary>

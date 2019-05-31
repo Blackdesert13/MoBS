@@ -18,8 +18,6 @@ using System.ComponentModel;
 using System.Threading;
 using MoBaSteuerung.ZeichnenElemente;
 using MoBa.Elemente;
-//using ModellBahnSteuerung.ZeichnenElemente;
-using ModellBahnSteuerung.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
 namespace MoBaSteuerung {
@@ -65,7 +63,7 @@ namespace MoBaSteuerung {
 			this._zeichnenElemente.ZugDateiPfadName = anlageDateiPfadName;
 			this.AnlageLaden(this.AnlageDatenEinlesen(anlageDateiPfadName));
 			//this.zeichnenElemente.ZugDateiSpeichern();
-			//.ZugDateiLaden(anlageDateiPfadName);
+			this.ZugDateiLaden(anlageDateiPfadName);
 		}
 
 
@@ -150,9 +148,9 @@ namespace MoBaSteuerung {
 
                 if (elem[0] == "SSG") {
                     new StartSignalGruppe(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
-                }
+				}
 
-                if (elem[0] == "FSS") {
+				if (elem[0] == "FSS") {
 					new FSS(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
 				if (elem[0] == "Schalter") {
@@ -200,6 +198,7 @@ namespace MoBaSteuerung {
 			try {
 				StreamReader ZugDatenStreamReader = new StreamReader(DateiPfadName + ".zug", System.Text.Encoding.UTF8);//(new MemoryStream(anlageDaten), System.Text.Encoding.UTF8);
 
+				ZeichnenElemente.ZugElemente.AlleLöschen();
 				string zeile = "";
 				while ((zeile = ZugDatenStreamReader.ReadLine()) != null) {
 					string[] elem = zeile.Split('\t');

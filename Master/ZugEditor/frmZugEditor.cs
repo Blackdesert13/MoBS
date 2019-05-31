@@ -15,85 +15,84 @@ namespace ModellBahnSteuerung.ZugEditor
 {
     public partial class frmZugEditor : Form
     {
-        private ElementListe<Zug> zugElemente;
-        private List<Zug> zugListe;
-        private AnlagenElemente pa;
+		private ElementListe<Zug> zugElemente;
+		private List<Zug> zugListe;
+		private AnlagenElemente pa;
 
-       // public frmZugEditor(ElementListe<Zug> ZugElemente, AnlagenElemente parent)
+		// public frmZugEditor(ElementListe<Zug> ZugElemente, AnlagenElemente parent)
         public frmZugEditor( AnlagenElemente parent)
         {
-            InitializeComponent();
-            pa = parent;
-            zugElemente = pa.ZugElemente;
-            zugListe = zugElemente.Elemente;
+			InitializeComponent();
+			pa = parent;
+			zugElemente = pa.ZugElemente;
+			zugListe = zugElemente.Elemente;
             foreach (Zug x in this.zugListe)
             {
-                string[] zeile = {
-                    Convert.ToString(x.ID),
-                    Convert.ToString(x.SignalNummer),
-                    x.ZugTyp,
-                    x.Lok,
-                    x.Bezeichnung,
-                    Convert.ToString( x.AnkunftsZeit),//A-Zeit
+				string[] zeile = {
+										Convert.ToString(x.ID),
+										Convert.ToString(x.SignalNummer),
+										x.ZugTyp,
+										x.Lok,
+										x.Bezeichnung,
+										Convert.ToString( x.AnkunftsZeit),//A-Zeit
                     Convert.ToString( x.Geschwindigkeit),
-                    Convert.ToString( x.DigitalAdresse),
-                    };
-                dataGridView1.Rows.Add(zeile);
-            }
-        }
+										Convert.ToString( x.DigitalAdresse),
+										};
+				dataGridView1.Rows.Add(zeile);
+			}
+		}
 
-        /// <summary>
-        /// erstellt aus dem Formolar eine neue Liste
-        /// </summary>
+		/// <summary>
+		/// erstellt aus dem Formolar eine neue Liste
+		/// </summary>
         private void zugListeNeu()
         {
-            zugListe.Clear();
+			zugListe.Clear();
             foreach(DataGridViewRow zeile in this.dataGridView1.Rows)
             {
                 string[] elem = new string[7];
-                elem[0] = "Zug";
-                elem[1] = (string)zeile.Cells[0].Value;
-                elem[2] = (string)zeile.Cells[1].Value;
-                elem[3] = (string)zeile.Cells[2].Value;
-                elem[4] = (string)zeile.Cells[3].Value;
-                elem[5] = (string)zeile.Cells[4].Value;
-                elem[6] = (string)zeile.Cells[5].Value;
-                if (elem[1] != null) { Zug zug = new Zug(pa, 0, AnzeigeTyp.Bedienen, elem); }               
-            }
-            pa.ZugDateiSpeichern();
-        }
+				elem[0] = "Zug";
+				elem[1] = (string)zeile.Cells[0].Value; //ID
+				elem[2] = (string)zeile.Cells[1].Value; //Signal
+				elem[3] = (string)zeile.Cells[3].Value; //Lok
+				elem[4] = (string)zeile.Cells[2].Value; //Typ
+				elem[5] = (string)zeile.Cells[6].Value; //Geschwindigkeit
+				elem[6] = (string)zeile.Cells[4].Value; //Bezeichnung
+				elem[7] = "0"; //Länge
+				elem[8] = (string)zeile.Cells[7].Value; //Digitale Addresse
+				elem[9] = (string)zeile.Cells[5].Value; //Ankunftszeit
+				if (elem[1] != null) { Zug zug = new Zug(pa, 0, AnzeigeTyp.Bedienen, elem); }
+			}
+			pa.ZugDateiSpeichern();
+		}
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
+		private void textBox1_TextChanged(object sender, EventArgs e) {
 
-        }
+		}
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
 
-        }
-        /// <summary>
-        /// übernehmen
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            zugListeNeu();
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+		}
+		/// <summary>
+		/// übernehmen
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void button1_Click(object sender, EventArgs e) {
+			zugListeNeu();
+			this.DialogResult = DialogResult.OK;
+			this.Close();
 
-        }
+		}
 
-        /// <summary>
-        /// Abbruch
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-    }
+		/// <summary>
+		/// Abbruch
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void button2_Click(object sender, EventArgs e) {
+			this.DialogResult = DialogResult.Cancel;
+			this.Close();
+		}
+	}
 }

@@ -16,12 +16,17 @@ namespace MoBaSteuerung.Elemente
     public class Regler : RasterAnlagenElement
     {
         #region privateFelder
+
         private Color fuellFarbe;
         private GraphicsPath _graphicsPath;
         private GraphicsPath _graphicsPathText;
         private StringFormat _stringFormat;
-        #endregion  privateFelder
+
+        #endregion  //privateFelder
+
+
         #region Properties
+
         public Color Farbe
         {
             get { return fuellFarbe; }
@@ -55,9 +60,12 @@ namespace MoBaSteuerung.Elemente
         {
             set { }
         }
-
+        
         #endregion//Properties
+
+
         #region Konstruktoren
+
         public Regler(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)
         : base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp)
         {
@@ -73,7 +81,10 @@ namespace MoBaSteuerung.Elemente
             KurzBezeichnung = "Reg";
             this.Berechnung();
         }
+
         #endregion
+
+
         /// <summary>
         /// berechnet die Grafik
         /// </summary>

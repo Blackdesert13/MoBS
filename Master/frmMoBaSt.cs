@@ -54,7 +54,7 @@ namespace MoBaSteuerung {
 		private bool _adminAktiviert = false;
 		private bool _anlageBearbeitenAktiviert = true;
 		private ServoAction _servoKeyAction = ServoAction.None;
-		private bool _shiftPressed = false;
+		private bool _verlaengern = false;
 
 		#endregion
 
@@ -1280,7 +1280,7 @@ namespace MoBaSteuerung {
 
 		private void MoBaStForm_KeyDown(object sender, KeyEventArgs e) {
 			this.keydownEventArgs = e;
-
+			
 			bool neuZeichnen = false;
 			switch (this.Controller.AnzeigeTyp) {
 				case AnzeigeTyp.Bearbeiten:
@@ -1296,11 +1296,13 @@ namespace MoBaSteuerung {
 					}
 					break;
 				case AnzeigeTyp.Bedienen:
-					if(e.KeyData == (Keys.Shift | Keys.ShiftKey)) {
+					if ((e.KeyData == (Keys.Shift | Keys.ShiftKey | Keys.Control)) 
+						|| (e.KeyData == (Keys.Shift | Keys.ControlKey | Keys.Control))
+					) {
+						_verlaengern = !_verlaengern;
 						return;
 					}
-					if ((e.KeyData == (Keys.NumPad0 | Keys.Control) || e.KeyData == (Keys.D0 | Keys.Control))
-						|| (e.KeyData == (Keys.NumPad0 | Keys.Shift) || e.KeyData == (Keys.D0 | Keys.Shift))
+					else if ((e.KeyData == (Keys.NumPad0 | Keys.Control) || e.KeyData == (Keys.D0 | Keys.Control))
 					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 0;
@@ -1309,8 +1311,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 0;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad1 | Keys.Control) || e.KeyData == (Keys.D1 | Keys.Control))
-						|| (e.KeyData == (Keys.NumPad1 | Keys.Shift) || e.KeyData == (Keys.D1 | Keys.Shift))
+					else if ((e.KeyData == (Keys.NumPad1 | Keys.Control) || e.KeyData == (Keys.D1 | Keys.Control))
 					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 1;
@@ -1319,8 +1320,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 1;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad2 | Keys.Control) || e.KeyData == (Keys.D2 | Keys.Control))
-						|| (e.KeyData == (Keys.NumPad2 | Keys.Shift) || e.KeyData == (Keys.D2 | Keys.Shift))
+					else if ((e.KeyData == (Keys.NumPad2 | Keys.Control) || e.KeyData == (Keys.D2 | Keys.Control))
 					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 2;
@@ -1329,8 +1329,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 2;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad3 | Keys.Control) || e.KeyData == (Keys.D3 | Keys.Control))
-						|| (e.KeyData == (Keys.NumPad3 | Keys.Shift) || e.KeyData == (Keys.D3 | Keys.Shift))
+					else if ((e.KeyData == (Keys.NumPad3 | Keys.Control) || e.KeyData == (Keys.D3 | Keys.Control))
 					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 3;
@@ -1339,8 +1338,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 3;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad4 | Keys.Control) || e.KeyData == (Keys.D4 | Keys.Control))
-						|| (e.KeyData == (Keys.NumPad4 | Keys.Shift) || e.KeyData == (Keys.D4 | Keys.Shift))
+					else if ((e.KeyData == (Keys.NumPad4 | Keys.Control) || e.KeyData == (Keys.D4 | Keys.Control))
 					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 4;
@@ -1349,8 +1347,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 4;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad5 | Keys.Control) || e.KeyData == (Keys.D5 | Keys.Control))
-						|| (e.KeyData == (Keys.NumPad5 | Keys.Shift) || e.KeyData == (Keys.D5 | Keys.Shift))
+					else if ((e.KeyData == (Keys.NumPad5 | Keys.Control) || e.KeyData == (Keys.D5 | Keys.Control))
 					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 5;
@@ -1359,8 +1356,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 5;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad6 | Keys.Control) || e.KeyData == (Keys.D6 | Keys.Control))
-						|| (e.KeyData == (Keys.NumPad6 | Keys.Shift) || e.KeyData == (Keys.D6 | Keys.Shift))
+					else if ((e.KeyData == (Keys.NumPad6 | Keys.Control) || e.KeyData == (Keys.D6 | Keys.Control))
 					) {
 						if (_signalNummer < 0) {
 							_signalNummer = 6;
@@ -1369,7 +1365,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 6;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad7 | Keys.Control) || e.KeyData == (Keys.D7 | Keys.Control))
+					else if ((e.KeyData == (Keys.NumPad7 | Keys.Control) || e.KeyData == (Keys.D7 | Keys.Control))
 						|| (e.KeyData == (Keys.NumPad7 | Keys.Shift) || e.KeyData == (Keys.D7 | Keys.Shift))
 					) {
 						if (_signalNummer < 0) {
@@ -1379,7 +1375,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 7;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad8 | Keys.Control) || e.KeyData == (Keys.D8 | Keys.Control))
+					else if ((e.KeyData == (Keys.NumPad8 | Keys.Control) || e.KeyData == (Keys.D8 | Keys.Control))
 						|| (e.KeyData == (Keys.NumPad8 | Keys.Shift) || e.KeyData == (Keys.D8 | Keys.Shift))
 					) {
 						if (_signalNummer < 0) {
@@ -1389,7 +1385,7 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 8;
 						}
 					}
-					if ((e.KeyData == (Keys.NumPad9 | Keys.Control) || e.KeyData == (Keys.D9 | Keys.Control))
+					else if ((e.KeyData == (Keys.NumPad9 | Keys.Control) || e.KeyData == (Keys.D9 | Keys.Control))
 						|| (e.KeyData == (Keys.NumPad9 | Keys.Shift) || e.KeyData == (Keys.D9 | Keys.Shift))
 					) {
 						if (_signalNummer < 0) {
@@ -1399,10 +1395,10 @@ namespace MoBaSteuerung {
 							_signalNummer = _signalNummer * 10 + 9;
 						}
 					}
-					if (e.KeyData == Keys.Escape) {
+					else if (e.KeyData == Keys.Escape) {
 						neuZeichnen = this.Controller.BedienenAuswahlLöschen();
 					}
-					if (e.KeyData == Keys.Left || e.KeyData == Keys.Right) {
+					else if (e.KeyData == Keys.Left || e.KeyData == Keys.Right) {
 						neuZeichnen = this.Controller.BedienenAuswahlLöschen();
 					}
 					break;
@@ -1422,14 +1418,13 @@ namespace MoBaSteuerung {
 
 		private void MoBaStForm_KeyUp(object sender, KeyEventArgs e) {
 			if (e.KeyData == Keys.ControlKey) {
-				if (this.Controller.FahrstrassenSignal(_signalNummer,false))
+				if (this.Controller.FahrstrassenSignal(_signalNummer,_verlaengern))
 					this.pictureBoxView.Invalidate();
 				_signalNummer = -1;
+				_verlaengern = false;
 			}
 			if (e.KeyData == Keys.ShiftKey) {
-				if (this.Controller.FahrstrassenSignal(_signalNummer,true))
-					this.pictureBoxView.Invalidate();
-				_signalNummer = -1;
+				_verlaengern = false;
 			}
 			if (e.KeyData == Keys.Left || e.KeyData == Keys.Right) {
 				if ((_servoKeyAction == ServoAction.RechtsHold && e.KeyData == Keys.Right)
@@ -1442,10 +1437,15 @@ namespace MoBaSteuerung {
 				_servoKeyAction = ServoAction.None;
 			}
 			if (_signalNummer >= 0) {
-				this.toolStripStatusLabelInfo.Text = "Signal " + _signalNummer;
+				string statusText = "";
+				if (_verlaengern){
+					statusText += "verlängern ";
+				}
+				statusText += "Signal " + _signalNummer;
+				this.toolStripStatusLabelInfo.Text = statusText;
 			}
 			else {
-				//this.toolStripStatusLabelInfo.Text = "Info";
+				this.toolStripStatusLabelInfo.Text = "Info";
 			}
 		}
 

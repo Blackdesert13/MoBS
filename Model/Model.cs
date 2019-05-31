@@ -503,8 +503,21 @@ namespace MoBaSteuerung {
 				}
 
 				if (el.Count > 0) {
-					if (!verlaengern || el.Count != 1) {
-						//Todo: modifizieren Liste?
+					if (el.Count != 1) {
+						for (int i = 0; i < el.Count;) {
+							if (((FahrstrasseN)el[i]).StartSignal == signal) {
+								el.RemoveAt(i);
+							}
+							else {
+								i++;
+							}
+						}
+						while(el.Count != 1) {
+							el.RemoveAt(1);
+						}
+						return el;
+					}
+					if (!verlaengern) {
 						return el;
 					}
 					if (((FahrstrasseN)el[0]).StartSignal == signal) {

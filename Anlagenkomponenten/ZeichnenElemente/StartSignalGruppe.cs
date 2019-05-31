@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 
-namespace ModellBahnSteuerung.Elemente
+namespace MoBaSteuerung.Elemente
 {
     public class StartSignalGruppe: RasterAnlagenElement
     {
