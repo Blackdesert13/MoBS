@@ -29,7 +29,7 @@ namespace MoBaSteuerung {
 	public partial class Model : Control {
 
 		public void FahrstrassenAuswahl(List<AnlagenElement> el) {
-			this.zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(el);
+			this._zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(el);
 		}
 
 		/*   /// <summary>
@@ -79,7 +79,7 @@ namespace MoBaSteuerung {
 		/// <param name="signalNummer"></param>
 		/// <returns></returns>
 		public List<AnlagenElement> FahrstrassenSignal(int signalNummer) {
-			Signal sn = zeichnenElemente.SignalElemente.Element(signalNummer);
+			Signal sn = _zeichnenElemente.SignalElemente.Element(signalNummer);
 			if (sn != null) {
 				return FahrstrassenSignalSchalten(sn);
 			}
@@ -99,13 +99,13 @@ namespace MoBaSteuerung {
 		/// <returns></returns>
 		public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal) {
 			List<AnlagenElement> el = new List<AnlagenElement>();
-			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen)
+			if (_zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen)
 					if (signal == fs.StartSignal || signal == fs.EndSignal) {
 						el.Add(fs);
 						return el;
 					}
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 					if (fs.StartSignal == signal && fs.AdressenFrei())
 						el.Add(fs);
 				}
@@ -113,14 +113,14 @@ namespace MoBaSteuerung {
 				return el;
 			}
 			else {
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
 					if (fs.EndSignal == signal) {
-						zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+						_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 						el.Add(fs);
 						//zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
 						return el;
 					}
-				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+				_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 				OnAnlageNeuZeichnen();
 			}
 			return null;

@@ -201,5 +201,14 @@ namespace ModellBahnSteuerung.ToolBox
 
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (_weiche != null)
+            {
+                frmProperties frm = new frmProperties(_weiche);
+                if (frm.ShowDialog(this) == DialogResult.OK) ;
+            }
+        }
     }
 }

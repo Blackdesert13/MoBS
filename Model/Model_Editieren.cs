@@ -74,13 +74,13 @@ namespace MoBaSteuerung {
 				switch (bearbeitungsModus) {
 					case BearbeitungsModus.Gleis:
 						if (this._neuesElement.GetType().Name == "Knoten") {
-							Gleis gl = new Gleis(this.zeichnenElemente, this._neuesElement.Zoom, this.anzeigeTyp, (Knoten)this._neuesElement, (Knoten)this._neuesElement);
+							Gleis gl = new Gleis(this._zeichnenElemente, this._neuesElement.Zoom, this._anzeigeTyp, (Knoten)this._neuesElement, (Knoten)this._neuesElement);
 							this._neuesElement = gl;
 						}
 						else {
 							Gleis gl = (Gleis)this._neuesElement;
 							command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Gleis, this.ZeichnenElemente
-									, (object)new object[]{ this.zeichnenElemente.GleisElemente.SucheFreieNummer()
+									, (object)new object[]{ this._zeichnenElemente.GleisElemente.SucheFreieNummer()
 																											 , gl.StartKn.PositionRaster, gl.EndKn.PositionRaster });
 							command.Ausfuehren();
 							NeuesElementVorschauReset();
@@ -90,7 +90,7 @@ namespace MoBaSteuerung {
 					case BearbeitungsModus.Signal:
 						_neuesElement.GleisElementAustragen();
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Signal, this.ZeichnenElemente
-										, (object)new object[] { this.zeichnenElemente.SignalElemente.SucheFreieNummer()
+										, (object)new object[] { this._zeichnenElemente.SignalElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster, ((Signal)_neuesElement).InZeichenRichtung });
 						command.Ausfuehren();
 						NeuesElementVorschauReset();
@@ -98,7 +98,7 @@ namespace MoBaSteuerung {
 					case BearbeitungsModus.Entkuppler:
 						_neuesElement.GleisElementAustragen();
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Entkuppler, this.ZeichnenElemente
-										, (object)new object[] { this.zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
+										, (object)new object[] { this._zeichnenElemente.EntkupplerElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
 						command.Ausfuehren();
 						NeuesElementVorschauReset();
@@ -106,7 +106,7 @@ namespace MoBaSteuerung {
 					case BearbeitungsModus.Schalter:
 						_neuesElement.GleisElementAustragen();
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.Schalter, this.ZeichnenElemente
-										, (object)new object[] { this.zeichnenElemente.SchalterElemente.SucheFreieNummer()
+										, (object)new object[] { this._zeichnenElemente.SchalterElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
 						command.Ausfuehren();
 						NeuesElementVorschauReset();
@@ -114,7 +114,7 @@ namespace MoBaSteuerung {
 					case BearbeitungsModus.Fss:
 						_neuesElement.GleisElementAustragen();
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.FSS, this.ZeichnenElemente
-										, (object)new object[] { this.zeichnenElemente.FssElemente.SucheFreieNummer()
+										, (object)new object[] { this._zeichnenElemente.FssElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
 						command.Ausfuehren();
 						NeuesElementVorschauReset();
@@ -122,7 +122,7 @@ namespace MoBaSteuerung {
 					case BearbeitungsModus.InfoElement:
 						_neuesElement.GleisElementAustragen();
 						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.InfoElement, this.ZeichnenElemente
-										, (object)new object[] { this.zeichnenElemente.InfoElemente.SucheFreieNummer()
+										, (object)new object[] { this._zeichnenElemente.InfoElemente.SucheFreieNummer()
 																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
 						command.Ausfuehren();
 						NeuesElementVorschauReset();
@@ -136,28 +136,28 @@ namespace MoBaSteuerung {
 		private List<AnlagenElement> SucheElementSelektieren(Point punkt) {
 			List<AnlagenElement> elemList = new List<AnlagenElement> { };
 
-			foreach (Knoten el in zeichnenElemente.KnotenElemente.Elemente)
+			foreach (Knoten el in _zeichnenElemente.KnotenElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Entkuppler el in zeichnenElemente.EntkupplerElemente.Elemente)
+			foreach (Entkuppler el in _zeichnenElemente.EntkupplerElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Schalter el in zeichnenElemente.SchalterElemente.Elemente)
+			foreach (Schalter el in _zeichnenElemente.SchalterElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Signal el in zeichnenElemente.SignalElemente.Elemente)
+			foreach (Signal el in _zeichnenElemente.SignalElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Weiche el in zeichnenElemente.WeicheElemente.Elemente)
+			foreach (Weiche el in _zeichnenElemente.WeicheElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (FSS el in zeichnenElemente.FssElemente.Elemente)
+			foreach (FSS el in _zeichnenElemente.FssElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (InfoFenster el in zeichnenElemente.InfoElemente.Elemente)
+			foreach (InfoFenster el in _zeichnenElemente.InfoElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Gleis el in zeichnenElemente.GleisElemente.Elemente)
+			foreach (Gleis el in _zeichnenElemente.GleisElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			return elemList;
@@ -267,24 +267,24 @@ namespace MoBaSteuerung {
 		}
 
 		public void FahrstrassenSuchen() {
-			zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Clear();
-			zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen = new List<FahrstrasseN>();
-			foreach (Signal sn in zeichnenElemente.SignalElemente.Elemente) {
-				zeichnenElemente.FahrstrassenElemente.SucheFahrstrassen(sn);
+			_zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Clear();
+			_zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen = new List<FahrstrasseN>();
+			foreach (Signal sn in _zeichnenElemente.SignalElemente.Elemente) {
+				_zeichnenElemente.FahrstrassenElemente.SucheFahrstrassen(sn);
 			}
 		}
 
 		public void FahrstrassenSuchenVonSignal(List<int> stopGleise = null)
 		{
-			int altCount = zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Count;
+			int altCount = _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Count;
 			foreach (AnlagenElement el in _auswahlElemente) {
 				if(el is Signal) {
 					Signal sig = (Signal)el;
 					List<List<AnlagenElement>> fahrStrassenNeu = new List<List<AnlagenElement>>();
 
-					zeichnenElemente.FahrstrassenElemente.SucheFahrstrassen2(sig, fahrStrassenNeu, stopGleise);
+					_zeichnenElemente.FahrstrassenElemente.SucheFahrstrassen2(sig, fahrStrassenNeu, stopGleise);
 
-					foreach(FahrstrasseN fss in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+					foreach(FahrstrasseN fss in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 						for(int i = 0; i < fahrStrassenNeu.Count;) {
 							List<AnlagenElement> fssNeu = fahrStrassenNeu[i];
 							if (fss.IstGleich(fssNeu.ToArray())) {
@@ -298,7 +298,7 @@ namespace MoBaSteuerung {
 					}
 
 					foreach(List<AnlagenElement> listeElemente in fahrStrassenNeu) {
-						zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Add(
+						_zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Add(
 							new FahrstrasseN(listeElemente.ToArray())
 						);
 					}

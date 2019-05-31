@@ -28,18 +28,14 @@ namespace MoBaSteuerung {
 
 		#region Private Felder
 
-		private AnzeigeTyp anzeigeTyp;
-		private AnlagenElemente zeichnenElemente;
+		private AnzeigeTyp _anzeigeTyp;
+		private AnlagenElemente _zeichnenElemente;
 		private ArduinoController _ardController;
 		private bool _master = false;
 		private int _fahrstraßenStartVerzögerung;
 		private int _zubehörServoSchrittweite;
 		private string _connectedComPort = "";
-
-		/// <summary>
-		/// Dateiname.
-		/// </summary>
-		private string anlageDateiName;
+		private string _anlageDateiName;
 
 		/// <summary>
 		/// Dateipfad+name.
@@ -49,7 +45,7 @@ namespace MoBaSteuerung {
 		/// <summary>
 		/// 
 		/// </summary>
-		private bool istAnlageSpeichernErforderlich;
+		private bool _istAnlageSpeichernErforderlich;
 
 		#endregion
 
@@ -77,17 +73,17 @@ namespace MoBaSteuerung {
 		/// <summary>
 		/// alle AnlagenElementListen
 		/// </summary>
-		public AnlagenElemente ZeichnenElemente { get { return zeichnenElemente; } }
+		public AnlagenElemente ZeichnenElemente { get { return _zeichnenElemente; } }
 
 		/// <summary>
 		/// Speichern erforderlich.
 		/// </summary>
 		public bool IstAnlageSpeichernErforderlich {
 			set {
-				this.istAnlageSpeichernErforderlich = value;
+				this._istAnlageSpeichernErforderlich = value;
 			}
 			get {
-				return this.istAnlageSpeichernErforderlich;
+				return this._istAnlageSpeichernErforderlich;
 			}
 		}
 
@@ -96,7 +92,7 @@ namespace MoBaSteuerung {
 		/// </summary>
 		public string AnlageDateiName {
 			get {
-				return this.anlageDateiName;
+				return this._anlageDateiName;
 			}
 		}
 
@@ -112,10 +108,10 @@ namespace MoBaSteuerung {
 				this.anlageDateiPfadName = value;
 				// Dateiname übergeben
 				if (string.IsNullOrEmpty(this.anlageDateiPfadName)) {
-					this.anlageDateiName = Constanten.STANDARDFILENAME;
+					this._anlageDateiName = Constanten.STANDARDFILENAME;
 				}
 				else {
-					this.anlageDateiName = Path.GetFileNameWithoutExtension(this.anlageDateiPfadName);
+					this._anlageDateiName = Path.GetFileNameWithoutExtension(this.anlageDateiPfadName);
 				}
 			}
 		}
@@ -125,15 +121,15 @@ namespace MoBaSteuerung {
 		/// </summary>
 		public AnzeigeTyp Anzeigetyp {
 			set {
-				this.anzeigeTyp = value;
-				this.zeichnenElemente.AnzeigeTyp = this.anzeigeTyp;
+				this._anzeigeTyp = value;
+				this._zeichnenElemente.AnzeigeTyp = this._anzeigeTyp;
 			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public Int32 Zoom { set { this.zeichnenElemente.Zoom = value; } }
+		public Int32 Zoom { set { this._zeichnenElemente.Zoom = value; } }
 
 		/// <summary>
 		/// Server
@@ -148,26 +144,26 @@ namespace MoBaSteuerung {
 		/// </summary>
 		public bool RückmeldungAnzeigen {
 			set {
-				this.zeichnenElemente.RückmeldungAnzeigen = value;
+				this._zeichnenElemente.RückmeldungAnzeigen = value;
 				OnAnlageNeuZeichnen();
 			}
 			get {
-				return this.zeichnenElemente.RückmeldungAnzeigen;
+				return this._zeichnenElemente.RückmeldungAnzeigen;
 			}
 		}
 
 		public bool RückmeldungAktiv {
 			set {
-				if (value != this.zeichnenElemente.RückmeldungAktiv) {
+				if (value != this._zeichnenElemente.RückmeldungAktiv) {
 					if (value)
 						_ardController.SendData(new byte[] { 1, 1, 0, 0, 2 });
 					else
 						_ardController.SendData(new byte[] { 1, 2, 0, 0, 3 });
 				}
-				this.zeichnenElemente.RückmeldungAktiv = value;
+				this._zeichnenElemente.RückmeldungAktiv = value;
 			}
 			get {
-				return this.zeichnenElemente.RückmeldungAktiv;
+				return this._zeichnenElemente.RückmeldungAktiv;
 			}
 		}
 
@@ -199,7 +195,7 @@ namespace MoBaSteuerung {
 		/// 
 		/// </summary>
 		public Model() {
-			this.zeichnenElemente = new AnlagenElemente();
+			this._zeichnenElemente = new AnlagenElemente();
 			this._ardController = new ArduinoController();
 			this.AuswahlElemente = new List<AnlagenElement>();
 
@@ -225,7 +221,7 @@ namespace MoBaSteuerung {
 		/// <param name="p">Position des Mausklicks</param>
 		/// <returns></returns>
 		public List<AnlagenElement> BedienenMouseClick(Point p) {
-			zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
+			_zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
 			List<AnlagenElement> elemList = SucheElementAufPunkt(p);
 			return elemList;
 		}
@@ -277,26 +273,26 @@ namespace MoBaSteuerung {
 		/// <returns></returns>
 		private List<AnlagenElement> SucheElementAufPunkt(Point punkt) {
 			List<AnlagenElement> elemList = new List<AnlagenElement> { };
-			foreach (Entkuppler el in zeichnenElemente.EntkupplerElemente.Elemente)
+			foreach (Entkuppler el in _zeichnenElemente.EntkupplerElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Schalter el in zeichnenElemente.SchalterElemente.Elemente)
+			foreach (Schalter el in _zeichnenElemente.SchalterElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (FSS el in zeichnenElemente.FssElemente.Elemente)
+			foreach (FSS el in _zeichnenElemente.FssElemente.Elemente)
 				if (el.MouseClick(punkt)) {
 					elemList.Add(el);
 				}
-			foreach (Signal el in zeichnenElemente.SignalElemente.Elemente)
+			foreach (Signal el in _zeichnenElemente.SignalElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Servo el in zeichnenElemente.ServoElemente.Elemente)
+			foreach (Servo el in _zeichnenElemente.ServoElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Weiche el in zeichnenElemente.WeicheElemente.Elemente)
+			foreach (Weiche el in _zeichnenElemente.WeicheElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
-			foreach (Gleis el in zeichnenElemente.GleisElemente.Elemente)
+			foreach (Gleis el in _zeichnenElemente.GleisElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 
@@ -320,7 +316,7 @@ namespace MoBaSteuerung {
 			Debug.Print("Befehl von Arduino: " + befehlS);
 
 			if (befehl.Length == 5) {
-				Arduino arduino = this.zeichnenElemente.AnlagenZustand.GetArduino(befehl[0]);
+				Arduino arduino = this._zeichnenElemente.AnlagenZustand.GetArduino(befehl[0]);
 				if (arduino != null) {
 					switch (befehl[1]) {
 						case 10:
@@ -344,7 +340,7 @@ namespace MoBaSteuerung {
 							OnArduinoRueckmeldungReceived();
 							break;
 						case 99:
-							InfoFenster sysZeit = this.zeichnenElemente.InfoElemente.Element(99);
+							InfoFenster sysZeit = this._zeichnenElemente.InfoElemente.Element(99);
 							int zeit = befehl[2] + befehl[3] * 256;
 							string txt = "Ard-Zeit: ";
 							txt = txt + zeit + "_";// Convert.ToString( zeit);
@@ -360,7 +356,7 @@ namespace MoBaSteuerung {
 
 					if (befehl[1] > 99 && befehl[1] < 122) {
 						int id = befehl[1] - 100;
-						Haltestelle haltestelle = this.zeichnenElemente.HaltestellenElemente.Element(id);
+						Haltestelle haltestelle = this._zeichnenElemente.HaltestellenElemente.Element(id);
 						try {
 							if (haltestelle != null) {
 								haltestelle.InfoBefehl(befehl);
@@ -383,7 +379,7 @@ namespace MoBaSteuerung {
 		/// <param name="adresse">Adresse in der sich ein Zustand geändert hat</param>
 		private void Model_AnlagenzustandAdresseChanged(Adresse adresse) {
 			if (adresse != null && adresse.ArdNr > 1) {
-				byte[] befehl = this.zeichnenElemente.AnlagenZustand.GetBefehl(adresse.ArdNr, adresse.AdressenNr);
+				byte[] befehl = this._zeichnenElemente.AnlagenZustand.GetBefehl(adresse.ArdNr, adresse.AdressenNr);
 				if (befehl != null) {
 					Debug.Print("Sende an Arduino Befehl: " + befehl[0] + " " + befehl[1]
 													+ " " + befehl[2] + " " + befehl[3] + " " + befehl[4] + " ");
@@ -391,9 +387,9 @@ namespace MoBaSteuerung {
 				}
 			}
 			else {
-				foreach (Arduino arduino in zeichnenElemente.AnlagenZustand.ArduinoListe) {
+				foreach (Arduino arduino in _zeichnenElemente.AnlagenZustand.ArduinoListe) {
 					for (int i = 0; i < arduino.Ausgaenge.Length; i++)
-						this._ardController.SendData(this.zeichnenElemente.AnlagenZustand.GetBefehl(arduino.Nr, i));
+						this._ardController.SendData(this._zeichnenElemente.AnlagenZustand.GetBefehl(arduino.Nr, i));
 				}
 			}
 		}
@@ -408,28 +404,28 @@ namespace MoBaSteuerung {
 			AnlagenElement el = null;
 			switch (elementName) {
 				case "Servo":
-					el = zeichnenElemente.ServoElemente.Element(nr);
+					el = _zeichnenElemente.ServoElemente.Element(nr);
 					break;
 				case "Signal":
-					el = zeichnenElemente.SignalElemente.Element(nr);
+					el = _zeichnenElemente.SignalElemente.Element(nr);
 					break;
 				case "Gleis":
 					//el = zeichnenElemente.GleisElemente.Element(nr);
 					break;
 				case "Schalter":
-					el = zeichnenElemente.SchalterElemente.Element(nr);
+					el = _zeichnenElemente.SchalterElemente.Element(nr);
 					break;
 				case "FSS":
-					el = zeichnenElemente.FssElemente.Element(nr);
+					el = _zeichnenElemente.FssElemente.Element(nr);
 					break;
 				case "Entkuppler":
-					el = zeichnenElemente.EntkupplerElemente.Element(nr);
+					el = _zeichnenElemente.EntkupplerElemente.Element(nr);
 					break;
 				case "Weiche":
-					el = zeichnenElemente.WeicheElemente.Element(nr);
+					el = _zeichnenElemente.WeicheElemente.Element(nr);
 					break;
 				case "Fahrstrasse":
-					el = zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
+					el = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
 					if (!((Fahrstrasse)el).IsAktiv) {
 						Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
 						fahrstraßenStartThread.Start(el);
@@ -440,7 +436,7 @@ namespace MoBaSteuerung {
 			if (el != null) {
 				bool action = el.AusgangToggeln();
 				//if (elementName == "FSS")
-				zeichnenElemente.FSSAktualisieren();
+				_zeichnenElemente.FSSAktualisieren();
 				if (elementName == "Entkuppler") {
 					if (el.ElementZustand == Elementzustand.An && EntkupplerAbschaltAutoAktiv) {
 						Thread entkupplerAbschalt = new Thread(this.EntkupplerAbschaltung);
@@ -478,7 +474,7 @@ namespace MoBaSteuerung {
 		/// <param name="signalNummer"></param>
 		/// <returns></returns>
 		public List<AnlagenElement> FahrstrassenSignal(int signalNummer, bool verlaengern) {
-			Signal sn = zeichnenElemente.SignalElemente.Element(signalNummer);
+			Signal sn = _zeichnenElemente.SignalElemente.Element(signalNummer);
 			if (sn != null) {
 				return FahrstrassenSignalSchalten(sn, verlaengern);
 			}
@@ -498,9 +494,9 @@ namespace MoBaSteuerung {
 		/// <returns></returns>
 		public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal, bool verlaengern) {
 			List<AnlagenElement> el = new List<AnlagenElement>();
-			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
+			if (_zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
 
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen) {
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen) {
 					if (signal == fs.StartSignal || signal == fs.EndSignal) {
 						el.Add(fs);
 					}
@@ -517,7 +513,7 @@ namespace MoBaSteuerung {
 					el.Clear();
 				}
 
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 					if (fs.StartSignal == signal && fs.AdressenFrei())
 						el.Add(fs);
 				}
@@ -525,14 +521,14 @@ namespace MoBaSteuerung {
 				return el;
 			}
 			else {
-				foreach (FahrstrasseN fs in zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
 					if (fs.EndSignal == signal) {
-						zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+						_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 						el.Add(fs);
 						//zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
 						return el;
 					}
-				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+				_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 				OnAnlageNeuZeichnen();
 			}
 			return null;
@@ -545,20 +541,20 @@ namespace MoBaSteuerung {
 		/// <param name="graphics"></param>
 		public void ZeichneElementeBedienen(Graphics graphics) {
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
-			this.zeichnenElemente.FSSAktualisieren();
-			this.zeichnenElemente.ZuegeAktualisieren();
-			this.zeichnenElemente.GleisElemente.ElementeZeichnen1(graphics);
-			this.zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
-			//this.zeichnenElemente.KnotenElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FSSAktualisieren();
+			this._zeichnenElemente.ZuegeAktualisieren();
+			this._zeichnenElemente.GleisElemente.ElementeZeichnen1(graphics);
+			this._zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.SsgElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
 			graphics.SmoothingMode = SmoothingMode.Default;
 		}
 
@@ -569,17 +565,17 @@ namespace MoBaSteuerung {
 		public void ZeichneElementeBearbeiten(Graphics graphics) {
 			graphics.SmoothingMode = SmoothingMode.HighQuality;
 
-			this.zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.KnotenElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
-			this.zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.KnotenElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
 
 			if (this._neuesElement != null)
 				this._neuesElement.ElementZeichnen(graphics);
@@ -771,7 +767,7 @@ namespace MoBaSteuerung {
 		/// </summary>
 		/// <returns></returns>
 		public ElementListe<Zug> GetZugListe() {
-			return zeichnenElemente.ZugElemente;
+			return _zeichnenElemente.ZugElemente;
 		}
 
 		/// <summary>
@@ -785,7 +781,7 @@ namespace MoBaSteuerung {
 		public bool OpenComPort(string portName) {
 			if (this._ardController.OpenComPort(portName)) {
 				_connectedComPort = portName;
-				if (zeichnenElemente.RückmeldungAktiv)
+				if (_zeichnenElemente.RückmeldungAktiv)
 					_ardController.SendData(new byte[] { 1, 1, 0, 0, 2 });
 				else
 					_ardController.SendData(new byte[] { 1, 2, 0, 0, 3 });
@@ -813,8 +809,8 @@ namespace MoBaSteuerung {
 		/// </summary>
 		/// <returns>Gibt TRUE zurück, wenn eine Auswahl gelöscht wurde</returns>
 		public bool BedienenAuswahlLöschen() {
-			if (zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count > 0) {
-				zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+			if (_zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count > 0) {
+				_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 				return true;
 			}
 			return false;
@@ -825,22 +821,22 @@ namespace MoBaSteuerung {
 			if (this._neuesElement == null) {
 				switch (bearbeitungsModus) {
 					case BearbeitungsModus.Gleis:
-						this._neuesElement = new Knoten(this.zeichnenElemente, zoom, this.anzeigeTyp, letzterRasterpunkt);
+						this._neuesElement = new Knoten(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
 						break;
 					case BearbeitungsModus.Schalter:
-						this._neuesElement = new Schalter(this.zeichnenElemente, zoom, this.anzeigeTyp, letzterRasterpunkt);
+						this._neuesElement = new Schalter(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
 						break;
 					case BearbeitungsModus.Signal:
-						this._neuesElement = new Signal(this.zeichnenElemente, zoom, this.anzeigeTyp, letzterRasterpunkt, false);
+						this._neuesElement = new Signal(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt, false);
 						break;
 					case BearbeitungsModus.Entkuppler:
-						this._neuesElement = new Entkuppler(this.zeichnenElemente, zoom, this.anzeigeTyp, letzterRasterpunkt);
+						this._neuesElement = new Entkuppler(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
 						break;
 					case BearbeitungsModus.Fss:
-						this._neuesElement = new FSS(this.zeichnenElemente, zoom, this.anzeigeTyp, letzterRasterpunkt);
+						this._neuesElement = new FSS(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
 						break;
 					case BearbeitungsModus.InfoElement:
-						this._neuesElement = new InfoFenster(this.zeichnenElemente, zoom, this.anzeigeTyp, letzterRasterpunkt);
+						this._neuesElement = new InfoFenster(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
 						break;
 				}
 			}
@@ -853,7 +849,7 @@ namespace MoBaSteuerung {
 						}
 						else {
 							Gleis gl = (Gleis)this._neuesElement;
-							gl.EndKn = new Knoten(this.zeichnenElemente, zoom, this.anzeigeTyp, letzterRasterpunkt);
+							gl.EndKn = new Knoten(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
 							gl.BearbeitenAktualisierenNeuZeichnen();
 						}
 						break;
@@ -877,7 +873,7 @@ namespace MoBaSteuerung {
 
 		public void BedienenServoManuell(ServoAction action) {
 			Debug.Print("Servo Action " + action);
-			if (this.zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen()) {
+			if (this._zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen()) {
 				OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, action);
 				//if (keyData == Keys.Left) {
 				//    OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, ServoAction.LinksClick);

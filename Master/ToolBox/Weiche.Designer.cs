@@ -32,6 +32,7 @@
             this.LabelMenü = new System.Windows.Forms.Label();
             this.PictureBoxMenü = new System.Windows.Forms.PictureBox();
             this.PanelEigenschaften = new System.Windows.Forms.Panel();
+            this.buttonKoppelung = new System.Windows.Forms.Button();
             this.labelStecker = new System.Windows.Forms.Label();
             this.textBoxStecker = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,7 +51,7 @@
             this.labelKnoten = new System.Windows.Forms.Label();
             this.textBoxWeiche = new System.Windows.Forms.TextBox();
             this.buttonMC = new System.Windows.Forms.Button();
-            this.buttonKoppelung = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.PanelMenü.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxMenü)).BeginInit();
             this.PanelEigenschaften.SuspendLayout();
@@ -101,6 +102,7 @@
             // PanelEigenschaften
             // 
             this.PanelEigenschaften.BackColor = System.Drawing.Color.White;
+            this.PanelEigenschaften.Controls.Add(this.button1);
             this.PanelEigenschaften.Controls.Add(this.buttonKoppelung);
             this.PanelEigenschaften.Controls.Add(this.labelStecker);
             this.PanelEigenschaften.Controls.Add(this.textBoxStecker);
@@ -126,6 +128,16 @@
             this.PanelEigenschaften.Name = "PanelEigenschaften";
             this.PanelEigenschaften.Size = new System.Drawing.Size(338, 85);
             this.PanelEigenschaften.TabIndex = 1;
+            // 
+            // buttonKoppelung
+            // 
+            this.buttonKoppelung.Location = new System.Drawing.Point(270, 23);
+            this.buttonKoppelung.Name = "buttonKoppelung";
+            this.buttonKoppelung.Size = new System.Drawing.Size(67, 23);
+            this.buttonKoppelung.TabIndex = 18;
+            this.buttonKoppelung.Text = "Koppelung";
+            this.buttonKoppelung.UseVisualStyleBackColor = true;
+            this.buttonKoppelung.Click += new System.EventHandler(this.buttonKoppelung_Click);
             // 
             // labelStecker
             // 
@@ -290,15 +302,15 @@
             this.buttonMC.Text = "MC";
             this.buttonMC.UseVisualStyleBackColor = true;
             // 
-            // buttonKoppelung
+            // button1
             // 
-            this.buttonKoppelung.Location = new System.Drawing.Point(270, 23);
-            this.buttonKoppelung.Name = "buttonKoppelung";
-            this.buttonKoppelung.Size = new System.Drawing.Size(67, 23);
-            this.buttonKoppelung.TabIndex = 18;
-            this.buttonKoppelung.Text = "Koppelung";
-            this.buttonKoppelung.UseVisualStyleBackColor = true;
-            this.buttonKoppelung.Click += new System.EventHandler(this.buttonKoppelung_Click);
+            this.button1.Location = new System.Drawing.Point(294, 52);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(58, 23);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FrmWeiche
             // 
@@ -345,5 +357,6 @@
         private System.Windows.Forms.Label labelStecker;
         private System.Windows.Forms.TextBox textBoxStecker;
         private System.Windows.Forms.Button buttonKoppelung;
+        private System.Windows.Forms.Button button1;
     }
 }

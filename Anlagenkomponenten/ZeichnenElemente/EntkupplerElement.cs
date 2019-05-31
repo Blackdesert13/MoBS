@@ -15,7 +15,7 @@ namespace MoBaSteuerung.Elemente {
         //private Rectangle _mausRechteck = new Rectangle();
         private GraphicsPath _passivZeichen;
         private GraphicsPath _aktivZeichen;
-
+        #region Properties
         /// <summary>
         /// zum Speichern in der Anlagen-Datei
         /// </summary>
@@ -38,7 +38,9 @@ namespace MoBaSteuerung.Elemente {
                 return "Entkuppler " + this.ID;
             }
         }
+        #endregion //properties
 
+        #region Konstruktoren
         public Entkuppler(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
          : base(parent, 0, zoom, anzeigeTyp) {
             PositionRaster = rasterPosition;
@@ -88,7 +90,9 @@ namespace MoBaSteuerung.Elemente {
                 }
             }
         }
+        #endregion //Konstruktoren
 
+        #region oeffentlicheMethoden
         /// <summary>
         /// 
         /// </summary>
@@ -183,7 +187,7 @@ namespace MoBaSteuerung.Elemente {
             }
             return false;
         }
-
+        #endregion //öffentliche Methoden
     }
 
 }

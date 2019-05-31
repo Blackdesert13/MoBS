@@ -10,6 +10,7 @@ using System.Drawing;
 using MoBaSteuerung.ZeichnenElemente;
 using MoBa.Elemente;
 using System.IO;
+using ModellBahnSteuerung.Elemente;
 
 namespace MoBaSteuerung.Anlagenkomponenten {
 
@@ -19,263 +20,292 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 	/// </summary>
 	public class AnlagenElemente {
 		#region private Felder
-		private ElementListe<Regler> reglerElemente;
-		private ElementListe<Anschluss> anschlussElemente;
+		private ElementListe<Regler> _reglerElemente;
+        private ElementListe<StartSignalGruppe> _ssgElemente;
+        private ElementListe<Anschluss> _anschlussElemente;
 		private ElementListe<Servo> servoElemente;
-		private ElementListe<FSS> fssElemente;
-		private ElementListe<Gleis> gleisElemente;
-		private ElementListe<Weiche> weicheElemente;
+		private ElementListe<FSS> _fssElemente;
+		private ElementListe<Gleis> _gleisElemente;
+		private ElementListe<Weiche> _weicheElemente;
 		private ElementListe<Signal> signalElemente;
 		private ElementListe<Schalter> schalterElemente;
-		private ElementListe<Knoten> knotenElemente;
-		private ElementListe<Entkuppler> entkupplerElemente;
-		private ElementListe<MCSpeicher.MCSpeicher> listeMCSpeicher;
+		private ElementListe<Knoten> _knotenElemente;
+		private ElementListe<Entkuppler> _entkupplerElemente;
+		private ElementListe<MCSpeicher.MCSpeicher> _listeMCSpeicher;
 		private ElementListe<InfoFenster> infoElemente;
 		private ElementListe<Haltestelle> haltestellenElemente;//für Straßenbahn
-		private FahrstrassenNElemente fahrstrassenElemente;
-		private ElementListe<Zug> zugElemente;
-		private Anlagenzustand anlagenZustand;
-
-
+		private FahrstrassenNElemente _fahrstrassenElemente;
+		private ElementListe<Zug> _zugElemente;
+		private Anlagenzustand _anlagenZustand;
 		private bool _rückmeldungAnzeigen;
 		private bool _rückmeldungAktiv;
 		private int _entkupplerAbschaltAutoWert;
 		private bool _entkupplerAbschaltAutoAktiv;
-
 		private Servo _aktiverServo = null;
 		private ServoAction _aktiverServoRichtung = ServoAction.None;
 		private int _zoom;
 		private string zugDateiPfadName;
-		#endregion //private Felder
+        #endregion //private Felder
+        
+        #region Properties
+        public string ZugDateiPfadName { set { zugDateiPfadName = value; } }
+    
+        /// <summary>
+        /// 
+        /// </summary>
+        public Int32 Zoom
+        {
+            set
+            {
+                this._reglerElemente.Zoom = value;
+                this._ssgElemente.Zoom = value;
+                this._knotenElemente.Zoom = value;
+                this._gleisElemente.Zoom = value;
+                this._weicheElemente.Zoom = value;
+                this.signalElemente.Zoom = value;
+                this.schalterElemente.Zoom = value;
+                this._fssElemente.Zoom = value;
+                this.infoElemente.Zoom = value;
+                this._entkupplerElemente.Zoom = value;
+                this._fahrstrassenElemente.Zoom = value;
+                this.servoElemente.Zoom = value;
+                this._zoom = value;
+            }
+            get
+            {
+                return this._zoom;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public AnzeigeTyp AnzeigeTyp
+        {
+            set
+            {
+                this._ssgElemente.AnzeigeTyp = value;
+                this._gleisElemente.AnzeigeTyp = value;
+                this._weicheElemente.AnzeigeTyp = value;
+                this.signalElemente.AnzeigeTyp = value;
+                this.schalterElemente.AnzeigeTyp = value;
+                this._fssElemente.AnzeigeTyp = value;
+                this._knotenElemente.AnzeigeTyp = value;
+                this._entkupplerElemente.AnzeigeTyp = value;
+                this._fahrstrassenElemente.AnzeigeTyp = value;
+                this.infoElemente.AnzeigeTyp = value;
+                this.servoElemente.AnzeigeTyp = value;
+            }
+        }
+        public ElementListe<Regler> ReglerElemente { get { return this._reglerElemente; } }
+        public ElementListe<StartSignalGruppe> SsgElemente { get { return this._ssgElemente; } }
+        public ElementListe<Anschluss> AnschlussElemente { get { return this._anschlussElemente; } }
+        public ElementListe<Servo> ServoElemente { get { return this.servoElemente; } }
+        /// <summary>
+        /// Liste aller Gleise
+        /// </summary>
+        public ElementListe<Gleis> GleisElemente { get { return this._gleisElemente; } }
+        public ElementListe<MCSpeicher.MCSpeicher> ListeMCSpeicher
+        {
+            get
+            {
+                return _listeMCSpeicher;
+            }
+        }
+
+        public ElementListe<Zug> ZugElemente
+        {
+            get { return _zugElemente; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ElementListe<Weiche> WeicheElemente
+        {
+            get
+            {
+                return this._weicheElemente;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ElementListe<Signal> SignalElemente
+        {
+            get
+            {
+                return this.signalElemente;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ElementListe<Schalter> SchalterElemente
+        {
+            get
+            {
+                return this.schalterElemente;
+            }
+        }
+
+        /// <summary>
+        /// liefert die Fahrstromschalter-Liste
+        /// </summary>
+        public ElementListe<FSS> FssElemente
+        {
+            get
+            {
+                return this._fssElemente;
+            }
+        }
+
+        /// <summary>
+        /// liefert die Infofenster-Liste
+        /// </summary>
+        public ElementListe<InfoFenster> InfoElemente
+        {
+            get
+            {
+                return this.infoElemente;
+            }
+        }
+
+        /// <summary>
+        /// liefert die Haltestellen-Liste
+        /// </summary>
+        public ElementListe<Haltestelle> HaltestellenElemente
+        {
+            get
+            {
+                return this.haltestellenElemente;
+            }
+        }
+
+        /// <summary>
+        /// liefert die Knoten-Liste
+        /// </summary>
+        public ElementListe<Knoten> KnotenElemente
+        {
+            get
+            {
+                return this._knotenElemente;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ElementListe<Entkuppler> EntkupplerElemente
+        {
+            get
+            {
+                return this._entkupplerElemente;
+            }
+        }
 
 
-		/// <summary>
-		/// enthält alle Elemente der Anlage
-		/// </summary>
-		public AnlagenElemente() {
-			this.reglerElemente = new ElementListe<Regler>();
-			this.anschlussElemente = new ElementListe<Anschluss>();
+
+
+        public FahrstrassenNElemente FahrstrassenElemente
+        {
+            get
+            {
+                return _fahrstrassenElemente;
+            }
+        }
+
+        public Anlagenzustand AnlagenZustand
+        {
+            get
+            {
+                return _anlagenZustand;
+            }
+            set
+            {
+                _anlagenZustand = value;
+            }
+        }
+
+        public bool RückmeldungAnzeigen
+        {
+            get
+            {
+                return this._rückmeldungAnzeigen;
+            }
+            set
+            {
+                this._rückmeldungAnzeigen = value;
+            }
+        }
+
+        public bool RückmeldungAktiv
+        {
+            get
+            {
+                return _rückmeldungAktiv;
+            }
+
+            set
+            {
+                _rückmeldungAktiv = value;
+            }
+        }
+        #endregion //Properties
+        #region Konstruktoren
+        /// <summary>
+        /// enthält alle Elemente der Anlage
+        /// </summary>
+        public AnlagenElemente() {
+			this._reglerElemente = new ElementListe<Regler>();
+            this._ssgElemente = new ElementListe<StartSignalGruppe>();
+            this._anschlussElemente = new ElementListe<Anschluss>();
 			this.servoElemente = new ElementListe<Servo>();
-			this.knotenElemente = new ElementListe<Knoten>();
-			this.gleisElemente = new ElementListe<Gleis>();
-			this.weicheElemente = new ElementListe<Weiche>();
+			this._knotenElemente = new ElementListe<Knoten>();
+			this._gleisElemente = new ElementListe<Gleis>();
+			this._weicheElemente = new ElementListe<Weiche>();
 			this.signalElemente = new ElementListe<Signal>();
 			this.schalterElemente = new ElementListe<Schalter>();
-			this.fssElemente = new ElementListe<FSS>();
-			this.entkupplerElemente = new ElementListe<Entkuppler>();
+			this._fssElemente = new ElementListe<FSS>();
+			this._entkupplerElemente = new ElementListe<Entkuppler>();
 			this.infoElemente = new ElementListe<InfoFenster>();
 			this.haltestellenElemente = new ElementListe<Haltestelle>();
 
-			this.listeMCSpeicher = new ElementListe<MCSpeicher.MCSpeicher>();
-			this.fahrstrassenElemente = new FahrstrassenNElemente();
-			this.zugElemente = new ElementListe<Zug>();
-			this.anlagenZustand = new Anlagenzustand();
+			this._listeMCSpeicher = new ElementListe<MCSpeicher.MCSpeicher>();
+			this._fahrstrassenElemente = new FahrstrassenNElemente();
+			this._zugElemente = new ElementListe<Zug>();
+			this._anlagenZustand = new Anlagenzustand();
 
 			this.RückmeldungAnzeigen = false;
 			this.RückmeldungAktiv = false;
 			this.EntkupplerAbschaltAutoAktiv = true;
 			this.EntkupplerAbschaltAutoWert = 3;
 		}
+        #endregion //Konstruktoren
 
-		public string ZugDateiPfadName { set { zugDateiPfadName = value; } }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Int32 Zoom {
-			set {
-				this.reglerElemente.Zoom = value;
-				this.knotenElemente.Zoom = value;
-				this.gleisElemente.Zoom = value;
-				this.weicheElemente.Zoom = value;
-				this.signalElemente.Zoom = value;
-				this.schalterElemente.Zoom = value;
-				this.fssElemente.Zoom = value;
-				this.infoElemente.Zoom = value;
-				this.entkupplerElemente.Zoom = value;
-				this.fahrstrassenElemente.Zoom = value;
-				this.servoElemente.Zoom = value;
-				this._zoom = value;
-			}
-			get {
-				return this._zoom;
-			}
-
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public AnzeigeTyp AnzeigeTyp {
-			set {
-				this.gleisElemente.AnzeigeTyp = value;
-				this.weicheElemente.AnzeigeTyp = value;
-				this.signalElemente.AnzeigeTyp = value;
-				this.schalterElemente.AnzeigeTyp = value;
-				this.fssElemente.AnzeigeTyp = value;
-				this.knotenElemente.AnzeigeTyp = value;
-				this.entkupplerElemente.AnzeigeTyp = value;
-				this.fahrstrassenElemente.AnzeigeTyp = value;
-				this.infoElemente.AnzeigeTyp = value;
-				this.servoElemente.AnzeigeTyp = value;
-			}
-		}
-
-		public ElementListe<Regler> ReglerElemente {
-			get { return this.reglerElemente; }
-		}
-		public ElementListe<Anschluss> AnschlussElemente {
-			get { return this.anschlussElemente; }
-		}
-
-		public ElementListe<Servo> ServoElemente {
-			get { return this.servoElemente; }
-		}
-
-		/// <summary>
-		/// Liste aller Gleise
-		/// </summary>
-		public ElementListe<Gleis> GleisElemente {
-			get {
-				return this.gleisElemente;
-			}
-		}
 
 		/// <summary>
 		/// schaltet alle Gleise ein, für Digitalbetrieb
 		/// </summary>
 		public void GleiseEinschalten() {
 			List<Gleis> items;
-			items = gleisElemente.Elemente;
+			items = _gleisElemente.Elemente;
 			foreach (Gleis item in items) {
 				item.AusgangSchalten(true);
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public ElementListe<Weiche> WeicheElemente {
-			get {
-				return this.weicheElemente;
-			}
-		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public ElementListe<Signal> SignalElemente {
-			get {
-				return this.signalElemente;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public ElementListe<Schalter> SchalterElemente {
-			get {
-				return this.schalterElemente;
-			}
-		}
-
-		/// <summary>
-		/// liefert die Fahrstromschalter-Liste
-		/// </summary>
-		public ElementListe<FSS> FssElemente {
-			get {
-				return this.fssElemente;
-			}
-		}
-
-		/// <summary>
-		/// liefert die Infofenster-Liste
-		/// </summary>
-		public ElementListe<InfoFenster> InfoElemente {
-			get {
-				return this.infoElemente;
-			}
-		}
-
-		/// <summary>
-		/// liefert die Haltestellen-Liste
-		/// </summary>
-		public ElementListe<Haltestelle> HaltestellenElemente {
-			get {
-				return this.haltestellenElemente;
-			}
-		}
-
-		/// <summary>
-		/// liefert die Knoten-Liste
-		/// </summary>
-		public ElementListe<Knoten> KnotenElemente {
-			get {
-				return this.knotenElemente;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public ElementListe<Entkuppler> EntkupplerElemente {
-			get {
-				return this.entkupplerElemente;
-			}
-		}
-
-
-		public ElementListe<MCSpeicher.MCSpeicher> ListeMCSpeicher {
-			get {
-				return listeMCSpeicher;
-			}
-		}
-
-		public ElementListe<Zug> ZugElemente {
-			get { return zugElemente; }
-		}
-
-		public FahrstrassenNElemente FahrstrassenElemente {
-			get {
-				return fahrstrassenElemente;
-			}
-		}
-
-		public Anlagenzustand AnlagenZustand {
-			get {
-				return anlagenZustand;
-			}
-			set {
-				anlagenZustand = value;
-			}
-		}
-
-		public bool RückmeldungAnzeigen {
-			get {
-				return this._rückmeldungAnzeigen;
-			}
-			set {
-				this._rückmeldungAnzeigen = value;
-			}
-		}
-
-		public bool RückmeldungAktiv {
-			get {
-				return _rückmeldungAktiv;
-			}
-
-			set {
-				_rückmeldungAktiv = value;
-			}
-		}
 
 		/// <summary>
 		/// aktiviert die Koppelung nach dem Laden aller Elemente
 		/// </summary>
 		public void KoppelungenAktivieren() {
-			weicheElemente.KoppelungenAktivieren();
-			fssElemente.KoppelungenAktivieren();
-			gleisElemente.KoppelungenAktivieren();
+			_weicheElemente.KoppelungenAktivieren();
+			_fssElemente.KoppelungenAktivieren();
+			_gleisElemente.KoppelungenAktivieren();
 			schalterElemente.KoppelungenAktivieren();
 		}
 
@@ -345,7 +375,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			}
 			// Logging.Log.Schreibe(logString, LogLevel.Info);
 			//logString.Insert(Environment.NewLine);
-			foreach (FSS x in fssElemente.Elemente) {//reset aller FSS, Regler 1 und 2 auf null
+			foreach (FSS x in _fssElemente.Elemente) {//reset aller FSS, Regler 1 und 2 auf null
 				undefRegler = undefRegler + x.reset();
 				logString = logString + x.ReglerNummer1 + " " + x.ReglerNummer2 + " " + x.AktiverReglerNr + "\t";
 			}
@@ -357,7 +387,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			while ((undefRegler != 0) && (undefRegler != undefRegleralt)) {
 				undefRegleralt = undefRegler;
 				undefRegler = 0;
-				foreach (FSS x in fssElemente.Elemente) {
+				foreach (FSS x in _fssElemente.Elemente) {
 					undefRegler += x.aktualisieren();
 					//if (x.AktiverReglerNr == 0) undefRegler++;
 				}
@@ -373,7 +403,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 
 		public List<Gleis> RueckmeldungSuchen(int ArduinoNr) {
 			// List<Gleis> ergebnis = new List<Gleis>();
-			List<Gleis> gListe = gleisElemente.Elemente;
+			List<Gleis> gListe = _gleisElemente.Elemente;
 			return gListe.FindAll(x => x.Eingang.ArdNr == ArduinoNr);
 			//return ergebnis;
 		}
@@ -386,10 +416,10 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <returns></returns>
 		public List<AnlagenElement> RelaisAdresseSuchen(int ArduinoNr, int PlatinenNr) {
 			List<AnlagenElement> ergebnis = new List<AnlagenElement>();
-			ergebnis.AddRange(weicheElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
-			ergebnis.AddRange(gleisElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
-			ergebnis.AddRange(fssElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
-			ergebnis.AddRange(entkupplerElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
+			ergebnis.AddRange(_weicheElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
+			ergebnis.AddRange(_gleisElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
+			ergebnis.AddRange(_fssElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
+			ergebnis.AddRange(_entkupplerElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
 			ergebnis.AddRange(signalElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
 			return ergebnis;
 		}
@@ -401,7 +431,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <param name="PlatinenNr"></param>
 		/// <returns></returns>
 		public List<Gleis> RMAdresseSuchen(int ArduinoNr, int PlatinenNr) {
-			return gleisElemente.Elemente.FindAll(x => (x.Eingang.ArdNr == ArduinoNr) && (x.Eingang.AdressenNr == PlatinenNr));
+			return _gleisElemente.Elemente.FindAll(x => (x.Eingang.ArdNr == ArduinoNr) && (x.Eingang.AdressenNr == PlatinenNr));
 		}
 
 		/// <summary>
@@ -413,12 +443,12 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			string stecker = SteckerBezeichnung;
 			List<AnlagenElement> ergebnis = new List<AnlagenElement>();
 			ergebnis.AddRange(ReglerElemente.SteckerSuchen(stecker));
-			ergebnis.AddRange(weicheElemente.SteckerSuchen(stecker));
-			ergebnis.AddRange(gleisElemente.SteckerSuchen(stecker));
-			ergebnis.AddRange(fssElemente.SteckerSuchen(stecker));
-			ergebnis.AddRange(entkupplerElemente.SteckerSuchen(stecker));
+			ergebnis.AddRange(_weicheElemente.SteckerSuchen(stecker));
+			ergebnis.AddRange(_gleisElemente.SteckerSuchen(stecker));
+			ergebnis.AddRange(_fssElemente.SteckerSuchen(stecker));
+			ergebnis.AddRange(_entkupplerElemente.SteckerSuchen(stecker));
 			ergebnis.AddRange(signalElemente.SteckerSuchen(stecker));
-			ergebnis.AddRange(anschlussElemente.SteckerSuchen(stecker));
+			ergebnis.AddRange(_anschlussElemente.SteckerSuchen(stecker));
 			return ergebnis;
 		}
 
@@ -427,7 +457,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// </summary>
 		public void ZuegeAktualisieren() {
 			foreach (Signal x in signalElemente.Elemente) x.ZugNr = 0;
-			foreach (Zug x in zugElemente.Elemente) {
+			foreach (Zug x in _zugElemente.Elemente) {
 				if (x.SignalNummer != 0) {
 					signalElemente.Element(x.SignalNummer).ZugNr = x.ID;
 				}
@@ -440,21 +470,21 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// verknüpft FSS untereinander
 		/// </summary>
 		public void FSSLaden() {
-			foreach (FSS x in fssElemente.Elemente) { x.FSSLaden(); }
+			foreach (FSS x in _fssElemente.Elemente) { x.FSSLaden(); }
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public void AlleLöschen() {
-			this.gleisElemente.AlleLöschen();
-			this.weicheElemente.AlleLöschen();
+			this._gleisElemente.AlleLöschen();
+			this._weicheElemente.AlleLöschen();
 			this.signalElemente.AlleLöschen();
 			this.schalterElemente.AlleLöschen();
-			this.knotenElemente.AlleLöschen();
-			this.entkupplerElemente.AlleLöschen();
-			this.fahrstrassenElemente.AlleLöschen();
-			this.listeMCSpeicher.AlleLöschen();
+			this._knotenElemente.AlleLöschen();
+            this._entkupplerElemente.AlleLöschen();
+			this._fahrstrassenElemente.AlleLöschen();
+			this._listeMCSpeicher.AlleLöschen();
 			this.AnlagenZustand = new Anlagenzustand();
 		}
 

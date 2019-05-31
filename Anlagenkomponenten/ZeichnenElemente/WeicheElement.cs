@@ -13,22 +13,18 @@ namespace MoBaSteuerung.Elemente {
     /// Weiche
     /// </summary>
     public class Weiche : AnlagenElement {
-        //private Rectangle rechteckFillEllipse;
+        
         private Color farbeFillEllipse;
-        //private Rectangle rechteckDrawEllipse;
-        //private Point[] linienPositionen;
         private Color farbeLinien;
        // private Rectangle rechteckText;
         private StringFormat stringFormat;
-        //private Font stringFont;
-
-
         private Gleis[] _gleise = new Gleis[2] { null, null };
         private Knoten _knoten;
         private GraphicsPath[] graphicsPathLinien = new GraphicsPath[2] { new GraphicsPath(), new GraphicsPath() };
         private GraphicsPath graphicsPathUntergrung = new GraphicsPath();
         private bool _grundstellung = false;
-
+       
+        #region Properties
         /// <summary>
         /// zum Speichern in der Anlagen-Datei
         /// </summary>
@@ -52,15 +48,13 @@ namespace MoBaSteuerung.Elemente {
         }
 
         public bool Grundstellung {
-            get {
-                return _grundstellung;
-            }
-
-            set {
-                _grundstellung = value;
-            }
+            get { return _grundstellung; }
+            set { _grundstellung = value;}
         }
 
+        public Knoten Knoten { get { return _knoten; } }
+        
+        #endregion //Properties
         /// <summary>
         /// zum Laden aus der Text-Datei
         /// </summary>
