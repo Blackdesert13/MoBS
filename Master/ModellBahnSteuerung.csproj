@@ -112,12 +112,6 @@
     <Compile Include="frmProperties.Designer.cs">
       <DependentUpon>frmProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmBefehlsliste.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmBefehlsliste.Designer.cs">
-      <DependentUpon>FrmBefehlsliste.cs</DependentUpon>
-    </Compile>
     <Compile Include="SteckerAnzeige.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,9 +202,6 @@
     </Compile>
     <EmbeddedResource Include="frmProperties.resx">
       <DependentUpon>frmProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmBefehlsliste.resx">
-      <DependentUpon>FrmBefehlsliste.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialoge\frmArduino.resx">
       <DependentUpon>frmArduino.cs</DependentUpon>

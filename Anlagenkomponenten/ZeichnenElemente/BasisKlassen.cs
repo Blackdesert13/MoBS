@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Drawing.Design;
 
 namespace MoBaSteuerung.Elemente {
 
@@ -374,9 +376,13 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 			}
 		}
 
+
+		[Editor(typeof(BefehlsListeTypeEditor), typeof(UITypeEditor))]
+		[TypeConverter(typeof(BefehlslisteTypeConverter))]
 		public BefehlsListe Koppelung {
 			get { return _kopplungsBefehlsListe; }
 		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -465,6 +471,8 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		/// <summary>
 		/// Adresse des Elementes zum Schalten
 		/// </summary>
+		[TypeConverter(typeof(AdresseTypeConverter))]
+		[RefreshProperties(RefreshProperties.All)]
 		public Adresse Ausgang {
 			get {
 				if (_ausgang == null) {
@@ -480,6 +488,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		/// <summary>
 		/// die Kurzbezeichnung des Elements
 		/// </summary>
+		[Browsable(false)]//verstecke Eigenschaft im PropertyGrid
 		public string KurzBezeichnung {
 			get { return _kurzBezeichnung + _iD; }
 			set { _kurzBezeichnung = value; }

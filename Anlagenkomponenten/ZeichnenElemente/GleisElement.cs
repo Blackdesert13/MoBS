@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using MoBaSteuerung.Anlagenkomponenten.Enum;
 using MoBaSteuerung.Anlagenkomponenten;
 using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
+using System.ComponentModel;
 
 namespace MoBaSteuerung.Elemente {
 
@@ -67,6 +68,8 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
+
+		[TypeConverter(typeof(AdresseTypeConverter))]
 		public Adresse Eingang {
 			get {
 				if (_eingang == null) {
@@ -302,7 +305,7 @@ namespace MoBaSteuerung.Elemente {
 			graphics.DrawPath(stiftGleis, this.graphicsPath);
 
       //zum Test _eingang.Stellung = true;
-      if (_eingang.Stellung && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
+      if (Eingang.Stellung && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
       //if (Parent.RückmeldungAnzeigen && Eingang.RueckmeldungAbfragen()) 
       {
 				this.farbeLinien = Color.Orange;
