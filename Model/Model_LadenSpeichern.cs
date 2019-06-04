@@ -270,9 +270,10 @@ namespace MoBaSteuerung {
 																																			+ this._zeichnenElemente.InfoElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker\tAutostart\tZugLmax"
 																																			+ this._zeichnenElemente.SignalElemente.SpeicherString);
-			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "HStelln\tNr.\tInfFeld\tBez"
+      anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "StartSG\tNr.\tLageX\tLageY\tTyp\tBez.\tSignale"
+                                                                     + this._zeichnenElemente.SsgElemente.SpeicherString);
+      anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "HStelln\tNr.\tInfFeld\tBez"
 																																			+ this._zeichnenElemente.HaltestellenElemente.SpeicherString);
-
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + this._zeichnenElemente.FahrstrassenElemente.SpeicherString);
 
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Züge\tNr.\tSignal\tLok\tTyp\tGeschw\tBez\tZLänge\tDigAdr.\tAnkunft"

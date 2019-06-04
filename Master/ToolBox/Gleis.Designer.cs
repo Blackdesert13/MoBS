@@ -57,6 +57,7 @@
             this.buttonMC = new System.Windows.Forms.Button();
             this.buttonLöschen = new System.Windows.Forms.Button();
             this.toolTipGleis = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.PanelMenü.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxMenü)).BeginInit();
             this.PanelEigenschaften.SuspendLayout();
@@ -73,7 +74,7 @@
             this.PanelMenü.Location = new System.Drawing.Point(-1, -1);
             this.PanelMenü.Name = "PanelMenü";
             this.PanelMenü.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.PanelMenü.Size = new System.Drawing.Size(356, 26);
+            this.PanelMenü.Size = new System.Drawing.Size(396, 26);
             this.PanelMenü.TabIndex = 0;
             // 
             // LabelMenü
@@ -82,7 +83,7 @@
             this.LabelMenü.Location = new System.Drawing.Point(0, 0);
             this.LabelMenü.Name = "LabelMenü";
             this.LabelMenü.Padding = new System.Windows.Forms.Padding(5, 2, 2, 2);
-            this.LabelMenü.Size = new System.Drawing.Size(326, 24);
+            this.LabelMenü.Size = new System.Drawing.Size(366, 24);
             this.LabelMenü.TabIndex = 1;
             this.LabelMenü.Text = "Gleis";
             this.LabelMenü.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -91,7 +92,7 @@
             // 
             this.PictureBoxMenü.Dock = System.Windows.Forms.DockStyle.Right;
             this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.Open;
-            this.PictureBoxMenü.Location = new System.Drawing.Point(326, 0);
+            this.PictureBoxMenü.Location = new System.Drawing.Point(366, 0);
             this.PictureBoxMenü.Margin = new System.Windows.Forms.Padding(0);
             this.PictureBoxMenü.Name = "PictureBoxMenü";
             this.PictureBoxMenü.Size = new System.Drawing.Size(25, 24);
@@ -107,6 +108,7 @@
             // PanelEigenschaften
             // 
             this.PanelEigenschaften.BackColor = System.Drawing.Color.White;
+            this.PanelEigenschaften.Controls.Add(this.button1);
             this.PanelEigenschaften.Controls.Add(this.labelStecker);
             this.PanelEigenschaften.Controls.Add(this.textBoxStecker);
             this.PanelEigenschaften.Controls.Add(this.buttonSpeichern);
@@ -134,7 +136,7 @@
             this.PanelEigenschaften.Location = new System.Drawing.Point(0, 27);
             this.PanelEigenschaften.Margin = new System.Windows.Forms.Padding(0);
             this.PanelEigenschaften.Name = "PanelEigenschaften";
-            this.PanelEigenschaften.Size = new System.Drawing.Size(352, 85);
+            this.PanelEigenschaften.Size = new System.Drawing.Size(392, 85);
             this.PanelEigenschaften.TabIndex = 1;
             // 
             // labelStecker
@@ -349,6 +351,16 @@
             this.toolTipGleis.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTipGleis.ToolTipTitle = "Gleis";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(354, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(53, 23);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmGleis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,7 +371,7 @@
             this.Controls.Add(this.PanelEigenschaften);
             this.MinimumSize = new System.Drawing.Size(352, 112);
             this.Name = "FrmGleis";
-            this.Size = new System.Drawing.Size(352, 112);
+            this.Size = new System.Drawing.Size(392, 112);
             this.PanelMenü.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxMenü)).EndInit();
             this.PanelEigenschaften.ResumeLayout(false);
@@ -398,5 +410,6 @@
         private System.Windows.Forms.Button buttonSpeichern;
         private System.Windows.Forms.Label labelStecker;
         private System.Windows.Forms.TextBox textBoxStecker;
+        private System.Windows.Forms.Button button1;
     }
 }

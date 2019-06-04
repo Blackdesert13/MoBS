@@ -50,7 +50,7 @@ namespace ModellBahnSteuerung.ZugEditor
 			zugListe.Clear();
             foreach(DataGridViewRow zeile in this.dataGridView1.Rows)
             {
-                string[] elem = new string[7];
+                string[] elem = new string[10];
 				elem[0] = "Zug";
 				elem[1] = (string)zeile.Cells[0].Value; //ID
 				elem[2] = (string)zeile.Cells[1].Value; //Signal

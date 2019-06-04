@@ -179,7 +179,18 @@ namespace ModellBahnSteuerung.ToolBox
         {
 
         }
-
-
+        /// <summary>
+        /// propertygrid öffnen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (_gleis != null)
+            {
+                frmProperties frm = new frmProperties(_gleis);
+                if (frm.ShowDialog(this) == DialogResult.OK) ;
+            }
+        }
     }
 }

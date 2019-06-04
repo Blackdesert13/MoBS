@@ -14,17 +14,12 @@ namespace MoBaSteuerung.Elemente {
 	/// Gleis
 	/// </summary>
 	public class Gleis : LinienAnlagenElement {
-
-		private int reglerNr = 0;
-		//private int reglerNrAktuell = 0;
+        #region privateFelder
+        private int reglerNr = 0;
 		private Regler regler;
 		private FSS _fss;
-		// private Point[] linienPositionen;
 		private Color farbeLinien;
-		//private Rectangle rechteckText;
 		private StringFormat stringFormat;
-		//private Font stringFont;
-
 		private int _direction;
 		private int _length;
 		private Signal[] _signale = new Signal[2];
@@ -33,11 +28,12 @@ namespace MoBaSteuerung.Elemente {
 		private Schalter _schalter = null;
 		private Adresse _eingang;
 		private GraphicsPath graphicsPath;
-
-		/// <summary>
-		/// zum Speichern in der Anlagen-Datei
-		/// </summary>
-		public override string SpeicherString {
+        #endregion //privateFelder
+        #region properties
+        /// <summary>
+        /// zum Speichern in der Anlagen-Datei
+        /// </summary>
+        public override string SpeicherString {
 			get {
 				return "Gleis"
 						+ "\t" + ID
@@ -124,8 +120,8 @@ namespace MoBaSteuerung.Elemente {
 				_infoFelder = value;
 			}
 		}
-
-		public Gleis(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten startKnoten, Knoten endKnoten)
+        #endregion //Properties
+        public Gleis(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten startKnoten, Knoten endKnoten)
 				: base(parent, 0, zoom, anzeigeTyp) {
 			graphicsPath = new GraphicsPath();
 			KurzBezeichnung = "Gl";
