@@ -41,7 +41,6 @@ namespace MoBaSteuerung {
 
 		#endregion
 
-
 		public string BearbeitenAnlagenElementInfoText(Point punkt) {
 			List<AnlagenElement> elListe = this.SucheElementAufPunkt(punkt);
 			if (elListe.Count > 0) {

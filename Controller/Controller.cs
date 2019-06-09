@@ -232,6 +232,13 @@ namespace MoBaSteuerung
 			return _model.BedienenMouseDoubleClick(location);
 		}
 
+		public int BearbeitenenMouseDoubleClick(Point location)
+		{
+			_model.BearbeitenMouseDoubleClick(location);
+		
+			return 0;//_model.BearbeitenMouseDoubleClick(location);
+		}
+
 		private void Model_ZubehoerServoAction(int servo, ServoAction action)
 		{
 			if (this.AppTyp == AppTyp.Master) {
@@ -970,7 +977,6 @@ namespace MoBaSteuerung
 			int y = punkt.Y;
 			if (x < 0) x = 0;
 			if (y < 0) y = 0;
-
 			return new Point((x - this.Zoom / 2) / this.Zoom + 1
 											, (y - this.Zoom / 2) / this.Zoom + 1);
 		}

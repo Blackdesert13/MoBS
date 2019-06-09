@@ -27,7 +27,7 @@ namespace MoBaSteuerung.Elemente {
 		private List<InfoFenster> _infoFelder = new List<InfoFenster> { };
 		private Schalter _schalter = null;
 		private Adresse _eingang;
-		private GraphicsPath graphicsPath;
+		private GraphicsPath _graphicsPath;
         #endregion //privateFelder
         #region properties
         /// <summary>
@@ -64,7 +64,9 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
-
+		/// <summary>
+		/// Adresse der Rückmeldung
+		/// </summary>
 		[TypeConverter(typeof(AdresseTypeConverter))]
 		public Adresse Eingang {
 			get {
@@ -98,8 +100,15 @@ namespace MoBaSteuerung.Elemente {
 				_entkuppler = value;
 			}
 		}
+		
+		/// <summary>
+		/// Regler des Gleises, bei negativer Nummer wird dieser FSS abgefragt
+		/// </summary>
 		public int ReglerNr { get { return reglerNr; } set { reglerNr = value; } }
-
+		
+		/// <summary>
+		/// 
+		/// </summary>
 		public FSS Fss {
 			get {
 				return _fss;
@@ -120,10 +129,11 @@ namespace MoBaSteuerung.Elemente {
 				_infoFelder = value;
 			}
 		}
-        #endregion //Properties
-        public Gleis(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten startKnoten, Knoten endKnoten)
+		#endregion //Properties
+		#region Konstruktoren
+		public Gleis(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten startKnoten, Knoten endKnoten)
 				: base(parent, 0, zoom, anzeigeTyp) {
-			graphicsPath = new GraphicsPath();
+			_graphicsPath = new GraphicsPath();
 			KurzBezeichnung = "Gl";
 			StartKn = startKnoten;
 			EndKn = endKnoten;
@@ -133,7 +143,7 @@ namespace MoBaSteuerung.Elemente {
 
 		public Gleis(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten startKnoten, Knoten endKnoten)
 				: base(parent, iD, zoom, anzeigeTyp) {
-			graphicsPath = new GraphicsPath();
+			_graphicsPath = new GraphicsPath();
 			KurzBezeichnung = "Gl";
 			this.stringFormat = new StringFormat();
 			this.stringFormat.Alignment = StringAlignment.Far;
@@ -165,7 +175,7 @@ namespace MoBaSteuerung.Elemente {
 				: base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp) {
 			Ausgang = new Adresse(Parent);
 			Eingang = new Adresse(Parent);
-			graphicsPath = new GraphicsPath();
+			_graphicsPath = new GraphicsPath();
 			KurzBezeichnung = "Gl";
 			string[] start = elem[2].Split(' ');
 			string[] end = elem[3].Split(' ');
@@ -189,6 +199,7 @@ namespace MoBaSteuerung.Elemente {
 				Parent.GleisElemente.Hinzufügen(this);
 			}
 		}
+		#endregion //Konstruktoren
 		private void reglerLaden() {
 			if (_fss != null) {
 				if (_fss.AktiverReglerNr != regler.ID) regler = Parent.ReglerElemente.Element(_fss.AktiverReglerNr);
@@ -210,7 +221,7 @@ namespace MoBaSteuerung.Elemente {
            
             return Fehler;
         }
-        /// <summary>
+    /// <summary>
 		/// zeichnet die Regler-Farbe des Gleises
 		/// </summary>
 		/// <param name="graphics"></param>
@@ -241,7 +252,7 @@ namespace MoBaSteuerung.Elemente {
 					Pen stiftGleis = new Pen(farbeStift, Convert.ToSingle(this.Zoom * 0.75));
 					stiftGleis.EndCap = LineCap.Round;
 					stiftGleis.StartCap = LineCap.Round;
-					graphics.DrawPath(stiftGleis, this.graphicsPath);
+					graphics.DrawPath(stiftGleis, this._graphicsPath);
 				}
 			}
 		}
@@ -298,7 +309,7 @@ namespace MoBaSteuerung.Elemente {
 			stiftGleis.StartCap = LineCap.Round;
 			stiftGleis.Width = Convert.ToSingle(this.Zoom * 0.5);
 
-			graphics.DrawPath(stiftGleis, this.graphicsPath);
+			graphics.DrawPath(stiftGleis, this._graphicsPath);
 
       //zum Test _eingang.Stellung = true;
       if (Eingang.Stellung && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
@@ -311,11 +322,13 @@ namespace MoBaSteuerung.Elemente {
 				stift.DashStyle = DashStyle.Dash;
 				stift.DashPattern = new float[2] { 2, 2 };
 				stift.Width = Convert.ToSingle(this.Zoom * 0.4);
-				graphics.DrawPath(stift, this.graphicsPath);
+				graphics.DrawPath(stift, this._graphicsPath);
 			}
 		}
 
-
+		/// <summary>
+		/// berechnet die Grafik zum Zeichnen
+		/// </summary>
 		public override void Berechnung() {
 			double d = (Math.Atan2(StartKn.Position.Y - EndKn.Position.Y, EndKn.Position.X - StartKn.Position.X) * 4 / Math.PI);
 			if ((d % 1.0) == 0)
@@ -324,11 +337,8 @@ namespace MoBaSteuerung.Elemente {
 			_length = RasterLengthFromStartkn(EndKn.PositionRaster) * Zoom;
 			if ((_direction % 2) == 1)
 				_length = (int)(_length * Math.Sqrt(2));
-
-			//Mausrechteck = new Rectangle(_startKn.Position.X, _startKn.Position.Y - (int)(0.15 * Zoom), _length, (int)(0.3 * Zoom));
-
-			this.graphicsPath.Reset();
-			this.graphicsPath.AddLine(this.StartKn.PositionRaster.X * this.Zoom, this.StartKn.PositionRaster.Y * this.Zoom,
+        this._graphicsPath.Reset();
+			this._graphicsPath.AddLine(this.StartKn.PositionRaster.X * this.Zoom, this.StartKn.PositionRaster.Y * this.Zoom,
 																this.EndKn.PositionRaster.X * this.Zoom, this.EndKn.PositionRaster.Y * this.Zoom);
 		}
 
@@ -354,7 +364,7 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		private bool PunktAufGleis(Point punkt) {
-			return this.graphicsPath.IsOutlineVisible(punkt, new Pen(Color.Black, this.Zoom * 0.3f));
+			return this._graphicsPath.IsOutlineVisible(punkt, new Pen(Color.Black, this.Zoom * 0.3f));
 		}
 
 		private bool RasterPositionFrei(RasterAnlagenElement element) {

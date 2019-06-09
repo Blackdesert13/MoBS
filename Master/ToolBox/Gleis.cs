@@ -16,7 +16,7 @@ namespace ModellBahnSteuerung.ToolBox
   /// </summary>
     public partial class FrmGleis : UserControl
     {
-        private bool offen;
+        private bool _offen;
         private Model _model;
         private Gleis _gleis;
         //private MoBaSteuerung.Elemente.Weiche _weiche;
@@ -26,7 +26,7 @@ namespace ModellBahnSteuerung.ToolBox
         public FrmGleis()
         {
           InitializeComponent();
-          this.offen = true;
+          this._offen = true;
         }
 
         public Model Model { set { _model = value; } }
@@ -42,7 +42,7 @@ namespace ModellBahnSteuerung.ToolBox
 
         private void PictureBoxMenü_MouseEnter(object sender, EventArgs e)
         {
-          if (this.offen)
+          if (this._offen)
           {
             this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.OpenMouseEnter;
           }
@@ -54,7 +54,7 @@ namespace ModellBahnSteuerung.ToolBox
 
     private void PictureBoxMenü_MouseLeave(object sender, EventArgs e)
     {
-      if (this.offen)
+      if (this._offen)
       {
         this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.Open;
       }
@@ -66,7 +66,7 @@ namespace ModellBahnSteuerung.ToolBox
 
     private void PictureBoxMenü_MouseDown(object sender, MouseEventArgs e)
     {
-      if (this.offen)
+      if (this._offen)
       {
         this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.OpenMouseDown;
       }
@@ -78,7 +78,7 @@ namespace ModellBahnSteuerung.ToolBox
 
         private void PictureBoxMenü_MouseUp(object sender, MouseEventArgs e)
         {
-          if (this.offen)
+          if (this._offen)
           {
             this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.OpenMouseEnter;
           }
@@ -90,15 +90,15 @@ namespace ModellBahnSteuerung.ToolBox
 
         private void PictureBoxMenü_Click(object sender, EventArgs e)
         {
-          if (this.offen)
+          if (this._offen)
           {
             this.Height = 26;
-            this.offen = false;
+            this._offen = false;
           }
           else
           {
             this.Height = 112;
-            this.offen = true;
+            this._offen = true;
           }
         }
 
@@ -113,8 +113,7 @@ namespace ModellBahnSteuerung.ToolBox
             }
         }
 
-        private void gleisDatenLaden() {
-            //_gleis = gleis;
+        private void gleisDatenLaden() {      
             if (_gleis != null) {
                 textBoxGleis.Text = Convert.ToString( _gleis.ID);
                 textBoxAusgang.Text = _gleis.Ausgang.SpeicherString;

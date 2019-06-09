@@ -44,46 +44,6 @@ namespace MoBaSteuerung.Elemente
             Parent.HaltestellenElemente.Hinzufügen(this);
         }
 
-
-/* InfoBefehl für Debug
-
-        public void InfoBefehl(byte[] befehl)
-        {
-            if(befehl[1] - 100 == ID)
-            {
-                string txt = "HS" + ID + "-" ;
-                int infos = befehl[2];
-                int test;
-                int zeit = befehl[3];
-                for (int i = 0; i < 3; i++)
-                {
-                    test = infos % 2;
-                    txt = txt + " " + test;//befehl[2] + "-" + befehl[3];
-                    infos = infos >> 1;
-                }
-                test = infos % 2;
-                zeit = zeit + (test * 256);
-                infos = infos >> 1;
-                test = infos % 2;
-                zeit = zeit + (test * 512);
-                infos = infos >> 1;
-                test = infos % 2;
-                zeit = zeit + (test * 1024);
-                infos = infos >> 1;
-                test = infos % 2;
-                zeit = zeit + (test * 2048);
-                infos = infos >> 1;
-                test = infos % 2;
-                zeit = zeit + (test * 4096);
-                infos = infos >> 1;
-                txt = txt + " " + zeit;// Convert.ToString( zeit);// befehl[3];
-                //Event.OnEvent(this, new HaltestellenEventArgs(txt), HaltestellenChanged);
-                infoFenster.Text = txt;
-            }
-
-        }
-*/
-
         public void InfoBefehl(byte[] befehl)
         {
             if(befehl[1] - 100 == ID)

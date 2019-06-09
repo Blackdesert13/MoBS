@@ -57,7 +57,7 @@ namespace MoBaSteuerung.Elemente {
 
 		#endregion //Properties
 
-
+		#region Konstruktoren
 		/// <summary>
 		/// zum Laden aus der Text-Datei
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MoBaSteuerung.Elemente {
 		/// <param name="anzeigeTyp"></param>
 		/// <param name="elem">Zeile aus der Text-Datei</param>
 		public Weiche(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)
-: base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp) {// inArbeit
+       : base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp) {// inArbeit
 			KurzBezeichnung = "We";
 			string[] knotString = elem[2].Split(' ');
 			Knoten kn = parent.KnotenElemente.Element(Convert.ToInt32(knotString[0]));
@@ -74,7 +74,6 @@ namespace MoBaSteuerung.Elemente {
 				//this = kn.Weichen[Convert.ToInt32(knotString[1])];
 			}
 			Grundstellung = Convert.ToBoolean(elem[3]);
-
 			Ausgang.SpeicherString = elem[4];
 			Bezeichnung = elem[5];
 			if (elem.Length > 6)
@@ -101,8 +100,8 @@ namespace MoBaSteuerung.Elemente {
 			this.Berechnung();
 		}
 
-
-
+		#endregion //Konstruktoren
+		#region OeffendlicheMethoden
 		/// <summary>
 		/// 
 		/// </summary>
@@ -167,5 +166,6 @@ namespace MoBaSteuerung.Elemente {
 			//return t0.Contains(punkt) || t1.Contains(punkt);
 			return this.graphicsPathUntergrung.IsVisible(punkt);
 		}
+		#endregion /öffendliche Methoden
 	}
 }

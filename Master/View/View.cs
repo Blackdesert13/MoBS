@@ -378,17 +378,16 @@ namespace MoBaSteuerung
 		private void pictureBoxView_DoubleClick(object sender, EventArgs e)
 		{
 			bool neuZeichnen = false;
+			MouseEventArgs eArg = (MouseEventArgs)e;
 			switch (this.Controller.AnzeigeTyp) {
 				case AnzeigeTyp.Bearbeiten:
-
-
+					this.Controller.BearbeitenenMouseDoubleClick(eArg.Location);
 					break;
 				case AnzeigeTyp.Bedienen:
-					MouseEventArgs eArg = (MouseEventArgs)e;
 					//neuZeichnen = this.BedienenMouseClick();
 					int zugNr = this.Controller.BedienenMouseDoubleClick(eArg.Location);
-					//TODO:
-					//Zugeditor öffnen (ZUM SPICKEN Methode: zugEditorToolStripMenuItem_Click)
+					neuZeichnen = this.BedienenMouseClick();
+
 					break;
 			}
 			if (neuZeichnen) this.pictureBoxView.Invalidate();

@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MoBaSteuerung;
+using MoBaSteuerung.Elemente;
 
 namespace ModellBahnSteuerung.ToolBox
 {
@@ -15,18 +17,20 @@ namespace ModellBahnSteuerung.ToolBox
   public partial class Signal : UserControl
   {
     private bool offen;
+		private Model _model;
+		private MoBaSteuerung.Elemente.Signal _signal;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public Signal()
+		/// <summary>
+		/// 
+		/// </summary>
+		public Signal()
     {
       InitializeComponent();
       this.offen = true;
     }
 
-
-    private void PictureBoxMenü_MouseEnter(object sender, EventArgs e)
+		public Model Model { set { _model = value; } }
+		private void PictureBoxMenü_MouseEnter(object sender, EventArgs e)
     {
       if (this.offen)
       {
@@ -88,5 +92,60 @@ namespace ModellBahnSteuerung.ToolBox
       }
     }
 
-  }
+		private void signalDatenLaden()
+		{
+			if (_signal != null)
+			{
+				textBoxSignal.Text = Convert.ToString(_signal.ID);
+				textBoxAusgang.Text = _signal.Ausgang.SpeicherString;
+				//.Text = _signal.Bezeichnung;
+				
+				
+			}
+			else
+			{
+				textBoxGleis.Text = "";
+				textBoxAusgang.Text = "";
+				
+			}
+		}
+
+		private void signalLaden(int ID)
+		{
+			_signal = _model.ZeichnenElemente.SignalElemente.Element(ID);
+			_model.BearbeitenSelektieren(_signal);
+			signalDatenLaden();
+		}
+		private void buttonLaden_Click(object sender, EventArgs e)
+		{
+			int id;
+			if (int.TryParse(textBoxSignal.Text, out id))
+				signalLaden(id);
+			else
+			{
+				textBoxAusgang.Text = "";
+			}
+		}
+
+		private void buttonKoppelung_Click(object sender, EventArgs e)
+		{
+			if (_signal != null)
+			{
+				FrmBefehlsliste frmBefehlsliste = new FrmBefehlsliste(_signal.Koppelung, _signal.KurzBezeichnung + "-Koppelung");
+				if (frmBefehlsliste.ShowDialog(this) == DialogResult.OK)
+				{
+					// string[][] t =  frm.auslesen();
+				}
+			}
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			if (_signal != null)
+			{
+				frmProperties frm = new frmProperties(_signal);
+				if (frm.ShowDialog(this) == DialogResult.OK) ;
+			}
+		}
+	}
 }

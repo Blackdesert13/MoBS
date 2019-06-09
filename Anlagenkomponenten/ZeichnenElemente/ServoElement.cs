@@ -10,27 +10,31 @@ using System.Text;
 
 namespace MoBa.Elemente
 {
-    public class Servo : RasterAnlagenElement {
-        private bool _sichtbar = true;
+	/// <summary>
+	/// zur Bedienung von Zubehörservos
+	/// </summary>
+	public class Servo : RasterAnlagenElement {
+		#region privateFelder
+		private bool _sichtbar = true;
+    private int _winkelEin = 135;
+    private int _winkelAus = 45;
+    private int _speed = 0;//0 -> speed max
+    private string _beschriftung = "";
+    //private GraphicsPath graphicsPath;
+    private StringFormat _stringFormat;
+    private GraphicsPath _graphicsPathHintergrund;
+    private GraphicsPath _graphicsPathText;
+    private GraphicsPath _graphicsPathLeftButton;
+    private GraphicsPath _graphicsPathRightButton;
+    private bool _winkelRegelung = false;//true -> Steuerung nicht über Ein und Aus,
+																				 // winkelEin und -Aus sind dann die maximalen Endlagen
+		#endregion// privateFelder
 
-        private int _winkelEin = 135;
-        private int _winkelAus = 45;
-        private int _speed = 0;//0 -> speed max
-        private string _beschriftung = "";
-        private GraphicsPath graphicsPath;
-        private StringFormat stringFormat;
-        private GraphicsPath graphicsPathHintergrund;
-        private GraphicsPath graphicsPathText;
-        private GraphicsPath graphicsPathLeftButton;
-        private GraphicsPath graphicsPathRightButton;
-
-        private bool _winkelRegelung = false;//true -> Steuerung nicht über Ein und Aus,
-                                             // winkelEin und -Aus sind dann die maximalen Endlagen
-
-        /// <summary>
-        /// zum Speichern in der Anlagen-Datei
-        /// </summary>
-        public override string SpeicherString {
+		#region Properties
+		/// <summary>
+		/// zum Speichern in der Anlagen-Datei
+		/// </summary>
+		public override string SpeicherString {
             get {
                 return "Servo"
                        + "\t" + ID
@@ -45,9 +49,9 @@ namespace MoBa.Elemente
                        + "\t" + Stecker;
             }
         }
-
-
-        public Servo(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp)
+		#endregion //Properties
+		#region Konstruktoren
+		public Servo(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp)
             : base(parent, 0, zoom, anzeigeTyp) {
         }
 
@@ -68,27 +72,29 @@ namespace MoBa.Elemente
             this.Parent.ServoElemente.Hinzufügen(this);
             this.Berechnung();
         }
+		#endregion //Konstruktoren
 
-        public override void Berechnung() {
+		#region oeffentlicheMethoden
+		public override void Berechnung() {
             Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
             Matrix matrix = new Matrix();
             matrix.Translate(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
             matrix.Scale(Zoom, Zoom);
             //this.graphicsPathText.Reset();
-            this.graphicsPathText = new GraphicsPath();
-            this.graphicsPathText.AddString(_beschriftung, new FontFamily("Arial"), 0, 0.6f, new PointF(-0.5f, -0.36f), this.stringFormat);
-            RectangleF rechteck = graphicsPathText.GetBounds();
+            this._graphicsPathText = new GraphicsPath();
+            this._graphicsPathText.AddString(_beschriftung, new FontFamily("Arial"), 0, 0.6f, new PointF(-0.5f, -0.36f), this._stringFormat);
+            RectangleF rechteck = _graphicsPathText.GetBounds();
             rechteck.Inflate(0.1f,0.1f);
-            this.graphicsPathText.Transform(matrix);
-            this.graphicsPathHintergrund = new GraphicsPath();
-            this.graphicsPathHintergrund.AddRectangle(rechteck);
-            this.graphicsPathHintergrund.Transform(matrix);
-            this.graphicsPathLeftButton = new GraphicsPath();
-            this.graphicsPathLeftButton.AddRectangle(new RectangleF(rechteck.Left, rechteck.Bottom, rechteck.Width / 2, rechteck.Height));
-            this.graphicsPathLeftButton.Transform(matrix);
-            this.graphicsPathRightButton = new GraphicsPath();
-            this.graphicsPathRightButton.AddRectangle(new RectangleF(rechteck.Left+ rechteck.Width / 2, rechteck.Bottom, rechteck.Width / 2, rechteck.Height));
-            this.graphicsPathRightButton.Transform(matrix);
+            this._graphicsPathText.Transform(matrix);
+            this._graphicsPathHintergrund = new GraphicsPath();
+            this._graphicsPathHintergrund.AddRectangle(rechteck);
+            this._graphicsPathHintergrund.Transform(matrix);
+            this._graphicsPathLeftButton = new GraphicsPath();
+            this._graphicsPathLeftButton.AddRectangle(new RectangleF(rechteck.Left, rechteck.Bottom, rechteck.Width / 2, rechteck.Height));
+            this._graphicsPathLeftButton.Transform(matrix);
+            this._graphicsPathRightButton = new GraphicsPath();
+            this._graphicsPathRightButton.AddRectangle(new RectangleF(rechteck.Left+ rechteck.Width / 2, rechteck.Bottom, rechteck.Width / 2, rechteck.Height));
+            this._graphicsPathRightButton.Transform(matrix);
         }
 
         public override void ElementZeichnen(Graphics graphics) {
@@ -98,19 +104,19 @@ namespace MoBa.Elemente
                 SolidBrush pinselHintergrund = new SolidBrush(Color.White);
                 SolidBrush pinselText = new SolidBrush(Color.Black);
                 if(this.ElementZustand == Elementzustand.An) {
-                    graphics.DrawPath(stift, graphicsPathLeftButton);
-                    graphics.FillPath(pinselHintergrund, graphicsPathLeftButton);
-                    graphics.DrawPath(stift, graphicsPathRightButton);
-                    graphics.FillPath(pinselHintergrund, graphicsPathRightButton);
+                    graphics.DrawPath(stift, _graphicsPathLeftButton);
+                    graphics.FillPath(pinselHintergrund, _graphicsPathLeftButton);
+                    graphics.DrawPath(stift, _graphicsPathRightButton);
+                    graphics.FillPath(pinselHintergrund, _graphicsPathRightButton);
 
                     pinselHintergrund.Color = Color.Blue;
                     //stift.Color = Color.White;
                     pinselText.Color = Color.White;
 
                 }
-                graphics.DrawPath(stift, graphicsPathHintergrund);
-                graphics.FillPath(pinselHintergrund, graphicsPathHintergrund);
-                graphics.FillPath(pinselText, this.graphicsPathText);
+                graphics.DrawPath(stift, _graphicsPathHintergrund);
+                graphics.FillPath(pinselHintergrund, _graphicsPathHintergrund);
+                graphics.FillPath(pinselText, this._graphicsPathText);
             }
         }
 
@@ -127,14 +133,15 @@ namespace MoBa.Elemente
 
         public override bool MouseClick(Point punkt) {
             if(this.ElementZustand == Elementzustand.An && this.AnzeigenTyp == AnzeigeTyp.Bedienen) {
-                if (this.graphicsPathLeftButton.GetBounds().Contains(punkt)) {
+                if (this._graphicsPathLeftButton.GetBounds().Contains(punkt)) {
                     Parent.AktiverServoAction = ServoAction.LinksClick;
                 }
-                if (this.graphicsPathRightButton.GetBounds().Contains(punkt)) {
+                if (this._graphicsPathRightButton.GetBounds().Contains(punkt)) {
                     Parent.AktiverServoAction = ServoAction.RechtsClick;
                 }
             }
-            return this.graphicsPathHintergrund.GetBounds().Contains(punkt);
+            return this._graphicsPathHintergrund.GetBounds().Contains(punkt);
         }
-    }
+		#endregion //oeffentlicheMethoden
+	}
 }

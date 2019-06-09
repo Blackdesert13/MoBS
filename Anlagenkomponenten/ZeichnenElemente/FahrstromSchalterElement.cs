@@ -15,8 +15,8 @@ namespace MoBaSteuerung.Elemente {
 	/// </summary>
 	public class FSS : GleisRasterAnlagenElement {
 		//private Color füllFarbe;
-		private GraphicsPath graphicsPath;
-		private GraphicsPath graphicsPathKreis;
+		private GraphicsPath _graphicsPath;
+		private GraphicsPath _graphicsPathKreis;
 		private Regler[] _regler = new Regler[2];//der 3. Regler ist der aktive Regler
 		private FSS[] _fss = new FSS[2];
 		private int[] _reglerNr = new int[2];
@@ -57,8 +57,8 @@ namespace MoBaSteuerung.Elemente {
 		public FSS(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
 		: base(parent, 0, zoom, anzeigeTyp) {
 			KurzBezeichnung = "Fss";
-			this.graphicsPath = new GraphicsPath();
-			this.graphicsPathKreis = new GraphicsPath();
+			this._graphicsPath = new GraphicsPath();
+			this._graphicsPathKreis = new GraphicsPath();
 			PositionRaster = rasterPosition;
 			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			this.Berechnung();
@@ -66,8 +66,8 @@ namespace MoBaSteuerung.Elemente {
 		public FSS(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
 		 : base(parent, iD, zoom, anzeigeTyp) {
 			KurzBezeichnung = "Fss";
-			graphicsPath = new GraphicsPath();
-			this.graphicsPathKreis = new GraphicsPath();
+			_graphicsPath = new GraphicsPath();
+			this._graphicsPathKreis = new GraphicsPath();
 			PositionRaster = rasterPosition;
 			Ausgang = new Adresse(parent);
 			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
@@ -120,8 +120,8 @@ namespace MoBaSteuerung.Elemente {
 				{
 					AnschlussGleis = gl;
 					Parent.FssElemente.Hinzufügen(this);
-					graphicsPath = new GraphicsPath();
-					graphicsPathKreis = new GraphicsPath();
+					_graphicsPath = new GraphicsPath();
+					_graphicsPathKreis = new GraphicsPath();
 					this.Berechnung();
 				}
 			}
@@ -245,7 +245,7 @@ namespace MoBaSteuerung.Elemente {
 		public int reglerCheck() { return _reglerNr[3]; }
 
 		public override bool MouseClick(Point punkt) {
-			return this.graphicsPath.IsVisible(punkt);
+			return this._graphicsPath.IsVisible(punkt);
 		}
 
 		public override void Berechnung() {
@@ -253,12 +253,12 @@ namespace MoBaSteuerung.Elemente {
 			matrix.Translate(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			matrix.Scale(Zoom, Zoom);
 
-			this.graphicsPath.Reset();
-			this.graphicsPath.AddRectangle(new RectangleF(-0.45f, -0.45f, 0.9f, 0.9f));
-			this.graphicsPath.Transform(matrix);
-			this.graphicsPathKreis.Reset();
-			this.graphicsPathKreis.AddEllipse(new RectangleF(-0.4f, -0.4f, 0.8f, 0.8f));
-			this.graphicsPathKreis.Transform(matrix);
+			this._graphicsPath.Reset();
+			this._graphicsPath.AddRectangle(new RectangleF(-0.45f, -0.45f, 0.9f, 0.9f));
+			this._graphicsPath.Transform(matrix);
+			this._graphicsPathKreis.Reset();
+			this._graphicsPathKreis.AddEllipse(new RectangleF(-0.4f, -0.4f, 0.8f, 0.8f));
+			this._graphicsPathKreis.Transform(matrix);
 		}
 		
 		/// <summary>
@@ -341,11 +341,11 @@ namespace MoBaSteuerung.Elemente {
 
 			SolidBrush pinsel = new SolidBrush(farbePinsel);
 			Pen stift = new Pen(farbeStift, 1);
-			graphics.FillPath(pinsel, this.graphicsPath);
-			graphics.DrawPath(stift, this.graphicsPath);
+			graphics.FillPath(pinsel, this._graphicsPath);
+			graphics.DrawPath(stift, this._graphicsPath);
 			// SolidBrush pinsel1 = new SolidBrush(farbePinselInnen);
 			pinsel.Color = farbePinselInnen;
-			graphics.FillPath(pinsel, this.graphicsPathKreis);
+			graphics.FillPath(pinsel, this._graphicsPathKreis);
 		}
 	}
 }

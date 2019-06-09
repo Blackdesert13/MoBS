@@ -12,7 +12,6 @@ namespace MoBaSteuerung.Elemente {
     /// Entkuppler
     /// </summary>
     public class Entkuppler : GleisRasterAnlagenElement {
-        //private Rectangle _mausRechteck = new Rectangle();
         private GraphicsPath _passivZeichen;
         private GraphicsPath _aktivZeichen;
 
@@ -190,5 +189,4 @@ namespace MoBaSteuerung.Elemente {
         }
         #endregion //öffentliche Methoden
     }
-
 }

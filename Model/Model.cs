@@ -4,15 +4,15 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-
+using System.Windows.Forms;
 using MoBaSteuerung.Anlagenkomponenten;
 using MoBaSteuerung.Anlagenkomponenten.Delegates;
 using MoBaSteuerung.Anlagenkomponenten.Enum;
 using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
+using ModellBahnSteuerung.ZugEditor;
 using MoBaSteuerung;
 using MoBaSteuerung.Elemente;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
@@ -241,11 +241,40 @@ namespace MoBaSteuerung
 		#endregion//Konstruktor(en)
 
 		#region Mausclick-Befehle
+		public int BearbeitenMouseDoubleClick(Point location)
+		{
+			List<AnlagenElement> elements = SucheElementAufPunkt(location);
+			foreach (AnlagenElement x in elements)
+			{
+				if (x.GetType().Name == "InfoFenster")
+				{//
+				}
+			}
+					return 0;
+		}
+
 		public int BedienenMouseDoubleClick(Point location)
 		{
-			//TODO:
-			//Zeichenelemente auf punkt suchen (Methode: SucheElementAufPunkt)
-			//Zugnummer/Signalnummer auslesen, zurückgeben
+			List<AnlagenElement> elements = SucheElementAufPunkt(location);
+			foreach(AnlagenElement x in elements)
+			{
+				if(x.GetType().Name == "Signal")
+				{//
+					Signal sn = (Signal)x;
+					if (sn.ZugNr > 0)
+					{ 				
+						frmZugEditor frm = new frmZugEditor(this.ZeichnenElemente,sn.ZugNr);
+						if (frm.ShowDialog(this) == DialogResult.OK)
+						{
+							//model.
+							// string[][] t =  frm.auslesen();
+						}
+						else
+						{
+						}
+					}
+				}
+			}
 			return 0;
 		}
 
@@ -260,7 +289,50 @@ namespace MoBaSteuerung
 			List<AnlagenElement> elemList = SucheElementAufPunkt(p);
 			return elemList;
 		}
-
+		/// <summary>
+		/// Sucht nach Anlagenelementen, auf welche geclickt wurde
+		/// </summary>
+		/// <param name="punkt">Position des Clicks</param>
+		/// <returns></returns>
+		private List<AnlagenElement> SucheElementAufPunkt(Point punkt)
+		{
+			List<AnlagenElement> elemList = new List<AnlagenElement> { };
+			foreach (Entkuppler el in _zeichnenElemente.EntkupplerElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Schalter el in _zeichnenElemente.SchalterElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (FSS el in _zeichnenElemente.FssElemente.Elemente)
+				if (el.MouseClick(punkt))
+				{
+					elemList.Add(el);
+				}
+			foreach (Signal el in _zeichnenElemente.SignalElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Servo el in _zeichnenElemente.ServoElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Weiche el in _zeichnenElemente.WeicheElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Gleis el in _zeichnenElemente.GleisElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (StartSignalGruppe el in _zeichnenElemente.SsgElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (InfoFenster el in _zeichnenElemente.InfoElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			if (this.ZeichnenElemente.AktiverServoAction != ServoAction.None && this.ZeichnenElemente.AktiverServo != null)
+			{
+				OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, this.ZeichnenElemente.AktiverServoAction);
+				this.ZeichnenElemente.AktiverServoAction = ServoAction.None;
+			}
+			return elemList;
+		}
 		#endregion//Mausclick-Befehle
 
 
@@ -307,47 +379,7 @@ namespace MoBaSteuerung
 		#endregion//Servo
 
 		#region Öffentliche Methoden
-		/// <summary>
-		/// Sucht nach Anlagenelementen, auf welche geclickt wurde
-		/// </summary>
-		/// <param name="punkt">Position des Clicks</param>
-		/// <returns></returns>
-		private List<AnlagenElement> SucheElementAufPunkt(Point punkt)
-		{
-			List<AnlagenElement> elemList = new List<AnlagenElement> { };
-			foreach (Entkuppler el in _zeichnenElemente.EntkupplerElemente.Elemente)
-				if (el.MouseClick(punkt))
-					elemList.Add(el);
-			foreach (Schalter el in _zeichnenElemente.SchalterElemente.Elemente)
-				if (el.MouseClick(punkt))
-					elemList.Add(el);
-			foreach (FSS el in _zeichnenElemente.FssElemente.Elemente)
-				if (el.MouseClick(punkt))
-				{
-					elemList.Add(el);
-				}
-			foreach (Signal el in _zeichnenElemente.SignalElemente.Elemente)
-				if (el.MouseClick(punkt))
-					elemList.Add(el);
-			foreach (Servo el in _zeichnenElemente.ServoElemente.Elemente)
-				if (el.MouseClick(punkt))
-					elemList.Add(el);
-			foreach (Weiche el in _zeichnenElemente.WeicheElemente.Elemente)
-				if (el.MouseClick(punkt))
-					elemList.Add(el);
-			foreach (Gleis el in _zeichnenElemente.GleisElemente.Elemente)
-				if (el.MouseClick(punkt))
-					elemList.Add(el);
-			foreach (StartSignalGruppe el in _zeichnenElemente.SsgElemente.Elemente)
-				if (el.MouseClick(punkt))
-					elemList.Add(el);
-			if (this.ZeichnenElemente.AktiverServoAction != ServoAction.None && this.ZeichnenElemente.AktiverServo != null)
-			{
-				OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, this.ZeichnenElemente.AktiverServoAction);
-				this.ZeichnenElemente.AktiverServoAction = ServoAction.None;
-			}
-			return elemList;
-		}
+
 		/// <summary>
 		/// Liest ankommende Befehle vom ArduinoController und verarbeitet diese weiters
 		/// </summary>
@@ -425,7 +457,7 @@ namespace MoBaSteuerung
 				}
 			}
 		}
-		#endregion //Mausclick-Befehle
+		#endregion
 
 		/// <summary>
 		/// Wenn Zustand in einer Adresse geändert wurde, wird dieser über den ArduinoController gesendet.
@@ -463,13 +495,6 @@ namespace MoBaSteuerung
 		public bool ElementToggeln(string elementName, int nr)
 		{
 			AnlagenElement el = null;
-			/*if(elementName == "StartSignalGruppe") {
-					StartSignalGruppe ssg = _zeichnenElemente.SsgElemente.Element(nr);
-
-					nr =ssg.FSAuswahl();
-					if(nr > 0) { }
-
-			}*/
 			switch (elementName)
 			{
 				case "StartSignalGruppe":
@@ -945,7 +970,5 @@ namespace MoBaSteuerung
 					this.OnAnlagenZustandAdresseChanged(el.Ausgang);
 			}
 		}
-
-
 	}
 }

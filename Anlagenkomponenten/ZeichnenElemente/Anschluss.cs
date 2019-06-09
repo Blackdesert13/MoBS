@@ -8,11 +8,10 @@ using System.Text;
 
 namespace MoBaSteuerung.Elemente
 {
-    //soll Anschlüsse dokumentieren welche nicht durch Anlagenelemente bezeichnet sind
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Anschluss :AnlagenElement
+	/// <summary>
+	/// soll Anschlüsse dokumentieren welche nicht durch Anlagenelemente bezeichnet sind
+	/// </summary>
+	public class Anschluss :AnlagenElement
     {
         Int32 id;
         public Anschluss(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem)

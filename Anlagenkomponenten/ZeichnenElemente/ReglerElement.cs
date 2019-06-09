@@ -24,7 +24,6 @@ namespace MoBaSteuerung.Elemente
 
         #endregion  //privateFelder
 
-
         #region Properties
 
         public Color Farbe
@@ -82,13 +81,13 @@ namespace MoBaSteuerung.Elemente
             this.Berechnung();
         }
 
-        #endregion
+		#endregion
 
-
-        /// <summary>
-        /// berechnet die Grafik
-        /// </summary>
-        public override void Berechnung()
+		#region öffentliche Methoden
+		/// <summary>
+		/// berechnet die Grafik
+		/// </summary>
+		public override void Berechnung()
         {
             Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
             Matrix matrix = new Matrix();
@@ -117,5 +116,6 @@ namespace MoBaSteuerung.Elemente
             graphics.DrawPath(stift, this._graphicsPath);
             graphics.DrawPath(Pens.Black, this._graphicsPathText);
         }
-    }
+		#endregion //öffentliche Methoden
+	}
 }

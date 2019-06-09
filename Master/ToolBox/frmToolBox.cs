@@ -25,7 +25,8 @@ namespace MoBaSteuerung.ToolBox
         {
             _model = model;
             InitializeComponent();
-            this.weiche.Model = _model;
+						this.signal.Model = _model;
+			      this.weiche.Model = _model;
             this.gleis.Model = _model;
             this.schalter.Model = _model;
             this.fss.Model = _model;

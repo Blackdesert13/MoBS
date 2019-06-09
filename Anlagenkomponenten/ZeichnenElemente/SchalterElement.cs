@@ -13,9 +13,10 @@ namespace MoBaSteuerung.Elemente
 	/// </summary>
 	public class Schalter : GleisRasterAnlagenElement
 	{
-		private Color füllFarbe;
-		private GraphicsPath graphicsPath;
-
+		private Color _füllFarbe;
+		private GraphicsPath _graphicsPath;
+		
+		#region Properties
 		/// <summary>
 		/// zum Speichern in der Anlagen-Datei
 		/// </summary>
@@ -36,12 +37,30 @@ namespace MoBaSteuerung.Elemente
 				return "Schalter " + this.ID;
 			}
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool An
+		{
+			set
+			{
+				if (value)
+				{
+					this._füllFarbe = Color.Green;
+				}
+				else
+				{
+					this._füllFarbe = Color.Red;
+				}
+			}
+		}
+		#endregion //Properties
 
-
+		#region Konstruktoren
 		public Schalter(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
 		 : base(parent, 0, zoom, anzeigeTyp)
 		{
-			graphicsPath = new GraphicsPath();
+			_graphicsPath = new GraphicsPath();
 			PositionRaster = rasterPosition;
 			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			this.Berechnung();
@@ -50,7 +69,7 @@ namespace MoBaSteuerung.Elemente
 		public Schalter(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
 		 : base(parent, iD, zoom, anzeigeTyp)
 		{
-			graphicsPath = new GraphicsPath();
+			_graphicsPath = new GraphicsPath();
 			PositionRaster = rasterPosition;
 			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			foreach (Gleis gl in Parent.GleisElemente.Elemente) {
@@ -58,9 +77,7 @@ namespace MoBaSteuerung.Elemente
 					AnschlussGleis = gl;
 					Ausgang = AnschlussGleis.Ausgang;
 					Parent.SchalterElemente.Hinzufügen(this);
-
 					this.Berechnung();
-
 					break;
 				}
 			}
@@ -81,28 +98,13 @@ namespace MoBaSteuerung.Elemente
 					Ausgang = AnschlussGleis.Ausgang;
 
 					Parent.SchalterElemente.Hinzufügen(this);
-					graphicsPath = new GraphicsPath();
+					_graphicsPath = new GraphicsPath();
 
 					this.Berechnung();
 				}
 			}
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool An
-		{
-			set {
-				if (value) {
-					this.füllFarbe = Color.Green;
-				}
-				else {
-					this.füllFarbe = Color.Red;
-				}
-			}
-		}
-
+		#endregion //Konstruktoren
 
 		/// <summary>
 		/// 
@@ -139,30 +141,29 @@ namespace MoBaSteuerung.Elemente
 			SolidBrush pinsel = new SolidBrush(farbePinsel);
 			Pen stift = new Pen(farbeStift, 1);
 
-			graphics.FillPath(pinsel, this.graphicsPath);
-			graphics.DrawPath(stift, this.graphicsPath);
+			graphics.FillPath(pinsel, this._graphicsPath);
+			graphics.DrawPath(stift, this._graphicsPath);
 		}
 
+		/// <summary>
+		/// berechnet die Grafik zum Zeichnen
+		/// </summary>
 		public override void Berechnung()
 		{
 			if (AnschlussGleis != null)
-				PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition);
-
+			{ PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition); }
 			Matrix matrix = new Matrix();
 			matrix.Translate(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			matrix.Scale(Zoom, Zoom);
-
-			this.graphicsPath.Reset();
-			this.graphicsPath.AddRectangle(new RectangleF(-0.4f, -0.4f, 0.8f, 0.8f));
-
-			this.graphicsPath.Transform(matrix);
-			//Mausrechteck = graphicsPath.GetBounds();
+			this._graphicsPath.Reset();
+			this._graphicsPath.AddRectangle(new RectangleF(-0.4f, -0.4f, 0.8f, 0.8f));
+			this._graphicsPath.Transform(matrix);
 		}
 
 
 		public override bool MouseClick(Point punkt)
 		{
-			return this.graphicsPath.IsVisible(punkt);
+			return this._graphicsPath.IsVisible(punkt);
 		}
 
 

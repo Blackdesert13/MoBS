@@ -54,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArduinoController.cs" />
+    <Compile Include="frmProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProperties.Designer.cs">
+      <DependentUpon>frmProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model_Fahrstrassen.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -68,6 +74,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZugEditor\frmZugEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZugEditor\frmZugEditor.Designer.cs">
+      <DependentUpon>frmZugEditor.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mek49.ico" />
@@ -77,6 +89,14 @@
       <Project>{70b87220-8038-4b85-8652-a88786c86b75}</Project>
       <Name>Anlagenkomponenten</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmProperties.resx">
+      <DependentUpon>frmProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZugEditor\frmZugEditor.resx">
+      <DependentUpon>frmZugEditor.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

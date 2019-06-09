@@ -44,7 +44,7 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		/// <summary>
-		/// 
+		/// Bedienen, Editieren
 		/// </summary>
 		public AnzeigeTyp AnzeigeTyp {
 			set {
@@ -64,16 +64,16 @@ namespace MoBaSteuerung.Elemente {
 				}
 			}
 		}
-
+		
 		/// <summary>
-		/// 
+		/// ElementListe
 		/// </summary>
 		public ElementListe() {
 			this.items = new List<T>();
 		}
 
 		/// <summary>
-		/// 
+		/// Element hinzufügen
 		/// </summary>
 		/// <param name="element"></param>
 		public void Hinzufügen(T element) {

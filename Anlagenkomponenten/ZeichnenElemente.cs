@@ -20,14 +20,14 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 	public class AnlagenElemente {
 		#region private Felder
 		private ElementListe<Regler> _reglerElemente;
-        private ElementListe<StartSignalGruppe> _ssgElemente;
-        private ElementListe<Anschluss> _anschlussElemente;
+    private ElementListe<StartSignalGruppe> _ssgElemente;
+    private ElementListe<Anschluss> _anschlussElemente;
 		private ElementListe<Servo> servoElemente;
 		private ElementListe<FSS> _fssElemente;
 		private ElementListe<Gleis> _gleisElemente;
 		private ElementListe<Weiche> _weicheElemente;
-		private ElementListe<Signal> signalElemente;
-		private ElementListe<Schalter> schalterElemente;
+		private ElementListe<Signal> _signalElemente;
+		private ElementListe<Schalter> _schalterElemente;
 		private ElementListe<Knoten> _knotenElemente;
 		private ElementListe<Entkuppler> _entkupplerElemente;
 		private ElementListe<MCSpeicher.MCSpeicher> _listeMCSpeicher;
@@ -61,8 +61,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this._knotenElemente.Zoom = value;
                 this._gleisElemente.Zoom = value;
                 this._weicheElemente.Zoom = value;
-				this.signalElemente.Zoom = value;
-				this.schalterElemente.Zoom = value;
+				this._signalElemente.Zoom = value;
+				this._schalterElemente.Zoom = value;
                 this._fssElemente.Zoom = value;
 				this.infoElemente.Zoom = value;
                 this._entkupplerElemente.Zoom = value;
@@ -86,8 +86,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this._ssgElemente.AnzeigeTyp = value;
                 this._gleisElemente.AnzeigeTyp = value;
                 this._weicheElemente.AnzeigeTyp = value;
-				this.signalElemente.AnzeigeTyp = value;
-				this.schalterElemente.AnzeigeTyp = value;
+				this._signalElemente.AnzeigeTyp = value;
+				this._schalterElemente.AnzeigeTyp = value;
                 this._fssElemente.AnzeigeTyp = value;
                 this._knotenElemente.AnzeigeTyp = value;
                 this._entkupplerElemente.AnzeigeTyp = value;
@@ -134,7 +134,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         {
             get
             {
-				return this.signalElemente;
+				return this._signalElemente;
 			}
 		}
 
@@ -145,7 +145,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         {
             get
             {
-				return this.schalterElemente;
+				return this._schalterElemente;
 			}
 		}
 
@@ -268,8 +268,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			this._knotenElemente = new ElementListe<Knoten>();
 			this._gleisElemente = new ElementListe<Gleis>();
 			this._weicheElemente = new ElementListe<Weiche>();
-			this.signalElemente = new ElementListe<Signal>();
-			this.schalterElemente = new ElementListe<Schalter>();
+			this._signalElemente = new ElementListe<Signal>();
+			this._schalterElemente = new ElementListe<Schalter>();
 			this._fssElemente = new ElementListe<FSS>();
 			this._entkupplerElemente = new ElementListe<Entkuppler>();
 			this.infoElemente = new ElementListe<InfoFenster>();
@@ -309,7 +309,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			_weicheElemente.KoppelungenAktivieren();
 			_fssElemente.KoppelungenAktivieren();
 			_gleisElemente.KoppelungenAktivieren();
-			schalterElemente.KoppelungenAktivieren();
+			_signalElemente.KoppelungenAktivieren();
+			_schalterElemente.KoppelungenAktivieren();
 		}
 
 		public Servo AktiverServo {
@@ -423,7 +424,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			ergebnis.AddRange(_gleisElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
 			ergebnis.AddRange(_fssElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
 			ergebnis.AddRange(_entkupplerElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
-			ergebnis.AddRange(signalElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
+			ergebnis.AddRange(_signalElemente.AdresseSuchen(ArduinoNr, PlatinenNr));
 			return ergebnis;
 		}
 
@@ -450,7 +451,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			ergebnis.AddRange(_gleisElemente.SteckerSuchen(stecker));
 			ergebnis.AddRange(_fssElemente.SteckerSuchen(stecker));
 			ergebnis.AddRange(_entkupplerElemente.SteckerSuchen(stecker));
-			ergebnis.AddRange(signalElemente.SteckerSuchen(stecker));
+			ergebnis.AddRange(_signalElemente.SteckerSuchen(stecker));
 			ergebnis.AddRange(_anschlussElemente.SteckerSuchen(stecker));
 			return ergebnis;
 		}
@@ -459,10 +460,10 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// Züge werden in die Signale neu eingetragen
 		/// </summary>
 		public void ZuegeAktualisieren() {
-			foreach (Signal x in signalElemente.Elemente) x.ZugNr = 0;
+			foreach (Signal x in _signalElemente.Elemente) x.ZugNr = 0;
 			foreach (Zug x in _zugElemente.Elemente) {
 				if (x.SignalNummer != 0) {
-					signalElemente.Element(x.SignalNummer).ZugNr = x.ID;
+					_signalElemente.Element(x.SignalNummer).ZugNr = x.ID;
 				}
 			}
 		}
@@ -482,8 +483,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		public void AlleLöschen() {
 			this._gleisElemente.AlleLöschen();
 			this._weicheElemente.AlleLöschen();
-			this.signalElemente.AlleLöschen();
-			this.schalterElemente.AlleLöschen();
+			this._signalElemente.AlleLöschen();
+			this._schalterElemente.AlleLöschen();
 			this._knotenElemente.AlleLöschen();
             this._entkupplerElemente.AlleLöschen();
 			this._fahrstrassenElemente.AlleLöschen();

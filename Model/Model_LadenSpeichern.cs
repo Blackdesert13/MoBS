@@ -119,11 +119,9 @@ namespace MoBaSteuerung {
 				if (elem[0] == "Servo") {
 					new Servo(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "Gleis") {
 					new Gleis(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "Weiche") {
 					string[] knot = elem[2].Split(' ');
 					Knoten kn = _zeichnenElemente.KnotenElemente.Element(Convert.ToInt32(knot[0]));
@@ -145,34 +143,27 @@ namespace MoBaSteuerung {
 				if (elem[0] == "Signal") {
 					new Signal(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
-                if (elem[0] == "SSG") {
-                    new StartSignalGruppe(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
+        if (elem[0] == "SSG") {
+            new StartSignalGruppe(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "FSS") {
 					new FSS(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
 				if (elem[0] == "Schalter") {
 					new Schalter(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "Entkuppler") {
 					new Entkuppler(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "Info") {
 					new InfoFenster(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "Zug") {
 					new Zug(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "HS") {
 					new Haltestelle(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-
 				if (elem[0] == "FahrstrasseV") {
 					string befehleStart = anlageDatenStreamReader.ReadLine();
 					string befehleZiel = anlageDatenStreamReader.ReadLine();
@@ -268,7 +259,7 @@ namespace MoBaSteuerung {
 																																			+ this._zeichnenElemente.EntkupplerElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Infos\tNr.\tGleis\tLage\tBez"
 																																			+ this._zeichnenElemente.InfoElemente.SpeicherString);
-			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker\tAutostart\tZugLmax"
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker\tAutoSta\tZugLmax"
 																																			+ this._zeichnenElemente.SignalElemente.SpeicherString);
       anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "StartSG\tNr.\tLageX\tLageY\tTyp\tBez.\tSignale"
                                                                      + this._zeichnenElemente.SsgElemente.SpeicherString);

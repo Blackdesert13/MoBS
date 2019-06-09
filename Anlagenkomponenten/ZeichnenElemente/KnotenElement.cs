@@ -12,8 +12,8 @@ namespace MoBaSteuerung.Elemente {
     /// Knoten, definiert Gleis-Endpunkte
     /// </summary>
     public class Knoten : RasterAnlagenElement {
-        private Color füllFarbe;
-        private GraphicsPath graphicsPath;
+        private Color _füllFarbe;
+        private GraphicsPath _graphicsPath;
         private int _attachedTracks = 0;
         private Gleis[] _gleise = new Gleis[4];
         private Weiche[] _weichen = new Weiche[2];
@@ -41,9 +41,9 @@ namespace MoBaSteuerung.Elemente {
         : base(parent, 0, zoom, anzeigeTyp) {
             PositionRaster = positionRaster;
             Position = new Point(positionRaster.X * zoom, positionRaster.Y * zoom);
-            this.graphicsPath = new GraphicsPath();
+            this._graphicsPath = new GraphicsPath();
 
-            this.füllFarbe = Color.White;
+            this._füllFarbe = Color.White;
             this.Berechnung();
         }
 
@@ -58,10 +58,10 @@ namespace MoBaSteuerung.Elemente {
          : base(parent, iD, zoom, anzeigeTyp) {
             PositionRaster = positionRaster;
             Position = new Point(positionRaster.X * zoom, positionRaster.Y * zoom);
-            this.graphicsPath = new GraphicsPath();
+            this._graphicsPath = new GraphicsPath();
             Parent.KnotenElemente.Hinzufügen(this);
 
-            this.füllFarbe = Color.White;
+            this._füllFarbe = Color.White;
             this.Berechnung();
         }
 
@@ -71,8 +71,8 @@ namespace MoBaSteuerung.Elemente {
             Parent.KnotenElemente.Hinzufügen(this);
 
             Position = new Point(PositionRaster.X * zoom, PositionRaster.Y * zoom);
-            this.graphicsPath = new GraphicsPath();
-            this.füllFarbe = Color.White;
+            this._graphicsPath = new GraphicsPath();
+            this._füllFarbe = Color.White;
             this.Berechnung();
         }
 
@@ -83,10 +83,10 @@ namespace MoBaSteuerung.Elemente {
         public bool MouseEnter {
             set {
                 if (value) {
-                    this.füllFarbe = Color.Red;
+                    this._füllFarbe = Color.Red;
                 }
                 else {
-                    this.füllFarbe = Color.White;
+                    this._füllFarbe = Color.White;
                 }
             }
         }
@@ -124,8 +124,8 @@ namespace MoBaSteuerung.Elemente {
                 case AnzeigeTyp.Bearbeiten:
                     //graphics.FillPath(new SolidBrush(this.füllFarbe), this.graphicsPath);
                     if (this.ElementZustand == Elementzustand.Selektiert)
-                        graphics.FillPath(Brushes.Yellow, this.graphicsPath);
-                    graphics.DrawPath(Pens.Black, this.graphicsPath);
+                        graphics.FillPath(Brushes.Yellow, this._graphicsPath);
+                    graphics.DrawPath(Pens.Black, this._graphicsPath);
                     
                     break;
             }
@@ -135,12 +135,12 @@ namespace MoBaSteuerung.Elemente {
         /// </summary>
         public override void Berechnung() {
             Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
-            this.graphicsPath.Reset();
-            this.graphicsPath.AddEllipse(new RectangleF(Position.X - 0.225f * Zoom, Position.Y - 0.225f * Zoom, 0.45f * Zoom, 0.45f * Zoom));
+            this._graphicsPath.Reset();
+            this._graphicsPath.AddEllipse(new RectangleF(Position.X - 0.225f * Zoom, Position.Y - 0.225f * Zoom, 0.45f * Zoom, 0.45f * Zoom));
         }
 
         public override bool MouseClick(Point punkt) {
-            return this.graphicsPath.GetBounds().Contains(punkt);
+            return this._graphicsPath.GetBounds().Contains(punkt);
         }
 
         /// <summary>

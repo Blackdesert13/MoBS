@@ -50,7 +50,8 @@ namespace MoBaSteuerung.Elemente {
 						 + "\t" + Bezeichnung
 						 + "\t" + Stecker
 						 + "\t" + _autoStart
-						 + "\t" + _zugLaengeMax;
+						 + "\t" + _zugLaengeMax
+						 + "\t" + (Koppelung != null ? Koppelung.ListenString : "");// KoppelungsString; ;
 			}
 		}
 		/// <summary>
@@ -189,7 +190,7 @@ namespace MoBaSteuerung.Elemente {
 
 			if (elem.Length > 8) _autoStart = Convert.ToBoolean(elem[8]);
 			if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
-
+			if (elem.Length >10) KoppelungsString = elem[10];
 			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
 			if (gl != null) {
 				PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));

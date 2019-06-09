@@ -16,7 +16,7 @@ namespace ModellBahnSteuerung.ToolBox
   /// </summary>
   public partial class FrmWeiche : UserControl
   {
-        private bool offen;
+        private bool _offen;
         private Model _model;
         private MoBaSteuerung.Elemente.Weiche _weiche;
         
@@ -26,7 +26,7 @@ namespace ModellBahnSteuerung.ToolBox
         public FrmWeiche()
         {
             InitializeComponent();
-            this.offen = true;
+            this._offen = true;
         }
         
         /// <summary>
@@ -47,7 +47,7 @@ namespace ModellBahnSteuerung.ToolBox
         }
         private void PictureBoxMenü_MouseEnter(object sender, EventArgs e)
     {
-      if (this.offen)
+      if (this._offen)
       {
         this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.OpenMouseEnter;
       }
@@ -59,7 +59,7 @@ namespace ModellBahnSteuerung.ToolBox
 
     private void PictureBoxMenü_MouseLeave(object sender, EventArgs e)
     {
-      if (this.offen)
+      if (this._offen)
       {
         this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.Open;
       }
@@ -71,7 +71,7 @@ namespace ModellBahnSteuerung.ToolBox
 
     private void PictureBoxMenü_MouseDown(object sender, MouseEventArgs e)
     {
-      if (this.offen)
+      if (this._offen)
       {
         this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.OpenMouseDown;
       }
@@ -83,7 +83,7 @@ namespace ModellBahnSteuerung.ToolBox
 
     private void PictureBoxMenü_MouseUp(object sender, MouseEventArgs e)
     {
-      if (this.offen)
+      if (this._offen)
       {
         this.PictureBoxMenü.Image = global::ModellBahnSteuerung.Properties.Resources.OpenMouseEnter;
       }
@@ -95,15 +95,15 @@ namespace ModellBahnSteuerung.ToolBox
 
     private void PictureBoxMenü_Click(object sender, EventArgs e)
     {
-      if (this.offen)
+      if (this._offen)
       {
         this.Height = 26;
-        this.offen = false;
+        this._offen = false;
       }
       else
       {
         this.Height = 115;
-        this.offen = true;
+        this._offen = true;
       }
     }
 
@@ -191,14 +191,10 @@ namespace ModellBahnSteuerung.ToolBox
             if (_weiche != null)
             {
                 FrmBefehlsliste frmBefehlsliste = new FrmBefehlsliste(_weiche.Koppelung, _weiche.KurzBezeichnung + "-Koppelung");
-                if (frmBefehlsliste.ShowDialog(this) == DialogResult.OK)
-                {
-                    // string[][] t =  frm.auslesen();
-                }
-                else
-                {
-                }
-
+							if (frmBefehlsliste.ShowDialog(this) == DialogResult.OK)
+							{
+								// string[][] t =  frm.auslesen();
+							}
             }
         }
         /// <summary>

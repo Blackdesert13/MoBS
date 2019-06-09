@@ -15,19 +15,38 @@ namespace ModellBahnSteuerung.ZugEditor
 {
     public partial class frmZugEditor : Form
     {
-		private ElementListe<Zug> zugElemente;
-		private List<Zug> zugListe;
-		private AnlagenElemente pa;
+			private ElementListe<Zug> _zugElemente;
+			private List<Zug> _zugListe;
+			private AnlagenElemente _pa;
+		  private int _signalNummer;
+		
+		public frmZugEditor(AnlagenElemente parent, int ZugNummer)
+		{
+			Konstruktor(parent,ZugNummer);
+			foreach (DataGridViewRow zeile in this.dataGridView1.Rows)
+			{
 
-		// public frmZugEditor(ElementListe<Zug> ZugElemente, AnlagenElemente parent)
-        public frmZugEditor( AnlagenElemente parent)
-        {
+			}
+		}
+		public frmZugEditor( AnlagenElemente parent)
+    {
+			Konstruktor(parent,11);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="parent"></param>
+		/// <param name="ZugNummer"></param>
+		/// <returns></returns>
+		private int Konstruktor(AnlagenElemente parent,int ZugNummer)
+		{
 			InitializeComponent();
-			pa = parent;
-			zugElemente = pa.ZugElemente;
-			zugListe = zugElemente.Elemente;
-            foreach (Zug x in this.zugListe)
-            {
+			_pa = parent;
+			_zugElemente = _pa.ZugElemente;
+			_zugListe = _zugElemente.Elemente;
+			int aktiveZeile = -1;
+			foreach (Zug x in this._zugListe)
+			{
 				string[] zeile = {
 										Convert.ToString(x.ID),
 										Convert.ToString(x.SignalNummer),
@@ -40,14 +59,41 @@ namespace ModellBahnSteuerung.ZugEditor
 										};
 				dataGridView1.Rows.Add(zeile);
 			}
+			zugSuchen(3);
+			//this.dataGridView1.CurrentCell = this.dataGridView1[5, 3];
+			return aktiveZeile;
 		}
 
+		private void zugSuchen(int Signal)
+		{
+			/*String searchValue = "somestring";
+				int rowIndex = -1;
+				foreach(DataGridViewRow row in DataGridView1.Rows)
+				{
+						if(row.Cells[1].Value.ToString().Equals(searchValue))
+						{
+								rowIndex = row.Index;
+								break;
+						}
+				}*/
+			
+			foreach (DataGridViewRow zeile in dataGridView1.Rows)
+			{
+				if (zeile.Cells[0].Value.ToString().Equals("2"))
+				{
+					int z =zeile.Index;
+					this.dataGridView1.CurrentCell = this.dataGridView1[1, z];
+					break;
+				}
+			}
+
+		}
 		/// <summary>
 		/// erstellt aus dem Formolar eine neue Liste
 		/// </summary>
         private void zugListeNeu()
         {
-			zugListe.Clear();
+			_zugListe.Clear();
             foreach(DataGridViewRow zeile in this.dataGridView1.Rows)
             {
                 string[] elem = new string[10];
@@ -61,9 +107,9 @@ namespace ModellBahnSteuerung.ZugEditor
 				elem[7] = "0"; //Länge
 				elem[8] = (string)zeile.Cells[7].Value; //Digitale Addresse
 				elem[9] = (string)zeile.Cells[5].Value; //Ankunftszeit
-				if (elem[1] != null) { Zug zug = new Zug(pa, 0, AnzeigeTyp.Bedienen, elem); }
+				if (elem[1] != null) { Zug zug = new Zug(_pa, 0, AnzeigeTyp.Bedienen, elem); }
 			}
-			pa.ZugDateiSpeichern();
+			_pa.ZugDateiSpeichern();
 		}
 
 		private void textBox1_TextChanged(object sender, EventArgs e) {
