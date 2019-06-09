@@ -106,12 +106,6 @@
     <Compile Include="FahrstrassenEditor\FahrstrassenEditor.Designer.cs">
       <DependentUpon>FahrstrassenEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmProperties.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProperties.Designer.cs">
-      <DependentUpon>frmProperties.cs</DependentUpon>
-    </Compile>
     <Compile Include="SteckerAnzeige.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,15 +188,6 @@
     <Compile Include="View\View.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ZugEditor\frmZugEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ZugEditor\frmZugEditor.Designer.cs">
-      <DependentUpon>frmZugEditor.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="frmProperties.resx">
-      <DependentUpon>frmProperties.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dialoge\frmArduino.resx">
       <DependentUpon>frmArduino.cs</DependentUpon>
     </EmbeddedResource>
@@ -264,9 +249,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ZugEditor\frmZugEditor.resx">
-      <DependentUpon>frmZugEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
