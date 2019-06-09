@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.Threading;
 using MoBaSteuerung.ZeichnenElemente;
 using MoBa.Elemente;
+using ModellBahnSteuerung;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
 namespace MoBaSteuerung
@@ -246,9 +247,14 @@ namespace MoBaSteuerung
 			List<AnlagenElement> elements = SucheElementAufPunkt(location);
 			foreach (AnlagenElement x in elements)
 			{
-				if (x.GetType().Name == "InfoFenster")
-				{//
-				}
+				frmProperties frm = new frmProperties(x);
+				if (frm.ShowDialog(this) == DialogResult.OK) ;
+				/*if (x.GetType().Name == "InfoFenster")
+				{
+					InfoFenster info = (InfoFenster)x;
+					frmProperties frm = new frmProperties(info);
+					if (frm.ShowDialog(this) == DialogResult.OK) ;
+				}*/
 			}
 					return 0;
 		}

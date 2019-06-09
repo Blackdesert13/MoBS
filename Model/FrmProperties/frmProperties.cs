@@ -20,6 +20,7 @@ namespace ModellBahnSteuerung
         {
             InitializeComponent();
             propertyGrid1.SelectedObject = AElement;
+		       	this.Text = AElement.InfoString;
         }
 
         private void propertyGrid1_Click(object sender, EventArgs e)
