@@ -59,27 +59,27 @@ namespace ModellBahnSteuerung.ZugEditor
 										};
 				dataGridView1.Rows.Add(zeile);
 			}
-			zugSuchen(3);
-			//this.dataGridView1.CurrentCell = this.dataGridView1[5, 3];
+			zugSuchen(ZugNummer);
+			//this.dataGridView1.CurrentCell = this.dataGridView1[1, 3];
 			return aktiveZeile;
 		}
 
 		private void zugSuchen(int Signal)
 		{
-			/*String searchValue = "somestring";
+			String searchValue = "somestring";
 				int rowIndex = -1;
-				foreach(DataGridViewRow row in DataGridView1.Rows)
-				{
-						if(row.Cells[1].Value.ToString().Equals(searchValue))
-						{
-								rowIndex = row.Index;
-								break;
-						}
-				}*/
-			
+			/*foreach(DataGridViewRow row in dataGridView1.Rows)
+			{
+					if(row.Cells[1].Value.ToString().Equals(searchValue))
+					{
+							rowIndex = row.Index;
+							break;
+					}
+			}*/
+			string zn = Convert.ToString(Signal);
 			foreach (DataGridViewRow zeile in dataGridView1.Rows)
 			{
-				if (zeile.Cells[0].Value.ToString().Equals("2"))
+				if (zeile.Cells[1].Value.ToString().Equals(zn))
 				{
 					int z =zeile.Index;
 					this.dataGridView1.CurrentCell = this.dataGridView1[1, z];

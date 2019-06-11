@@ -20,7 +20,7 @@ namespace MoBaSteuerung.Elemente
 		private StringFormat _stringFormat;
 		private GraphicsPath _graphicsPathHintergrund;
 		private GraphicsPath _graphicsPathText;
-
+		private bool _lage;
 		/// <summary>
 		/// zum Speichern in der Anlagen-Datei
 		/// </summary>
@@ -30,8 +30,8 @@ namespace MoBaSteuerung.Elemente
 				return "Info"
 					+ "\t" + ID
 					+ "\t" + AnschlussGleis.ID + " " + Gleisposition
-					+ "\t" + 0
-					+ "\t" + " ";
+					+ "\t" + _lage
+					+ "\t" + Bezeichnung;
 			}
 		}
 
@@ -40,6 +40,22 @@ namespace MoBaSteuerung.Elemente
 			get {
 				return "InfoElement " + this.ID;
 			}
+		}
+		/// <summary>
+		/// Schreibrichtung nach rechts oder links
+		/// </summary>
+		public bool Lage
+		{
+			get { return _lage; }
+			set { _lage = value; }
+		}
+		
+		/// <summary>
+		/// Text zur Anzeige
+		/// </summary>
+		public string Text
+		{
+			set { _txt = value; Berechnung(); }
 		}
 
 		/// <summary>
@@ -95,6 +111,8 @@ namespace MoBaSteuerung.Elemente
 			string[] glAnschl = elem[2].Split(' ');
 			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
 			Gleisposition = Convert.ToInt32(glAnschl[1]);
+			if (elem[3] == "0") { _lage = false; }
+			else { _lage = Convert.ToBoolean(elem[3]); }
 			if (gl != null) {
 				PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
 				Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
@@ -105,14 +123,7 @@ namespace MoBaSteuerung.Elemente
 				this.Berechnung();
 			}
 		}
-
-		/// <summary>
-		/// Text zur Anzeige
-		/// </summary>
-		public string Text
-		{
-			set { _txt = value; Berechnung(); }
-		}
+		
 
 		/// <summary>
 		/// Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
@@ -161,15 +172,19 @@ namespace MoBaSteuerung.Elemente
 			this._graphicsPathText = new GraphicsPath();
 			this._graphicsPathText.AddString(_txt, new FontFamily("Arial"), 0, 0.6f, new PointF(-0.5f, -0.36f), this._stringFormat);
 			RectangleF rechteck = _graphicsPathText.GetBounds();
-			//rechteck.Inflate(0.1f,0.1f);
+			if (_lage)
+			{
+				float l = rechteck.Width ;
+				this._graphicsPathText = new GraphicsPath();
+				this._graphicsPathText.AddString(_txt, new FontFamily("Arial"), 0, 0.6f, new PointF(-l, -0.36f), this._stringFormat);
+				rechteck = _graphicsPathText.GetBounds();
+			}
 			rechteck.Inflate(0.1f, 0f);
 
 			this._graphicsPathText.Transform(matrix);
 			this._graphicsPathHintergrund = new GraphicsPath();
-			this._graphicsPathHintergrund.AddRectangle(rechteck);
-			//this.graphicsPathText.Reset();
+			this._graphicsPathHintergrund.AddRectangle(rechteck);			
 			this._graphicsPathHintergrund.Transform(matrix);
-
 		}
 
 		public override bool MouseClick(Point punkt)

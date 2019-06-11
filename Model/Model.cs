@@ -310,10 +310,8 @@ namespace MoBaSteuerung
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			foreach (FSS el in _zeichnenElemente.FssElemente.Elemente)
-				if (el.MouseClick(punkt))
-				{
-					elemList.Add(el);
-				}
+				if (el.MouseClick(punkt))				{
+					elemList.Add(el);				}
 			foreach (Signal el in _zeichnenElemente.SignalElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
@@ -330,6 +328,9 @@ namespace MoBaSteuerung
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			foreach (InfoFenster el in _zeichnenElemente.InfoElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (Regler el in _zeichnenElemente.ReglerElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			if (this.ZeichnenElemente.AktiverServoAction != ServoAction.None && this.ZeichnenElemente.AktiverServo != null)
@@ -612,7 +613,7 @@ namespace MoBaSteuerung
 			this._zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
-
+			this._zeichnenElemente.SsgElemente.ElementeZeichnen(graphics);
 			if (this._neuesElement != null)
 				this._neuesElement.ElementZeichnen(graphics);
 

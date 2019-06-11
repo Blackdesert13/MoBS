@@ -30,7 +30,7 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		/// <summary>
-		/// 
+		/// Zeile in der Speicherdatei
 		/// </summary>
 		public string SpeicherString {
 			get {
@@ -177,17 +177,6 @@ namespace MoBaSteuerung.Elemente {
 		/// <param name="PlatinenNr"></param>
 		/// <returns></returns>  
 		public List<T> AdresseSuchen(int ArduinoNr, int PlatinenNr) {
-			/*for .Net Framework 3.5
-			public List<AnlagenElement> AdresseSuchen(int ArduinoNr, int PlatinenNr)
-							{
-									var list = items.FindAll(x => (x.Ausgang.ArdNr == ArduinoNr) && (x.Ausgang.AdressenNr == PlatinenNr));
-									List<AnlagenElement> ergebnis = new List<AnlagenElement>();
-									foreach(var x in list) {
-											ergebnis.Add((AnlagenElement)x);
-									}
-									return ergebnis;
-							}
-			*/
 			return items.FindAll(x => (x.Ausgang.ArdNr == ArduinoNr) && (x.Ausgang.AdressenNr == PlatinenNr));
 		}
 
@@ -197,18 +186,6 @@ namespace MoBaSteuerung.Elemente {
 		/// <param name="SteckerName"></param>
 		/// <returns></returns>
 		public List<T> SteckerSuchen(string SteckerName) {
-			/*for .Net Framework 3.5
-public List<AnlagenElement> SteckerSuchen(string SteckerName)
-			{
-					var list = items.FindAll( x => x.SteckerSuche(SteckerName) );
-					List<AnlagenElement> ergebnis = new List<AnlagenElement>();
-					foreach (var x in list) {
-							ergebnis.Add((AnlagenElement)x);
-					}
-					return ergebnis;
-			}
-
-*/
 			return items.FindAll(x => x.SteckerSuche(SteckerName));
 		}
 
