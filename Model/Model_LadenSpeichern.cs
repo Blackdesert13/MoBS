@@ -66,6 +66,21 @@ namespace MoBaSteuerung {
 			this.ZugDateiLaden(anlageDateiPfadName);
 		}
 
+		public byte[] ZugListeAuslesen() {
+			string zugDateiName = ZeichnenElemente.ZugDateiPfadName;
+			if (!string.IsNullOrEmpty(zugDateiName)) {
+				FileStream zugListeFileStream = new FileStream(zugDateiName + ".zug", FileMode.Open, FileAccess.Read, FileShare.Read);
+
+				byte[] anlageBytes = new byte[zugListeFileStream.Length];
+				zugListeFileStream.Read(anlageBytes, 0, anlageBytes.Length);
+
+				zugListeFileStream.Close();
+				zugListeFileStream.Dispose();
+
+				return anlageBytes;
+			}
+			return null;
+		}
 
 		/// <summary>
 		/// Lädt die Anlagedatei ein.
@@ -187,17 +202,19 @@ namespace MoBaSteuerung {
 
 		public void ZugDateiLaden(string DateiPfadName) {
 			try {
-				StreamReader ZugDatenStreamReader = new StreamReader(DateiPfadName + ".zug", System.Text.Encoding.UTF8);//(new MemoryStream(anlageDaten), System.Text.Encoding.UTF8);
+				ZeichnenElemente.ZugDateiPfadName = DateiPfadName;
+				StreamReader zugDatenStreamReader = new StreamReader(DateiPfadName + ".zug", System.Text.Encoding.UTF8);//(new MemoryStream(anlageDaten), System.Text.Encoding.UTF8);
 
 				ZeichnenElemente.ZugElemente.AlleLöschen();
+
 				string zeile = "";
-				while ((zeile = ZugDatenStreamReader.ReadLine()) != null) {
+				while ((zeile = zugDatenStreamReader.ReadLine()) != null) {
 					string[] elem = zeile.Split('\t');
 					if (elem[0] == "Zug") {
 						new Zug(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 					}
 				}
-				ZugDatenStreamReader.Dispose();
+				zugDatenStreamReader.Dispose();
 			}
 			catch(FileNotFoundException e) {
 
@@ -205,6 +222,24 @@ namespace MoBaSteuerung {
 			
 		}
 
+		public void ZugDateiLaden(byte[] zugDateiDaten) {
+			try {
+				StreamReader zugDatenStreamReader = new StreamReader(new MemoryStream(zugDateiDaten), System.Text.Encoding.UTF8);
+
+				ZeichnenElemente.ZugElemente.AlleLöschen();
+				string zeile = "";
+				while ((zeile = zugDatenStreamReader.ReadLine()) != null) {
+					string[] elem = zeile.Split('\t');
+					if (elem[0] == "Zug") {
+						new Zug(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
+					}
+				}
+				zugDatenStreamReader.Dispose();
+			}
+			catch (FileNotFoundException e) {
+
+			}
+		}
 
 		/// <summary>
 		/// Neue Anlage

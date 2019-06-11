@@ -75,11 +75,11 @@ namespace MoBaKommunikation
       throw new IndexOutOfRangeException();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="anlageDaten"></param>
-    internal void SendenAnlageZustandsDatenAnAlle(byte[] anlageDaten)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="anlageDaten"></param>
+		internal void SendenAnlageZustandsDatenAnAlle(byte[] anlageDaten)
     {
       // ToDo Parallel senden mit Exception händling
       foreach (SlaveClient itemSlaveClient in this.slaveClients)
@@ -88,12 +88,23 @@ namespace MoBaKommunikation
       }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="slaveDNS"></param>
-    /// <param name="anlageDaten"></param>
-    internal void SendenAnlage(string slaveDNS, byte[] anlageDaten)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="zugListe"></param>
+		internal void SendenZugListeAnAlle(byte[] zugListe) {
+			// ToDo Parallel senden mit Exception händling
+			foreach (SlaveClient itemSlaveClient in this.slaveClients) {
+				itemSlaveClient.SendenZumSlave.ZugListenDaten(zugListe);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="slaveDNS"></param>
+		/// <param name="anlageDaten"></param>
+		internal void SendenAnlage(string slaveDNS, byte[] anlageDaten)
     {
       // ToDo
       new Task(() => this.Item(slaveDNS).SendenZumSlave.AnlageDaten(anlageDaten)).Start();

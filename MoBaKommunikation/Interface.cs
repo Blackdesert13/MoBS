@@ -46,9 +46,15 @@ namespace MoBaKommunikation
     /// <param name="anlagenZustandsDaten"></param>
     void AnlageZustandsDaten(byte[] anlagenZustandsDaten);
 
-    /// <summary>
-    /// 
-    /// </summary>
-    void MasterBeendet();
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="zugListenDaten"></param>
+		void ZugListenDaten(byte[] zugListenDaten);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		void MasterBeendet();
   }
 }

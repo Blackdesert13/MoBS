@@ -72,11 +72,16 @@ namespace MoBaSteuerung.Anlagenkomponenten.Delegates {
     /// </summary>
     public delegate void AnlagenZustandEventHandler();
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="AnlageDaten"></param>
-    public delegate void AnlageDatenEventHandler(byte[] AnlageDaten);
+	/// <summary>
+	/// 
+	/// </summary>
+	public delegate void ZugListeChangedEventHandler();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="AnlageDaten"></param>
+	public delegate void AnlageDatenEventHandler(byte[] AnlageDaten);
 
     public delegate void ServoBewegungEventHandler(int Servo, ServoAction Richtung);
 }

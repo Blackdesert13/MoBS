@@ -43,11 +43,14 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		private Servo _aktiverServo = null;
 		private ServoAction _aktiverServoRichtung = ServoAction.None;
 		private int _zoom;
-		private string zugDateiPfadName;
+		private string _zugDateiPfadName;
 		#endregion //private Felder
 
         #region Properties
-		public string ZugDateiPfadName { set { zugDateiPfadName = value; } }
+		public string ZugDateiPfadName {
+			set { _zugDateiPfadName = value; }
+			get { return _zugDateiPfadName; }
+		}
 
 		/// <summary>
 		/// 
@@ -360,12 +363,14 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <param name="zugDateiPfadName">Der Pfad zu der zu speichernden Zugdatei</param>
 		public void ZugDateiSpeichern()//string zugDateiPfadName)
 		{
-			StreamWriter zugStreamWriter = new StreamWriter(zugDateiPfadName + ".zug", false, System.Text.Encoding.UTF8);
+			if (_zugDateiPfadName != "") {
+				StreamWriter zugStreamWriter = new StreamWriter(_zugDateiPfadName + ".zug", false, System.Text.Encoding.UTF8);
 
-			zugStreamWriter.WriteLine(Environment.NewLine + "Züge\tNr.\tSignal\tLok\tTyp\tGeschw\tBez"
-																																	 + this.ZugElemente.SpeicherString);
-			zugStreamWriter.Flush();
-			zugStreamWriter.Dispose();
+				zugStreamWriter.WriteLine(Environment.NewLine + "Züge\tNr.\tSignal\tLok\tTyp\tGeschw\tBez"
+																																		 + this.ZugElemente.SpeicherString);
+				zugStreamWriter.Flush();
+				zugStreamWriter.Dispose();
+			}
 		}
 
 		public void FSSAktualisieren() {

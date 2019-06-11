@@ -89,13 +89,16 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		}
 
 		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-			if (value is BefehlsListe) {
-				AnlagenElement el = (AnlagenElement)context.Instance;
-				if(el!= null) {
-					return el.Koppelung.ListenString;
+			if (value != null) {
+				if (value is BefehlsListe) {
+					AnlagenElement el = (AnlagenElement)context.Instance;
+					if (el != null) {
+						return el.Koppelung.ListenString;
+					}
 				}
+				return value.GetType().FullName;
 			}
-			return value.GetType().FullName;
+			return null;
 		}
 	}
 }

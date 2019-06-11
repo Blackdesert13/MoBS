@@ -162,12 +162,16 @@ namespace MoBaKommunikation
       // Anlagedaten an alle Slaves senden
       this.slaveClients.SendenAnlageZustandsDatenAnAlle(anlageZustandsDaten);
     }
+		
+		public void SendeZugListeAnAlle(byte[] zugListe) {
+			this.slaveClients.SendenZugListeAnAlle(zugListe);
+		}
 
-    #endregion
+		#endregion
 
-    #region Private
+		#region Private
 
-    private void SlaveAnmelden(string slaveDNS, Int32 port, string remoteSlaveID, string name)
+		private void SlaveAnmelden(string slaveDNS, Int32 port, string remoteSlaveID, string name)
     {
       // Slave Anmelden
       SlaveClient slaveClients = this.slaveClients.Add(slaveDNS, port, remoteSlaveID, name);
@@ -246,6 +250,7 @@ namespace MoBaKommunikation
       }
     }
 
-    #endregion
-  }
+
+		#endregion
+	}
 }

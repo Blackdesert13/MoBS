@@ -760,6 +760,9 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		public void AlleLöschenAuswahl() {
+			foreach (FahrstrasseN fs in this._auswahlFahrstrassen) {
+				fs.Selektiert = false;
+			}
 			this._auswahlFahrstrassen = new List<FahrstrasseN>();
 		}
 
@@ -977,6 +980,9 @@ namespace MoBaSteuerung.Elemente {
 		public void AktiveFahrstrassenAktualisieren(Anlagenzustand anlZust) {
 			foreach (FahrstrasseN fs in _aktiveFahrstrassen) {
 				fs.IsAktiv = false;
+				foreach (Befehl befehl in fs.StartBefehle) {
+					befehl.Element.IsLocked = false;
+				}
 			}
 			_aktiveFahrstrassen.Clear();
 			foreach (WeichenStrasse weSt in anlZust.AktiveFahrstrassen) {
@@ -1029,6 +1035,7 @@ namespace MoBaSteuerung.Elemente {
 			}
 			set {
 				_isAktiv = value;
+				this.Ausgang.Stellung = value;
 			}
 		}
 

@@ -532,13 +532,19 @@ namespace MoBaSteuerung
 				case "Weiche":
 					el = _zeichnenElemente.WeicheElemente.Element(nr);
 					break;
-				case "Fahrstrasse":
+				case "FahrstrasseN_Ziel":
 					el = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
-					if (!((Fahrstrasse)el).IsAktiv)
-					{
-						Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
-						fahrstraßenStartThread.Start(el);
-					}
+
+						FahrstrasseSchalten((FahrstrasseN)el, FahrstrassenSignalTyp.ZielSignal);
+						_zeichnenElemente.FSSAktualisieren();
+						return true;
+					break;
+				case "FahrstrasseN_Start":
+					el = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
+
+					FahrstrasseSchalten((FahrstrasseN)el, FahrstrassenSignalTyp.StartSignal);
+					_zeichnenElemente.FSSAktualisieren();
+					return true;
 					break;
 			}
 
@@ -758,6 +764,11 @@ namespace MoBaSteuerung
 		/// <summary>
 		/// 
 		/// </summary>
+		public event ZugListeChangedEventHandler ZugListeChanged;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public event AnlagenZustandEventHandler AnlagenzustandChanged;
 
 		public event ServoBewegungEventHandler ZubehoerServoAction;
@@ -821,6 +832,12 @@ namespace MoBaSteuerung
 			if (this.AnlagenzustandChanged != null)
 			{
 				this.AnlagenzustandChanged();
+			}
+		}
+
+		protected virtual void OnZugListeChanged() {
+			if (this.ZugListeChanged != null) {
+				this.ZugListeChanged();
 			}
 		}
 

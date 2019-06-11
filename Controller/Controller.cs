@@ -330,13 +330,21 @@ namespace MoBaSteuerung
 			if (this.AppTyp == AppTyp.Master) {
 				action = _model.FahrstrasseSchalten(el, signal);
 				if (master != null) {
-					//master.SendeAnlageZustandsDatenAnAlle(this.model.AnlagenZustandsDatenAuslesen());
+					master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
 				}
 			}
 			if (this.AppTyp == AppTyp.Slave) {
-				if (slave != null) {
-					//slave.SlaveAnMasterMouseClick(el[0].GetType().Name, el[0].ID);
+				if (signal == FahrstrassenSignalTyp.ZielSignal) {
+					if (slave != null) {
+						slave.SlaveAnMasterMouseClick(el.GetType().Name + "_Ziel", el.ID);
+					}
 				}
+				else {
+					if (slave != null) {
+						slave.SlaveAnMasterMouseClick(el.GetType().Name + "_Start", el.ID);
+					}
+				}
+				return true;
 			}
 			return action;
 		}
@@ -439,12 +447,18 @@ namespace MoBaSteuerung
 			this.slave = new MoBaKommunikation.Slave("MoBaSteuerungSlave");
 			this.slave.MasterAnlageDatenEventHandler += Slave_MasterAnlageDatenEventHandler;
 			this.slave.MasterAnlagenZustandsDatenEventHandler += Slave_MasterAnlagenZustandsDatenEventHandler;
+			this.slave.MasterZugListenDatenEventHandler += Slave_MasterZugListenDatenEventHandler;
 
 			this.slave.Start(masterName, 55555, "MoBaSteuerung", "Test");
 
 
 			// Masternamen zurück geben
 			this.OnMasterConnected(masterName);
+		}
+
+		private void Slave_MasterZugListenDatenEventHandler(byte[] e) {
+			_model.ZugDateiLaden(e);
+			OnViewNeuZeichnen();
 		}
 
 		private void Slave_MasterAnlagenZustandsDatenEventHandler(byte[] e)
@@ -552,6 +566,7 @@ namespace MoBaSteuerung
 			this._model.AnlageNeuZeichnen += Model_AnlageNeuZeichnen;
 			this._model.AnlageGrößeInRasterChanged += Model_AnlageGrößeInRasterChanged;
 			this._model.AnlagenzustandChanged += Model_AnlagenzustandAdresseChanged;
+			this._model.ZugListeChanged += Model_ZugListeChanged;
 			this._model.ZubehoerServoAction += Model_ZubehoerServoAction;
 			this.AnlageAusgangsZustand(AppTyp.Undefiniert);
 		}
@@ -611,7 +626,12 @@ namespace MoBaSteuerung
 				master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
 			}
 		}
-
+		
+		private void Model_ZugListeChanged() {
+			if(master != null) {
+				master.SendeZugListeAnAlle(this._model.ZugListeAuslesen());
+			}
+		}
 
 		private void AnlageAusgangsZustand(AppTyp appTyp)
 		{
