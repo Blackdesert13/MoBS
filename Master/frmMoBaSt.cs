@@ -509,6 +509,7 @@ namespace MoBaSteuerung {
 			try {
 				// Slave (Client) trennen.
 				if (this.Controller.SlaveVomMasterTrennen()) {
+					this.zugEditorToolStripMenuItem.Enabled = true;
 					this.toolStripMenuItemDateiNeu.Enabled = true;
 					this.toolStripMenuItemDateiLaden.Enabled = true;
 					this.toolStripMenuItemDateiSchließen.Enabled = false;
@@ -579,6 +580,7 @@ namespace MoBaSteuerung {
 				if (!this.MasterAnlageSpeichern()) {
 					this.Controller.SlaveMitMasterVerbinden(global::ModellBahnSteuerung.Properties.Settings.Default.MasterName);
 
+					this.zugEditorToolStripMenuItem.Enabled = false;
 					this.toolStripMenuItemDateiNeu.Enabled = false;
 					this.toolStripMenuItemDateiLaden.Enabled = false;
 					this.toolStripMenuItemDateiSchließen.Enabled = false;
@@ -1452,8 +1454,10 @@ namespace MoBaSteuerung {
 		private void zugEditorToolStripMenuItem_Click(object sender, EventArgs e) {
 			frmZugEditor frm = new frmZugEditor(this.Controller.ZeichnenElemente);
 			if (frm.ShowDialog(this) == DialogResult.OK) {
-			//model.
+				//model.
 				// string[][] t =  frm.auslesen();
+				this.pictureBoxView.Invalidate();
+				this.Controller.Model_ZugListeChanged();
 			}
 			else {
 			}

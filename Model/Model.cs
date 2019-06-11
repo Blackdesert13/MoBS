@@ -272,8 +272,8 @@ namespace MoBaSteuerung
 						frmZugEditor frm = new frmZugEditor(this.ZeichnenElemente,sn.ZugNr);
 						if (frm.ShowDialog(this) == DialogResult.OK)
 						{
-							//model.
-							// string[][] t =  frm.auslesen();
+							this.OnAnlageNeuZeichnen();
+							this.OnZugListeChanged();
 						}
 						else
 						{
@@ -310,8 +310,10 @@ namespace MoBaSteuerung
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			foreach (FSS el in _zeichnenElemente.FssElemente.Elemente)
-				if (el.MouseClick(punkt))				{
-					elemList.Add(el);				}
+				if (el.MouseClick(punkt))
+				{
+					elemList.Add(el);
+				}
 			foreach (Signal el in _zeichnenElemente.SignalElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);

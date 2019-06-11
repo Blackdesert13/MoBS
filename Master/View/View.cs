@@ -383,10 +383,9 @@ namespace MoBaSteuerung
 				case AnzeigeTyp.Bearbeiten:
 					this.Controller.BearbeitenenMouseDoubleClick(eArg.Location);
 					break;
-				case AnzeigeTyp.Bedienen:
-					//neuZeichnen = this.BedienenMouseClick();
+				case AnzeigeTyp.Bedienen:                   
 					int zugNr = this.Controller.BedienenMouseDoubleClick(eArg.Location);
-					neuZeichnen = this.BedienenMouseClick();
+					//neuZeichnen = this.BedienenMouseClick();
 
 					break;
 			}

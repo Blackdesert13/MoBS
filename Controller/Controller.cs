@@ -229,7 +229,10 @@ namespace MoBaSteuerung
 
 		public int BedienenMouseDoubleClick(Point location)
 		{
-			return _model.BedienenMouseDoubleClick(location);
+			if (this.AppTyp == AppTyp.Master) {
+				return _model.BedienenMouseDoubleClick(location);
+			}
+			return -1;
 		}
 
 		public int BearbeitenenMouseDoubleClick(Point location)
@@ -627,7 +630,7 @@ namespace MoBaSteuerung
 			}
 		}
 		
-		private void Model_ZugListeChanged() {
+		public void Model_ZugListeChanged() {
 			if(master != null) {
 				master.SendeZugListeAnAlle(this._model.ZugListeAuslesen());
 			}
@@ -824,6 +827,8 @@ namespace MoBaSteuerung
 			Debug.Print("Master SlaveAnmelden " + slaveClient.SlaveDNS + ":" + slaveClient.SlavePort.ToString());
 			try {
 				slaveClient.SendenZumSlave.AnlageDaten(this._model.AnlageDatenEinlesen(this._model.AnlageDateiPfadName));
+				Model_AnlagenzustandAdresseChanged();
+				Model_ZugListeChanged();
 				//this.master.SendeAnlageZuSlave(slaveClient.SlaveDNS, this.model.AnlageDatenEinlesen(this.anlageDateiPfadName));
 			}
 			catch (Exception ex) {

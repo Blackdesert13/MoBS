@@ -41,6 +41,7 @@ namespace MoBaSteuerung.Elemente
 				return "InfoElement " + this.ID;
 			}
 		}
+
 		/// <summary>
 		/// Schreibrichtung nach rechts oder links
 		/// </summary>
@@ -123,7 +124,7 @@ namespace MoBaSteuerung.Elemente
 				this.Berechnung();
 			}
 		}
-		
+
 
 		/// <summary>
 		/// Diese Methode sucht in der Gleisliste nach einem Gleis, welches an der Position dieses Elementes liegt
@@ -183,7 +184,7 @@ namespace MoBaSteuerung.Elemente
 
 			this._graphicsPathText.Transform(matrix);
 			this._graphicsPathHintergrund = new GraphicsPath();
-			this._graphicsPathHintergrund.AddRectangle(rechteck);			
+			this._graphicsPathHintergrund.AddRectangle(rechteck);
 			this._graphicsPathHintergrund.Transform(matrix);
 		}
 
