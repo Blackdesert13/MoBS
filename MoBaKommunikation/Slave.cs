@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MoBaSteuerung.Anlagenkomponenten;
+using MoBaSteuerung.Anlagenkomponenten.Enum;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.Remoting;
@@ -53,7 +55,7 @@ namespace MoBaKommunikation {
 			if (this.sendenZumMaster != null) {
 				this.remoteID = remoteID;
 				this.port = port;
-				new Task(() => this.sendenZumMaster.Anmelden(Environment.MachineName, this.port + 1, this.remoteID + "Slave", clientName + Environment.MachineName)).Start();
+				new Task(() => this.sendenZumMaster.Anmelden(/*Environment.MachineName*/masterDNS, this.port + 1, this.remoteID + "Slave", clientName + Environment.MachineName)).Start();
 			}
 
 			ISlave.MasterAnlageDaten = this.MasterAnlageDaten;
@@ -99,7 +101,7 @@ namespace MoBaKommunikation {
 				}
 			}
 			catch (Exception ex) {
-				Debug.Print("Error: " + ex.Message);
+				Logging.Log.Schreibe("Error: " + ex.Message, LogLevel.Trace);
 			}
 		}
 

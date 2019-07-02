@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Threading;
 using System.ComponentModel;
+using MoBaSteuerung.Anlagenkomponenten;
+using MoBaSteuerung.Anlagenkomponenten.Enum;
 
 namespace MoBaSteuerung {
     public class BefehlEventArgs : EventArgs {
@@ -97,7 +99,7 @@ namespace MoBaSteuerung {
                 return true;
             }
             catch (Exception e) {
-                Debug.Print(e.Message);
+                Logging.Log.Schreibe(e.Message);
                 if(showErrorDialog)
                     MessageBox.Show("Der ComPort konnte nicht geöffnet werden.");
             }
@@ -116,7 +118,7 @@ namespace MoBaSteuerung {
                 }
             }
             catch (Exception ex) {
-                Debug.Print(ex.Message);
+                Logging.Log.Schreibe(ex.Message);
             }
         }
 
@@ -152,7 +154,7 @@ namespace MoBaSteuerung {
                         Debug.Print(msg + "gesendet");
                     }
                     catch(Exception e) {
-                        Debug.Print(e.Message);
+                        Logging.Log.Schreibe(e.Message);
                     }
             }
             else {
@@ -172,7 +174,7 @@ namespace MoBaSteuerung {
                     }
                 }
                 catch (Exception) {
-                    Debug.Print("Fehler beim Schließen des Ports");
+                    Logging.Log.Schreibe("Fehler beim Schließen des Ports");
                 }
                 finally {
                     ComPort = null;

@@ -440,7 +440,7 @@ namespace MoBaSteuerung
 							}
 							catch (Exception e)
 							{
-								Debug.Print(e.Message);
+								Logging.Log.Schreibe(e.Message);
 							}
 							OnArduinoRueckmeldungReceived();
 							break;
@@ -459,7 +459,7 @@ namespace MoBaSteuerung
 						}
 						catch (Exception e)
 						{
-							Debug.Print(e.Message);
+							Logging.Log.Schreibe(e.Message);
 						}
 						OnArduinoRueckmeldungReceived();
 					}
@@ -970,7 +970,7 @@ namespace MoBaSteuerung
 
 		public void BedienenServoManuell(ServoAction action)
 		{
-			Debug.Print("Servo Action " + action);
+			Logging.Log.Schreibe("Servo Action " + action);
 			if (this._zeichnenElemente.AktiverServo != null && _ardController.IsPortOpen())
 			{
 				OnZubehoerServoAction(this.ZeichnenElemente.AktiverServo.ID, action);

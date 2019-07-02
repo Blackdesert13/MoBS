@@ -267,6 +267,7 @@ namespace MoBaSteuerung
 					el = _model.BedienenMouseClick(p);
 					if (el.Count > 0) {
 						if (this.AppTyp == AppTyp.Master) {
+							Logging.Log.Schreibe("Master Element Schalten: " + el[0].GetType().Name + " " + el[0].ID, LogLevel.Trace);
 							if (_model.ElementToggeln(el[0].GetType().Name, el[0].ID)) {
 								if (master != null) {
 									master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());

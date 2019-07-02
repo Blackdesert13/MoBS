@@ -65,7 +65,6 @@ namespace MoBaSteuerung.Elemente {
 				return "Signal " + this.ID;
 			}
 		}
-
 		public string Anzeige {
 			set {
 				if (_infoFenster != null) {

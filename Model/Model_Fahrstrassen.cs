@@ -21,7 +21,8 @@ using MoBa.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
 namespace MoBaSteuerung {
-	
+	//hier nur Methoden zum Anlage laden und Speichern
+
 	/// <summary>
 	/// Anlagenlogik
 	/// </summary>
@@ -159,17 +160,7 @@ namespace MoBaSteuerung {
 
 				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 					if (fs.StartSignal == signal && fs.AdressenFrei())
-					{
-						/*bool zTypPruefung = true;
-						if ((fs.EndSignal.ZugTypString != "")&& (fs.StartSignal.Zug != null))
-						{
-							if ( (fs.EndSignal.ZugTypString != ""))
-							{
-
-							}
-						}*/
-					 {el.Add(fs);}
-					}
+						el.Add(fs);
 				}
 				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
 				return el;

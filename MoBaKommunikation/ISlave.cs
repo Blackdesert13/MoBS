@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MoBaSteuerung.Anlagenkomponenten;
+using MoBaSteuerung.Anlagenkomponenten.Enum;
+using System;
 using System.Diagnostics;
 
 namespace MoBaKommunikation {
@@ -20,7 +22,7 @@ namespace MoBaKommunikation {
 		/// </summary>
 		/// <param name="anlageDaten"></param>
 		public void AnlageDaten(byte[] anlageDaten) {
-			Debug.Print(anlageDaten.Length.ToString());
+			Logging.Log.Schreibe(anlageDaten.Length.ToString(),LogLevel.Trace);
 			MasterAnlageDaten(anlageDaten);
 		}
 
@@ -29,7 +31,7 @@ namespace MoBaKommunikation {
 		/// </summary>
 		/// <param name="zugListenDaten"></param>
 		public void ZugListenDaten(byte[] zugListenDaten) {
-			Debug.Print(zugListenDaten.Length.ToString());
+			Logging.Log.Schreibe(zugListenDaten.Length.ToString(), LogLevel.Trace);
 			MasterZugListenDaten(zugListenDaten);
 		}
 
@@ -38,7 +40,7 @@ namespace MoBaKommunikation {
 		/// </summary>
 		/// <param name="anlageZustandDaten"></param>
 		public void AnlageZustandsDaten(byte[] anlageZustandDaten) {
-			Debug.Print(anlageZustandDaten.Length.ToString());
+			Logging.Log.Schreibe(anlageZustandDaten.Length.ToString());
 			MasterAnlagenZustandsDaten(anlageZustandDaten);
 		}
 
@@ -46,7 +48,7 @@ namespace MoBaKommunikation {
 		/// 
 		/// </summary>
 		public void MasterBeendet() {
-			Debug.Print("MasterBeendet");
+			Logging.Log.Schreibe("MasterBeendet");
 		}
 
 	}

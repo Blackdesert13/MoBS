@@ -205,7 +205,7 @@ namespace MoBaSteuerung.Elemente
 					graphics.FillPath(pinsel1, this._graphicsPathText);
 				}
 				catch (Exception e) {
-					Debug.Print(e.Message);
+					Logging.Log.Schreibe(e.Message);
 				}
 			}
 			if (this.AnzeigenTyp == AnzeigeTyp.Bearbeiten) {
@@ -229,7 +229,7 @@ namespace MoBaSteuerung.Elemente
 					graphics.FillPath(pinsel1, this._graphicsPathText);
 				}
 				catch (Exception e) {
-					Debug.Print(e.Message);
+					Logging.Log.Schreibe(e.Message);
 				}
 			}
 			//graphics.DrawPath(stift, this.graphicsPathText);

@@ -985,6 +985,16 @@ namespace MoBaSteuerung.Elemente {
 					fs.AdressenSperren();
 				}
 			}
+			if (this._auswahlFahrstrassen.Count > 0) {
+				Signal startSignal = this._auswahlFahrstrassen[0].StartSignal;
+				AlleLöschenAuswahl();
+				List<AnlagenElement> fahrstrassen = new List<AnlagenElement>();
+				foreach (FahrstrasseN fs in _gespeicherteFahrstrassen) {
+					if (fs.StartSignal == startSignal && fs.AdressenFrei())
+						fahrstrassen.Add(fs);
+				}
+				HinzufügenAuswahl(fahrstrassen);
+			}
 		}
 	}
 
@@ -1046,11 +1056,9 @@ namespace MoBaSteuerung.Elemente {
 		public string StartBefehleString {
 			get {
 				string value = "";
-				if (_startGleise != null)
-				
+				if(_startGleise != null)
 					value += this.AuslesenBefehlsliste(_startGleise);
-					value += this.AuslesenBefehlsliste(_startBefehle);
-				
+				value += this.AuslesenBefehlsliste(_startBefehle);
 				return value;
 			}
 			set { 
@@ -1364,10 +1372,6 @@ namespace MoBaSteuerung.Elemente {
 					}
 				}
 			}
-			if (_startBefehle.Count == 0)
-			{
-				return;
-			}
 		}
 
 		public override void Berechnung() {
@@ -1397,7 +1401,7 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		/// <summary>
-    /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
+        /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
 		/// Zielsignal-Prüfung nach Zugtyp muss noch eingefügt werden
 		/// </summary>
 		/// <returns></returns>
@@ -1407,12 +1411,12 @@ namespace MoBaSteuerung.Elemente {
 			{
 				if (!_endSignal.ZugTypPruefung(_startSignal.Zug.ZugTyp)) { return false; }
 			}
-			//Prüfung der Zuglänge am Zielsignal
+		        //Prüfung der Zuglänge am Zielsignal
       if(_endSignal.ZugLaengeMax>0) 
-      {
-          if (_startSignal.Zug.Laenge > _endSignal.ZugLaengeMax)
-              return false;             
-      }
+            {
+                if (_startSignal.Zug.Laenge > _endSignal.ZugLaengeMax)
+                    return false;             
+            }
 			//Prüfung nach Blockaden
 			foreach (Befehl adr in _startBefehle) {
 				if(adr.Element is Signal) {
@@ -1421,6 +1425,7 @@ namespace MoBaSteuerung.Elemente {
 					}
 					continue;
 				}
+
 				if (adr.Element is Knoten) {
 					continue;
 				}
@@ -1433,7 +1438,8 @@ namespace MoBaSteuerung.Elemente {
 				if (adr.Element.IsLocked) {
 					if (adr.SchaltZustand != adr.Element.Ausgang.AdresseAbfragen())
 						return false;
-				}			
+				}
+				
 			}
 			return true;
 		}

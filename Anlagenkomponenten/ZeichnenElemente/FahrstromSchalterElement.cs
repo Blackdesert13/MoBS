@@ -143,6 +143,7 @@ namespace MoBaSteuerung.Elemente {
 				else _fss[0] = this.Parent.FssElemente.Element(-_reglerNr[0]);
 			}
 		}
+
 		[Description("Regler am Schließer des Relais \nFSS wird mit negativer Nr. angegeben")]
 		public int ReglerNummer2 {
 			get { return _reglerNr[1]; }
