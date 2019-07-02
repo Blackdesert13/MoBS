@@ -1407,7 +1407,7 @@ namespace MoBaSteuerung.Elemente {
 		/// <returns></returns>
 		public bool AdressenFrei() {
 			//Prüfung auf Zugtypen am Zielsignal
-			if (_startSignal.Zug.ZugTyp != "")
+			if (_startSignal.Zug != null && _startSignal.Zug.ZugTyp != "")
 			{
 				if (!_endSignal.ZugTypPruefung(_startSignal.Zug.ZugTyp)) { return false; }
 			}
