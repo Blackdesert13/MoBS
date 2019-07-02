@@ -4,6 +4,7 @@ using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 using MoBaSteuerung.Elemente;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace MoBaSteuerung.Elemente {
         */
 		//private bool stellung = false;
 
+		[Description("die Zeile in der Anlagendatei")]
 		/// <summary>
 		/// zum Speichern in der Anlagen-Datei
 		/// </summary>
@@ -48,6 +50,8 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
+
+		[Description("Kurzbezeichnung des Elements")]
 		public override string InfoString {
 			get {
 				return "FSS " + this.ID;
@@ -127,8 +131,7 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
-
-
+    [Description("Regler am Öffner des Relais \nFSS wird mit negativer Nr. angegeben")]
 		public int ReglerNummer1 {
 			get { return _reglerNr[0]; }
 			set {
@@ -140,6 +143,7 @@ namespace MoBaSteuerung.Elemente {
 				else _fss[0] = this.Parent.FssElemente.Element(-_reglerNr[0]);
 			}
 		}
+		[Description("Regler am Schließer des Relais \nFSS wird mit negativer Nr. angegeben")]
 		public int ReglerNummer2 {
 			get { return _reglerNr[1]; }
 			set {

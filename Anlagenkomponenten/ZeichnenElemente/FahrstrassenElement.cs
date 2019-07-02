@@ -337,13 +337,6 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 
-
-		//public Fahrstrasse(ZeichnenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Signal startSignal)
-		// : base(parent, iD, zoom, anzeigeTyp) {
-
-		//}
-
-
 		public Fahrstrasse(AnlagenElement[] elementListe)
         : base(elementListe[0].Parent, elementListe[0].Parent.FahrstrassenElemente.GespeicherteFahrstrassen.Count + 1, elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
 			_listeElemente = elementListe;
@@ -412,7 +405,6 @@ namespace MoBaSteuerung.Elemente {
 			else
 				return;
 
-			//parent.FahrstarssenElemente.GespeicherteFahrstrassen.Add(this);
 			Berechnung();
 		}
 
@@ -1054,9 +1046,11 @@ namespace MoBaSteuerung.Elemente {
 		public string StartBefehleString {
 			get {
 				string value = "";
-				if(_startGleise != null)
+				if (_startGleise != null)
+				
 					value += this.AuslesenBefehlsliste(_startGleise);
-				value += this.AuslesenBefehlsliste(_startBefehle);
+					value += this.AuslesenBefehlsliste(_startBefehle);
+				
 				return value;
 			}
 			set { 
@@ -1334,6 +1328,9 @@ namespace MoBaSteuerung.Elemente {
 			graphics.DrawPath(stift, _fahrstrLinie);
 		}
 
+		/// <summary>
+		/// sucht Start-Gleise aus der Startbefehlsliste
+		/// </summary>
 		private void StartGleiseAktualisieren()
 		{
 			if (_startGleise == null)
@@ -1367,6 +1364,10 @@ namespace MoBaSteuerung.Elemente {
 					}
 				}
 			}
+			if (_startBefehle.Count == 0)
+			{
+				return;
+			}
 		}
 
 		public override void Berechnung() {
@@ -1396,28 +1397,30 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		/// <summary>
-        /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
+    /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
+		/// Zielsignal-Prüfung nach Zugtyp muss noch eingefügt werden
 		/// </summary>
 		/// <returns></returns>
 		public bool AdressenFrei() {
-		        //Prüfung der Zuglänge am Zielsignal
-
-            if(_endSignal.ZugLaengeMax>0) //(_endSignal.l > 0)
-            {
-                if (_startSignal.Zug.Laenge > _endSignal.ZugLaengeMax)
-                    return false;             
-            }
-
-			// if (_endSignal.Zug > 0)
-			//   return false;
+			//Prüfung auf Zugtypen am Zielsignal
+			if (_startSignal.Zug.ZugTyp != "")
+			{
+				if (!_endSignal.ZugTypPruefung(_startSignal.Zug.ZugTyp)) { return false; }
+			}
+			//Prüfung der Zuglänge am Zielsignal
+      if(_endSignal.ZugLaengeMax>0) 
+      {
+          if (_startSignal.Zug.Laenge > _endSignal.ZugLaengeMax)
+              return false;             
+      }
+			//Prüfung nach Blockaden
 			foreach (Befehl adr in _startBefehle) {
 				if(adr.Element is Signal) {
-					if(adr.Element == this.EndSignal && adr.Element.IsLocked){
+					if(adr.Element == this._endSignal && adr.Element.IsLocked){
 						return false;
 					}
 					continue;
 				}
-
 				if (adr.Element is Knoten) {
 					continue;
 				}
@@ -1430,8 +1433,7 @@ namespace MoBaSteuerung.Elemente {
 				if (adr.Element.IsLocked) {
 					if (adr.SchaltZustand != adr.Element.Ausgang.AdresseAbfragen())
 						return false;
-				}
-				
+				}			
 			}
 			return true;
 		}

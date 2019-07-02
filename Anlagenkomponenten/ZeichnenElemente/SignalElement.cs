@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -29,6 +30,7 @@ namespace MoBaSteuerung.Elemente {
 		private Zug zug;
 		private bool _autoStart;
 		private int _zugLaengeMax;
+		private List<string> _zugTyp = new List<string>();
 		//private DateTime _zeitAnkunft;
 
 		#endregion //private Felder
@@ -51,6 +53,7 @@ namespace MoBaSteuerung.Elemente {
 						 + "\t" + Stecker
 						 + "\t" + _autoStart
 						 + "\t" + _zugLaengeMax
+						 + "\t" + ZugTypString
 						 + "\t" + (Koppelung != null ? Koppelung.ListenString : "");// KoppelungsString; ;
 			}
 		}
@@ -62,11 +65,33 @@ namespace MoBaSteuerung.Elemente {
 				return "Signal " + this.ID;
 			}
 		}
+
 		public string Anzeige {
 			set {
 				if (_infoFenster != null) {
 					_infoFenster.Text = value;
 				}
+			}
+		}
+		/// <summary>
+		/// Aufzählung der zulässigen Zug-Typen
+		/// </summary>
+		[Description("Aufzählung der zulässigen Zug-Typen an diesem Signal\nohne Angaben sind alle Zug-Typen zulässig")]
+		public string ZugTypString
+		{
+			get
+			{
+				string ergebnis="";
+				foreach(string x in _zugTyp) {	ergebnis += x; }
+				return ergebnis.Trim();
+			}
+			set
+			{
+				_zugTyp = new List<string>();
+				string[] ztyp = value.Split(' ');
+				for(int i=0; i < ztyp.Length; i++)
+				{if(ztyp[i]!="")
+					_zugTyp.Add(ztyp[i]); }
 			}
 		}
 		/// <summary>
@@ -190,7 +215,8 @@ namespace MoBaSteuerung.Elemente {
 
 			if (elem.Length > 8) _autoStart = Convert.ToBoolean(elem[8]);
 			if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
-			if (elem.Length >10) KoppelungsString = elem[10];
+			if (elem.Length > 10) ZugTypString = elem[10];
+			if (elem.Length >11) KoppelungsString = elem[11];
 			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
 			if (gl != null) {
 				PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
@@ -369,6 +395,20 @@ namespace MoBaSteuerung.Elemente {
 				zug.AnkunftsZeit = DateTime.Now;
 				zug.SignalNummer = neueSignalNr;
 			}
+		}
+		/// <summary>
+		/// prüft ob der Zug-Typ an diesem Signal zulässig ist
+		/// </summary>
+		/// <param name="ZugTyp">der zu prüfende Zugtyp</param>
+		/// <returns>gibt true wenn der Zugtyp zugelässig ist</returns>
+		public bool ZugTypPruefung(string ZugTyp)
+		{
+			if(_zugTyp.Count == 0)  { return true; }
+			foreach (string x in _zugTyp)
+			{
+				if (x.Equals(ZugTyp)) { return true; }
+			}
+			return false;
 		}
 	}
 }

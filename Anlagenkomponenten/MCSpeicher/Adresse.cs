@@ -57,7 +57,8 @@ namespace MoBaSteuerung.Anlagenkomponenten.MCSpeicher {
 		/// Arduino-Nr
 		/// </summary>
 		[DisplayName("Arduino Nr.")]
-		[Category("1")]
+		[Description("Nr. des Arduinos")]
+
 		public int MCNr {
 			set {
 				_mc = _parent.ListeMCSpeicher.Element(value);

@@ -21,8 +21,7 @@ using MoBa.Elemente;
 //using MoBa.Anlagenkomponenten.ZeichnenElemente;
 
 namespace MoBaSteuerung {
-	//hier nur Methoden zum Anlage laden und Speichern
-
+	
 	/// <summary>
 	/// Anlagenlogik
 	/// </summary>
@@ -32,16 +31,6 @@ namespace MoBaSteuerung {
 			this._zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(el);
 		}
 
-		/*   /// <summary>
-		/// Überträgt den Zug auf das neue Signal
-		/// </summary>
-		/// <param name="NeuesSignal"></param>
-		public void ZugWechsel(int NeuesSignal)
-		{
-				int neueSignalNr = NeuesSignal;
-				if (zug != null)
-						zug.SignalNummer = neueSignalNr;
-		}*/
 		private void FahrstraßeStarten(object fahrstraße) {
 			FahrstrasseN fs = (FahrstrasseN)fahrstraße;
 			//Adresse adrStartGleis = fs.adrStartGleis;
@@ -170,7 +159,17 @@ namespace MoBaSteuerung {
 
 				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 					if (fs.StartSignal == signal && fs.AdressenFrei())
-						el.Add(fs);
+					{
+						/*bool zTypPruefung = true;
+						if ((fs.EndSignal.ZugTypString != "")&& (fs.StartSignal.Zug != null))
+						{
+							if ( (fs.EndSignal.ZugTypString != ""))
+							{
+
+							}
+						}*/
+					 {el.Add(fs);}
+					}
 				}
 				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
 				return el;

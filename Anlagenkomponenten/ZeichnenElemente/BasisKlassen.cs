@@ -379,6 +379,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 
 		[Editor(typeof(BefehlsListeTypeEditor), typeof(UITypeEditor))]
 		[TypeConverter(typeof(BefehlslisteTypeConverter))]
+		[Description("")]
 		public BefehlsListe Koppelung {
 			get { return _kopplungsBefehlsListe; }
 		}
