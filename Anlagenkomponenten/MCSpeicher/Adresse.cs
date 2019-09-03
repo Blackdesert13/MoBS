@@ -171,10 +171,10 @@ namespace MoBaSteuerung.Anlagenkomponenten.MCSpeicher {
 		}
 
 		/// <summary>
-		/// liefert die Stellung der Adresse
+		/// liefert die Stellung der Ausgangs-Adresse
 		/// </summary>
 		/// <returns></returns>
-		public bool AdresseAbfragen() {
+		public bool AusgangAbfragen() {
 			//if (_ardNr == 0)
 			//    return (_bitNr != 0);
 			Arduino ard = _parent.AnlagenZustand.GetArduino(_ardNr);
@@ -184,6 +184,21 @@ namespace MoBaSteuerung.Anlagenkomponenten.MCSpeicher {
 			return _stellung;
 		}
 
+		/// <summary>
+		/// liefert die Stellung der Ausgangs-Adresse
+		/// </summary>
+		/// <returns></returns>
+		public bool EingangAbfragen()
+		{
+			//if (_ardNr == 0)
+			//    return (_bitNr != 0);
+			Arduino ard = _parent.AnlagenZustand.GetArduino(_ardNr);
+			if (ard != null)
+			{
+				return ard.Rueckmeldung[_adresseNr, _bitNr];
+			}
+			return _stellung;
+		}
 		/// <summary>
 		/// liefert den Zustand der Rückmelde-Adresse
 		/// </summary>

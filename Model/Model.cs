@@ -344,7 +344,6 @@ namespace MoBaSteuerung
 		}
 		#endregion//Mausclick-Befehle
 
-
 		#region Servo
 		public bool ServoBewegungManuell(int servo, ServoAction action)
 		{
@@ -388,7 +387,14 @@ namespace MoBaSteuerung
 		#endregion//Servo
 
 		#region Öffentliche Methoden
-
+		/// <summary>
+		/// prüft ob durch RM FS aufgelöst werden
+		/// </summary>
+		private void FahrstrasseAufRMCheck()
+		{
+			List<WeichenStrasse> aFS =_zeichnenElemente.AnlagenZustand.AktiveFahrstrassen;
+			//foreach
+		}
 		/// <summary>
 		/// Liest ankommende Befehle vom ArduinoController und verarbeitet diese weiters
 		/// </summary>
@@ -415,6 +421,7 @@ namespace MoBaSteuerung
 							break;
 						case 11:
 							arduino.Rueckmeldung[1] = (ushort)(befehl[2] + befehl[3] * 256);
+							aktiveFSZielgleisPruefen();
 							OnArduinoRueckmeldungReceived();
 							break;
 						case 40:
@@ -467,7 +474,24 @@ namespace MoBaSteuerung
 			}
 		}
 		#endregion
-
+		/// <summary>
+		/// prüft ob durch Rückmeldung eine FS aufgelöst werden kann
+		/// </summary>
+		public void aktiveFSZielgleisPruefen()
+		{
+			FahrstrasseN fs;
+			
+			for(int i=0;i< _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen.Count;i++)
+			{ 
+				fs = _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen[i];
+				//fs = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(x.Id);
+				if (fs.ZielPruefung())
+				{
+					FahrstrasseSchalten(fs, FahrstrassenSignalTyp.ZielSignal);
+					//if(fs.)
+				}
+			}
+		}
 		/// <summary>
 		/// Wenn Zustand in einer Adresse geändert wurde, wird dieser über den ArduinoController gesendet.
 		/// Wird keine Adresse an die Methode übergeben, werden alle Adressen ausgegeben.

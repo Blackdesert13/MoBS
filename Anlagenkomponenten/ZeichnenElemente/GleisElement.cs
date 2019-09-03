@@ -312,7 +312,7 @@ namespace MoBaSteuerung.Elemente {
 			graphics.DrawPath(stiftGleis, this._graphicsPath);
 
       //zum Test _eingang.Stellung = true;
-      if (Eingang.Stellung && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
+      if (Eingang.EingangAbfragen() && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
       //if (Parent.RückmeldungAnzeigen && Eingang.RueckmeldungAbfragen()) 
       {
 				this.farbeLinien = Color.Orange;
@@ -561,7 +561,7 @@ namespace MoBaSteuerung.Elemente {
         /// gibt die Belegung des Gleises zurück
         /// </summary>
         /// <returns></returns>
-        public  bool GleisBelegung()
+        public bool GleisBelegung()
         {
             if (_eingang.Stellung) return true;
             if (_signale[0] != null)

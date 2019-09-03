@@ -28,9 +28,11 @@ namespace MoBaSteuerung.Elemente {
 		private bool _inZeichenRichtung = false;
 		private InfoFenster _infoFenster = null;
 		private Zug zug;
-		private bool _autoStart;
+		private bool _autoStart = false;
+		private List<FahrstrasseN>  _autoStartFSGruppe;
 		private int _zugLaengeMax;
 		private List<string> _zugTyp = new List<string>();
+		private Gleis _zielGleis;
 		//private DateTime _zeitAnkunft;
 
 		#endregion //private Felder
@@ -54,7 +56,8 @@ namespace MoBaSteuerung.Elemente {
 						 + "\t" + _autoStart
 						 + "\t" + _zugLaengeMax
 						 + "\t" + ZugTypString
-						 + "\t" + (Koppelung != null ? Koppelung.ListenString : "");// KoppelungsString; ;
+						 + "\t" + (Koppelung != null ? Koppelung.ListenString : "")// KoppelungsString; ;
+						 + "\t" + Convert.ToString( ZielGleisNr) ;
 			}
 		}
 		/// <summary>
@@ -65,6 +68,25 @@ namespace MoBaSteuerung.Elemente {
 				return "Signal " + this.ID;
 			}
 		}
+		/// <summary>
+		/// bei aktiver Rückmeldung sollen Fahrstrassen diesem Zielsiegnal aufgelöst werden
+		/// </summary>
+		public int ZielGleisNr
+		{
+			set
+			{
+				if (value > 0) {
+					_zielGleis = Parent.GleisElemente.Element(value);
+				}
+				else { _zielGleis = null; }
+			}
+			get
+			{
+				if(_zielGleis == null) { return 0; }
+				else { return _zielGleis.ID; }
+			}
+		}
+
 		public string Anzeige {
 			set {
 				if (_infoFenster != null) {
@@ -81,7 +103,7 @@ namespace MoBaSteuerung.Elemente {
 			get
 			{
 				string ergebnis="";
-				foreach(string x in _zugTyp) {	ergebnis += x; }
+				foreach(string x in _zugTyp) {	ergebnis += x + " "; }
 				return ergebnis.Trim();
 			}
 			set
@@ -151,7 +173,17 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
-
+		public bool AutoStart {
+			get { return _autoStart; }
+			set {
+				_autoStart = value;
+				/*if (_autoStart)
+				{
+					//_autoStartFSGruppe = Parent.FahrstrassenElemente.StartSignalGruppe(ID);
+				}
+				else { _autoStartFSGruppe = null; }*/
+			}
+		}
 
 		#endregion //Properties
 
@@ -215,7 +247,8 @@ namespace MoBaSteuerung.Elemente {
 			if (elem.Length > 8) _autoStart = Convert.ToBoolean(elem[8]);
 			if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
 			if (elem.Length > 10) ZugTypString = elem[10];
-			if (elem.Length >11) KoppelungsString = elem[11];
+			if (elem.Length > 11) KoppelungsString = elem[11];
+			if (elem.Length > 12) { ZielGleisNr = Convert.ToInt16(elem[12]); }
 			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
 			if (gl != null) {
 				PositionRaster = gl.GetRasterPosition(this, Convert.ToInt32(glAnschl[1]));
@@ -408,6 +441,23 @@ namespace MoBaSteuerung.Elemente {
 				if (x.Equals(ZugTyp)) { return true; }
 			}
 			return false;
+		}
+		/// <summary>
+		/// prüft ob der Zug-Typ und die Zug-Länge an diesem Signal zulässig ist
+		/// </summary>
+		/// <param name="PruefZug">der zu prüfende Zug</param>
+		/// <returns>gibt true wenn der Zug am Signal zugelässig ist</returns>
+		public bool ZugPruefung(Zug PruefZug)
+		{
+			if (_zugLaengeMax > 0) { }
+			if (_zugTyp.Count != 0)
+			{ 
+				foreach (string x in _zugTyp)
+				{
+					if (!x.Equals(PruefZug)) { return false; }
+				}
+		  }
+			return true;
 		}
 	}
 }

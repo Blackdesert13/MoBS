@@ -294,7 +294,7 @@ namespace MoBaSteuerung {
 																																			+ this._zeichnenElemente.EntkupplerElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Infos\tNr.\tGleis\tLage\tBez"
 																																			+ this._zeichnenElemente.InfoElemente.SpeicherString);
-			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker\tAutoSta\tZugLmax\tZugTyp\tKopplung"
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker\tAutoSta\tZugLmax\tZugTyp\tKopplg.\tZielGleis"
 																																			+ this._zeichnenElemente.SignalElemente.SpeicherString);
       anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "StartSG\tNr.\tLageX\tLageY\tTyp\tBez.\tSignale"
                                                                      + this._zeichnenElemente.SsgElemente.SpeicherString);

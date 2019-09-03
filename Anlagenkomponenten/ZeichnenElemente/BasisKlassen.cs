@@ -358,6 +358,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		private string _kopplungsString;
 		private bool _fehler = false;
 
+		#region Eigenschaften
 		/// <summary>
 		/// Fehler nach der Prüfung
 		/// </summary>
@@ -382,10 +383,12 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		[Description("")]
 		public BefehlsListe Koppelung {
 			get { return _kopplungsBefehlsListe; }
+			set {  _kopplungsBefehlsListe =value; }
 		}
-
+		#endregion //Eigenschaften
+		
 		/// <summary>
-		/// 
+		/// erstellt aus dem Kopplungsstring eine neue Befehlsliste
 		/// </summary>
 		public void KoppelungAktivieren() {
 			_kopplungsBefehlsListe = new BefehlsListe(_parent, _ausgang.Stellung, _kopplungsString);
@@ -515,7 +518,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 				if (Selektiert) {
 					return Elementzustand.Selektiert;
 				}
-				if (this.Ausgang.AdresseAbfragen()) {
+				if (this.Ausgang.AusgangAbfragen()) {
 					return Elementzustand.An;
 				}
 				return Elementzustand.Aus;

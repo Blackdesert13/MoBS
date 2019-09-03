@@ -12,15 +12,17 @@ namespace MoBaSteuerung.Elemente {
 		private string _listenString;
 		private AnlagenElemente _parent;
 		private bool _ausgangsStellung;
+		private bool _aktiv = true;
 
 		public BefehlsListe(AnlagenElemente Parent, bool AusgangsStellung, string Listenstring) {
 			_parent = Parent;
-			_ausgangsStellung = AusgangsStellung;
+			_aktiv = AusgangsStellung;
 			_listenString = Listenstring;
 			ListeAktivieren();
 		}
-		public bool AusgangsStellung {
-			set { _ausgangsStellung = value; }
+		public bool Aktiv {
+			set { _aktiv = value; }
+			
 		}
 		public string ListenString {
 			get { return _listenString; }
@@ -29,6 +31,7 @@ namespace MoBaSteuerung.Elemente {
 
 		public List<Befehl> BefListe {
 			get { return _liste; }
+			set { _liste = value; }
 		}
 
 		/// <summary>
@@ -45,6 +48,7 @@ namespace MoBaSteuerung.Elemente {
 		public void ListeAktivieren()//(AnlagenElemente parent)
 		{
 			_liste = new List<Befehl>();
+			_aktiv = true;
 			if (_listenString != "" && _listenString != null) {
 				string[] stringArray = _listenString.Split(new char[] { ' ' ,';'});
 				for (int i = 0; i < stringArray.Length; i++) {
@@ -95,19 +99,26 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 		public void KoppelungSchalten(bool AusgangsStellung) {
-			_ausgangsStellung = AusgangsStellung;
-			foreach (Befehl x in _liste) {
-				x.BefehlAusfuehren(_ausgangsStellung);
+			if (_aktiv)
+			{
+				_ausgangsStellung = AusgangsStellung;
+				foreach (Befehl x in _liste)
+				{
+					x.BefehlAusfuehren(_ausgangsStellung);
+				}
 			}
 		}
 		/// <summary>
 		/// führt alle Befehle der Befehlsliste aus
 		/// </summary>
 		public void KoppelungSchalten() {
-			foreach (Befehl x in _liste) {
-				x.BefehlAusfuehren();
+			if (_aktiv)
+			{
+				foreach (Befehl x in _liste)
+				{
+					x.BefehlAusfuehren();
+				}
 			}
-
 		}
 	}
 

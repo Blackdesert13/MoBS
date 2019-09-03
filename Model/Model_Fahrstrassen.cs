@@ -67,8 +67,8 @@ namespace MoBaSteuerung {
 			if (el != null) {
 				bool verlaengern = el.StartSignal.IsLocked;
 				if (!el.IsAktiv && !verlaengern) {
-					Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
-					fahrstraßenStartThread.Start(el);
+					//Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
+					//fahrstraßenStartThread.Start(el);
 				}
 				bool action = el.AusgangToggeln(signalTyp, verlaengern);
 				if (action && _ardController.IsPortOpen())
@@ -127,7 +127,7 @@ namespace MoBaSteuerung {
 		public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal, bool verlaengern) {
 			List<AnlagenElement> el = new List<AnlagenElement>();
 			if (_zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
-
+				//prüft ob das Signal an einer aktiven FS beteiligt ist
 				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen) {
 					if (signal == fs.StartSignal || signal == fs.EndSignal) {
 						el.Add(fs);
@@ -159,7 +159,7 @@ namespace MoBaSteuerung {
 				}
 
 				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
-					if (fs.StartSignal == signal && fs.AdressenFrei())
+					if (fs.StartSignal == signal && fs.Verfuegbarkeit())
 						el.Add(fs);
 				}
 				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
@@ -212,7 +212,7 @@ namespace MoBaSteuerung {
 						return el;
 					}
 				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
-					if (fs.StartSignal == signal && fs.AdressenFrei())
+					if (fs.StartSignal == signal && fs.Verfuegbarkeit())
 						el.Add(fs);
 				}
 				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);

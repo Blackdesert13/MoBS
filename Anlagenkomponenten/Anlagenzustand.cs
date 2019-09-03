@@ -144,16 +144,6 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 _id = value;
             }
         }
-
-        //public int Fahrbereich {
-        //    get {
-        //        return _fahrbereich;
-        //    }
-        //    set {
-        //        _fahrbereich = value;
-        //    }
-        //}
-
     }
 
 

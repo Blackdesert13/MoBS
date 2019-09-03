@@ -546,7 +546,7 @@ namespace MoBaSteuerung.Elemente {
 		public bool AdressenFrei() {
 			foreach (Adresse adr in _startBefehle) {
 				if (adr.IsLocked) {
-					if (adr.Stellung != adr.AdresseAbfragen())
+					if (adr.Stellung != adr.AusgangAbfragen())
 						return false;
 				}
 			}
@@ -585,64 +585,63 @@ namespace MoBaSteuerung.Elemente {
 	#endregion
 
 	/// <summary>
-	/// 
+	/// Liste der FahrstrassenN
 	/// </summary>
 	public class FahrstrassenNElemente {
 		private List<FahrstrasseN> _aktiveFahrstrassen;
 		private List<FahrstrasseN> _auswahlFahrstrassen;
 		private List<FahrstrasseN> _gespeicherteFahrstrassen;
-        #region Properties
-
-        /// <summary>
-        /// zum Speichern in der Anlagen-Datei
-        /// </summary>
-        public string SpeicherString
+    #region Properties
+    /// <summary>
+    /// zum Speichern in der Anlagen-Datei
+    /// </summary>
+    public string SpeicherString
+    {
+        get
         {
-            get
+            string spString = "FahrstraßenN"
+                            + "\t" + "Nr."
+                            + "\t" + "Start"
+                            + "\t"+"ZielGleis";
+            foreach (FahrstrasseN x in this.GespeicherteFahrstrassen)
             {
-                string spString = "FahrstraßenN"
-                                + "\t" + "Nr."
-                                + "\t" + "Start"
-                                + "\t" + "Ziel";
-                foreach (FahrstrasseN x in this.GespeicherteFahrstrassen)
-                {
-                    spString += Environment.NewLine + x.SpeicherString;
-                }
-                return spString;
+                spString += Environment.NewLine + x.SpeicherString;
+            }
+            return spString;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Int32 Zoom
+    {
+        set
+        {
+            foreach (FahrstrasseN item in this._gespeicherteFahrstrassen)
+            {
+                item.Zoom = value;
             }
         }
+    }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Int32 Zoom
+    /// <summary>
+    /// 
+    /// </summary>
+    public AnzeigeTyp AnzeigeTyp
+    {
+        set
         {
-            set
+            foreach (FahrstrasseN item in this._aktiveFahrstrassen)
             {
-                foreach (FahrstrasseN item in this._gespeicherteFahrstrassen)
-                {
-                    item.Zoom = value;
-                }
+                item.AnzeigenTyp = value;
+            }
+            foreach (FahrstrasseN item in this._auswahlFahrstrassen)
+            {
+                item.AnzeigenTyp = value;
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public AnzeigeTyp AnzeigeTyp
-        {
-            set
-            {
-                foreach (FahrstrasseN item in this._aktiveFahrstrassen)
-                {
-                    item.AnzeigenTyp = value;
-                }
-                foreach (FahrstrasseN item in this._auswahlFahrstrassen)
-                {
-                    item.AnzeigenTyp = value;
-                }
-            }
-        }
+    }
 
 		/// <summary>
 		/// 
@@ -726,10 +725,36 @@ namespace MoBaSteuerung.Elemente {
 		public void LöschenAktiv(FahrstrasseN aktiveFahrstrasse) {
 			this._aktiveFahrstrassen.Remove(aktiveFahrstrasse);
 		}
-
+		/// <summary>
+		/// liefert die AutostartFS für das Startsignal
+		/// </summary>
+		/// <param name="StartSignalID">Nr des Startsignals</param>
+		/// <returns></returns>
+		public FahrstrasseN StartSignalGruppe(int StartSignalID)
+		{
+			FahrstrasseN ergebnis = null;
+			List<FahrstrasseN> erg = _gespeicherteFahrstrassen.FindAll(
+				delegate (FahrstrasseN fs) { return fs.ID == StartSignalID; });
+			if (erg == null) { return ergebnis; }
+			else{
+				erg = erg.FindAll(  delegate (FahrstrasseN fs) { return fs.Verfuegbarkeit() == true; } );
+				if (erg == null) { return ergebnis; }
+				else
+				{
+					Zug zug = erg[0].StartSignal.Zug;
+					if (zug == null) { return erg[0]; }
+					else
+					{
+						//if(zug.ZugTyp!= "") { erg.FindAll(delegate(FahrstrasseN fs) { return fs.StartSignal. })}
+					}
+				}
+			//länge und Zugtyp prüfen
+			}
+			return ergebnis;
+		}
 
 		/// <summary>
-        /// FahrstrasseNeu ist die aktuelle Fahrstrasse
+    /// FahrstrasseNeu ist die aktuelle Fahrstrasse
 		/// </summary>
 		/// <param name="iD"></param>
 		/// <returns></returns>
@@ -990,17 +1015,17 @@ namespace MoBaSteuerung.Elemente {
 				AlleLöschenAuswahl();
 				List<AnlagenElement> fahrstrassen = new List<AnlagenElement>();
 				foreach (FahrstrasseN fs in _gespeicherteFahrstrassen) {
-					if (fs.StartSignal == startSignal && fs.AdressenFrei())
+					if (fs.StartSignal == startSignal && fs.Verfuegbarkeit())
 						fahrstrassen.Add(fs);
 				}
 				HinzufügenAuswahl(fahrstrassen);
 			}
 		}
 	}
-
+	/// <summary>
+	/// aktuell verwendete Fahrstrasse
+	/// </summary>
 	public class FahrstrasseN : AnlagenElement {
-
-
 		private GraphicsPath _fahrstrLinie = new GraphicsPath();
 		private AnlagenElement[] _listeElemente;
 		private Signal _startSignal;
@@ -1009,9 +1034,17 @@ namespace MoBaSteuerung.Elemente {
 		private List<Befehl> _startBefehle;
 		private List<Befehl> _startGleise;
 		private List<Befehl> _endBefehle;
-
+		private List<Adresse> _streckenRM;
+		private Gleis _zielGleis;
+		
+		#region Properties
+		/// <summary>
+		/// 
+		/// </summary>
 		public override string SpeicherString {
 			get {
+				//int zielGlNr = 0;
+				//if (_zielGleis != null) { zielGlNr = _zielGleis.ID; }
 				string txt = "FahrstrasseN"
 										+ "\t" + ID
 										+ "\t" + StartSignal.ID
@@ -1030,7 +1063,9 @@ namespace MoBaSteuerung.Elemente {
 				return txt;
 			}
 		}
-
+		/// <summary>
+		/// gibt an ob FS aktiv ist
+		/// </summary>
 		public bool IsAktiv {
 			get {
 				return _isAktiv;
@@ -1054,10 +1089,11 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		public string StartBefehleString {
-			get {
+			get
+			{
 				string value = "";
-				if(_startGleise != null)
-					value += this.AuslesenBefehlsliste(_startGleise);
+				if (_startGleise != null)
+				{	value += this.AuslesenBefehlsliste(_startGleise);		}
 				value += this.AuslesenBefehlsliste(_startBefehle);
 				return value;
 			}
@@ -1109,15 +1145,12 @@ namespace MoBaSteuerung.Elemente {
 				_endBefehle = value;
 			}
 		}
-
-
-
-		//public Fahrstrasse(ZeichnenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Signal startSignal)
-		// : base(parent, iD, zoom, anzeigeTyp) {
-
-		//}
-
-
+		#endregion//Properties
+		#region Konstuktoren
+		/// <summary>
+		/// erstellt FS aus Serialisierung (für Slave)
+		/// </summary>
+		/// <param name="elementListe">Serialisierung</param>
 		public FahrstrasseN(AnlagenElement[] elementListe)
 		: base(elementListe[0].Parent, elementListe[0].Parent.FahrstrassenElemente.SucheFreieNummer(), elementListe[0].Zoom, elementListe[0].AnzeigenTyp) {
 			_listeElemente = elementListe;
@@ -1129,6 +1162,12 @@ namespace MoBaSteuerung.Elemente {
 
 		public FahrstrasseN(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, string[] elem, string befehleStart, string befehleZiel, string knotenListe)
 				: base(parent, Convert.ToInt32(elem[1]), zoom, anzeigeTyp) {
+		/*	int zielGleisNr = 0;
+			//bool result =
+			int.TryParse(elem[4], out zielGleisNr);
+			if(zielGleisNr!=0){
+				_zielGleis = parent.GleisElemente.Element(Convert.ToInt32(elem[4]));}*/
+			
 			int startS = Convert.ToInt16(elem[2]);
 			int zielS = Convert.ToInt16(elem[3]);
 			if (startS > 0) {
@@ -1138,6 +1177,11 @@ namespace MoBaSteuerung.Elemente {
 				return;
 			if (zielS > 0) {
 				_endSignal = parent.SignalElemente.Element(zielS);
+				if (_endSignal != null)
+				{
+					if (_endSignal.ZielGleisNr > 0)
+					{ _zielGleis = parent.GleisElemente.Element(_endSignal.ZielGleisNr); }
+				}
 			}
 			else
 				return;
@@ -1170,12 +1214,12 @@ namespace MoBaSteuerung.Elemente {
 				_listeElemente = knoten.ToArray();
 			}
 			else
-				return;
+			 return;
 
-            parent.FahrstrassenElemente.GespeicherteFahrstrassen.Add(this);
+      parent.FahrstrassenElemente.GespeicherteFahrstrassen.Add(this);
 			Berechnung();
 		}
-
+		#endregion//Konstruktoren
 		private string AuslesenBefehlsliste(List<Befehl> list) {
 			string spString = String.Empty;
 			foreach (Befehl befehl in list) {
@@ -1311,7 +1355,7 @@ namespace MoBaSteuerung.Elemente {
 				i = i - anz;
 			}
 		}
-
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -1398,14 +1442,60 @@ namespace MoBaSteuerung.Elemente {
 					_startBefehle[i].Element.IsLocked = true;
 				}
 			}
+			_startSignal.IsLocked = false;
 		}
 
 		/// <summary>
-        /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
-		/// Zielsignal-Prüfung nach Zugtyp muss noch eingefügt werden
+		/// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
+		/// soll AdressenFrei ersetzen
 		/// </summary>
 		/// <returns></returns>
-		public bool AdressenFrei() {
+		public bool Verfuegbarkeit()//Verfuegbarkeit()
+		{
+			if (_startSignal.Zug != null)
+			{
+				if (_startSignal.Zug != null )
+				{
+					if (!_endSignal.ZugPruefung(_startSignal.Zug)) { return false; }
+				}		
+			}
+			//Prüfung nach Blockaden
+			foreach (Befehl adr in _startBefehle)
+			{
+				if (adr.Element is Signal)
+				{
+					if (adr.Element == this._endSignal && adr.Element.IsLocked)
+					{
+						return false;
+					}
+					continue;
+				}
+
+				if (adr.Element is Knoten)
+				{
+					continue;
+				}
+				if (adr.Element is Gleis)
+				{
+					Gleis gl = (Gleis)adr.Element;
+					if (gl.GleisBelegung())
+						return false;
+				}
+				if (adr.Element.IsLocked)
+				{
+					if (adr.SchaltZustand != adr.Element.Ausgang.AusgangAbfragen())
+						return false;
+				}
+			}
+			return true;
+		}
+
+		/// <summary>
+    /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
+		/// </summary>
+		/// <returns></returns>
+		public bool AdressenFreiAlt()//AdressenFrei
+		{
 			//Prüfung auf Zugtypen am Zielsignal
 			if (_startSignal.Zug != null && _startSignal.Zug.ZugTyp != "")
 			{
@@ -1436,20 +1526,36 @@ namespace MoBaSteuerung.Elemente {
 						return false;
 				}
 				if (adr.Element.IsLocked) {
-					if (adr.SchaltZustand != adr.Element.Ausgang.AdresseAbfragen())
+					if (adr.SchaltZustand != adr.Element.Ausgang.AusgangAbfragen())
 						return false;
 				}
 				
 			}
 			return true;
 		}
+		/// <summary>
+		/// soll die Startgleise mit dem Startsignal vorrübergehend Koppeln
+		/// </summary>
+		public void StartgleiseInSignalKoppeln(){
+			//BefehlsListe startSignal
+			//_startSignal.Koppelung.BefListe = _startGleise;
+		}
+		 
 
 		public bool AusgangToggeln(FahrstrassenSignalTyp signalTyp, bool verlaengern) {
-			if (AdressenFrei() || IsAktiv) {
+			if (Verfuegbarkeit() || IsAktiv) {
+				//StartSignal.Koppelung.Aktiv = true;//StartgleiseInSignalKoppeln();
 				if (Parent.AnlagenZustand.FahrstrasseSchalten(this.ID)) {
+
 					for (int i = 0; i < _startBefehle.Count; i++) {
-							this._startBefehle[i].BefehlAusfuehren();
-							this._startBefehle[i].Element.IsLocked = true;       
+						//if (_startBefehle[i].Element.GetType() != typeof(Signal))
+						if (_startBefehle[i].Element is Signal)
+						{ }
+						else
+						{
+							_startBefehle[i].BefehlAusfuehren();
+							this._startBefehle[i].Element.IsLocked = true;
+						}
 					}
 					if (verlaengern) {
 						foreach(Befehl befehl in this._startGleise) {
@@ -1458,8 +1564,10 @@ namespace MoBaSteuerung.Elemente {
 							befehl.Element.IsLocked = true;
 						}
 					}
+					_startSignal.IsLocked = false;
 				}
 				else {
+					_startSignal.Koppelung.Aktiv = false;
 					FahrstrasseN fsAnkommend = null;
 					foreach(FahrstrasseN el in Parent.FahrstrassenElemente.AktiveFahrstrassen) {
 						if(el.EndSignal == this.StartSignal) {
@@ -1601,6 +1709,53 @@ namespace MoBaSteuerung.Elemente {
 			if (_startGleise != null) {
 				foreach (Befehl befehl in _startGleise) {
 					befehl.BefehlAusfuehren();
+				}
+			}
+		}
+		/// <summary>
+		/// prüft ob am Zielgleis die FS aufgelöst werden kann
+		/// </summary>
+		/// <returns></returns>
+		public bool ZielPruefung()
+		{
+			if(_zielGleis != null)
+			{
+				return _zielGleis.Eingang.RueckmeldungAbfragen();
+			}
+			return false;
+		}
+		/// <summary>
+		/// prüft ob die Strecke wieder frei ist
+		/// </summary>
+		/// <returns>true wenn die Strecke belegt ist</returns>
+		private bool streckePruefung()
+		{
+			bool erg = false;
+			foreach (Adresse rm in _streckenRM)
+			{
+				if(rm.RueckmeldungAbfragen()) { return true; }
+			}
+			return erg;
+		}
+	  private void streckenRMErmitteln()
+		{
+			foreach(Befehl bef in _startBefehle)
+			{
+				Gleis gl;
+				Adresse ad;
+				_streckenRM = new List<Adresse>();
+				if (bef.Element is Gleis)
+				{
+					gl = (Gleis)bef.Element;
+					if (gl.Eingang.SpeicherString != "0-0-0")
+					{
+						ad = gl.Eingang;
+						foreach (Adresse x in _streckenRM)
+						{
+							if (!x.GleicheAdresse(gl.Eingang)) { _streckenRM.Add(gl.Eingang); }
+						}
+					}
+
 				}
 			}
 		}
