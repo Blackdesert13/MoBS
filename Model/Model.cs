@@ -417,10 +417,14 @@ namespace MoBaSteuerung
 					{
 						case 10:
 							arduino.Rueckmeldung[0] = (ushort)(befehl[2] + befehl[3] * 256);
-							OnArduinoRueckmeldungReceived();
+							//OnArduinoRueckmeldungReceived();
 							break;
 						case 11:
 							arduino.Rueckmeldung[1] = (ushort)(befehl[2] + befehl[3] * 256);
+							//aktiveFSZielgleisPruefen();
+							//OnArduinoRueckmeldungReceived();
+							break;
+						case 19:
 							aktiveFSZielgleisPruefen();
 							OnArduinoRueckmeldungReceived();
 							break;

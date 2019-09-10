@@ -283,9 +283,9 @@ namespace MoBaSteuerung.Elemente {
 
 					break;
 				case AnzeigeTyp.Bedienen:
-					if (Passiv) {
-						transpanz = 128;
-					}
+					//if (Passiv) {
+					//	transpanz = 128;
+					//}
 					switch (this.ElementZustand) {
 						case Elementzustand.An:
 							farbeStift = Color.FromArgb(transpanz, Color.Blue);

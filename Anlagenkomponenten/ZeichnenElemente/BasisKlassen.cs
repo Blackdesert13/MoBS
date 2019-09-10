@@ -637,16 +637,19 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		}
 
 		[Browsable(false)]//verstecke Eigenschaft im PropertyGrid
-		public bool Passiv {
-			get {
+		public bool Passiv
+		{
+			get
+			{
 				return _passiv;
 			}
 
-			set {
+			set
+			{
 				_passiv = value;
 			}
 		}
-		
+
 		[Browsable(false)]//verstecke Eigenschaft im PropertyGrid
 		public bool Selektiert {
 			get {
@@ -778,11 +781,5 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		public virtual bool GleisElementAustragen() {
 			return false;
 		}
-
-
-		//public virtual void DragDropElementVerknüpfungenAktualisieren()
-		//{
-
-		//}
 	}
 }

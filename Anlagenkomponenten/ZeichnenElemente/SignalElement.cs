@@ -308,9 +308,9 @@ namespace MoBaSteuerung.Elemente {
 					}
 
 					graphics.FillPath(Brushes.White, this._graphicsPathHintergrund);
-					if (Passiv) {
-						transpanz = 128;
-					}
+					//if (Passiv) {
+					//	transpanz = 128;
+					//}
 					if (this.ElementZustand == Elementzustand.An)
 						farbePinsel = Color.FromArgb(transpanz, Color.Green);
 					else

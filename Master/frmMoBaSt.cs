@@ -68,7 +68,7 @@ namespace MoBaSteuerung {
 			// Model erzeugen einbinden
 			this.InizializeModel();
 			// Controller erzeugen einbinden
-			this.InitializeController();
+			//this.InitializeController();
 			((Control)this.pictureBoxView).AllowDrop = true;
 			this.MouseWheel += MoBaStForm_MouseWheel;
 			// erstellen der Menü Raster Bilder

@@ -1567,7 +1567,7 @@ namespace MoBaSteuerung.Elemente {
 					_startSignal.IsLocked = false;
 				}
 				else {
-					_startSignal.Koppelung.Aktiv = false;
+					//_startSignal.Koppelung.Aktiv = false;
 					FahrstrasseN fsAnkommend = null;
 					foreach(FahrstrasseN el in Parent.FahrstrassenElemente.AktiveFahrstrassen) {
 						if(el.EndSignal == this.StartSignal) {
