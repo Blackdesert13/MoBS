@@ -41,9 +41,7 @@ namespace MoBaSteuerung {
 				//adrStartGleis.IsLocked = true;
 
 				this.OnAnlageNeuZeichnen();
-				this.OnAnlagenzustandChanged();
-				if (_ardController.IsPortOpen())
-					this.OnAnlagenZustandAdresseChanged(null);
+				this.OnAnlagenzustandChanged(null);
 			}
 		}
 
@@ -71,8 +69,8 @@ namespace MoBaSteuerung {
 					//fahrstraßenStartThread.Start(el);
 				}
 				bool action = el.AusgangToggeln(signalTyp, verlaengern);
-				if (action && _ardController.IsPortOpen())
-					OnAnlagenZustandAdresseChanged(el.Ausgang);
+				//if (action && _ardController.IsPortOpen())
+				//	OnAnlagenzustandChanged(el.Ausgang);
 				if (signalTyp == FahrstrassenSignalTyp.ZielSignal) {
 					this.ZeichnenElemente.ZugDateiSpeichern();
 					OnZugListeChanged();

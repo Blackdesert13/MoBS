@@ -79,10 +79,12 @@ namespace ModellBahnSteuerung.ZugEditor {
 				}*/
 
 			foreach (DataGridViewRow zeile in dataGridView1.Rows) {
-				if (zeile.Cells[0].Value.ToString().Equals("2")) {
-					int z = zeile.Index;
-					this.dataGridView1.CurrentCell = this.dataGridView1[1, z];
-					break;
+				if (zeile.Cells.Count > 0) {
+					if (zeile.Cells[0].Value != null && zeile.Cells[0].Value.ToString().Equals("2")) {
+						int z = zeile.Index;
+						this.dataGridView1.CurrentCell = this.dataGridView1[1, z];
+						break;
+					}
 				}
 			}
 

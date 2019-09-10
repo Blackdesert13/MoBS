@@ -247,7 +247,7 @@ namespace MoBaSteuerung.Elemente {
 			if (elem.Length > 8) _autoStart = Convert.ToBoolean(elem[8]);
 			if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
 			if (elem.Length > 10) ZugTypString = elem[10];
-			if (elem.Length > 11) KoppelungsString = elem[11];
+			if (elem.Length >11) KoppelungsString = elem[11];
 			if (elem.Length > 12) { ZielGleisNr = Convert.ToInt16(elem[12]); }
 			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
 			if (gl != null) {

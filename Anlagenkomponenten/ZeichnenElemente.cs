@@ -64,10 +64,10 @@ namespace MoBaSteuerung.Anlagenkomponenten {
                 this._knotenElemente.Zoom = value;
                 this._gleisElemente.Zoom = value;
                 this._weicheElemente.Zoom = value;
-				        this._signalElemente.Zoom = value;
-								this._schalterElemente.Zoom = value;
+				this._signalElemente.Zoom = value;
+				this._schalterElemente.Zoom = value;
                 this._fssElemente.Zoom = value;
-								this.infoElemente.Zoom = value;
+				this.infoElemente.Zoom = value;
                 this._entkupplerElemente.Zoom = value;
                 this._fahrstrassenElemente.Zoom = value;
 				this.servoElemente.Zoom = value;
@@ -82,36 +82,36 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// 
 		/// </summary>
-		public AnzeigeTyp AnzeigeTyp
-		{
-			set
-			{
-        this._ssgElemente.AnzeigeTyp = value;
-        this._gleisElemente.AnzeigeTyp = value;
-        this._weicheElemente.AnzeigeTyp = value;
+        public AnzeigeTyp AnzeigeTyp
+        {
+            set
+            {
+                this._ssgElemente.AnzeigeTyp = value;
+                this._gleisElemente.AnzeigeTyp = value;
+                this._weicheElemente.AnzeigeTyp = value;
 				this._signalElemente.AnzeigeTyp = value;
 				this._schalterElemente.AnzeigeTyp = value;
-        this._fssElemente.AnzeigeTyp = value;
-        this._knotenElemente.AnzeigeTyp = value;
-        this._entkupplerElemente.AnzeigeTyp = value;
-        this._fahrstrassenElemente.AnzeigeTyp = value;
+                this._fssElemente.AnzeigeTyp = value;
+                this._knotenElemente.AnzeigeTyp = value;
+                this._entkupplerElemente.AnzeigeTyp = value;
+                this._fahrstrassenElemente.AnzeigeTyp = value;
 				this.infoElemente.AnzeigeTyp = value;
 				this.servoElemente.AnzeigeTyp = value;
 			}
 		}
-    public ElementListe<Regler> ReglerElemente { get { return this._reglerElemente; } }
-    public ElementListe<StartSignalGruppe> SsgElemente { get { return this._ssgElemente; } }
-    public ElementListe<Anschluss> AnschlussElemente { get { return this._anschlussElemente; } }
-    public ElementListe<Servo> ServoElemente { get { return this.servoElemente; } }
+        public ElementListe<Regler> ReglerElemente { get { return this._reglerElemente; } }
+        public ElementListe<StartSignalGruppe> SsgElemente { get { return this._ssgElemente; } }
+        public ElementListe<Anschluss> AnschlussElemente { get { return this._anschlussElemente; } }
+        public ElementListe<Servo> ServoElemente { get { return this.servoElemente; } }
 		/// <summary>
 		/// Liste aller Gleise
 		/// </summary>
-    public ElementListe<Gleis> GleisElemente { get { return this._gleisElemente; } }
-    public ElementListe<MCSpeicher.MCSpeicher> ListeMCSpeicher
-    {
-      get
-      {
-        return _listeMCSpeicher;
+        public ElementListe<Gleis> GleisElemente { get { return this._gleisElemente; } }
+        public ElementListe<MCSpeicher.MCSpeicher> ListeMCSpeicher
+        {
+            get
+            {
+                return _listeMCSpeicher;
 			}
 		}
 
@@ -144,12 +144,12 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// 
 		/// </summary>
-    public ElementListe<Schalter> SchalterElemente
-    {
-        get
+        public ElementListe<Schalter> SchalterElemente
         {
-				    return this._schalterElemente;
-			  }
+            get
+            {
+				return this._schalterElemente;
+			}
 		}
 
 		/// <summary>

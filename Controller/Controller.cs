@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using MoBaSteuerung.Elemente;
 using MoBaSteuerung.ZeichnenElemente;
-
+using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 
 namespace MoBaSteuerung
 {
@@ -268,18 +268,19 @@ namespace MoBaSteuerung
 					if (el.Count > 0) {
 						if (this.AppTyp == AppTyp.Master) {
 							Logging.Log.Schreibe("Master Element Schalten: " + el[0].GetType().Name + " " + el[0].ID, LogLevel.Trace);
-							if (_model.ElementToggeln(el[0].GetType().Name, el[0].ID)) {
-								if (master != null) {
-									master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
-								}
-							}
+							//if (_model.ElementToggeln(el[0].GetType().Name, el[0].ID)) {
+							//	if (master != null) {
+							//		master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
+							//	}
+							//}
+							_model.ElementToggeln(el[0].GetType().Name, el[0].ID);
 						}
 						if (this.AppTyp == AppTyp.Slave) {
 							if (slave != null) {
 								slave.SlaveAnMasterMouseClick(el[0].GetType().Name, el[0].ID);
 							}
 						}
-						return true;
+						return false;
 					}
 					break;
 				case MouseButtons.Right:
@@ -332,10 +333,13 @@ namespace MoBaSteuerung
 		{
 			bool action = false;
 			if (this.AppTyp == AppTyp.Master) {
-				action = _model.FahrstrasseSchalten(el, signal);
-				if (master != null) {
-					master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
-				}
+				_model.ElementToggeln(
+					signal == FahrstrassenSignalTyp.StartSignal ? "FahrstrasseN_Start" : "FahrstrasseN_Ziel", el.ID
+					);
+				//action = _model.FahrstrasseSchalten(el, signal);
+				//if (master != null) {
+				//	master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
+				//}
 			}
 			if (this.AppTyp == AppTyp.Slave) {
 				if (signal == FahrstrassenSignalTyp.ZielSignal) {
@@ -624,7 +628,7 @@ namespace MoBaSteuerung
 			this.AnlageGrößeInRaster = e;
 		}
 
-		private void Model_AnlagenzustandAdresseChanged()
+		private void Model_AnlagenzustandAdresseChanged(Adresse adresse)
 		{
 			if (master != null) {
 				master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
@@ -817,10 +821,11 @@ namespace MoBaSteuerung
 		private void Master_SlaveMouseClickEventHandler(string elementType, int id)
 		{
 			Debug.Print("Master SlaveClick: " + elementType + " " + id);
-			if (this._model.ElementToggeln(elementType, id)) {
-				master.SendeAnlageZustandsDatenAnAlle(_model.AnlagenZustandsDatenAuslesen());
-				this.OnViewNeuZeichnen();
-			}
+			this._model.ElementToggeln(elementType, id);
+			//if (this._model.ElementToggeln(elementType, id)) {
+			//	master.SendeAnlageZustandsDatenAnAlle(_model.AnlagenZustandsDatenAuslesen());
+			//	this.OnViewNeuZeichnen();
+			//}
 		}
 
 		private void Master_SlaveAnmeldenClickEventHandler(MoBaKommunikation.SlaveClient slaveClient)
@@ -828,7 +833,7 @@ namespace MoBaSteuerung
 			Debug.Print("Master SlaveAnmelden " + slaveClient.SlaveDNS + ":" + slaveClient.SlavePort.ToString());
 			try {
 				slaveClient.SendenZumSlave.AnlageDaten(this._model.AnlageDatenEinlesen(this._model.AnlageDateiPfadName));
-				Model_AnlagenzustandAdresseChanged();
+				Model_AnlagenzustandAdresseChanged(null);
 				Model_ZugListeChanged();
 				//this.master.SendeAnlageZuSlave(slaveClient.SlaveDNS, this.model.AnlageDatenEinlesen(this.anlageDateiPfadName));
 			}

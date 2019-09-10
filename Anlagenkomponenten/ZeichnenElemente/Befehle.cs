@@ -20,13 +20,14 @@ namespace MoBaSteuerung.Elemente {
 			_listenString = Listenstring;
 			ListeAktivieren();
 		}
+
 		//public bool Aktiv
 		//{
 		//	set {
 		//		//_aktiv = value;
-		//	}
-
+		//	}			
 		//}
+
 		public string ListenString {
 			get { return _listenString; }
 			set { _listenString = value; }
@@ -104,12 +105,12 @@ namespace MoBaSteuerung.Elemente {
 		public void KoppelungSchalten(bool AusgangsStellung) {
 			//if (_aktiv)
 			{
-				_ausgangsStellung = AusgangsStellung;
+			_ausgangsStellung = AusgangsStellung;
 				foreach (Befehl x in _liste)
 				{
-					x.BefehlAusfuehren(_ausgangsStellung);
-				}
+				x.BefehlAusfuehren(_ausgangsStellung);
 			}
+		}
 		}
 		/// <summary>
 		/// führt alle Befehle der Befehlsliste aus
@@ -119,8 +120,8 @@ namespace MoBaSteuerung.Elemente {
 			{
 				foreach (Befehl x in _liste)
 				{
-					x.BefehlAusfuehren();
-				}
+				x.BefehlAusfuehren();
+			}
 			}
 		}
 	}
@@ -170,8 +171,6 @@ namespace MoBaSteuerung.Elemente {
 			this.Element = element;
 			this.SchaltZustand = schaltZustand;
 		}
-
-
 
 		public void BefehlAusfuehren() {
 			this.Element.Ausgang.AusgangSchalten(this.SchaltZustand);

@@ -561,7 +561,7 @@ namespace MoBaSteuerung.Elemente {
         /// gibt die Belegung des Gleises zurück
         /// </summary>
         /// <returns></returns>
-        public bool GleisBelegung()
+        public  bool GleisBelegung()
         {
             if (_eingang.Stellung) return true;
             if (_signale[0] != null)

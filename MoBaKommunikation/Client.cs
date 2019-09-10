@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoBaKommunikation
@@ -10,14 +11,26 @@ namespace MoBaKommunikation
   public class SlaveClients : IDisposable
   {
     private List<SlaveClient> slaveClients;
+		private volatile Queue<byte[]> _anClientsAnlagenzustand = new Queue<byte[]>();
+		private Thread _Daemon_AnlagenzustandAnClients = null;
+		private volatile Queue<byte[]> _anClientsZugListe = new Queue<byte[]>();
+		private Thread _Daemon_ZugListeAnClients = null;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public SlaveClients()
+		/// <summary>
+		/// 
+		/// </summary>
+		public SlaveClients()
     {
       this.slaveClients = new List<MoBaKommunikation.SlaveClient>();
-    }
+
+			//_Daemon_AnlagenzustandAnClients = new Thread(Daemon_AnlagenzustandAnClients);
+			//this._Daemon_AnlagenzustandAnClients.IsBackground = true;
+			//this._Daemon_AnlagenzustandAnClients.Start();
+
+			//_Daemon_ZugListeAnClients = new Thread(Daemon_ZugListeAnClients);
+			//this._Daemon_ZugListeAnClients.IsBackground = true;
+			//this._Daemon_ZugListeAnClients.Start();
+		}
 
     /// <summary>
     /// 
@@ -79,26 +92,96 @@ namespace MoBaKommunikation
 		/// 
 		/// </summary>
 		/// <param name="anlageDaten"></param>
+		internal void SendenAnlageZustandsDatenAnAlle(byte[] anlageDaten) {
+			//_anClientsAnlagenzustand.Enqueue(anlageDaten);
+			Thread sendeThread = new Thread(this.SendenAnlageZustandsDatenAnAlleAusfuehren);
+			sendeThread.Start(anlageDaten);
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="anlageDaten"></param>
+		private void SendenAnlageZustandsDatenAnAlleAusfuehren(object anlageDaten)
+    {
+      // ToDo Parallel senden mit Exception händling
+      foreach (SlaveClient itemSlaveClient in this.slaveClients)
+      {
+				itemSlaveClient.SendenZumSlave.AnlageZustandsDaten((byte[])anlageDaten);
+      }
+    }
+
+		/*alte Version
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="anlageDaten"></param>
 		internal void SendenAnlageZustandsDatenAnAlle(byte[] anlageDaten)
     {
       // ToDo Parallel senden mit Exception händling
       foreach (SlaveClient itemSlaveClient in this.slaveClients)
       {
-        itemSlaveClient.SendenZumSlave.AnlageZustandsDaten(anlageDaten);
+				itemSlaveClient.SendenZumSlave.AnlageZustandsDaten(anlageDaten);
       }
-    }
+    }*/
+
+		private void Daemon_AnlagenzustandAnClients() {
+			while (true) {
+				if (_anClientsAnlagenzustand.Count > 0) {
+					byte[] datenAnlagenzustand = _anClientsAnlagenzustand.Dequeue();
+					// ToDo Parallel senden mit Exception händling
+					foreach (SlaveClient itemSlaveClient in this.slaveClients) {
+						itemSlaveClient.SendenZumSlave.AnlageZustandsDaten(datenAnlagenzustand);
+					}
+				}
+			}
+		}
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="anlageDaten"></param>
+		internal void SendenZugListeAnAlle(byte[] anlageDaten) {
+			//_anClientsZugListe.Enqueue(anlageDaten);
+			Thread sendeThread = new Thread(this.SendenZugListeAnAlleAusfuehren);
+			sendeThread.Start(anlageDaten);
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="zugListe"></param>
-		internal void SendenZugListeAnAlle(byte[] zugListe) {
+		private void SendenZugListeAnAlleAusfuehren(object zugListe) {
 			// ToDo Parallel senden mit Exception händling
 			foreach (SlaveClient itemSlaveClient in this.slaveClients) {
-				itemSlaveClient.SendenZumSlave.ZugListenDaten(zugListe);
+				itemSlaveClient.SendenZumSlave.ZugListenDaten((byte[])zugListe);
 			}
 		}
 
+		///// <summary>
+		///// 
+		///// </summary>
+		///// <param name="zugListe"></param>
+		//internal void SendenZugListeAnAlle(byte[] zugListe) {
+		//	// ToDo Parallel senden mit Exception händling
+		//	foreach (SlaveClient itemSlaveClient in this.slaveClients) {
+		//		itemSlaveClient.SendenZumSlave.ZugListenDaten(zugListe);
+		//	}
+		//}
+
+		private void Daemon_ZugListeAnClients() {
+			while (true) {
+				if (_anClientsZugListe.Count > 0) {
+					byte[] zugListe = _anClientsZugListe.Dequeue();
+					// ToDo Parallel senden mit Exception händling
+					foreach (SlaveClient itemSlaveClient in this.slaveClients) {
+						itemSlaveClient.SendenZumSlave.ZugListenDaten(zugListe);
+					}
+				}
+			}
+		}
+		
 		/// <summary>
 		/// 
 		/// </summary>

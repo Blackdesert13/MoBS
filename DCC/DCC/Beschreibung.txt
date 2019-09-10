@@ -1,0 +1,72 @@
+﻿  DCC API Beschreibung
+
+	*** Lok ***
+	static Function:
+
+	DCC.Lok.Fahren(Adresse, Fahrrichtung, Fahrstufe)			-> Rückgabe Byte Array
+	DCC.Lok.NotHalt(Adresse, Fahrrichtung)								-> Rückgabe Byte Array
+	DCC.Lok.Funktion(Adresse, Funktionstaste, Schalten)		-> Rückgabe Byte Array
+
+	Fahrregler:
+	class:
+
+	new DCC.Lok()									neue Instanz mit Default Adresse 3
+	new DCC.Lok(Adresse)					neue Instanz mit Adresse
+
+	.Adresse											Adresse die bedient werden soll
+	.Lokdaten											individuelle Lok Einstellungen
+	.FahrreglerShow()							Fahrregler anzeigen
+	.FahrreglerHide								Fahrregler ausblenden
+	.DCCBefehlDatenEventHandler		EventHandler für Byte Rückgabe beim Fahren und Schalten über die Oberfläche		-> Rückgabe Byte Array
+
+	*** Zubehör ***
+	static Function:
+
+	DCC.Zubehör.Schalten(Adresse, Schalten)								-> Rückgabe Byte Array
+
+	Alle Byte Array Rückgaben sind 5 Byte groß und das Erste und Letzte Byte ist mit 0 belegt.
+
+
+
+
+	
+	I2C zu DCC Protokoll 
+
+  Byte 4        Byte 3    Byte 2        Byte 1    Byte 0      
+  I2C Adresse   DCC Typ   DCC Adresse   Daten     Kontrolle
+
+	Byte 0 ist 0
+	Byte 1 bis 3 wird gefüllt
+	Byte 4 ist 0
+
+  Byte 3:
+  0 -> Lok Geschwindigkeit
+  1 -> Lok Funktion
+  2 -> Zubehör
+
+  Byte 2:
+
+  1 - 127 -> DCC Adresse für Lok
+  1 - 255 -> Zubehör
+
+  Byte 1:
+
+  Lok Geschwindigkeit:
+
+  x                 xxx xxxx
+  0 -> Rückwärts    000 0000 -> Fahrstufe 0 mit Richtungswechsel
+  1 -> Vorwärts     000 0001 -> Sofort Halt
+                    000 0002 - 111 1111 -> Fahrstufe 1 - 127
+
+  Funktion:
+
+  xxx           x xxxx
+  000 -> Aus    0 0000 -> F0 Licht
+  001 -> An     0 0001 - 1 1100 -> F1 - F28 Funktion
+  010 -> Um
+
+  Zubehör:
+
+  xxxx xxxx
+  0000 0000 -> Abzweig
+  0000 0001 -> Gerade  

@@ -386,7 +386,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 			set {  _kopplungsBefehlsListe =value; }
 		}
 		#endregion //Eigenschaften
-		
+
 		/// <summary>
 		/// erstellt aus dem Kopplungsstring eine neue Befehlsliste
 		/// </summary>
@@ -637,19 +637,16 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		}
 
 		[Browsable(false)]//verstecke Eigenschaft im PropertyGrid
-		public bool Passiv
-		{
-			get
-			{
+		public bool Passiv {
+			get {
 				return _passiv;
 			}
 
-			set
-			{
+			set {
 				_passiv = value;
 			}
 		}
-
+		
 		[Browsable(false)]//verstecke Eigenschaft im PropertyGrid
 		public bool Selektiert {
 			get {

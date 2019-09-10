@@ -591,57 +591,57 @@ namespace MoBaSteuerung.Elemente {
 		private List<FahrstrasseN> _aktiveFahrstrassen;
 		private List<FahrstrasseN> _auswahlFahrstrassen;
 		private List<FahrstrasseN> _gespeicherteFahrstrassen;
-    #region Properties
-    /// <summary>
-    /// zum Speichern in der Anlagen-Datei
-    /// </summary>
-    public string SpeicherString
-    {
-        get
+        #region Properties
+        /// <summary>
+        /// zum Speichern in der Anlagen-Datei
+        /// </summary>
+        public string SpeicherString
         {
-            string spString = "FahrstraßenN"
-                            + "\t" + "Nr."
-                            + "\t" + "Start"
+            get
+            {
+                string spString = "FahrstraßenN"
+                                + "\t" + "Nr."
+                                + "\t" + "Start"
                             + "\t"+"ZielGleis";
-            foreach (FahrstrasseN x in this.GespeicherteFahrstrassen)
-            {
-                spString += Environment.NewLine + x.SpeicherString;
+                foreach (FahrstrasseN x in this.GespeicherteFahrstrassen)
+                {
+                    spString += Environment.NewLine + x.SpeicherString;
+                }
+                return spString;
             }
-            return spString;
         }
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public Int32 Zoom
-    {
-        set
+        /// <summary>
+        /// 
+        /// </summary>
+        public Int32 Zoom
         {
-            foreach (FahrstrasseN item in this._gespeicherteFahrstrassen)
+            set
             {
-                item.Zoom = value;
+                foreach (FahrstrasseN item in this._gespeicherteFahrstrassen)
+                {
+                    item.Zoom = value;
+                }
             }
         }
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public AnzeigeTyp AnzeigeTyp
-    {
-        set
+        /// <summary>
+        /// 
+        /// </summary>
+        public AnzeigeTyp AnzeigeTyp
         {
-            foreach (FahrstrasseN item in this._aktiveFahrstrassen)
+            set
             {
-                item.AnzeigenTyp = value;
-            }
-            foreach (FahrstrasseN item in this._auswahlFahrstrassen)
-            {
-                item.AnzeigenTyp = value;
+                foreach (FahrstrasseN item in this._aktiveFahrstrassen)
+                {
+                    item.AnzeigenTyp = value;
+                }
+                foreach (FahrstrasseN item in this._auswahlFahrstrassen)
+                {
+                    item.AnzeigenTyp = value;
+                }
             }
         }
-    }
 
 		/// <summary>
 		/// 
@@ -754,7 +754,7 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		/// <summary>
-    /// FahrstrasseNeu ist die aktuelle Fahrstrasse
+        /// FahrstrasseNeu ist die aktuelle Fahrstrasse
 		/// </summary>
 		/// <param name="iD"></param>
 		/// <returns></returns>
@@ -1036,7 +1036,7 @@ namespace MoBaSteuerung.Elemente {
 		private List<Befehl> _endBefehle;
 		private List<Adresse> _streckenRM;
 		private Gleis _zielGleis;
-		
+
 		#region Properties
 		/// <summary>
 		/// 
@@ -1092,7 +1092,7 @@ namespace MoBaSteuerung.Elemente {
 			get
 			{
 				string value = "";
-				if (_startGleise != null)
+				if(_startGleise != null)
 				{	value += this.AuslesenBefehlsliste(_startGleise);		}
 				value += this.AuslesenBefehlsliste(_startBefehle);
 				return value;
@@ -1214,9 +1214,9 @@ namespace MoBaSteuerung.Elemente {
 				_listeElemente = knoten.ToArray();
 			}
 			else
-			 return;
+				return;
 
-      parent.FahrstrassenElemente.GespeicherteFahrstrassen.Add(this);
+            parent.FahrstrassenElemente.GespeicherteFahrstrassen.Add(this);
 			Berechnung();
 		}
 		#endregion//Konstruktoren
@@ -1355,7 +1355,7 @@ namespace MoBaSteuerung.Elemente {
 				i = i - anz;
 			}
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -1446,7 +1446,7 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		/// <summary>
-		/// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
+        /// prüft die Verfügbarkeit der FS (Adr.-Block., Zielsignal-Belegung, Zug-Länge)
 		/// soll AdressenFrei ersetzen
 		/// </summary>
 		/// <returns></returns>
@@ -1554,8 +1554,8 @@ namespace MoBaSteuerung.Elemente {
 						else
 						{
 							_startBefehle[i].BefehlAusfuehren();
-							this._startBefehle[i].Element.IsLocked = true;
-						}
+							this._startBefehle[i].Element.IsLocked = true;       
+					}
 					}
 					if (verlaengern) {
 						foreach(Befehl befehl in this._startGleise) {

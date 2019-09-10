@@ -4,13 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{010BA840-CC8E-4091-9606-7F590CDF01E3}</ProjectGuid>
+    <ProjectGuid>{8A9D4C47-0C1C-40FA-AA92-E9B7DB3DF7E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModellBahnSteuerung</RootNamespace>
-    <AssemblyName>MoBa.Model</AssemblyName>
+    <RootNamespace>DCC</RootNamespace>
+    <AssemblyName>DCC</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
@@ -28,7 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\MoBa.Model.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\DCC.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,70 +40,48 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Mek49.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArduinoController.cs" />
-    <Compile Include="FrmProperties\frmProperties.cs">
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Fahrregler.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmProperties\frmProperties.designer.cs">
-      <DependentUpon>frmProperties.cs</DependentUpon>
+    <Compile Include="Fahrregler.Designer.cs">
+      <DependentUpon>Fahrregler.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model_Schalten.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Model_Fahrstrassen.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Model_LadenSpeichern.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="EditKommando.cs" />
-    <Compile Include="Model.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Model_Editieren.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Lok.cs" />
+    <Compile Include="LokEinstellungen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZugEditor\frmZugEditor.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ZugEditor\frmZugEditor.Designer.cs">
-      <DependentUpon>frmZugEditor.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Zubehör.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mek49.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Anlagenkomponenten\Anlagenkomponenten.csproj">
-      <Project>{70b87220-8038-4b85-8652-a88786c86b75}</Project>
-      <Name>Anlagenkomponenten</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="FrmProperties\frmProperties.resx">
-      <DependentUpon>frmProperties.cs</DependentUpon>
+    <EmbeddedResource Include="Fahrregler.resx">
+      <DependentUpon>Fahrregler.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ZugEditor\frmZugEditor.resx">
-      <DependentUpon>frmZugEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Sourcen\Fahrregler.ico" />
+    <Content Include="Beschreibung.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
