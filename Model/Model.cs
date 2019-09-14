@@ -417,7 +417,8 @@ namespace MoBaSteuerung {
 				//fs = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(x.Id);
 				if (fs.ZielPruefung())
 				{
-					FahrstrasseSchalten(fs, FahrstrassenSignalTyp.ZielSignal);
+					ElementToggeln("FahrstrasseN_Ziel", fs.ID);
+					//FahrstrasseSchalten(fs, FahrstrassenSignalTyp.ZielSignal);
 					//if(fs.)
 				}
 			}

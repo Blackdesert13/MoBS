@@ -273,6 +273,18 @@ namespace MoBaSteuerung {
 			}
 		}
 
+		public void ThreadAction(bool v) {
+			if (v) {
+				if (!_Daemon_ElementToggeln.IsAlive) {
+
+					_Daemon_ElementToggeln.Resume();
+				}
+			}
+			else {
+				_Daemon_ElementToggeln.Suspend();
+			}
+		}
+
 		public void FahrstrassenSuchenVonSignal(List<int> stopGleise = null)
 		{
 			int altCount = _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen.Count;

@@ -266,6 +266,15 @@ namespace MoBaSteuerung
 
 					el = _model.BedienenMouseClick(p);
 					if (el.Count > 0) {
+						if (el[0].GetType().Name == "StartSignalGruppe") {
+							StartSignalGruppe ssg = (StartSignalGruppe)el[0];
+							int signalId = ssg.FSAuswahl();
+							if (signalId != 0) {
+								return FahrstrassenSignal(signalId, true);
+							}
+							return false;
+						}
+
 						if (this.AppTyp == AppTyp.Master) {
 							Logging.Log.Schreibe("Master Element Schalten: " + el[0].GetType().Name + " " + el[0].ID, LogLevel.Trace);
 							//if (_model.ElementToggeln(el[0].GetType().Name, el[0].ID)) {
@@ -380,6 +389,7 @@ namespace MoBaSteuerung
 			this._model.AnlageDateiPfadName = "";
 			// StandardName übergeben
 			this.OnFileNew(this._model.AnlageDateiName);
+			this._model.ThreadAction(false);
 		}
 
 		/// <summary>
@@ -398,7 +408,7 @@ namespace MoBaSteuerung
 			this._model.Zoom = this.zoom;
 			// geladenen Namen zurückgeben
 			this.OnFileLoaded(this._model.AnlageDateiPfadName);
-
+			this._model.ThreadAction(true);
 		}
 
 		/// <summary>
@@ -459,7 +469,7 @@ namespace MoBaSteuerung
 
 			this.slave.Start(masterName, 55555, "MoBaSteuerung", "Test");
 
-
+			this._model.ThreadAction(false);
 			// Masternamen zurück geben
 			this.OnMasterConnected(masterName);
 		}

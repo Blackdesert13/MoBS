@@ -180,14 +180,19 @@ namespace MoBaSteuerung {
 			AnlagenElement el = null;
 			switch (elementName) {
 				case "StartSignalGruppe":
-					StartSignalGruppe ssg = _zeichnenElemente.SsgElemente.Element(nr);
-					int signalId = ssg.FSAuswahl();
-					if (signalId != 0) {
-						el = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
-						FahrstrasseSchalten((FahrstrasseN)el, FahrstrassenSignalTyp.StartSignal);
-						_zeichnenElemente.FSSAktualisieren();
-						return true;
-					}
+					//StartSignalGruppe ssg = _zeichnenElemente.SsgElemente.Element(nr);
+					//int signalId = ssg.FSAuswahl();
+					//if (signalId != 0) {
+					//	Signal sn = _zeichnenElemente.SignalElemente.Element(signalId);
+					//	if (sn != null) {
+					//		return FahrstrassenSignalSchalten(sn);
+					//	}
+					//	FahrstrassenSignalSchalten(signalId);
+					//	//el = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(signalId);
+					//	//FahrstrasseSchalten((FahrstrasseN)el, FahrstrassenSignalTyp.StartSignal);
+					//	_zeichnenElemente.FSSAktualisieren();
+					//	return true;
+					//}
 					return false;
 				case "Servo":
 					el = _zeichnenElemente.ServoElemente.Element(nr);
