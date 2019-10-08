@@ -993,6 +993,7 @@ namespace MoBaSteuerung
 				case BearbeitungsModus.Entkuppler:
 				case BearbeitungsModus.Fss:
 				case BearbeitungsModus.InfoElement:
+				case BearbeitungsModus.EingangsSchalter:
 					result = this._model.BearbeitenNeuZeichnen(bearbeitungsModus, button, this.BerechneRasterPunkt(punkt));
 					break;
 				case BearbeitungsModus.Selektieren:

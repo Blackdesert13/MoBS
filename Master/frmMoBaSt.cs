@@ -1153,9 +1153,28 @@ namespace MoBaSteuerung {
 			}
 		}
 
+
+
+		private void toolStripButtonElementEingSchalter_Click(object sender, EventArgs e) {
+			this._model.BearbeitenSelektionLöschen();
+			pictureBoxView.Invalidate();
+			toolStripButtonElementFss.Checked = false;
+			toolStripButtonElementSchalter.Checked = false;
+			toolStripButtonElementGleis.Checked = false;
+			toolStripButtonElementEntkuppler.Checked = false;
+			toolStripButtonElementSignal.Checked = false;
+			toolStripButtonElementInfoElement.Checked = false;
+			this.Controller.NeuesElementVorschauReset();
+			if (toolStripButtonElementEingSchalter.Checked)
+				this.bearbeitungsModus = BearbeitungsModus.EingangsSchalter;
+			else
+				this.bearbeitungsModus = BearbeitungsModus.Selektieren;
+		}
+
 		private void toolStripButtonElementSchalter_Click(object sender, EventArgs e) {
 			this._model.BearbeitenSelektionLöschen();
 			pictureBoxView.Invalidate();
+			toolStripButtonElementEingSchalter.Checked = false;
 			toolStripButtonElementFss.Checked = false;
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementEntkuppler.Checked = false;
@@ -1171,6 +1190,7 @@ namespace MoBaSteuerung {
 		private void toolStripButtonElementFss_Click(object sender, EventArgs e) {
 			this._model.BearbeitenSelektionLöschen();
 			pictureBoxView.Invalidate();
+			toolStripButtonElementEingSchalter.Checked = false;
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementSchalter.Checked = false;
 			toolStripButtonElementEntkuppler.Checked = false;
@@ -1186,6 +1206,7 @@ namespace MoBaSteuerung {
 		private void toolStripButtonElementInfoElement_Click(object sender, EventArgs e) {
 			this._model.BearbeitenSelektionLöschen();
 			pictureBoxView.Invalidate();
+			toolStripButtonElementEingSchalter.Checked = false;
 			toolStripButtonElementFss.Checked = false;
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementSchalter.Checked = false;
@@ -1201,6 +1222,7 @@ namespace MoBaSteuerung {
 		private void toolStripButtonElementEntkuppler_Click(object sender, EventArgs e) {
 			this._model.BearbeitenSelektionLöschen();
 			pictureBoxView.Invalidate();
+			toolStripButtonElementEingSchalter.Checked = false;
 			toolStripButtonElementFss.Checked = false;
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementSchalter.Checked = false;
@@ -1216,6 +1238,7 @@ namespace MoBaSteuerung {
 		private void toolStripButtonElementSignal_Click(object sender, EventArgs e) {
 			this._model.BearbeitenSelektionLöschen();
 			pictureBoxView.Invalidate();
+			toolStripButtonElementEingSchalter.Checked = false;
 			toolStripButtonElementFss.Checked = false;
 			toolStripButtonElementGleis.Checked = false;
 			toolStripButtonElementSchalter.Checked = false;
@@ -1231,6 +1254,7 @@ namespace MoBaSteuerung {
 		private void toolStripButtonElementGleis_Click(object sender, EventArgs e) {
 			this._model.BearbeitenSelektionLöschen();
 			pictureBoxView.Invalidate();
+			toolStripButtonElementEingSchalter.Checked = false;
 			toolStripButtonElementFss.Checked = false;
 			toolStripButtonElementSchalter.Checked = false;
 			toolStripButtonElementEntkuppler.Checked = false;
@@ -1524,7 +1548,5 @@ namespace MoBaSteuerung {
 				this._fahrStraßenEditor.Hide();
 			}
 		}
-
-
 	}
 }

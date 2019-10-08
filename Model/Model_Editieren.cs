@@ -126,11 +126,18 @@ namespace MoBaSteuerung {
 						command.Ausfuehren();
 						NeuesElementVorschauReset();
 						return true;
+					case BearbeitungsModus.EingangsSchalter:
+						_neuesElement.GleisElementAustragen();
+						command = new EditKommando(EditAction.Neuzeichnen, ElementTyp.EingangsSchalter, this.ZeichnenElemente
+										, (object)new object[] { this._zeichnenElemente.EingSchalterElemente.SucheFreieNummer()
+																												 , ((RasterAnlagenElement)_neuesElement).PositionRaster });
+						command.Ausfuehren();
+						NeuesElementVorschauReset();
+						return true;
 				}
 			}
 			return false;
 		}
-
 
 		private List<AnlagenElement> SucheElementSelektieren(Point punkt) {
 			List<AnlagenElement> elemList = new List<AnlagenElement> { };
@@ -151,6 +158,9 @@ namespace MoBaSteuerung {
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			foreach (FSS el in _zeichnenElemente.FssElemente.Elemente)
+				if (el.MouseClick(punkt))
+					elemList.Add(el);
+			foreach (EingangsSchalter el in _zeichnenElemente.EingSchalterElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
 			foreach (InfoFenster el in _zeichnenElemente.InfoElemente.Elemente)

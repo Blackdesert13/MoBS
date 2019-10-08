@@ -68,7 +68,7 @@ namespace MoBaSteuerung {
 					//Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
 					//fahrstraßenStartThread.Start(el);
 				}
-				bool action = el.AusgangToggeln(signalTyp, verlaengern);
+				bool action = el.AusgangToggeln(signalTyp, verlaengern && !el.StartSignal.AutoStart);
 				//if (action && _ardController.IsPortOpen())
 				//	OnAnlagenzustandChanged(el.Ausgang);
 				if (signalTyp == FahrstrassenSignalTyp.ZielSignal) {
@@ -213,7 +213,6 @@ namespace MoBaSteuerung {
 					if (fs.StartSignal == signal && fs.Verfuegbarkeit())
 						el.Add(fs);
 				}
-				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
 				return el;
 			}
 			else {

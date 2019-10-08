@@ -81,6 +81,7 @@
     <Compile Include="ZeichnenElemente\BasisKlassen.cs" />
     <Compile Include="ZeichnenElemente\Anschluss.cs" />
     <Compile Include="ZeichnenElemente\Befehle.cs" />
+    <Compile Include="ZeichnenElemente\EingangsSchalter.cs" />
     <Compile Include="ZeichnenElemente\StartSignalGruppe.cs" />
     <Compile Include="ZeichnenElemente\ServoElement.cs" />
     <Compile Include="ZeichnenElemente\ZugElement.cs" />

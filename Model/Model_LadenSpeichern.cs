@@ -54,6 +54,31 @@ namespace MoBaSteuerung {
 			return stream.GetBuffer();
 		}
 
+		/// <summary>
+		/// speichert die gegenwärtigen Anlagenzustand der Anlage in einer Datei
+		/// </summary>
+		public void AnlagenzustandSpeichern() {
+			string dateiPfad = _zeichnenElemente.ZugDateiPfadName;
+			if (dateiPfad != "") {
+				File.WriteAllBytes(dateiPfad + ".xml", AnlagenZustandsDatenAuslesen());
+			}
+		}
+
+		/// <summary>
+		/// speichert die gegenwärtigen Anlagenzustand der Anlage in einer Datei
+		/// </summary>
+		public void AnlagenzustandLaden() {
+			string dateiPfad = _zeichnenElemente.ZugDateiPfadName;
+			if (dateiPfad != "") {
+				dateiPfad += ".xml";
+				if (File.Exists(dateiPfad)) {
+					AnlagenZustandsDatenEinlesen(File.ReadAllBytes(dateiPfad));
+				}
+				else {
+					AnlagenzustandSpeichern();
+				}
+			}
+		}
 
 		/// <summary>
 		/// löscht alle gegenwärtige Elemente und 
@@ -64,6 +89,7 @@ namespace MoBaSteuerung {
 			this.AnlageLaden(this.AnlageDatenEinlesen(anlageDateiPfadName));
 			//this.zeichnenElemente.ZugDateiSpeichern();
 			this.ZugDateiLaden(anlageDateiPfadName);
+			this.AnlagenzustandLaden();
 		}
 
 		public byte[] ZugListeAuslesen() {
@@ -172,6 +198,9 @@ namespace MoBaSteuerung {
 				}
 				if (elem[0] == "Info") {
 					new InfoFenster(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
+				}
+				if (elem[0] == "EingSchalter") {
+					new EingangsSchalter(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
 				if (elem[0] == "Zug") {
 					new Zug(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
@@ -288,6 +317,8 @@ namespace MoBaSteuerung {
 																																			+ this._zeichnenElemente.WeicheElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "GleisSchalter\tNr.\tGleis\tBez.\tKoppelung"
 																																			+ this._zeichnenElemente.SchalterElemente.SpeicherString);
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "EingangsSchalter\tNr.\tGleis\tEingang\tBez.\tStecker"
+																																			+ this._zeichnenElemente.EingSchalterElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung"
 																																			+ this._zeichnenElemente.FssElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Entkuppler_\tNr.\tGleis\tAusgang\tBez.\tStecker"

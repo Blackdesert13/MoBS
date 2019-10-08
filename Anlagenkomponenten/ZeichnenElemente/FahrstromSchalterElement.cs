@@ -334,6 +334,9 @@ namespace MoBaSteuerung.Elemente {
 							break;
 					}
 				}
+				if (Ausgang.IsLocked) {
+					farbeStift = Color.Red;
+				}
 			}
 
 			if(this.AnschlussGleis == null) {

@@ -14,8 +14,8 @@ namespace MoBaSteuerung.Elemente {
 	/// Gleis
 	/// </summary>
 	public class Gleis : LinienAnlagenElement {
-        #region privateFelder
-        private int reglerNr = 0;
+		#region privateFelder
+		private int reglerNr = 0;
 		private Regler regler;
 		private FSS _fss;
 		private Color farbeLinien;
@@ -23,17 +23,18 @@ namespace MoBaSteuerung.Elemente {
 		private int _direction;
 		private int _length;
 		private Signal[] _signale = new Signal[2];
+		private List<EingangsSchalter> _eingSchalter = new List<EingangsSchalter> { };
 		private List<Entkuppler> _entkuppler = new List<Entkuppler> { };
 		private List<InfoFenster> _infoFelder = new List<InfoFenster> { };
 		private Schalter _schalter = null;
 		private Adresse _eingang;
 		private GraphicsPath _graphicsPath;
-        #endregion //privateFelder
-        #region properties
-        /// <summary>
-        /// zum Speichern in der Anlagen-Datei
-        /// </summary>
-        public override string SpeicherString {
+		#endregion //privateFelder
+		#region properties
+		/// <summary>
+		/// zum Speichern in der Anlagen-Datei
+		/// </summary>
+		public override string SpeicherString {
 			get {
 				return "Gleis"
 						+ "\t" + ID
@@ -44,7 +45,7 @@ namespace MoBaSteuerung.Elemente {
 						+ "\t" + Eingang.SpeicherString
 						+ "\t" + Bezeichnung
 						+ "\t" + Stecker
-                        + "\t" + KoppelungsString;
+												+ "\t" + KoppelungsString;
 			}
 		}
 
@@ -100,12 +101,12 @@ namespace MoBaSteuerung.Elemente {
 				_entkuppler = value;
 			}
 		}
-		
+
 		/// <summary>
 		/// Regler des Gleises, bei negativer Nummer wird dieser FSS abgefragt
 		/// </summary>
 		public int ReglerNr { get { return reglerNr; } set { reglerNr = value; } }
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -119,8 +120,7 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
-		public List<InfoFenster> InfoFelder
-		{
+		public List<InfoFenster> InfoFelder {
 			get {
 				return _infoFelder;
 			}
@@ -129,7 +129,18 @@ namespace MoBaSteuerung.Elemente {
 				_infoFelder = value;
 			}
 		}
+
+		public List<EingangsSchalter> EingSchalter {
+			get {
+				return _eingSchalter;
+			}
+
+			set {
+				_eingSchalter = value;
+			}
+		}
 		#endregion //Properties
+
 		#region Konstruktoren
 		public Gleis(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Knoten startKnoten, Knoten endKnoten)
 				: base(parent, 0, zoom, anzeigeTyp) {
@@ -184,10 +195,10 @@ namespace MoBaSteuerung.Elemente {
 			Bezeichnung = elem[7];
 			if (elem.Length > 8)
 				Stecker = elem[8];
-            if (elem.Length > 9)
-                KoppelungsString = elem[9];
-            reglerNr = 0;
-            reglerNr = Convert.ToInt32(elem[4]);
+			if (elem.Length > 9)
+				KoppelungsString = elem[9];
+			reglerNr = 0;
+			reglerNr = Convert.ToInt32(elem[4]);
 			if (reglerNr > 0) { regler = parent.ReglerElemente.Element(Convert.ToInt32(elem[4])); }
 			StartKn = Parent.KnotenElemente.Element(Convert.ToInt32(start[0]));
 			EndKn = Parent.KnotenElemente.Element(Convert.ToInt32(end[0]));
@@ -205,49 +216,42 @@ namespace MoBaSteuerung.Elemente {
 				if (_fss.AktiverReglerNr != regler.ID) regler = Parent.ReglerElemente.Element(_fss.AktiverReglerNr);
 			}
 		}
-		public bool Pruefung()
-        {
-            string fehlermeldung;
-            
-            int dx = Math.Abs( StartKn.PositionRaster.X - EndKn.PositionRaster.X);
-            int dy = Math.Abs(StartKn.PositionRaster.Y - EndKn.PositionRaster.Y);
-            Fehler = false;
+		public bool Pruefung() {
+			string fehlermeldung;
 
-            if ((dx != 0)&&(dy != 0))
-            {
-                if (dx != dy) Fehler = true;
-                fehlermeldung = "Gl" + Convert.ToString(ID) + ":Winkelfehler";
-            }
-           
-            return Fehler;
-        }
-    /// <summary>
+			int dx = Math.Abs(StartKn.PositionRaster.X - EndKn.PositionRaster.X);
+			int dy = Math.Abs(StartKn.PositionRaster.Y - EndKn.PositionRaster.Y);
+			Fehler = false;
+
+			if ((dx != 0) && (dy != 0)) {
+				if (dx != dy) Fehler = true;
+				fehlermeldung = "Gl" + Convert.ToString(ID) + ":Winkelfehler";
+			}
+
+			return Fehler;
+		}
+		/// <summary>
 		/// zeichnet die Regler-Farbe des Gleises
 		/// </summary>
 		/// <param name="graphics"></param>
 		public override void ElementZeichnen1(Graphics graphics) {
 			if (this.AnzeigenTyp == AnzeigeTyp.Bedienen) {
 				//int transpanz = 255;
-			    if (reglerNr < 0)
-                {
-                    if ((_fss == null) || (_fss.ID != -reglerNr))
-                    {
-                        _fss = Parent.FssElemente.Element(-reglerNr);
-                        
-                    }
-                    if (_fss != null)
-                    {
-                        regler = Parent.FssElemente.Element(-reglerNr).AktiverRegler();
-                    }
-                    else
-                    {
-                        byte tb = 0;
-                    }
-                }
+				if (reglerNr < 0) {
+					if ((_fss == null) || (_fss.ID != -reglerNr)) {
+						_fss = Parent.FssElemente.Element(-reglerNr);
+
+					}
+					if (_fss != null) {
+						regler = Parent.FssElemente.Element(-reglerNr).AktiverRegler();
+					}
+					else {
+						byte tb = 0;
+					}
+				}
 				if (reglerNr > 0)
-					if (regler==null || reglerNr != regler.ID) regler = Parent.ReglerElemente.Element(reglerNr);
-                if ((reglerNr != 0) && (regler != null))
-                {
+					if (regler == null || reglerNr != regler.ID) regler = Parent.ReglerElemente.Element(reglerNr);
+				if ((reglerNr != 0) && (regler != null)) {
 					Color farbeStift = regler.Farbe;//farbeStift = Color.FromArgb(transpanz, Color.Azure);
 					Pen stiftGleis = new Pen(farbeStift, Convert.ToSingle(this.Zoom * 0.75));
 					stiftGleis.EndCap = LineCap.Round;
@@ -291,12 +295,12 @@ namespace MoBaSteuerung.Elemente {
 							farbeStift = Color.FromArgb(transpanz, Color.Blue);
 							break;
 						case Elementzustand.Aus:
-              if (this.Ausgang.SpeicherString == "0-0-0"){
-                farbeStift = Color.FromArgb(transpanz, Color.LightBlue); //BlueViolet CadetBlue LightBlue
-              }
-              else{ 
-                farbeStift = Color.FromArgb(transpanz, Color.Gray); 
-               }
+							if (this.Ausgang.SpeicherString == "0-0-0") {
+								farbeStift = Color.FromArgb(transpanz, Color.LightBlue); //BlueViolet CadetBlue LightBlue
+							}
+							else {
+								farbeStift = Color.FromArgb(transpanz, Color.Gray);
+							}
 							break;
 					}
 					break;
@@ -311,10 +315,10 @@ namespace MoBaSteuerung.Elemente {
 
 			graphics.DrawPath(stiftGleis, this._graphicsPath);
 
-      //zum Test _eingang.Stellung = true;
-      if (Eingang.EingangAbfragen() && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
-      //if (Parent.RückmeldungAnzeigen && Eingang.RueckmeldungAbfragen()) 
-      {
+			//zum Test _eingang.Stellung = true;
+			if (Eingang.EingangAbfragen() && this.AnzeigenTyp == AnzeigeTyp.Bedienen)
+			//if (Parent.RückmeldungAnzeigen && Eingang.RueckmeldungAbfragen()) 
+			{
 				this.farbeLinien = Color.Orange;
 				Pen stift = new Pen(this.farbeLinien);
 				stift.EndCap = LineCap.Round;
@@ -337,7 +341,7 @@ namespace MoBaSteuerung.Elemente {
 			_length = RasterLengthFromStartkn(EndKn.PositionRaster) * Zoom;
 			if ((_direction % 2) == 1)
 				_length = (int)(_length * Math.Sqrt(2));
-        this._graphicsPath.Reset();
+			this._graphicsPath.Reset();
 			this._graphicsPath.AddLine(this.StartKn.PositionRaster.X * this.Zoom, this.StartKn.PositionRaster.Y * this.Zoom,
 																this.EndKn.PositionRaster.X * this.Zoom, this.EndKn.PositionRaster.Y * this.Zoom);
 		}
@@ -378,6 +382,11 @@ namespace MoBaSteuerung.Elemente {
 					if (el.PositionRaster == element.PositionRaster)
 						return false;
 			}
+			foreach (RasterAnlagenElement el in EingSchalter) {
+				if (el != null)
+					if (el.PositionRaster == element.PositionRaster)
+						return false;
+			}
 			foreach (RasterAnlagenElement el in InfoFelder) {
 				if (el != null)
 					if (el.PositionRaster == element.PositionRaster)
@@ -403,6 +412,21 @@ namespace MoBaSteuerung.Elemente {
 											);
 		}
 
+		public bool GleisElementAnschluss(EingangsSchalter eingSchalter) {
+			if (PunktAufGleis(eingSchalter.Position)) {
+				if (RasterPositionFrei(eingSchalter)) {
+					int glPos = RasterLengthFromStartkn(eingSchalter.PositionRaster);
+					if ((glPos > 0) && (glPos < _length)) {
+						this.EingSchalter.Add(eingSchalter);
+
+						eingSchalter.Gleisposition = glPos;
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
 		public bool GleisElementAnschluss(FSS fss) {
 			if (this.Fss == null) {
 				if (PunktAufGleis(fss.Position)) {
@@ -426,7 +450,7 @@ namespace MoBaSteuerung.Elemente {
 					int glPos = RasterLengthFromStartkn(signal.PositionRaster);
 					if ((glPos > 0) && (glPos < _length)) {
 						if (signal.InZeichenRichtung) {
-							if(_signale[0] != null) {
+							if (_signale[0] != null) {
 								return false;
 							}
 							_signale[0] = signal;
@@ -483,8 +507,7 @@ namespace MoBaSteuerung.Elemente {
 			return false;
 		}
 
-		public bool GleisElementAnschluss(InfoFenster infoFenster)
-		{
+		public bool GleisElementAnschluss(InfoFenster infoFenster) {
 			if (this.InfoFelder != null) {
 				if (PunktAufGleis(infoFenster.Position)) {
 					if (RasterPositionFrei(infoFenster)) {
@@ -502,8 +525,7 @@ namespace MoBaSteuerung.Elemente {
 
 		}
 
-		public bool GleisElementAustragen(InfoFenster infoFenster)
-		{
+		public bool GleisElementAustragen(InfoFenster infoFenster) {
 			return this.InfoFelder.Remove(infoFenster);
 		}
 
@@ -543,6 +565,15 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		/// <summary>
+		/// Durch diese Methode wird ein EingangsSchalter, welcher diesem Gleis zugeordnet ist entfernt.
+		/// </summary>
+		/// <param name="eingSchalter">zu entfernender EingangsSchalter</param>
+		/// <returns>Gibt TRUE zurück, wenn der übergeben EingangsSchalter erfolgreich entfernt wurde, andernfalls FALSE. Wenn der EingangsSchalter nicht gefunden wurde ebenfalls FALSE</returns>
+		public bool GleisElementAustragen(EingangsSchalter eingSchalter) {
+			return this.EingSchalter.Remove(eingSchalter);
+		}
+
+		/// <summary>
 		/// Durch diese Methode wird ein Signal, welches diesem Gleis zugeordnet ist entfernt.
 		/// </summary>
 		/// <param name="signal">zu entfernendes Signal</param>
@@ -557,19 +588,24 @@ namespace MoBaSteuerung.Elemente {
 			return false;
 		}
 
-        /// <summary>
-        /// gibt die Belegung des Gleises zurück
-        /// </summary>
-        /// <returns></returns>
-        public  bool GleisBelegung()
-        {
-            if (_eingang.Stellung) return true;
-            if (_signale[0] != null)
-            { if (_signale[0].ZugNr != 0) return true; }
-            if (_signale[1] != null)
-            { if (_signale[1].ZugNr != 0) return true; }
-            return false;
-        }
+		/// <summary>
+		/// gibt die Belegung des Gleises zurück
+		/// </summary>
+		/// <returns></returns>
+		public bool GleisBelegung() {
+			if (_eingang.EingangAbfragen()) {
+				return true;
+			}
+			if (_signale[0] != null) {
+				if (_signale[0].ZugNr != 0) return true;
+			}
+			if (_signale[1] != null) {
+				if (_signale[1].ZugNr != 0) {
+					return true;
+				}
+			}
+			return false;
+		}
 
 		public override bool MouseClick(Point p) {
 			return this.PunktAufGleis(p);

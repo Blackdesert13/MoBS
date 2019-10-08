@@ -67,7 +67,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 					//left-shift 1, then take complement, then bitwise AND
 					_value[adresse] &= (UInt16)(~(1 << bit));
 				}
-				_changed[adresse] |= oldvalue != _value[adresse];
+				_changed[adresse] |= true;// oldvalue != _value[adresse];
 			}
 		}
 
@@ -76,7 +76,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 				return _value[index];
 			}
 			set {
-				_changed[index] |= _value[index] != value;
+				_changed[index] |= true;// _value[index] != value;
 				_value[index] = value;
 			}
 		}

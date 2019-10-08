@@ -91,6 +91,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementSchalter = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonElementFss = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonElementInfoElement = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButtonElementEingSchalter = new System.Windows.Forms.ToolStripButton();
 			this.toolStripBearbeiten = new System.Windows.Forms.ToolStrip();
 			this.toolStripSplitButtonCheckableGitter = new Master.ToolStripSplitButtonCheckable();
 			this.toolStripMenuItemGitterGitterLinie = new System.Windows.Forms.ToolStripMenuItem();
@@ -597,7 +598,7 @@ namespace MoBaSteuerung {
 			this.toolStripContainer.ContentPanel.BackColor = System.Drawing.Color.White;
 			this.toolStripContainer.ContentPanel.Controls.Add(this.panelView);
 			this.toolStripContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(966, 400);
+			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(931, 400);
 			this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			// 
 			// toolStripContainer.LeftToolStripPanel
@@ -622,7 +623,7 @@ namespace MoBaSteuerung {
 			this.panelView.Location = new System.Drawing.Point(0, 0);
 			this.panelView.Margin = new System.Windows.Forms.Padding(0);
 			this.panelView.Name = "panelView";
-            this.panelView.Size = new System.Drawing.Size(966, 400);
+			this.panelView.Size = new System.Drawing.Size(931, 400);
 			this.panelView.TabIndex = 6;
 			this.panelView.Visible = false;
 			this.panelView.VisibleChanged += new System.EventHandler(this.panelView_VisibleChanged);
@@ -633,7 +634,7 @@ namespace MoBaSteuerung {
 			// 
 			this.vScrollBarView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.vScrollBarView.Location = new System.Drawing.Point(949, 0);
+			this.vScrollBarView.Location = new System.Drawing.Point(914, 0);
 			this.vScrollBarView.Name = "vScrollBarView";
 			this.vScrollBarView.Size = new System.Drawing.Size(17, 425);
 			this.vScrollBarView.TabIndex = 4;
@@ -649,7 +650,7 @@ namespace MoBaSteuerung {
 			this.panelScrollView.Location = new System.Drawing.Point(0, 0);
 			this.panelScrollView.Margin = new System.Windows.Forms.Padding(0);
 			this.panelScrollView.Name = "panelScrollView";
-            this.panelScrollView.Size = new System.Drawing.Size(949, 383);
+			this.panelScrollView.Size = new System.Drawing.Size(914, 383);
 			this.panelScrollView.TabIndex = 3;
 			// 
 			// pictureBoxView
@@ -680,7 +681,7 @@ namespace MoBaSteuerung {
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.hScrollBarView.Location = new System.Drawing.Point(0, 383);
 			this.hScrollBarView.Name = "hScrollBarView";
-            this.hScrollBarView.Size = new System.Drawing.Size(949, 17);
+			this.hScrollBarView.Size = new System.Drawing.Size(914, 17);
 			this.hScrollBarView.TabIndex = 5;
 			this.hScrollBarView.ValueChanged += new System.EventHandler(this.hScrollBarView_ValueChanged);
 			// 
@@ -693,10 +694,11 @@ namespace MoBaSteuerung {
             this.toolStripButtonElementEntkuppler,
             this.toolStripButtonElementSchalter,
             this.toolStripButtonElementFss,
-            this.toolStripButtonElementInfoElement});
+            this.toolStripButtonElementInfoElement,
+            this.toolStripButtonElementEingSchalter});
 			this.toolStripElemente.Location = new System.Drawing.Point(0, 3);
 			this.toolStripElemente.Name = "toolStripElemente";
-            this.toolStripElemente.Size = new System.Drawing.Size(174, 25);
+			this.toolStripElemente.Size = new System.Drawing.Size(35, 184);
 			this.toolStripElemente.TabIndex = 0;
 			this.toolStripElemente.Visible = false;
 			// 
@@ -707,7 +709,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementGleis.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementGleis.Image")));
 			this.toolStripButtonElementGleis.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementGleis.Name = "toolStripButtonElementGleis";
-            this.toolStripButtonElementGleis.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButtonElementGleis.Size = new System.Drawing.Size(33, 19);
 			this.toolStripButtonElementGleis.Text = "G";
 			this.toolStripButtonElementGleis.ToolTipText = "Gleis";
 			this.toolStripButtonElementGleis.Click += new System.EventHandler(this.toolStripButtonElementGleis_Click);
@@ -719,7 +721,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementSignal.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementSignal.Image")));
 			this.toolStripButtonElementSignal.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementSignal.Name = "toolStripButtonElementSignal";
-            this.toolStripButtonElementSignal.Size = new System.Drawing.Size(27, 22);
+			this.toolStripButtonElementSignal.Size = new System.Drawing.Size(33, 19);
 			this.toolStripButtonElementSignal.Text = "Sig";
 			this.toolStripButtonElementSignal.ToolTipText = "Signal";
 			this.toolStripButtonElementSignal.Click += new System.EventHandler(this.toolStripButtonElementSignal_Click);
@@ -731,7 +733,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementEntkuppler.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementEntkuppler.Image")));
 			this.toolStripButtonElementEntkuppler.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementEntkuppler.Name = "toolStripButtonElementEntkuppler";
-            this.toolStripButtonElementEntkuppler.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButtonElementEntkuppler.Size = new System.Drawing.Size(33, 19);
 			this.toolStripButtonElementEntkuppler.Text = "E";
 			this.toolStripButtonElementEntkuppler.ToolTipText = "Entkuppler";
 			this.toolStripButtonElementEntkuppler.Click += new System.EventHandler(this.toolStripButtonElementEntkuppler_Click);
@@ -743,7 +745,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementSchalter.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementSchalter.Image")));
 			this.toolStripButtonElementSchalter.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementSchalter.Name = "toolStripButtonElementSchalter";
-            this.toolStripButtonElementSchalter.Size = new System.Drawing.Size(30, 22);
+			this.toolStripButtonElementSchalter.Size = new System.Drawing.Size(33, 19);
 			this.toolStripButtonElementSchalter.Text = "Sch";
 			this.toolStripButtonElementSchalter.ToolTipText = "Schalter";
 			this.toolStripButtonElementSchalter.Click += new System.EventHandler(this.toolStripButtonElementSchalter_Click);
@@ -755,7 +757,7 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementFss.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementFss.Image")));
 			this.toolStripButtonElementFss.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementFss.Name = "toolStripButtonElementFss";
-            this.toolStripButtonElementFss.Size = new System.Drawing.Size(27, 22);
+			this.toolStripButtonElementFss.Size = new System.Drawing.Size(33, 19);
 			this.toolStripButtonElementFss.Text = "Fss";
 			this.toolStripButtonElementFss.ToolTipText = "Fahrstromschalter";
 			this.toolStripButtonElementFss.Click += new System.EventHandler(this.toolStripButtonElementFss_Click);
@@ -767,9 +769,20 @@ namespace MoBaSteuerung {
 			this.toolStripButtonElementInfoElement.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementInfoElement.Image")));
 			this.toolStripButtonElementInfoElement.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonElementInfoElement.Name = "toolStripButtonElementInfoElement";
-            this.toolStripButtonElementInfoElement.Size = new System.Drawing.Size(32, 22);
+			this.toolStripButtonElementInfoElement.Size = new System.Drawing.Size(33, 19);
 			this.toolStripButtonElementInfoElement.Text = "Info";
 			this.toolStripButtonElementInfoElement.Click += new System.EventHandler(this.toolStripButtonElementInfoElement_Click);
+			// 
+			// toolStripButtonElementEingSchalter
+			// 
+			this.toolStripButtonElementEingSchalter.CheckOnClick = true;
+			this.toolStripButtonElementEingSchalter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.toolStripButtonElementEingSchalter.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonElementEingSchalter.Image")));
+			this.toolStripButtonElementEingSchalter.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButtonElementEingSchalter.Name = "toolStripButtonElementEingSchalter";
+			this.toolStripButtonElementEingSchalter.Size = new System.Drawing.Size(33, 19);
+			this.toolStripButtonElementEingSchalter.Text = "Eing";
+			this.toolStripButtonElementEingSchalter.Click += new System.EventHandler(this.toolStripButtonElementEingSchalter_Click);
 			// 
 			// toolStripBearbeiten
 			// 
@@ -1146,5 +1159,6 @@ namespace MoBaSteuerung {
 		private FontDialog fontDialog1;
 		private Master.ToolStripMenuItemCheckable toolStripButtonFahrstrassenEditor;
 		private ToolStripButton toolStripButtonElementInfoElement;
+		private ToolStripButton toolStripButtonElementEingSchalter;
 	}
 }

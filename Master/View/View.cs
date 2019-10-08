@@ -590,6 +590,7 @@ namespace MoBaSteuerung
 				case BearbeitungsModus.Gleis:
 				case BearbeitungsModus.Fss:
 				case BearbeitungsModus.InfoElement:
+				case BearbeitungsModus.EingangsSchalter:
 					if (neuerRasterpunkterreicht)
 						result = this.Controller.NeuesElementVorschau(this.bearbeitungsModus, this._letzterRasterpunkt);
 					break;

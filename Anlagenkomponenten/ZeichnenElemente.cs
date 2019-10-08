@@ -24,6 +24,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
     private ElementListe<Anschluss> _anschlussElemente;
 		private ElementListe<Servo> servoElemente;
 		private ElementListe<FSS> _fssElemente;
+		private ElementListe<EingangsSchalter> _eingSchalterElemente;
 		private ElementListe<Gleis> _gleisElemente;
 		private ElementListe<Weiche> _weicheElemente;
 		private ElementListe<Signal> _signalElemente;
@@ -55,10 +56,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// 
 		/// </summary>
-        public Int32 Zoom
-        {
-            set
-            {
+		public Int32 Zoom {
+			set {
                 this._reglerElemente.Zoom = value;
                 this._ssgElemente.Zoom = value;
                 this._knotenElemente.Zoom = value;
@@ -70,11 +69,11 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 				this.infoElemente.Zoom = value;
                 this._entkupplerElemente.Zoom = value;
                 this._fahrstrassenElemente.Zoom = value;
+				this._eingSchalterElemente.Zoom = value;
 				this.servoElemente.Zoom = value;
 				this._zoom = value;
 			}
-            get
-            {
+			get {
 				return this._zoom;
 			}
 		}
@@ -82,19 +81,18 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// 
 		/// </summary>
-        public AnzeigeTyp AnzeigeTyp
-        {
-            set
-            {
-                this._ssgElemente.AnzeigeTyp = value;
-                this._gleisElemente.AnzeigeTyp = value;
-                this._weicheElemente.AnzeigeTyp = value;
+		public AnzeigeTyp AnzeigeTyp {
+			set {
+        this._ssgElemente.AnzeigeTyp = value;
+        this._gleisElemente.AnzeigeTyp = value;
+        this._weicheElemente.AnzeigeTyp = value;
 				this._signalElemente.AnzeigeTyp = value;
 				this._schalterElemente.AnzeigeTyp = value;
-                this._fssElemente.AnzeigeTyp = value;
-                this._knotenElemente.AnzeigeTyp = value;
-                this._entkupplerElemente.AnzeigeTyp = value;
-                this._fahrstrassenElemente.AnzeigeTyp = value;
+        this._fssElemente.AnzeigeTyp = value;
+        this._knotenElemente.AnzeigeTyp = value;
+        this._entkupplerElemente.AnzeigeTyp = value;
+        this._fahrstrassenElemente.AnzeigeTyp = value;
+				this._eingSchalterElemente.AnzeigeTyp = value;
 				this.infoElemente.AnzeigeTyp = value;
 				this.servoElemente.AnzeigeTyp = value;
 			}
@@ -107,25 +105,20 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// Liste aller Gleise
 		/// </summary>
         public ElementListe<Gleis> GleisElemente { get { return this._gleisElemente; } }
-        public ElementListe<MCSpeicher.MCSpeicher> ListeMCSpeicher
-        {
-            get
-            {
+		public ElementListe<MCSpeicher.MCSpeicher> ListeMCSpeicher {
+			get {
                 return _listeMCSpeicher;
 			}
 		}
 
-        public ElementListe<Zug> ZugElemente
-        {
+		public ElementListe<Zug> ZugElemente {
             get { return _zugElemente; }
 		}
 		/// <summary>
 		/// 
 		/// </summary>
-        public ElementListe<Weiche> WeicheElemente
-        {
-            get
-            {
+		public ElementListe<Weiche> WeicheElemente {
+			get {
                 return this._weicheElemente;
 			}
 		}
@@ -133,10 +126,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// 
 		/// </summary>
-        public ElementListe<Signal> SignalElemente
-        {
-            get
-            {
+		public ElementListe<Signal> SignalElemente {
+			get {
 				return this._signalElemente;
 			}
 		}
@@ -144,10 +135,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// 
 		/// </summary>
-        public ElementListe<Schalter> SchalterElemente
-        {
-            get
-            {
+		public ElementListe<Schalter> SchalterElemente {
+			get {
 				return this._schalterElemente;
 			}
 		}
@@ -155,21 +144,26 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// liefert die Fahrstromschalter-Liste
 		/// </summary>
-        public ElementListe<FSS> FssElemente
-        {
-            get
-            {
+		public ElementListe<FSS> FssElemente {
+			get {
                 return this._fssElemente;
+			}
+		}
+
+		/// <summary>
+		/// liefert die EingangsSchalter-Liste
+		/// </summary>
+		public ElementListe<EingangsSchalter> EingSchalterElemente {
+			get {
+				return _eingSchalterElemente;
 			}
 		}
 
 		/// <summary>
 		/// liefert die Infofenster-Liste
 		/// </summary>
-        public ElementListe<InfoFenster> InfoElemente
-        {
-            get
-            {
+		public ElementListe<InfoFenster> InfoElemente {
+			get {
 				return this.infoElemente;
 			}
 		}
@@ -177,10 +171,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// liefert die Haltestellen-Liste
 		/// </summary>
-        public ElementListe<Haltestelle> HaltestellenElemente
-        {
-            get
-            {
+		public ElementListe<Haltestelle> HaltestellenElemente {
+			get {
 				return this.haltestellenElemente;
 			}
 		}
@@ -188,10 +180,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// liefert die Knoten-Liste
 		/// </summary>
-        public ElementListe<Knoten> KnotenElemente
-        {
-            get
-            {
+		public ElementListe<Knoten> KnotenElemente {
+			get {
                 return this._knotenElemente;
 			}
 		}
@@ -199,10 +189,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// 
 		/// </summary>
-        public ElementListe<Entkuppler> EntkupplerElemente
-        {
-            get
-            {
+		public ElementListe<Entkuppler> EntkupplerElemente {
+			get {
                 return this._entkupplerElemente;
 			}
 		}
@@ -210,47 +198,36 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 
 
 
-        public FahrstrassenNElemente FahrstrassenElemente
-        {
-            get
-            {
+		public FahrstrassenNElemente FahrstrassenElemente {
+			get {
                 return _fahrstrassenElemente;
 			}
 		}
 
-        public Anlagenzustand AnlagenZustand
-        {
-            get
-            {
+		public Anlagenzustand AnlagenZustand {
+			get {
                 return _anlagenZustand;
 			}
-            set
-            {
+			set {
                 _anlagenZustand = value;
 			}
 		}
 
-        public bool RückmeldungAnzeigen
-        {
-            get
-            {
+		public bool RückmeldungAnzeigen {
+			get {
 				return this._rückmeldungAnzeigen;
 			}
-            set
-            {
+			set {
 				this._rückmeldungAnzeigen = value;
 			}
 		}
 
-        public bool RückmeldungAktiv
-        {
-            get
-            {
+		public bool RückmeldungAktiv {
+			get {
 				return _rückmeldungAktiv;
 			}
 
-            set
-            {
+			set {
 				_rückmeldungAktiv = value;
 			}
 		}
@@ -272,6 +249,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			this._gleisElemente = new ElementListe<Gleis>();
 			this._weicheElemente = new ElementListe<Weiche>();
 			this._signalElemente = new ElementListe<Signal>();
+			this._eingSchalterElemente = new ElementListe<EingangsSchalter>();
 			this._schalterElemente = new ElementListe<Schalter>();
 			this._fssElemente = new ElementListe<FSS>();
 			this._entkupplerElemente = new ElementListe<Entkuppler>();
@@ -360,8 +338,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// <summary>
 		/// speichert die gegenwärtige Zug-Liste der Anlage in einer Datei
 		/// </summary>
-		/// <param name="zugDateiPfadName">Der Pfad zu der zu speichernden Zugdatei</param>
-		public void ZugDateiSpeichern()//string zugDateiPfadName)
+		public void ZugDateiSpeichern()
 		{
 			if (_zugDateiPfadName != "") {
 				StreamWriter zugStreamWriter = new StreamWriter(_zugDateiPfadName + ".zug", false, System.Text.Encoding.UTF8);
@@ -493,6 +470,8 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			this._knotenElemente.AlleLöschen();
             this._entkupplerElemente.AlleLöschen();
 			this._fahrstrassenElemente.AlleLöschen();
+			this._fssElemente.AlleLöschen();
+			this._eingSchalterElemente.AlleLöschen();
 			this._listeMCSpeicher.AlleLöschen();
 			this.AnlagenZustand = new Anlagenzustand();
 		}

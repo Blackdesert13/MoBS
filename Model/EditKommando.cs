@@ -23,7 +23,8 @@ public enum ElementTyp {
 	Schalter,
 	Entkuppler,
 	FSS,
-	InfoElement
+	InfoElement,
+	EingangsSchalter
 }
 
 namespace MoBaSteuerung {
@@ -77,6 +78,10 @@ namespace MoBaSteuerung {
 			else if (element is InfoFenster) {
 				_elementTyp = ElementTyp.InfoElement;
 				_alterWert = ((InfoFenster)element).PositionRaster;
+			}
+			else if (element is EingangsSchalter) {
+				_elementTyp = ElementTyp.EingangsSchalter;
+				_alterWert = ((EingangsSchalter)element).PositionRaster;
 			}
 			_aktion = aktion;
 			_element = element;
@@ -158,6 +163,7 @@ namespace MoBaSteuerung {
 					case ElementTyp.FSS:
 					case ElementTyp.Schalter:
 					case ElementTyp.InfoElement:
+					case ElementTyp.EingangsSchalter:
 						GleisRasterAnlagenElement element = (GleisRasterAnlagenElement)_element;
 						element.PositionRaster = new Point(pDiff.X + pAltW.X, pDiff.Y + pAltW.Y);
 						element.BearbeitenAktualisierenNeuZeichnen();
@@ -217,6 +223,7 @@ namespace MoBaSteuerung {
 				case ElementTyp.FSS:
 				case ElementTyp.Schalter:
 				case ElementTyp.InfoElement:
+				case ElementTyp.EingangsSchalter:
 					GleisRasterAnlagenElement element = (GleisRasterAnlagenElement)_element;
 					element.PositionRaster = new Point(pAltW.X, pAltW.Y);
 					element.BearbeitenAktualisierenNeuZeichnen();
@@ -290,6 +297,10 @@ namespace MoBaSteuerung {
 					break;
 				case ElementTyp.InfoElement:
 					new InfoFenster(_anlagenElemente, (int)parameter[0], _anlagenElemente.Zoom,
+									AnzeigeTyp.Bearbeiten, (Point)parameter[1]);
+					break;
+				case ElementTyp.EingangsSchalter:
+					new EingangsSchalter(_anlagenElemente, (int)parameter[0], _anlagenElemente.Zoom,
 									AnzeigeTyp.Bearbeiten, (Point)parameter[1]);
 					break;
 			}

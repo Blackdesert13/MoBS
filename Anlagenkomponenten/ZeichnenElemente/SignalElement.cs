@@ -316,6 +316,9 @@ namespace MoBaSteuerung.Elemente {
 					else
 						farbePinsel = Color.FromArgb(transpanz, Color.Red);
 					farbeStift = Color.FromArgb(transpanz, Color.Black);
+					if (Ausgang.IsLocked) {
+						farbeStift = Color.FromArgb(transpanz, Color.Red);
+					}
 					break;
 			}
 

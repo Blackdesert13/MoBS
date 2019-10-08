@@ -253,14 +253,15 @@ namespace MoBaSteuerung.Anlagenkomponenten.MCSpeicher {
 		/// </summary>
 		/// <returns></returns>
 		public bool AusgangSchalten(bool schaltzustand) {
-			Arduino ard = _parent.AnlagenZustand.GetArduino(_ardNr);
-			if (ard != null) {
-				if (!ard.LockedAusg[_adresseNr, _bitNr]) {
-					_stellung = schaltzustand;
-					ard.Ausgaenge[_adresseNr, _bitNr] = _stellung;
-					return true;
+			if (!IsLocked) {
+				Arduino ard = _parent.AnlagenZustand.GetArduino(_ardNr);
+				if (ard != null) {
+					ard.Ausgaenge[_adresseNr, _bitNr] = schaltzustand;
 				}
+				_stellung = schaltzustand;
+				return true;
 			}
+			
 			return false;
 		}
 

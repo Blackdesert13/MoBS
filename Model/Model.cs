@@ -260,6 +260,10 @@ namespace MoBaSteuerung {
 				if (el.MouseClick(punkt)) {
 					elemList.Add(el);
 				}
+			foreach (EingangsSchalter el in _zeichnenElemente.EingSchalterElemente.Elemente)
+				if (el.MouseClick(punkt)) {
+					elemList.Add(el);
+				}
 			foreach (Signal el in _zeichnenElemente.SignalElemente.Elemente)
 				if (el.MouseClick(punkt))
 					elemList.Add(el);
@@ -353,12 +357,14 @@ namespace MoBaSteuerung {
 					switch (befehl[1]) {
 						case 10:
 							arduino.Rueckmeldung[0] = (ushort)(befehl[2] + befehl[3] * 256);
-							OnArduinoRueckmeldungReceived();
 							break;
 						case 11:
 							arduino.Rueckmeldung[1] = (ushort)(befehl[2] + befehl[3] * 256);
+							break;
+						case 19:
 							aktiveFSZielgleisPruefen();
 							OnArduinoRueckmeldungReceived();
+							OnAnlageNeuZeichnen();//Todo: zeile entfernen oder auskommentieren
 							break;
 						case 40:
 							arduino.Ausgaenge[0] = (ushort)(befehl[2] + befehl[3] * 256);
@@ -371,6 +377,9 @@ namespace MoBaSteuerung {
 						case 42:
 							arduino.Ausgaenge[2] = (ushort)(befehl[2] + befehl[3] * 256);
 							OnArduinoRueckmeldungReceived();
+							break;
+						case 49:
+							AlleAusgaengeSenden();
 							break;
 						case 99:
 							InfoFenster sysZeit = this._zeichnenElemente.InfoElemente.Element(99);
@@ -411,15 +420,14 @@ namespace MoBaSteuerung {
 		{
 			FahrstrasseN fs;
 			
-			for(int i=0;i< _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen.Count;i++)
-			{ 
+			for(int i=0;i< _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen.Count;i++) { 
 				fs = _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen[i];
 				//fs = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(x.Id);
-				if (fs.ZielPruefung())
-				{
+				if (fs.ZielPruefung()) {
 					ElementToggeln("FahrstrasseN_Ziel", fs.ID);
-					//FahrstrasseSchalten(fs, FahrstrassenSignalTyp.ZielSignal);
-					//if(fs.)
+					if (fs.EndSignal.AutoStart) {
+						ElementToggeln("Signal", fs.EndSignal.ID);
+					}
 				}
 			}
 		}
@@ -473,6 +481,7 @@ namespace MoBaSteuerung {
 			this._zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.EingSchalterElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
@@ -495,6 +504,7 @@ namespace MoBaSteuerung {
 			this._zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.EingSchalterElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SsgElemente.ElementeZeichnen(graphics);
@@ -682,6 +692,9 @@ namespace MoBaSteuerung {
 					case BearbeitungsModus.InfoElement:
 						this._neuesElement = new InfoFenster(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
 						break;
+					case BearbeitungsModus.EingangsSchalter:
+						this._neuesElement = new EingangsSchalter(this._zeichnenElemente, zoom, this._anzeigeTyp, letzterRasterpunkt);
+						break;
 				}
 			}
 			else {
@@ -702,6 +715,7 @@ namespace MoBaSteuerung {
 					case BearbeitungsModus.Entkuppler:
 					case BearbeitungsModus.Schalter:
 					case BearbeitungsModus.Fss:
+					case BearbeitungsModus.EingangsSchalter:
 						((RasterAnlagenElement)this._neuesElement).PositionRaster = letzterRasterpunkt;
 						this._neuesElement.BearbeitenAktualisierenNeuZeichnen();
 						break;

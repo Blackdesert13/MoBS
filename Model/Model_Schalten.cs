@@ -86,6 +86,8 @@ namespace MoBaSteuerung {
 					}
 					if (_ardController.OpenComPort(_connectedComPort, false)) {
 						result = "ComPort " + _connectedComPort + " neu verbunden";
+						AlleAusgaengeSenden();
+						_ardController.SendData(new byte[] { 1, 19, 0, 0, 20 });
 					}
 					else {
 						result = "ComPort " + _connectedComPort + " getrennt";
@@ -94,6 +96,18 @@ namespace MoBaSteuerung {
 				}
 			}
 			return result;
+		}
+
+		/// <summary>
+		/// Sendet alle Ausgänge über den Comport an die Anlage
+		/// </summary>
+		private void AlleAusgaengeSenden() {
+			foreach (Arduino arduino in _zeichnenElemente.AnlagenZustand.ArduinoListe) {
+				for (int i = 0; i < arduino.Ausgaenge.Length; i++) {
+					this._ardController.SendData(this._zeichnenElemente.AnlagenZustand.GetBefehl(arduino.Nr, i));
+					arduino.Ausgaenge.Changed[i] = false;
+				}
+			}
 		}
 
 		/// <summary>
@@ -107,16 +121,14 @@ namespace MoBaSteuerung {
 		public bool OpenComPort(string portName) {
 			if (this._ardController.OpenComPort(portName)) {
 				_connectedComPort = portName;
-				foreach (Arduino arduino in _zeichnenElemente.AnlagenZustand.ArduinoListe) {
-					for (int i = 0; i < arduino.Ausgaenge.Length; i++) {
-						this._ardController.SendData(this._zeichnenElemente.AnlagenZustand.GetBefehl(arduino.Nr, i));
-						arduino.Ausgaenge.Changed[i] = false;
-					}
-				}
-				if (_zeichnenElemente.RückmeldungAktiv)
+				AlleAusgaengeSenden();
+				if (_zeichnenElemente.RückmeldungAktiv) {
 					_ardController.SendData(new byte[] { 1, 1, 0, 0, 2 });
-				else
+				}
+				else {
 					_ardController.SendData(new byte[] { 1, 2, 0, 0, 3 });
+				}
+				_ardController.SendData(new byte[] { 1, 19, 0, 0, 20 });
 				return true;
 			}
 			return false;
@@ -153,6 +165,7 @@ namespace MoBaSteuerung {
 				if (_schaltBefehle.Count > 0) {
 					Tuple<string, int> schaltBefehl = _schaltBefehle.Dequeue();
 					if(this.ElementToggelnAusfuehren(schaltBefehl.Item1, schaltBefehl.Item2)) {
+						AnlagenzustandSpeichern();
 						OnAnlagenzustandChanged(null);
 						OnAnlageNeuZeichnen();
 					}
@@ -217,8 +230,15 @@ namespace MoBaSteuerung {
 					break;
 				case "FahrstrasseN_Ziel":
 					el = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
+					FahrstrasseN fs = (FahrstrasseN)el;
+					FahrstrasseSchalten(fs, FahrstrassenSignalTyp.ZielSignal);
 
-					FahrstrasseSchalten((FahrstrasseN)el, FahrstrassenSignalTyp.ZielSignal);
+					if (fs.IsAktiv && fs.EndSignal.AutoStart) {
+						List<AnlagenElement> fsListe = FahrstrassenSignalSchalten(fs.EndSignal, true);
+						if(fsListe.Count > 0) {
+							FahrstrasseSchalten((FahrstrasseN)fsListe[0], FahrstrassenSignalTyp.ZielSignal);
+						}
+					}
 					_zeichnenElemente.FSSAktualisieren();
 					return true;
 					break;

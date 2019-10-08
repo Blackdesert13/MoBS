@@ -1568,23 +1568,38 @@ namespace MoBaSteuerung.Elemente {
 				}
 				else {
 					//_startSignal.Koppelung.Aktiv = false;
-					FahrstrasseN fsAnkommend = null;
-					foreach(FahrstrasseN el in Parent.FahrstrassenElemente.AktiveFahrstrassen) {
-						if(el.EndSignal == this.StartSignal) {
-							fsAnkommend = el;
-							break;
+					if (signalTyp == FahrstrassenSignalTyp.ZielSignal) {
+						FahrstrasseN fsAnkommend = null;
+						foreach (FahrstrasseN el in Parent.FahrstrassenElemente.AktiveFahrstrassen) {
+							if (el.EndSignal == this.StartSignal) {
+								fsAnkommend = el;
+								break;
+							}
+						}
+						if (fsAnkommend != null) {
+							fsAnkommend.AusgangToggeln(FahrstrassenSignalTyp.ZielSignal, verlaengern);
 						}
 					}
-					if(fsAnkommend != null) {
-						fsAnkommend.AusgangToggeln(FahrstrassenSignalTyp.ZielSignal, verlaengern);
+
+					if (signalTyp == FahrstrassenSignalTyp.StartSignal && this.EndSignal.AutoStart) {
+						FahrstrasseN fsAutostart = null;
+						foreach (FahrstrasseN el in Parent.FahrstrassenElemente.AktiveFahrstrassen) {
+							if (el.StartSignal == this.EndSignal) {
+								fsAutostart = el;
+								break;
+							}
+						}
+						if (fsAutostart != null) {
+							fsAutostart.AusgangToggeln(FahrstrassenSignalTyp.StartSignal, verlaengern);
+						}
 					}
 
 					foreach (Befehl adr in _startBefehle) {
 						adr.Element.IsLocked = false;
 					}
 					foreach (Befehl adr in _endBefehle) {
-						adr.BefehlAusfuehren();
 						adr.Element.IsLocked = false;
+						adr.BefehlAusfuehren();
 					}
 					if (signalTyp == FahrstrassenSignalTyp.ZielSignal) {
 						//	this._startSignal.Zug = 0;

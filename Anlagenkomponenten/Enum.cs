@@ -86,7 +86,8 @@
 		MC,
 		Gleis,
 		Fss,
-		InfoElement
+		InfoElement,
+		EingangsSchalter
 	}
 
 
