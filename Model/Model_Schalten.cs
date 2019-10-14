@@ -160,14 +160,22 @@ namespace MoBaSteuerung {
 		//	}
 		//}
 
+		DateTime _zeitpunktLetzterBefehl;
 		private void Daemon_ElementToggeln() {
 			while (true) {
 				if (_schaltBefehle.Count > 0) {
+					_zeitpunktLetzterBefehl = DateTime.Now;
 					Tuple<string, int> schaltBefehl = _schaltBefehle.Dequeue();
 					if(this.ElementToggelnAusfuehren(schaltBefehl.Item1, schaltBefehl.Item2)) {
 						AnlagenzustandSpeichern();
 						OnAnlagenzustandChanged(null);
 						OnAnlageNeuZeichnen();
+					}
+				}
+				else {
+					TimeSpan diff = DateTime.Now.Subtract(_zeitpunktLetzterBefehl);
+					if(diff.Seconds > 1) {
+						_Daemon_ElementToggeln.Suspend();
 					}
 				}
 			}
@@ -181,6 +189,10 @@ namespace MoBaSteuerung {
 		/// <returns></returns>
 		public void ElementToggeln(string elementName, int nr) {
 			this._schaltBefehle.Enqueue(new Tuple<string, int>(elementName, nr));
+			if (_Daemon_ElementToggeln.ThreadState == (System.Threading.ThreadState.Suspended | System.Threading.ThreadState.Background )) {
+				_Daemon_ElementToggeln.Resume();
+			}
+
 		}
 
 		/// <summary>
