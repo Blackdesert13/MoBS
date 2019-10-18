@@ -174,7 +174,7 @@ namespace MoBaSteuerung {
 				}
 				else {
 					TimeSpan diff = DateTime.Now.Subtract(_zeitpunktLetzterBefehl);
-					if(diff.Seconds > 1) {
+					if(diff.Milliseconds > 500) {
 						_Daemon_ElementToggeln.Suspend();
 					}
 				}
