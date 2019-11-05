@@ -286,7 +286,12 @@ namespace MoBaSteuerung
 						}
 						if (this.AppTyp == AppTyp.Slave) {
 							if (slave != null) {
-								slave.SlaveAnMasterMouseClick(el[0].GetType().Name, el[0].ID);
+								try {
+									slave.SlaveAnMasterMouseClick(el[0].GetType().Name, el[0].ID);
+								}
+								catch(Exception e) {
+
+								}
 							}
 						}
 						return false;
@@ -325,7 +330,10 @@ namespace MoBaSteuerung
 			List<Elemente.AnlagenElement> el = _model.FahrstrassenSignal(signalNummer,shift);
 			if (el != null) {
 				if (el.Count == 1) {
-					if (((FahrstrasseN)el[0]).StartSignal.ID == signalNummer)
+					if(el[0].ElementZustand == Elementzustand.Aus) {
+						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal, shift);
+					}
+					else if (((FahrstrasseN)el[0]).StartSignal.ID == signalNummer)
 						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.StartSignal,shift);
 					else if (((FahrstrasseN)el[0]).EndSignal.ID == signalNummer)
 						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal, shift);
@@ -353,12 +361,22 @@ namespace MoBaSteuerung
 			if (this.AppTyp == AppTyp.Slave) {
 				if (signal == FahrstrassenSignalTyp.ZielSignal) {
 					if (slave != null) {
-						slave.SlaveAnMasterMouseClick(el.GetType().Name + "_Ziel", el.ID);
+						try { 
+							slave.SlaveAnMasterMouseClick(el.GetType().Name + "_Ziel", el.ID);
+						}
+						catch (Exception e) {
+
+						}
 					}
 				}
 				else {
 					if (slave != null) {
-						slave.SlaveAnMasterMouseClick(el.GetType().Name + "_Start", el.ID);
+						try { 
+							slave.SlaveAnMasterMouseClick(el.GetType().Name + "_Start", el.ID);
+						}
+						catch (Exception e) {
+
+						}
 					}
 				}
 				return true;

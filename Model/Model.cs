@@ -426,7 +426,16 @@ namespace MoBaSteuerung {
 				if (fs.ZielPruefung()) {
 					ElementToggeln("FahrstrasseN_Ziel", fs.ID);
 					if (fs.EndSignal.AutoStart) {
-						ElementToggeln("Signal", fs.EndSignal.ID);
+						bool starten = false;
+						foreach (FahrstrasseN fahrstrasse in _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen) {
+							if (fahrstrasse.StartSignal == fs.EndSignal) {
+								starten = true;
+							}
+						}
+						if (starten) {
+							ElementToggeln("Signal", fs.EndSignal.ID);
+						}
+						
 					}
 				}
 			}

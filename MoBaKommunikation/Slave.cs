@@ -53,9 +53,13 @@ namespace MoBaKommunikation {
 
 			// An Master anmelden
 			if (this.sendenZumMaster != null) {
-				this.remoteID = remoteID;
-				this.port = port;
-				new Task(() => this.sendenZumMaster.Anmelden(Environment.MachineName, this.port + 1, this.remoteID + "Slave", clientName + Environment.MachineName)).Start();
+				try {
+					this.remoteID = remoteID;
+					this.port = port;
+					new Task(() => this.sendenZumMaster.Anmelden(Environment.MachineName, this.port + 1, this.remoteID + "Slave", clientName + Environment.MachineName)).Start();
+
+				}
+				catch (Exception e) { }
 			}
 
 			ISlave.MasterAnlageDaten = this.MasterAnlageDaten;
@@ -85,13 +89,23 @@ namespace MoBaKommunikation {
 
 			// Vom Master abmelden
 			if (this.sendenZumMaster != null) {
-				this.sendenZumMaster.Abmelden(Environment.MachineName, this.port + 1, this.remoteID + "Slave");
+				try {
+					this.sendenZumMaster.Abmelden(Environment.MachineName, this.port + 1, this.remoteID + "Slave");
+				}
+				catch (Exception e) {
+
+				}
 			}
 		}
 
 
 		public void SlaveAnMasterMouseClick(string elementType, int id) {
-			new Task(() => this.SlaveAnMasterMouseClickTask(elementType, id)).Start();
+			try { 
+				new Task(() => this.SlaveAnMasterMouseClickTask(elementType, id)).Start();
+			}
+			catch (Exception e) {
+
+			}
 		}
 
 		private void SlaveAnMasterMouseClickTask(string elementType, int id) {

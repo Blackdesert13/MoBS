@@ -28,6 +28,7 @@ namespace MoBaSteuerung.Elemente {
 		private bool _inZeichenRichtung = false;
 		private InfoFenster _infoFenster = null;
 		private Zug zug;
+		private Signal _gegenSignal = null;
 		private bool _autoStart = false;
 		private List<FahrstrasseN>  _autoStartFSGruppe;
 		private int _zugLaengeMax;
@@ -185,6 +186,16 @@ namespace MoBaSteuerung.Elemente {
 			}
 		}
 
+		public Signal GegenSignal {
+			get {
+				return _gegenSignal;
+			}
+
+			set {
+				_gegenSignal = value;
+			}
+		}
+
 		#endregion //Properties
 
 		#region Konstruktoren
@@ -273,6 +284,11 @@ namespace MoBaSteuerung.Elemente {
 
 					this.Berechnung();
 				}
+				Signal gegenSig = GegenSignalSuchen();
+				if(gegenSig != null) {
+					GegenSignal = gegenSig;
+					gegenSig.GegenSignal = this;
+				}
 			}
 			infoFensterLaden(Convert.ToInt16(elem[4]));
 		}
@@ -280,6 +296,51 @@ namespace MoBaSteuerung.Elemente {
 
 		private void infoFensterLaden(int Nummer) {
 			_infoFenster = this.Parent.InfoElemente.Element(Nummer);
+		}
+
+		private Signal GegenSignalSuchen() {
+
+			bool richtung = this.InZeichenRichtung;
+			Gleis gl = this.AnschlussGleis;
+			if (richtung) {
+				if (gl.Signale[1] != null) {
+					return gl.Signale[1];
+				}
+			}
+			else {
+				if (gl.Signale[0] != null) {
+					return gl.Signale[0];
+				}
+			}
+			Knoten kn = (richtung ? gl.StartKn : gl.EndKn);
+			while (kn.Weichen[0] == null && kn.Weichen[1] == null) {
+				bool stumpfGleis = true;
+				foreach(Gleis g in kn.Gleise) {
+					if(g != null && g!= gl) {
+						gl = g;
+						stumpfGleis = false;
+						break;
+					}
+				}
+				if (stumpfGleis) {
+					break;
+				}
+				richtung = (gl.StartKn == kn);
+
+				if (richtung) {
+					if (gl.Signale[0] != null) {
+						return gl.Signale[0];
+					}
+				}
+				else {
+					if (gl.Signale[1] != null) {
+						return gl.Signale[1];
+					}
+				}
+				kn = (richtung ? gl.EndKn : gl.StartKn);
+			}
+
+			return null;
 		}
 
 		/// <summary>
@@ -457,7 +518,7 @@ namespace MoBaSteuerung.Elemente {
 			{ 
 				foreach (string x in _zugTyp)
 				{
-					if (!x.Equals(PruefZug)) { return false; }
+					if (!x.Equals(PruefZug.ZugTyp)) { return false; }
 				}
 		  }
 			return true;

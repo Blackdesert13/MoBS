@@ -788,11 +788,16 @@ namespace MoBaSteuerung.Elemente {
 		/// </summary>
 		/// <param name="e"></param>
 		public void ElementeZeichnen(Graphics e) {
-			foreach (FahrstrasseN item in this._auswahlFahrstrassen) {
-				item.ElementZeichnen(e);
+			try {
+				foreach (FahrstrasseN item in this._auswahlFahrstrassen) {
+					item.ElementZeichnen(e);
+				}
+				foreach (FahrstrasseN item in this._aktiveFahrstrassen) {
+					item.ElementZeichnen(e);
+				}
 			}
-			foreach (FahrstrasseN item in this._aktiveFahrstrassen) {
-				item.ElementZeichnen(e);
+			catch(Exception ex) {
+
 			}
 		}
 
@@ -995,32 +1000,37 @@ namespace MoBaSteuerung.Elemente {
 		}
 
 		public void AktiveFahrstrassenAktualisieren(Anlagenzustand anlZust) {
-			foreach (FahrstrasseN fs in _aktiveFahrstrassen) {
-				fs.IsAktiv = false;
-				foreach (Befehl befehl in fs.StartBefehle) {
-					befehl.Element.IsLocked = false;
+			try {
+				foreach (FahrstrasseN fs in _aktiveFahrstrassen) {//Todo: Exception wurde geworfen im Client =>untersuchen!!!!
+					fs.IsAktiv = false;
+					foreach (Befehl befehl in fs.StartBefehle) {
+						befehl.Element.IsLocked = false;
+					}
+				}
+				_aktiveFahrstrassen.Clear();
+				foreach (WeichenStrasse weSt in anlZust.AktiveFahrstrassen) {
+					FahrstrasseN fs = Fahrstrasse(weSt.Id);
+					if (fs != null) {
+						_aktiveFahrstrassen.Add(fs);
+						fs.IsAktiv = true;
+						fs.AdressenSperren();
+					}
+				}
+				if (this._auswahlFahrstrassen.Count > 0) {
+					Signal startSignal = this._auswahlFahrstrassen[0].StartSignal;
+					AlleLöschenAuswahl();
+					List<AnlagenElement> fahrstrassen = new List<AnlagenElement>();
+					foreach (FahrstrasseN fs in _gespeicherteFahrstrassen) {
+						if (fs.StartSignal == startSignal && fs.Verfuegbarkeit())
+							fahrstrassen.Add(fs);
+					}
+					HinzufügenAuswahl(fahrstrassen);
 				}
 			}
-			_aktiveFahrstrassen.Clear();
-			foreach (WeichenStrasse weSt in anlZust.AktiveFahrstrassen) {
-				FahrstrasseN fs = Fahrstrasse(weSt.Id);
-				if (fs != null) {
-					_aktiveFahrstrassen.Add(fs);
-					fs.IsAktiv = true;
-					fs.AdressenSperren();
-				}
+			catch(Exception e) {
+
 			}
-			if (this._auswahlFahrstrassen.Count > 0) {
-				Signal startSignal = this._auswahlFahrstrassen[0].StartSignal;
-				AlleLöschenAuswahl();
-				List<AnlagenElement> fahrstrassen = new List<AnlagenElement>();
-				foreach (FahrstrasseN fs in _gespeicherteFahrstrassen) {
-					if (fs.StartSignal == startSignal && fs.Verfuegbarkeit())
-						fahrstrassen.Add(fs);
-				}
-				HinzufügenAuswahl(fahrstrassen);
 			}
-		}
 	}
 	/// <summary>
 	/// aktuell verwendete Fahrstrasse
@@ -1452,6 +1462,9 @@ namespace MoBaSteuerung.Elemente {
 		/// <returns></returns>
 		public bool Verfuegbarkeit()//Verfuegbarkeit()
 		{
+			if(this._endSignal.ID == 4) {
+				int a = 10;
+			}
 			if (_startSignal.Zug != null)
 			{
 				if (_startSignal.Zug != null )
@@ -1555,13 +1568,18 @@ namespace MoBaSteuerung.Elemente {
 						{
 							_startBefehle[i].BefehlAusfuehren();
 							this._startBefehle[i].Element.IsLocked = true;       
-					}
+						}
 					}
 					if (verlaengern) {
 						foreach(Befehl befehl in this._startGleise) {
 							befehl.Element.IsLocked = false;
 							befehl.BefehlAusfuehren();
 							befehl.Element.IsLocked = true;
+						}
+					}
+					if(_startSignal.Zug == null) {
+						if(_startSignal.GegenSignal != null && _startSignal.GegenSignal.Zug != null) {
+							_startSignal.GegenSignal.ZugWechsel(_startSignal.ID);
 						}
 					}
 					_startSignal.IsLocked = false;

@@ -191,8 +191,10 @@ namespace MoBaSteuerung.Anlagenkomponenten
 
             lock (_singletonLock)
             {
-              this.logStreamWriter.WriteLine(this.logTexte.Dequeue());
-            }
+							this.logTexte.Dequeue();
+							//Todo: uncomment write to log file an comment line above
+							//this.logStreamWriter.WriteLine(this.logTexte.Dequeue());
+						}
 
             this.logStreamWriter.Flush();
 

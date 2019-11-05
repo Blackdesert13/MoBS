@@ -32,7 +32,7 @@ namespace MoBaSteuerung {
 		private ArduinoController _ardController;
 		private string _connectedComPort = "";
 		//volatile Queue<> _arduinoSendeListe = new Queue<Anlagenzustand>();
-		volatile Queue<Tuple<String,int>> _schaltBefehle = new Queue<Tuple<String, int>>();
+		volatile Queue<Tuple<String, int>> _schaltBefehle = new Queue<Tuple<String, int>>();
 		private Thread _Daemon_SendenAnArduino = null;
 		private Thread _Daemon_ElementToggeln = null;
 
@@ -166,7 +166,7 @@ namespace MoBaSteuerung {
 				if (_schaltBefehle.Count > 0) {
 					_zeitpunktLetzterBefehl = DateTime.Now;
 					Tuple<string, int> schaltBefehl = _schaltBefehle.Dequeue();
-					if(this.ElementToggelnAusfuehren(schaltBefehl.Item1, schaltBefehl.Item2)) {
+					if (this.ElementToggelnAusfuehren(schaltBefehl.Item1, schaltBefehl.Item2)) {
 						AnlagenzustandSpeichern();
 						OnAnlagenzustandChanged(null);
 						OnAnlageNeuZeichnen();
@@ -174,13 +174,13 @@ namespace MoBaSteuerung {
 				}
 				else {
 					TimeSpan diff = DateTime.Now.Subtract(_zeitpunktLetzterBefehl);
-					if(diff.Milliseconds > 500) {
+					if (diff.Milliseconds > 500) {
 						_Daemon_ElementToggeln.Suspend();
 					}
 				}
 			}
 		}
-		
+
 		/// <summary>
 		/// Umschalten eines Elementes
 		/// </summary>
@@ -189,7 +189,7 @@ namespace MoBaSteuerung {
 		/// <returns></returns>
 		public void ElementToggeln(string elementName, int nr) {
 			this._schaltBefehle.Enqueue(new Tuple<string, int>(elementName, nr));
-			if (_Daemon_ElementToggeln.ThreadState == (System.Threading.ThreadState.Suspended | System.Threading.ThreadState.Background )) {
+			if (_Daemon_ElementToggeln.ThreadState == (System.Threading.ThreadState.Suspended | System.Threading.ThreadState.Background)) {
 				_Daemon_ElementToggeln.Resume();
 			}
 
@@ -245,13 +245,59 @@ namespace MoBaSteuerung {
 					FahrstrasseN fs = (FahrstrasseN)el;
 					FahrstrasseSchalten(fs, FahrstrassenSignalTyp.ZielSignal);
 
-					if (fs.IsAktiv && fs.EndSignal.AutoStart) {
-						List<AnlagenElement> fsListe = FahrstrassenSignalSchalten(fs.EndSignal, true);
-						if(fsListe.Count > 0) {
-							FahrstrasseSchalten((FahrstrasseN)fsListe[0], FahrstrassenSignalTyp.ZielSignal);
+					if (fs.EndSignal.AutoStart) {
+						if (fs.IsAktiv) {
+							try {
+								Zug zug = fs.StartSignal.Zug;
+								if (zug == null) {//suche nach startsignal
+									FahrstrasseN fsStart = (FahrstrasseN)el;
+									
+									bool startFound;
+									do {
+										startFound = false;
+										foreach (AnlagenElement x in _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen) {
+											if (((FahrstrasseN)x).EndSignal == fsStart.StartSignal) {
+												fsStart = (FahrstrasseN)x;
+												startFound = true;
+												break;
+											}
+										}
+									} while (startFound && fsStart.StartSignal.Zug == null);
+									//if (fsStart.StartSignal.Zug != null) {
+										zug = fsStart.StartSignal.Zug;
+									//}
+								}
+								if(zug != null) {
+									fs.EndSignal.ZugNr = zug.ID;
+								}
+								List<AnlagenElement> fsListe = FahrstrassenSignalSchalten(fs.EndSignal, true);
+								fs.EndSignal.ZugNr = 0;
+								if (fsListe != null && fsListe.Count > 0) {
+									FahrstrasseN autostartFs = null;
+									foreach(AnlagenElement x in fsListe) {
+										if(((FahrstrasseN)x).EndSignal.ZugTypString != string.Empty) {
+											autostartFs = (FahrstrasseN)x;
+											break;
+										}
+									}
+									if(autostartFs == null) {
+										autostartFs = (FahrstrasseN)fsListe[0];
+									}
+									FahrstrasseSchalten(autostartFs, FahrstrassenSignalTyp.ZielSignal);
+								}
+							}
+							catch(Exception e) {
+
+							}
+
 						}
 					}
-					_zeichnenElemente.FSSAktualisieren();
+					try {
+						_zeichnenElemente.FSSAktualisieren();
+					}
+					catch(Exception e) {
+
+					}
 					return true;
 					break;
 				case "FahrstrasseN_Start":

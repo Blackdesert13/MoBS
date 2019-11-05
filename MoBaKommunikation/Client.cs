@@ -107,7 +107,12 @@ namespace MoBaKommunikation
       // ToDo Parallel senden mit Exception händling
       foreach (SlaveClient itemSlaveClient in this.slaveClients)
       {
-				itemSlaveClient.SendenZumSlave.AnlageZustandsDaten((byte[])anlageDaten);
+				try {
+					itemSlaveClient.SendenZumSlave.AnlageZustandsDaten((byte[])anlageDaten);
+				}
+				catch (Exception e) {
+
+				}
       }
     }
 
@@ -131,7 +136,12 @@ namespace MoBaKommunikation
 					byte[] datenAnlagenzustand = _anClientsAnlagenzustand.Dequeue();
 					// ToDo Parallel senden mit Exception händling
 					foreach (SlaveClient itemSlaveClient in this.slaveClients) {
-						itemSlaveClient.SendenZumSlave.AnlageZustandsDaten(datenAnlagenzustand);
+						try {
+							itemSlaveClient.SendenZumSlave.AnlageZustandsDaten(datenAnlagenzustand);
+						}
+						catch(Exception e) {
+
+						}
 					}
 				}
 			}
@@ -155,7 +165,12 @@ namespace MoBaKommunikation
 		private void SendenZugListeAnAlleAusfuehren(object zugListe) {
 			// ToDo Parallel senden mit Exception händling
 			foreach (SlaveClient itemSlaveClient in this.slaveClients) {
-				itemSlaveClient.SendenZumSlave.ZugListenDaten((byte[])zugListe);
+				try {
+					itemSlaveClient.SendenZumSlave.ZugListenDaten((byte[])zugListe);
+				}
+				catch(Exception e) {
+
+				}
 			}
 		}
 

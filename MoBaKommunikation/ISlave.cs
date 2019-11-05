@@ -22,7 +22,7 @@ namespace MoBaKommunikation {
 		/// </summary>
 		/// <param name="anlageDaten"></param>
 		public void AnlageDaten(byte[] anlageDaten) {
-			Logging.Log.Schreibe(anlageDaten.Length.ToString(),LogLevel.Trace);
+			//Logging.Log.Schreibe(anlageDaten.Length.ToString(),LogLevel.Trace);
 			MasterAnlageDaten(anlageDaten);
 		}
 
@@ -31,7 +31,7 @@ namespace MoBaKommunikation {
 		/// </summary>
 		/// <param name="zugListenDaten"></param>
 		public void ZugListenDaten(byte[] zugListenDaten) {
-			Logging.Log.Schreibe(zugListenDaten.Length.ToString(), LogLevel.Trace);
+			//Logging.Log.Schreibe(zugListenDaten.Length.ToString(), LogLevel.Trace);
 			MasterZugListenDaten(zugListenDaten);
 		}
 
@@ -40,7 +40,7 @@ namespace MoBaKommunikation {
 		/// </summary>
 		/// <param name="anlageZustandDaten"></param>
 		public void AnlageZustandsDaten(byte[] anlageZustandDaten) {
-			Logging.Log.Schreibe(anlageZustandDaten.Length.ToString());
+			//Logging.Log.Schreibe(anlageZustandDaten.Length.ToString());
 			MasterAnlagenZustandsDaten(anlageZustandDaten);
 		}
 
