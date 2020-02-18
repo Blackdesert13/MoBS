@@ -12,6 +12,7 @@ using MoBaSteuerung.Elemente;
 using MoBaSteuerung.ZeichnenElemente;
 using MoBaSteuerung.Anlagenkomponenten.MCSpeicher;
 
+
 namespace MoBaSteuerung
 {
 	/// <summary>
@@ -63,8 +64,7 @@ namespace MoBaSteuerung
 		/// Standardgröße der Anlage
 		/// </summary>
 		private Size anzeigeGrößeInPixel;
-
-
+		
 		private MoBaKommunikation.Master master;
 
 

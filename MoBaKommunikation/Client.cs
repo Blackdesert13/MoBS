@@ -23,13 +23,13 @@ namespace MoBaKommunikation
     {
       this.slaveClients = new List<MoBaKommunikation.SlaveClient>();
 
-			//_Daemon_AnlagenzustandAnClients = new Thread(Daemon_AnlagenzustandAnClients);
-			//this._Daemon_AnlagenzustandAnClients.IsBackground = true;
-			//this._Daemon_AnlagenzustandAnClients.Start();
+			_Daemon_AnlagenzustandAnClients = new Thread(Daemon_AnlagenzustandAnClients);
+			this._Daemon_AnlagenzustandAnClients.IsBackground = true;
+			this._Daemon_AnlagenzustandAnClients.Start();
 
-			//_Daemon_ZugListeAnClients = new Thread(Daemon_ZugListeAnClients);
-			//this._Daemon_ZugListeAnClients.IsBackground = true;
-			//this._Daemon_ZugListeAnClients.Start();
+			_Daemon_ZugListeAnClients = new Thread(Daemon_ZugListeAnClients);
+			this._Daemon_ZugListeAnClients.IsBackground = true;
+			this._Daemon_ZugListeAnClients.Start();
 		}
 
     /// <summary>
@@ -93,28 +93,8 @@ namespace MoBaKommunikation
 		/// </summary>
 		/// <param name="anlageDaten"></param>
 		internal void SendenAnlageZustandsDatenAnAlle(byte[] anlageDaten) {
-			//_anClientsAnlagenzustand.Enqueue(anlageDaten);
-			Thread sendeThread = new Thread(this.SendenAnlageZustandsDatenAnAlleAusfuehren);
-			sendeThread.Start(anlageDaten);
+			_anClientsAnlagenzustand.Enqueue(anlageDaten);
 		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="anlageDaten"></param>
-		private void SendenAnlageZustandsDatenAnAlleAusfuehren(object anlageDaten)
-    {
-      // ToDo Parallel senden mit Exception händling
-      foreach (SlaveClient itemSlaveClient in this.slaveClients)
-      {
-				try {
-					itemSlaveClient.SendenZumSlave.AnlageZustandsDaten((byte[])anlageDaten);
-				}
-				catch (Exception e) {
-
-				}
-      }
-    }
 
 		/*alte Version
 		/// <summary>
@@ -136,12 +116,7 @@ namespace MoBaKommunikation
 					byte[] datenAnlagenzustand = _anClientsAnlagenzustand.Dequeue();
 					// ToDo Parallel senden mit Exception händling
 					foreach (SlaveClient itemSlaveClient in this.slaveClients) {
-						try {
-							itemSlaveClient.SendenZumSlave.AnlageZustandsDaten(datenAnlagenzustand);
-						}
-						catch(Exception e) {
-
-						}
+						itemSlaveClient.SendenZumSlave.AnlageZustandsDaten(datenAnlagenzustand);
 					}
 				}
 			}
@@ -153,25 +128,7 @@ namespace MoBaKommunikation
 		/// </summary>
 		/// <param name="anlageDaten"></param>
 		internal void SendenZugListeAnAlle(byte[] anlageDaten) {
-			//_anClientsZugListe.Enqueue(anlageDaten);
-			Thread sendeThread = new Thread(this.SendenZugListeAnAlleAusfuehren);
-			sendeThread.Start(anlageDaten);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="zugListe"></param>
-		private void SendenZugListeAnAlleAusfuehren(object zugListe) {
-			// ToDo Parallel senden mit Exception händling
-			foreach (SlaveClient itemSlaveClient in this.slaveClients) {
-				try {
-					itemSlaveClient.SendenZumSlave.ZugListenDaten((byte[])zugListe);
-				}
-				catch(Exception e) {
-
-				}
-			}
+			_anClientsZugListe.Enqueue(anlageDaten);
 		}
 
 		///// <summary>
