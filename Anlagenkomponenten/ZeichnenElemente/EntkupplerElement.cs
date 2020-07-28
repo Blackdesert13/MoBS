@@ -127,8 +127,9 @@ namespace MoBaSteuerung.Elemente {
         }
 
         public override void Berechnung() {
-            if (AnschlussGleis != null)
+            if (AnschlussGleis != null) {
                 PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition);
+            }
             Matrix matrix = new Matrix();
             matrix.Translate(this.PositionRaster.X * this.Zoom, this.PositionRaster.Y * this.Zoom);
             matrix.Scale(this.Zoom, this.Zoom);

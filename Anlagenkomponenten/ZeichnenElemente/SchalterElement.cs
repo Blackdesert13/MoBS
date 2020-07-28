@@ -207,5 +207,10 @@ namespace MoBaSteuerung.Elemente
 			}
 			return false;
 		}
-	}
+
+        public override bool AusgangToggeln()
+        {
+            return AnschlussGleis.AusgangToggeln();
+        }
+    }
 }

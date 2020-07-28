@@ -189,12 +189,17 @@ namespace MoBaSteuerung {
 										el.Berechnung();
 									}
 								}
-								foreach (Signal el in item.Signale) {
+                                foreach (Signal el in item.Signale) {
 									if (el != null) {
 										el.Berechnung();
 									}
 								}
-							}
+                                foreach (EingangsSchalter el in item.EingSchalter) {
+                                    if (el != null) {
+                                        el.Berechnung();
+                                    }
+                                }
+                            }
 						}
 						foreach (Weiche item in k.Weichen) {
 							if (item != null) {

@@ -402,8 +402,9 @@ namespace MoBaSteuerung.Elemente {
 		public override void Berechnung() {
 			//Stopwatch watch = new Stopwatch();
 			//watch.Start();
-			if (AnschlussGleis != null)
+			if (AnschlussGleis != null) { 
 				PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition);
+            }
 
 			int winkel = 0;
 			if (AnschlussGleis != null)
