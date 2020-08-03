@@ -82,7 +82,7 @@
     <Compile Include="ZeichnenElemente\Anschluss.cs" />
     <Compile Include="ZeichnenElemente\Befehle.cs" />
     <Compile Include="ZeichnenElemente\EingangsSchalter.cs" />
-    <Compile Include="ZeichnenElemente\KettenFahrstrassen.cs" />
+    <Compile Include="ZeichnenElemente\FahrstrassenKElement.cs" />
     <Compile Include="ZeichnenElemente\StartSignalGruppe.cs" />
     <Compile Include="ZeichnenElemente\ServoElement.cs" />
     <Compile Include="ZeichnenElemente\ZugElement.cs" />

@@ -1158,7 +1158,7 @@ namespace MoBaSteuerung.Elemente {
 		#endregion//Properties
 		#region Konstuktoren
 		/// <summary>
-		/// erstellt FS aus Serialisierung (für Slave)
+		/// erstellt FS aus Pfad beim suchen
 		/// </summary>
 		/// <param name="elementListe">Serialisierung</param>
 		public FahrstrasseN(AnlagenElement[] elementListe)

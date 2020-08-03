@@ -30,10 +30,12 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 		private FahrstrassenAnzeige _fahrstrassenAnzeige = new FahrstrassenAnzeige();
 		private DataTable _tabelle;
 		private int _ausgewählteFahrstrasse = -1;
+        private int _heightMenuStrip = 24;
 
 		public FahrstrassenEditor(Model model) {
 			InitializeComponent();
 
+            _heightMenuStrip = menuStrip1.Height;
 			_model = model;
 			_beenden = false;
 			dataGridView1.AutoGenerateColumns = false;
@@ -248,5 +250,14 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				
 			}
 		}
-	}
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+            if(tabControl1.SelectedTab == this.tabPageKombiFs) {
+                this.menuStrip1.Enabled = false;
+            }
+            else {
+                this.menuStrip1.Enabled = true;
+            }
+        }
+    }
 }
