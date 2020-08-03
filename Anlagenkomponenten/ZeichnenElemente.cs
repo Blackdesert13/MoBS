@@ -35,6 +35,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		private ElementListe<InfoFenster> infoElemente;
 		private ElementListe<Haltestelle> haltestellenElemente;//für Straßenbahn
 		private FahrstrassenNElemente _fahrstrassenElemente;
+		private ElementListe<FahrstrasseK> _kettenFahrstrassenElemente;
 		private ElementListe<Zug> _zugElemente;
 		private Anlagenzustand _anlagenZustand;
 		private bool _rückmeldungAnzeigen;
@@ -58,17 +59,17 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 		/// </summary>
 		public Int32 Zoom {
 			set {
-                this._reglerElemente.Zoom = value;
-                this._ssgElemente.Zoom = value;
-                this._knotenElemente.Zoom = value;
-                this._gleisElemente.Zoom = value;
-                this._weicheElemente.Zoom = value;
+				this._reglerElemente.Zoom = value;
+				this._ssgElemente.Zoom = value;
+				this._knotenElemente.Zoom = value;
+				this._gleisElemente.Zoom = value;
+				this._weicheElemente.Zoom = value;
 				this._signalElemente.Zoom = value;
 				this._schalterElemente.Zoom = value;
-                this._fssElemente.Zoom = value;
+				this._fssElemente.Zoom = value;
 				this.infoElemente.Zoom = value;
-                this._entkupplerElemente.Zoom = value;
-                this._fahrstrassenElemente.Zoom = value;
+				this._entkupplerElemente.Zoom = value;
+				this._fahrstrassenElemente.Zoom = value;
 				this._eingSchalterElemente.Zoom = value;
 				this.servoElemente.Zoom = value;
 				this._zoom = value;
@@ -92,6 +93,7 @@ namespace MoBaSteuerung.Anlagenkomponenten {
         this._knotenElemente.AnzeigeTyp = value;
         this._entkupplerElemente.AnzeigeTyp = value;
         this._fahrstrassenElemente.AnzeigeTyp = value;
+				this._kettenFahrstrassenElemente.AnzeigeTyp = value;
 				this._eingSchalterElemente.AnzeigeTyp = value;
 				this.infoElemente.AnzeigeTyp = value;
 				this.servoElemente.AnzeigeTyp = value;
@@ -195,8 +197,11 @@ namespace MoBaSteuerung.Anlagenkomponenten {
 			}
 		}
 
-
-
+		public ElementListe<FahrstrasseK> KettenFahrstrassenElemente {
+			get {
+				return _kettenFahrstrassenElemente;
+			}
+		}
 
 		public FahrstrassenNElemente FahrstrassenElemente {
 			get {
