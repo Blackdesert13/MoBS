@@ -120,14 +120,15 @@ namespace MoBaSteuerung.Elemente {
 				}
 			}
 		}
-	
-		
-
+  
 		public override bool MouseClick(Point punkt) {
 			return this._graphicsPath.IsVisible(punkt);
 		}
 
 		public override void Berechnung() {
+			if (AnschlussGleis != null) {
+				PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition);
+			}
 			Matrix matrix = new Matrix();
 			matrix.Translate(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			matrix.Scale(Zoom, Zoom);
