@@ -203,7 +203,7 @@ namespace MoBaSteuerung.Elemente {
 			else
 				return;
 
-			parent.FahrstrassenElemente.GespeicherteFahrstrassen.Add(this);
+			//parent.FahrstrassenElemente.GespeicherteFahrstrassen.Add(this);
 			Berechnung();
 		}
 		#endregion//Konstruktoren
