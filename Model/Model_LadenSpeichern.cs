@@ -184,8 +184,8 @@ namespace MoBaSteuerung {
 				if (elem[0] == "Signal") {
 					new Signal(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
-        if (elem[0] == "SSG") {
-            new StartSignalGruppe(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
+				if (elem[0] == "SSG") {
+					new StartSignalGruppe(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
 				}
 				if (elem[0] == "FSS") {
 					new FSS(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem);
@@ -220,6 +220,10 @@ namespace MoBaSteuerung {
 					string knotenListe = anlageDatenStreamReader.ReadLine();
 					new FahrstrasseN(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem, befehleStart, befehleZiel, knotenListe);
 				}
+				if (elem[0] == "FahrstrasseK") {
+					string fsListe = anlageDatenStreamReader.ReadLine();
+					new FahrstrasseK(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem, fsListe);
+				}
 			}
 			anlageDatenStreamReader.Dispose();
 
@@ -245,10 +249,10 @@ namespace MoBaSteuerung {
 				}
 				zugDatenStreamReader.Dispose();
 			}
-			catch(FileNotFoundException e) {
+			catch (FileNotFoundException e) {
 
 			}
-			
+
 		}
 
 		public void ZugDateiLaden(byte[] zugDateiDaten) {
@@ -302,37 +306,38 @@ namespace MoBaSteuerung {
 			string trennung = "--------------------------------------------------------------------------------------------";
 			StreamWriter anlageStreamWriter = new StreamWriter(anlageDateiPfadName, false, System.Text.Encoding.UTF8);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Anschlüsse\tNr.\tBez.\tStecker"
-																																			+ this._zeichnenElemente.AnschlussElemente.SpeicherString);
+										+ this._zeichnenElemente.AnschlussElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Arduinos\tNr.\tLageX\tLageY\tAnl.-Teil"
-																																			+ this._zeichnenElemente.ListeMCSpeicher.SpeicherString);
+										+ this._zeichnenElemente.ListeMCSpeicher.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Servos\tNr.\tLageX\tLageY\tWinkelE\tWinkelA\tSpeed\tManuell\tAusgang\tBeschr.\tBez\tStecker"
-																																			+ this._zeichnenElemente.ServoElemente.SpeicherString);
+										+ this._zeichnenElemente.ServoElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FahrReg\tNr.\tLageX\tLageY\tFarbe\tFarbeZ\tBez\tStecker"
-																																			+ this._zeichnenElemente.ReglerElemente.SpeicherString);
+										+ this._zeichnenElemente.ReglerElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Knoten\tNr.\tLageX\tLageY"
-																																			+ this._zeichnenElemente.KnotenElemente.SpeicherString);
+										+ this._zeichnenElemente.KnotenElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Gleise\tNr.\tStartKn\tEndKn\tRegler\tAusgang\tEingang\tBez.\tStecker"
-																																			+ this._zeichnenElemente.GleisElemente.SpeicherString);
+										+ this._zeichnenElemente.GleisElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Weichen\tNr.\tKnoten\tGru-Ste\tAusgang\tBez.\tStecker\tKoppelung"
-																																			+ this._zeichnenElemente.WeicheElemente.SpeicherString);
+										+ this._zeichnenElemente.WeicheElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "GleisSchalter\tNr.\tGleis\tBez.\tKoppelung"
-																																			+ this._zeichnenElemente.SchalterElemente.SpeicherString);
+										+ this._zeichnenElemente.SchalterElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "EingangsSchalter\tNr.\tGleis\tEingang\tBez.\tStecker"
-																																			+ this._zeichnenElemente.EingSchalterElemente.SpeicherString);
+										+ this._zeichnenElemente.EingSchalterElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung"
-																																			+ this._zeichnenElemente.FssElemente.SpeicherString);
+										+ this._zeichnenElemente.FssElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Entkuppler_\tNr.\tGleis\tAusgang\tBez.\tStecker"
-																																			+ this._zeichnenElemente.EntkupplerElemente.SpeicherString);
+										+ this._zeichnenElemente.EntkupplerElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Infos\tNr.\tGleis\tLage\tBez"
-																																			+ this._zeichnenElemente.InfoElemente.SpeicherString);
+										+ this._zeichnenElemente.InfoElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Signale\tNr.\tGleis\tRichtu.\tInfoF\tAusgang\tBez.\tStecker\tAutoSta\tZugLmax\tZugTyp\tKopplg.\tZielGleis"
-																																			+ this._zeichnenElemente.SignalElemente.SpeicherString);
-      anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "StartSG\tNr.\tLageX\tLageY\tTyp\tBez.\tSignale"
-                                                                     + this._zeichnenElemente.SsgElemente.SpeicherString);
-      anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "HStelln\tNr.\tInfFeld\tBez"
-																																			+ this._zeichnenElemente.HaltestellenElemente.SpeicherString);
+										+ this._zeichnenElemente.SignalElemente.SpeicherString);
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "StartSG\tNr.\tLageX\tLageY\tTyp\tBez.\tSignale"
+										+ this._zeichnenElemente.SsgElemente.SpeicherString);
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "HStelln\tNr.\tInfFeld\tBez"
+										+ this._zeichnenElemente.HaltestellenElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + this._zeichnenElemente.FahrstrassenElemente.SpeicherString);
-
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FahrstrassenK\tNr."
+										+ this._zeichnenElemente.FahrstrassenKElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Züge\tNr.\tSignal\tLok\tTyp\tGeschw\tBez\tZLänge\tDigAdr.\tAnkunft"
 																																	 //1=ID, 2=Signal, 3=Lok, 4=Typ, 5=Speed, 6=Bezeichnung, 7=Länge, 8=DigitalAdresse, 9=AnkunftsZeit
 																																	 + this._zeichnenElemente.ZugElemente.SpeicherString);

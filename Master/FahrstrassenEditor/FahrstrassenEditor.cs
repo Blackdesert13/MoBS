@@ -25,10 +25,26 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				}
 			}
 		}
+		public class FahrstrassenKAnzeige {
+			private List<FahrstrasseK> _fahrstrassen;
+
+			public List<FahrstrasseK> Fahrstrassen {
+				get {
+					return _fahrstrassen;
+				}
+
+				set {
+					_fahrstrassen = value;
+				}
+			}
+		}
+
 		private bool _beenden;
 		private Model _model;
 		private FahrstrassenAnzeige _fahrstrassenAnzeige = new FahrstrassenAnzeige();
+		private FahrstrassenKAnzeige _fahrstrassenKAnzeige = new FahrstrassenKAnzeige();
 		private DataTable _tabelle;
+		private DataTable _tabelleK;
 		private int _ausgewählteFahrstrasse = -1;
         private int _heightMenuStrip = 24;
 
@@ -39,6 +55,10 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 			_model = model;
 			_beenden = false;
 			dataGridView1.AutoGenerateColumns = false;
+			dataGridView2.AutoGenerateColumns = false;
+			//tabControl1_SelectedIndexChanged(tabControl1, new EventArgs());
+
+			this.dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
 		}
 
 
@@ -72,6 +92,7 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 
 		public void AktualisierenTabelle(){
 			_fahrstrassenAnzeige.Fahrstrassen = _model.ZeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen;
+			_fahrstrassenKAnzeige.Fahrstrassen = _model.ZeichnenElemente.FahrstrassenKElemente.Elemente;
 
 			_tabelle = new DataTable();
 			_tabelle.Columns.Add("ID", typeof(int));
@@ -97,6 +118,28 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 			dataGridView1.DataSource = _tabelle;
 			comboBox1.SelectedIndex = 0;
 			comboBox1_SelectedIndexChanged(comboBox1, null);
+
+			_tabelleK = new DataTable();
+			_tabelleK.Columns.Add("ID", typeof(int));
+			_tabelleK.Columns.Add("Start", typeof(int));
+			_tabelleK.Columns.Add("Ziel", typeof(int));
+			_tabelleK.Columns.Add("Fahrstraßen", typeof(string));
+
+			//DataGridViewRowCollection rowCollection = dataGridView1.Rows;
+			//rowCollection.Clear();
+			foreach (FahrstrasseK fahrStrasseK in _fahrstrassenKAnzeige.Fahrstrassen) {
+				_tabelleK.Rows.Add(
+					fahrStrasseK.ID,
+					fahrStrasseK.StartSignal.ID,
+					fahrStrasseK.EndSignal.ID,
+					fahrStrasseK.FahrstrassenString.Trim().Replace("\t", "; ")
+					);
+
+			}
+			
+			dataGridView2.DataSource = _tabelleK;
+			comboBox2.SelectedIndex = 0;
+			comboBox2_SelectedIndexChanged(comboBox2, null);
 		}
 
 		private void fahrstraßenSuchenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,8 +218,7 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				fs.StartBefehleString = (string)row[3];
 				fs.EndBefehleString = (string)row[4];
 			}
-
-
+			
 			for(int i = 0; i < _fahrstrassenAnzeige.Fahrstrassen.Count;) {
 				if (ids.Contains(_fahrstrassenAnzeige.Fahrstrassen[i].ID)) {
 					i++;
@@ -186,6 +228,53 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				}
 			}
 
+			List<int> kIds = new List<int>();
+			foreach (DataRow row in _tabelleK.Rows) {
+				FahrstrasseK fs = null;
+				if((string)row[3] == "") {
+					continue;
+				}
+
+				if (row[0].ToString() != "") {
+					int id = (int)row[0];//Convert.ToInt32(row[0]);
+					kIds.Add(id);
+
+					foreach (FahrstrasseK el in _fahrstrassenKAnzeige.Fahrstrassen) {
+						if (el.ID == id) {
+							fs = el;
+							break;
+						}
+					}
+					fs.FahrstrassenString = (string)row[3];
+				}
+				else {
+					int id = _model.ZeichnenElemente.FahrstrassenKElemente.SucheFreieNummer();
+					fs = new FahrstrasseK(
+							_model.ZeichnenElemente,
+							_model.ZeichnenElemente.Zoom,
+							MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp.Bearbeiten,
+							new string[] { "",  id.ToString()},
+							 " FahrstrassenListe\t" + ((string)row[3]).Trim().Replace("; ", "\t")
+						);
+					if(fs.StartSignal != null) {
+						row[0] = id;
+						row[1] = fs.StartSignal.ID;
+						row[2] = fs.EndSignal.ID;
+
+						kIds.Add(id);
+					}
+					
+				}
+			}
+
+			for (int i = 0; i < _fahrstrassenKAnzeige.Fahrstrassen.Count;) {
+				if (kIds.Contains(_fahrstrassenKAnzeige.Fahrstrassen[i].ID)) {
+					i++;
+				}
+				else {
+					_fahrstrassenKAnzeige.Fahrstrassen.RemoveAt(i);
+				}
+			}
 		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -253,11 +342,50 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
             if(tabControl1.SelectedTab == this.tabPageKombiFs) {
-                this.menuStrip1.Enabled = false;
-            }
+				//this.menuStrip1.Enabled = false;
+				this.dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+				this.dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+				this.fahrstraßenSuchenToolStripMenuItem.Enabled = false;
+				this.alleFahrstraßenSuchenToolStripMenuItem.Enabled = false;
+			}
             else {
-                this.menuStrip1.Enabled = true;
-            }
+				//this.menuStrip1.Enabled = true;
+				this.dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+				this.dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+				this.fahrstraßenSuchenToolStripMenuItem.Enabled = true;
+				this.alleFahrstraßenSuchenToolStripMenuItem.Enabled = true;
+			}
         }
-    }
+
+		private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) {
+			string rowFilter = string.Empty;
+			switch (comboBox2.SelectedIndex) {
+				case 0:
+					break;
+				case 1:
+					rowFilter = string.Format("[{0}] = '{1}'", "Start", (int)numericUpDown2.Value);
+					break;
+				case 2:
+					rowFilter = string.Format("[{0}] = '{1}'", "Ziel", (int)numericUpDown2.Value);
+					break;
+			}
+			(dataGridView2.DataSource as DataTable).DefaultView.RowFilter = rowFilter;
+		}
+
+		private void numericUpDown2_ValueChanged(object sender, EventArgs e) {
+			comboBox2_SelectedIndexChanged(comboBox2, e);
+		}
+
+		private void dataGridView2_SelectionChanged(object sender, EventArgs e) {
+
+		}
+
+		private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+
+		}
+
+		private void dataGridView2_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
+
+		}
+	}
 }
