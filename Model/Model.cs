@@ -485,6 +485,7 @@ namespace MoBaSteuerung {
 			this._zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FahrstrassenKElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SsgElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
@@ -517,6 +518,7 @@ namespace MoBaSteuerung {
 			this._zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ServoElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SsgElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FahrstrassenKElemente.ElementeZeichnen(graphics);
 			if (this._neuesElement != null)
 				this._neuesElement.ElementZeichnen(graphics);
 

@@ -56,6 +56,7 @@
 			this.KombiFsColumnStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.KombiFsColumnEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.KombiFsColumnFahrstrassen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.neueKombiFahrstrasse = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPageTabelle.SuspendLayout();
@@ -291,13 +292,14 @@
 			this.tabPagePropertyGrid.Location = new System.Drawing.Point(4, 4);
 			this.tabPagePropertyGrid.Name = "tabPagePropertyGrid";
 			this.tabPagePropertyGrid.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPagePropertyGrid.Size = new System.Drawing.Size(462, 411);
+			this.tabPagePropertyGrid.Size = new System.Drawing.Size(462, 412);
 			this.tabPagePropertyGrid.TabIndex = 1;
 			this.tabPagePropertyGrid.Text = "PropertyGrid";
 			this.tabPagePropertyGrid.UseVisualStyleBackColor = true;
 			// 
 			// tabPageKombiFs
 			// 
+			this.tabPageKombiFs.Controls.Add(this.neueKombiFahrstrasse);
 			this.tabPageKombiFs.Controls.Add(this.numericUpDown2);
 			this.tabPageKombiFs.Controls.Add(this.label2);
 			this.tabPageKombiFs.Controls.Add(this.comboBox2);
@@ -407,6 +409,17 @@
 			this.KombiFsColumnFahrstrassen.HeaderText = "Fahrstraßen";
 			this.KombiFsColumnFahrstrassen.Name = "KombiFsColumnFahrstrassen";
 			// 
+			// neueKombiFahrstrasse
+			// 
+			this.neueKombiFahrstrasse.Location = new System.Drawing.Point(345, 9);
+			this.neueKombiFahrstrasse.Name = "neueKombiFahrstrasse";
+			this.neueKombiFahrstrasse.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.neueKombiFahrstrasse.Size = new System.Drawing.Size(86, 20);
+			this.neueKombiFahrstrasse.TabIndex = 7;
+			this.neueKombiFahrstrasse.Text = "neu";
+			this.neueKombiFahrstrasse.UseVisualStyleBackColor = true;
+			this.neueKombiFahrstrasse.Click += new System.EventHandler(this.neueKombiFahrstrasse_Click);
+			// 
 			// FahrstrassenEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,5 +480,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn KombiFsColumnStart;
 		private System.Windows.Forms.DataGridViewTextBoxColumn KombiFsColumnEnd;
 		private System.Windows.Forms.DataGridViewTextBoxColumn KombiFsColumnFahrstrassen;
+		private System.Windows.Forms.Button neueKombiFahrstrasse;
 	}
 }

@@ -18,9 +18,12 @@ namespace MoBaSteuerung.Elemente {
 	/// </summary>
 	public class FahrstrasseK : AnlagenElement {
 		private GraphicsPath _fahrstrLinie = new GraphicsPath();
+		private GraphicsPath _graphicsPathHintergrund = new GraphicsPath();
 		private Signal _startSignal;
 		private Signal _endSignal;
+		private List<Knoten> _knotenListe = new List<Knoten>();
 		private bool _isAktiv = false;
+
 		private List<FahrstrasseN> _fahrStrassen;
 
 		#region Properties
@@ -52,6 +55,7 @@ namespace MoBaSteuerung.Elemente {
 			set {
 				_fahrStrassen.Clear();
 				this.EinlesenFahrstrassenListe(_fahrStrassen, value.Trim().Replace(";", "\t"));
+				Berechnung();
 			}
 		}
 
@@ -103,6 +107,7 @@ namespace MoBaSteuerung.Elemente {
 
 			this._startSignal = _fahrStrassen.First().StartSignal;
 			this._endSignal = _fahrStrassen.Last().EndSignal;
+			
 			Parent.FahrstrassenKElemente.Hinzufügen(this);
 			Berechnung();
 		}
@@ -152,28 +157,74 @@ namespace MoBaSteuerung.Elemente {
 		/// </summary>
 		/// <param name="graphics"></param>
 		public override void ElementZeichnen(Graphics graphics) {
-			//Pen stift = new Pen(Color.Yellow, (Single)(this.Zoom * 0.2));
-			//switch (this.ElementZustand) {
-			//	case Elementzustand.An:
-			//		stift.Color = Color.Red;
-			//		break;
-			//	case Elementzustand.Aus:
-			//		return;
-			//	case Elementzustand.Selektiert:
-			//		stift.Color = Color.Yellow;
-			//		break;
-			//}
+			if(this.AnzeigenTyp == AnzeigeTyp.Bearbeiten) {
+				Pen stift = new Pen(Color.Yellow, (Single)(this.Zoom * 0.2));
+				switch (this.ElementZustand) {
+					case Elementzustand.An:
+						stift.Color = Color.Red;
+						break;
+					case Elementzustand.Aus:
+						return;
+					case Elementzustand.Selektiert:
+						stift.Color = Color.Yellow;
+						break;
+				}
 
-			//stift.EndCap = LineCap.Round;
-			//stift.LineJoin = LineJoin.Round;
-			//stift.StartCap = LineCap.Round;
+				stift.EndCap = LineCap.Round;
+				stift.LineJoin = LineJoin.Round;
+				stift.StartCap = LineCap.Round;
 
-			//graphics.DrawPath(stift, _fahrstrLinie);
+				graphics.DrawPath(stift, _fahrstrLinie);
+			}
+			else if(this.AnzeigenTyp == AnzeigeTyp.Bedienen){
+				
+				switch (this.ElementZustand) {
+					case Elementzustand.An:
+						return;
+					case Elementzustand.Aus:
+						return;
+					case Elementzustand.Selektiert:
+						break;
+				}
+				
+				Color farbePinsel = Color.FromArgb(128, Color.Yellow);
+				SolidBrush pinsel = new SolidBrush(farbePinsel);
+				graphics.FillPath(pinsel, this._graphicsPathHintergrund);
+			}
+			
 		}
 
 
 		public override void Berechnung() {
 			_fahrstrLinie.Reset();
+
+			this._knotenListe.Clear();
+			foreach (FahrstrasseN item in _fahrStrassen) {
+				foreach (AnlagenElement anlElement in item.ListeElemente) {
+					if (anlElement is Knoten) {
+						this._knotenListe.Add((Knoten)anlElement);
+					}
+				}
+			}
+
+			List<Point> punkte = new List<Point> { };
+			punkte.Add(_startSignal.PositionRaster);
+			foreach (Knoten el in _knotenListe) {
+				punkte.Add(((RasterAnlagenElement)el).PositionRaster);
+			}
+			punkte.Add(_endSignal.PositionRaster);
+
+			_fahrstrLinie.AddLines(punkte.ToArray());
+			Matrix matrix = new Matrix();
+			matrix.Scale(Zoom, Zoom);
+			_fahrstrLinie.Transform(matrix);
+
+			Matrix matrix2 = new Matrix();
+			matrix2.Translate(this._endSignal.PositionRaster.X * this.Zoom, this._endSignal.PositionRaster.Y * this.Zoom);
+			matrix2.Scale(this.Zoom, this.Zoom);
+			this._graphicsPathHintergrund.Reset();
+			this._graphicsPathHintergrund.AddEllipse(new RectangleF(-0.5f, -0.5f, 1f, 1f));
+			this._graphicsPathHintergrund.Transform(matrix);
 		}
 
 

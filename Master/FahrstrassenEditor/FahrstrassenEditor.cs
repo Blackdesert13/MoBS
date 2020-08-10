@@ -348,6 +348,12 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				this.dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
 				this.fahrstraßenSuchenToolStripMenuItem.Enabled = false;
 				this.alleFahrstraßenSuchenToolStripMenuItem.Enabled = false;
+				foreach (FahrstrasseN el in _model.ZeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen) {
+					el.Selektiert = false;
+				}
+				_model.ZeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Clear();
+				//this.dataGridView2_SelectionChanged(this.dataGridView2, null);
+				_model.OnAnlageNeuZeichnen();
 			}
             else {
 				//this.menuStrip1.Enabled = true;
@@ -355,6 +361,12 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				this.dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
 				this.fahrstraßenSuchenToolStripMenuItem.Enabled = true;
 				this.alleFahrstraßenSuchenToolStripMenuItem.Enabled = true;
+				FahrstrasseK fskAlt = _model.ZeichnenElemente.FahrstrassenKElemente.Element(_ausgewählteKombiFahrstrasse);
+				if (fskAlt != null) {
+					fskAlt.Selektiert = false;
+				}
+				//this.dataGridView2_SelectionChanged(this.dataGridView2, null);
+				_model.OnAnlageNeuZeichnen();
 			}
         }
 
@@ -383,10 +395,13 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				int id = (int)row.Cells[0].Value;
 				if (id != _ausgewählteKombiFahrstrasse) {
 					FahrstrasseK fskAlt = _model.ZeichnenElemente.FahrstrassenKElemente.Element(_ausgewählteKombiFahrstrasse);
-					fskAlt.Selektiert = true;
+					if (fskAlt != null) {
+						fskAlt.Selektiert = false;
+					}
 					_ausgewählteKombiFahrstrasse = id;
 					FahrstrasseK fskNeu = _model.ZeichnenElemente.FahrstrassenKElemente.Element(id);
 					fskNeu.Selektiert = true;
+					_model.OnAnlageNeuZeichnen();
 				}
 			}
 		}
@@ -397,6 +412,16 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 
 		private void dataGridView2_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
 
+		}
+
+		private void neueKombiFahrstrasse_Click(object sender, EventArgs e) {
+			frmKombiFahrstrasse frm = new frmKombiFahrstrasse();
+			if (frm.ShowDialog(this) == DialogResult.OK) {
+
+			}
+			else {
+
+			}
 		}
 	}
 }

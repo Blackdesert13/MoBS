@@ -106,6 +106,12 @@
     <Compile Include="FahrstrassenEditor\FahrstrassenEditor.Designer.cs">
       <DependentUpon>FahrstrassenEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FahrstrassenEditor\frmKombiFahrstrasse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FahrstrassenEditor\frmKombiFahrstrasse.Designer.cs">
+      <DependentUpon>frmKombiFahrstrasse.cs</DependentUpon>
+    </Compile>
     <Compile Include="SteckerAnzeige.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FahrstrassenEditor\FahrstrassenEditor.resx">
       <DependentUpon>FahrstrassenEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FahrstrassenEditor\frmKombiFahrstrasse.resx">
+      <DependentUpon>frmKombiFahrstrasse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SteckerAnzeige.resx">
       <DependentUpon>SteckerAnzeige.cs</DependentUpon>
