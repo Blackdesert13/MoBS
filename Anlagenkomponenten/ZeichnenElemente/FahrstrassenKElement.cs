@@ -51,7 +51,7 @@ namespace MoBaSteuerung.Elemente {
 			}
 			set {
 				_fahrStrassen.Clear();
-				this.EinlesenFahrstrassenListe(_fahrStrassen, value.Trim().Replace("\t", "; "));
+				this.EinlesenFahrstrassenListe(_fahrStrassen, value.Trim().Replace(";", "\t"));
 			}
 		}
 
@@ -113,7 +113,7 @@ namespace MoBaSteuerung.Elemente {
 			if (spString[0] == " FahrstrassenListe") {
 				try {
 					for (int i = 1; i < spString.Length; i++) {
-						Int16 id = Convert.ToInt16(spString[i]);
+						Int16 id = Convert.ToInt16(spString[i].Trim());
 						bool found = false;
 						foreach (FahrstrasseN fs in Parent.FahrstrassenElemente.GespeicherteFahrstrassen) {
 							if (fs.ID == id) {

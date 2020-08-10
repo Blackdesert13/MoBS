@@ -46,7 +46,8 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 		private DataTable _tabelle;
 		private DataTable _tabelleK;
 		private int _ausgewählteFahrstrasse = -1;
-        private int _heightMenuStrip = 24;
+    private int _heightMenuStrip = 24;
+		private int _ausgewählteKombiFahrstrasse = -1;
 
 		public FahrstrassenEditor(Model model) {
 			InitializeComponent();
@@ -254,7 +255,7 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 							_model.ZeichnenElemente.Zoom,
 							MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp.Bearbeiten,
 							new string[] { "",  id.ToString()},
-							 " FahrstrassenListe\t" + ((string)row[3]).Trim().Replace("; ", "\t")
+							 " FahrstrassenListe\t" + ((string)row[3]).Trim().Replace(";", "\t")
 						);
 					if(fs.StartSignal != null) {
 						row[0] = id;
@@ -377,7 +378,17 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 		}
 
 		private void dataGridView2_SelectionChanged(object sender, EventArgs e) {
-
+			DataGridViewRow row = dataGridView2.CurrentRow;
+			if (row != null) {
+				int id = (int)row.Cells[0].Value;
+				if (id != _ausgewählteKombiFahrstrasse) {
+					FahrstrasseK fskAlt = _model.ZeichnenElemente.FahrstrassenKElemente.Element(_ausgewählteKombiFahrstrasse);
+					fskAlt.Selektiert = true;
+					_ausgewählteKombiFahrstrasse = id;
+					FahrstrasseK fskNeu = _model.ZeichnenElemente.FahrstrassenKElemente.Element(id);
+					fskNeu.Selektiert = true;
+				}
+			}
 		}
 
 		private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
