@@ -100,6 +100,9 @@
     <Compile Include="Dialoge\frmInfo.Designer.cs">
       <DependentUpon>frmInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FahrstrassenEditor\CheckedComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FahrstrassenEditor\FahrstrassenEditor.cs">
       <SubType>Form</SubType>
     </Compile>
