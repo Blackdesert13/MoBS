@@ -46,7 +46,7 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 		private DataTable _tabelle;
 		private DataTable _tabelleK;
 		private int _ausgewählteFahrstrasse = -1;
-    private int _heightMenuStrip = 24;
+		private int _heightMenuStrip = 24;
 		private int _ausgewählteKombiFahrstrasse = -1;
 
 		public FahrstrassenEditor(Model model) {
@@ -415,7 +415,8 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 		}
 
 		private void neueKombiFahrstrasse_Click(object sender, EventArgs e) {
-			frmKombiFahrstrasse frm = new frmKombiFahrstrasse();
+			this.fahrstraßenSpeichernToolStripMenuItem_Click(fahrstraßenSpeichernToolStripMenuItem, null);
+			frmKombiFahrstrasse frm = new frmKombiFahrstrasse(_model);
 			if (frm.ShowDialog(this) == DialogResult.OK) {
 
 			}

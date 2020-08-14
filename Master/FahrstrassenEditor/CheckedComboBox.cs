@@ -206,6 +206,9 @@ namespace CheckComboBoxTest {
             }
 
             protected override void OnActivated(EventArgs e) {
+				if (!this.Enabled) {
+					return;
+				}
                 Debug.WriteLine("OnActivated");
                 base.OnActivated(e);
                 dropdownClosed = false;
@@ -320,7 +323,10 @@ namespace CheckComboBoxTest {
         }        
 
         protected override void OnDropDown(EventArgs e) {
-            base.OnDropDown(e);
+			if (!this.Enabled) {
+				return;
+			}
+			base.OnDropDown(e);
             DoDropDown();    
         }
 

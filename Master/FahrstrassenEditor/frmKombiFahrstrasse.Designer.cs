@@ -28,10 +28,12 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.checkedComboBox1 = new CheckComboBoxTest.CheckedComboBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.checkedComboBox2 = new CheckComboBoxTest.CheckedComboBox();
+			this.comboBoxZielSignal = new System.Windows.Forms.ComboBox();
+			this.comboBoxStartSignal = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
+			this.checkedComboBox2 = new CheckComboBoxTest.CheckedComboBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.checkedComboBox1 = new CheckComboBoxTest.CheckedComboBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -73,7 +75,7 @@
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 382F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(531, 382);
 			this.tableLayoutPanel1.TabIndex = 2;
 			// 
@@ -91,6 +93,8 @@
 			// 
 			this.panel1.AutoScroll = true;
 			this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.panel1.Controls.Add(this.comboBoxZielSignal);
+			this.panel1.Controls.Add(this.comboBoxStartSignal);
 			this.panel1.Controls.Add(this.label2);
 			this.panel1.Controls.Add(this.checkedComboBox2);
 			this.panel1.Controls.Add(this.label1);
@@ -101,20 +105,49 @@
 			this.panel1.Size = new System.Drawing.Size(258, 376);
 			this.panel1.TabIndex = 0;
 			// 
-			// checkedComboBox1
+			// comboBoxZielSignal
 			// 
-			this.checkedComboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.comboBoxZielSignal.FormattingEnabled = true;
+			this.comboBoxZielSignal.Location = new System.Drawing.Point(94, 146);
+			this.comboBoxZielSignal.Name = "comboBoxZielSignal";
+			this.comboBoxZielSignal.Size = new System.Drawing.Size(151, 21);
+			this.comboBoxZielSignal.TabIndex = 2;
+			this.comboBoxZielSignal.SelectedValueChanged += new System.EventHandler(this.comboBoxZielSignal_SelectedValueChanged);
+			// 
+			// comboBoxStartSignal
+			// 
+			this.comboBoxStartSignal.FormattingEnabled = true;
+			this.comboBoxStartSignal.Location = new System.Drawing.Point(94, 119);
+			this.comboBoxStartSignal.Name = "comboBoxStartSignal";
+			this.comboBoxStartSignal.Size = new System.Drawing.Size(151, 21);
+			this.comboBoxStartSignal.TabIndex = 2;
+			this.comboBoxStartSignal.SelectedValueChanged += new System.EventHandler(this.comboBoxStartSignal_SelectedValueChanged);
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(18, 149);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(56, 13);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "Ziel-Signal";
+			// 
+			// checkedComboBox2
+			// 
+			this.checkedComboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkedComboBox1.CheckOnClick = true;
-			this.checkedComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.checkedComboBox1.DropDownHeight = 1;
-			this.checkedComboBox1.FormattingEnabled = true;
-			this.checkedComboBox1.IntegralHeight = false;
-			this.checkedComboBox1.Location = new System.Drawing.Point(94, 94);
-			this.checkedComboBox1.Name = "checkedComboBox1";
-			this.checkedComboBox1.Size = new System.Drawing.Size(151, 21);
-			this.checkedComboBox1.TabIndex = 0;
-			this.checkedComboBox1.ValueSeparator = ", ";
+			this.checkedComboBox2.CheckOnClick = true;
+			this.checkedComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.checkedComboBox2.DropDownHeight = 1;
+			this.checkedComboBox2.Enabled = false;
+			this.checkedComboBox2.FormattingEnabled = true;
+			this.checkedComboBox2.IntegralHeight = false;
+			this.checkedComboBox2.Location = new System.Drawing.Point(94, 173);
+			this.checkedComboBox2.Name = "checkedComboBox2";
+			this.checkedComboBox2.Size = new System.Drawing.Size(151, 21);
+			this.checkedComboBox2.TabIndex = 0;
+			this.checkedComboBox2.Text = "Start-Ziel-Signal auswählen";
+			this.checkedComboBox2.ValueSeparator = ", ";
 			// 
 			// label1
 			// 
@@ -125,29 +158,22 @@
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Start-Signal";
 			// 
-			// checkedComboBox2
+			// checkedComboBox1
 			// 
-			this.checkedComboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.checkedComboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkedComboBox2.CheckOnClick = true;
-			this.checkedComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-			this.checkedComboBox2.DropDownHeight = 1;
-			this.checkedComboBox2.FormattingEnabled = true;
-			this.checkedComboBox2.IntegralHeight = false;
-			this.checkedComboBox2.Location = new System.Drawing.Point(94, 174);
-			this.checkedComboBox2.Name = "checkedComboBox2";
-			this.checkedComboBox2.Size = new System.Drawing.Size(151, 21);
-			this.checkedComboBox2.TabIndex = 0;
-			this.checkedComboBox2.ValueSeparator = ", ";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(18, 149);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(56, 13);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Ziel-Signal";
+			this.checkedComboBox1.CheckOnClick = true;
+			this.checkedComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+			this.checkedComboBox1.DropDownHeight = 1;
+			this.checkedComboBox1.Enabled = false;
+			this.checkedComboBox1.FormattingEnabled = true;
+			this.checkedComboBox1.IntegralHeight = false;
+			this.checkedComboBox1.Location = new System.Drawing.Point(94, 92);
+			this.checkedComboBox1.Name = "checkedComboBox1";
+			this.checkedComboBox1.Size = new System.Drawing.Size(151, 21);
+			this.checkedComboBox1.TabIndex = 0;
+			this.checkedComboBox1.Text = "Start-Ziel-Signal auswählen";
+			this.checkedComboBox1.ValueSeparator = ", ";
 			// 
 			// frmKombiFahrstrasse
 			// 
@@ -186,5 +212,7 @@
 		private CheckComboBoxTest.CheckedComboBox checkedComboBox2;
 		private System.Windows.Forms.Label label1;
 		private CheckComboBoxTest.CheckedComboBox checkedComboBox1;
+		private System.Windows.Forms.ComboBox comboBoxZielSignal;
+		private System.Windows.Forms.ComboBox comboBoxStartSignal;
 	}
 }

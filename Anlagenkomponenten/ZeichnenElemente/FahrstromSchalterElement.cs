@@ -67,6 +67,7 @@ namespace MoBaSteuerung.Elemente {
 			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			this.Berechnung();
 		}
+
 		public FSS(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
 		 : base(parent, iD, zoom, anzeigeTyp) {
 			KurzBezeichnung = "Fss";
