@@ -99,6 +99,26 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 				else {
 					checkedComboBox1.Enabled = true;
 					checkedComboBox2.Enabled = true;
+
+					checkedComboBox2.Items.Clear();
+					int startSignalId = (int)comboBoxZielSignal.SelectedItem;
+					foreach (FahrstrasseN fs in _anlagenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+						if (startSignalId == fs.StartSignal.ID) {
+							if (!checkedComboBox2.Items.Contains(fs.EndSignal.ID)) {
+								checkedComboBox2.Items.Add(fs.EndSignal.ID);
+							}
+						}
+					}
+
+					checkedComboBox1.Items.Clear();
+					int zielSignalId = (int)comboBoxStartSignal.SelectedItem;
+					foreach (FahrstrasseN fs in _anlagenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+						if (zielSignalId == fs.EndSignal.ID) {
+							if (!checkedComboBox1.Items.Contains(fs.StartSignal.ID)) {
+								checkedComboBox1.Items.Add(fs.StartSignal.ID);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -136,9 +156,35 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 					checkedComboBox1.Enabled = true;
 					checkedComboBox2.Enabled = true;
 
+					checkedComboBox2.Items.Clear();
+					int startSignalId = (int)comboBoxZielSignal.SelectedItem;
+					foreach (FahrstrasseN fs in _anlagenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+						if (startSignalId == fs.StartSignal.ID) {
+							if (!checkedComboBox2.Items.Contains(fs.EndSignal.ID)) {
+								checkedComboBox2.Items.Add(fs.EndSignal.ID);
+							}
+						}
+					}
 					
+					checkedComboBox1.Items.Clear();
+					int zielSignalId = (int)comboBoxStartSignal.SelectedItem;
+					foreach (FahrstrasseN fs in _anlagenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
+						if (zielSignalId == fs.EndSignal.ID) {
+							if (!checkedComboBox1.Items.Contains(fs.StartSignal.ID)) {
+								checkedComboBox1.Items.Add(fs.StartSignal.ID);
+							}
+						}
+					}
 				}
 			}
+		}
+
+		private void checkedComboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+			
+		}
+
+		private void checkedComboBox2_SelectedIndexChanged(object sender, EventArgs e) {
+
 		}
 	}
 }

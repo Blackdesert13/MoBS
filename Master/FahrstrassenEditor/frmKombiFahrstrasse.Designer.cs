@@ -31,8 +31,8 @@
 			this.comboBoxZielSignal = new System.Windows.Forms.ComboBox();
 			this.comboBoxStartSignal = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
-			this.checkedComboBox2 = new CheckComboBoxTest.CheckedComboBox();
 			this.label1 = new System.Windows.Forms.Label();
+			this.checkedComboBox2 = new CheckComboBoxTest.CheckedComboBox();
 			this.checkedComboBox1 = new CheckComboBoxTest.CheckedComboBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -132,6 +132,15 @@
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Ziel-Signal";
 			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(18, 122);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(61, 13);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "Start-Signal";
+			// 
 			// checkedComboBox2
 			// 
 			this.checkedComboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -148,15 +157,7 @@
 			this.checkedComboBox2.TabIndex = 0;
 			this.checkedComboBox2.Text = "Start-Ziel-Signal auswählen";
 			this.checkedComboBox2.ValueSeparator = ", ";
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(18, 122);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(61, 13);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "Start-Signal";
+			this.checkedComboBox2.SelectedIndexChanged += new System.EventHandler(this.checkedComboBox2_SelectedIndexChanged);
 			// 
 			// checkedComboBox1
 			// 
@@ -174,6 +175,7 @@
 			this.checkedComboBox1.TabIndex = 0;
 			this.checkedComboBox1.Text = "Start-Ziel-Signal auswählen";
 			this.checkedComboBox1.ValueSeparator = ", ";
+			this.checkedComboBox1.SelectedIndexChanged += new System.EventHandler(this.checkedComboBox1_SelectedIndexChanged);
 			// 
 			// frmKombiFahrstrasse
 			// 
