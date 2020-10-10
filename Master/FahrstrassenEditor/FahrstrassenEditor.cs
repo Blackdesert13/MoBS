@@ -1,4 +1,5 @@
 ﻿using MoBaSteuerung;
+using MoBaSteuerung.Anlagenkomponenten.Enum;
 using MoBaSteuerung.Elemente;
 using System;
 using System.Collections.Generic;
@@ -125,6 +126,7 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 			_tabelleK.Columns.Add("Start", typeof(int));
 			_tabelleK.Columns.Add("Ziel", typeof(int));
 			_tabelleK.Columns.Add("Fahrstraßen", typeof(string));
+			_tabelleK.Columns.Add("Befehle", typeof(string));
 
 			//DataGridViewRowCollection rowCollection = dataGridView1.Rows;
 			//rowCollection.Clear();
@@ -133,7 +135,8 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 					fahrStrasseK.ID,
 					fahrStrasseK.StartSignal.ID,
 					fahrStrasseK.EndSignal.ID,
-					fahrStrasseK.FahrstrassenString.Trim().Replace("\t", "; ")
+					fahrStrasseK.FahrstrassenString.Trim().Replace("\t", "; "),
+					fahrStrasseK.BefehleString.Trim().Replace("\t", "; ")
 					);
 
 			}
@@ -246,7 +249,8 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 							break;
 						}
 					}
-					fs.FahrstrassenString = (string)row[3];
+					fs.FahrstrassenString = " FahrstrassenListe\t" + (string)row[3];
+					fs.BefehleString = (string)row[4];
 				}
 				else {
 					int id = _model.ZeichnenElemente.FahrstrassenKElemente.SucheFreieNummer();
@@ -255,7 +259,8 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 							_model.ZeichnenElemente.Zoom,
 							MoBaSteuerung.Anlagenkomponenten.Enum.AnzeigeTyp.Bearbeiten,
 							new string[] { "",  id.ToString()},
-							 " FahrstrassenListe\t" + ((string)row[3]).Trim().Replace(";", "\t")
+							 " FahrstrassenListe\t" + ((string)row[3]).Trim().Replace(";", "\t"),
+							 " Befehle\t" + ((string)row[3]).Trim().Replace(";", "\t")
 						);
 					if(fs.StartSignal != null) {
 						row[0] = id;
@@ -327,6 +332,12 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 					}
 
 					if(bListe != null && frm != null) {
+						FahrstrasseK fskAlt = _model.ZeichnenElemente.FahrstrassenKElemente.Element(_ausgewählteKombiFahrstrasse);
+						if (fskAlt != null) {
+							fskAlt.Selektiert = false;
+						}
+						//this.dataGridView2_SelectionChanged(this.dataGridView2, null);
+						_model.OnAnlageNeuZeichnen();
 						frm.ShowDialog();
 						string newValue = bListe.ListenString.Trim().Replace(";", "");
 						if (column == 3) {
@@ -337,7 +348,6 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 						}
 					}
 				}
-				
 			}
 		}
 
@@ -417,11 +427,71 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 		private void neueKombiFahrstrasse_Click(object sender, EventArgs e) {
 			this.fahrstraßenSpeichernToolStripMenuItem_Click(fahrstraßenSpeichernToolStripMenuItem, null);
 			frmKombiFahrstrasse frm = new frmKombiFahrstrasse(_model);
+			this.Hide();
 			if (frm.ShowDialog(this) == DialogResult.OK) {
+				List<List<FahrstrasseN>> fahrstraßenListen = frm.GetFahrstrassenListen();
+				string befehlsString = frm.GetBefehlsString();
+				foreach (FahrstrasseK fsK in _model.ZeichnenElemente.FahrstrassenKElemente.Elemente) {
+					for (int i = 0; i < fahrstraßenListen.Count;) {
+						List<FahrstrasseN> fahrstrassen = fahrstraßenListen[i];
+						if (fsK.IstGleich(fahrstrassen)) {
+							fahrstraßenListen.RemoveAt(i);
+						}
+						else {
+							i++;
+						}
 
+					}
+				}
+
+				foreach (List<FahrstrasseN> fahrstrassen in fahrstraßenListen) {
+					new FahrstrasseK(_model.ZeichnenElemente, _model.ZeichnenElemente.Zoom, AnzeigeTyp.Bearbeiten, fahrstrassen, befehlsString);
+				}
 			}
 			else {
+				int a = 10;
+			}
+			AktualisierenTabelle();
+			this.Show();
+		}
 
+		private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+			int column = e.ColumnIndex;
+			if (column > 3) {
+				DataGridViewRow row = ((DataGridView)sender).Rows[e.RowIndex];
+				DataGridViewCell idCell = row.Cells[0];
+				int id = (int)idCell.Value;
+
+				FahrstrasseK fs = null;
+				foreach (FahrstrasseK el in _fahrstrassenKAnzeige.Fahrstrassen) {
+					if (el.ID == id) {
+						fs = el;
+						break;
+					}
+				}
+
+				if (fs != null) {
+					BefehlsListe bListe = null;
+					Form frm = null;
+					if (column == 4) {
+						bListe = new BefehlsListe(_model.ZeichnenElemente, false, (string)row.Cells[4].Value);
+						frm = new FrmBefehlsliste(bListe, "Befehle");
+					}
+
+					if (bListe != null && frm != null) {
+						FahrstrasseK fskAlt = _model.ZeichnenElemente.FahrstrassenKElemente.Element(_ausgewählteKombiFahrstrasse);
+						if (fskAlt != null) {
+							fskAlt.Selektiert = false;
+						}
+						//this.dataGridView2_SelectionChanged(this.dataGridView2, null);
+						_model.OnAnlageNeuZeichnen();
+						frm.ShowDialog();
+						string newValue = bListe.ListenString.Trim().Replace(";", "");
+						if (column == 4) {
+							row.Cells[4].Value = newValue.Replace(" ", "; "); ;
+						}
+					}
+				}
 			}
 		}
 	}

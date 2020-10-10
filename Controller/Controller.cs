@@ -330,13 +330,20 @@ namespace MoBaSteuerung
 			List<Elemente.AnlagenElement> el = _model.FahrstrassenSignal(signalNummer,shift);
 			if (el != null) {
 				if (el.Count == 1) {
-					if(el[0].ElementZustand == Elementzustand.Aus) {
-						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal, shift);
+					if (el[0] is FahrstrasseN) {
+						if (el[0].ElementZustand == Elementzustand.Aus) {
+							return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal, shift);
+						}
+						else if (((FahrstrasseN)el[0]).StartSignal.ID == signalNummer) {
+							return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.StartSignal, shift);
+						}
+						else if (((FahrstrasseN)el[0]).EndSignal.ID == signalNummer) {
+							return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal, shift);
+						}
 					}
-					else if (((FahrstrasseN)el[0]).StartSignal.ID == signalNummer)
-						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.StartSignal,shift);
-					else if (((FahrstrasseN)el[0]).EndSignal.ID == signalNummer)
-						return FahrstrasseSchalten((FahrstrasseN)el[0], FahrstrassenSignalTyp.ZielSignal, shift);
+					else if (el[0] is FahrstrasseK) {
+						return FahrstrasseSchalten((FahrstrasseK)el[0]);
+					}
 				}
 				else {
 					this._model.FahrstrassenAuswahl(el);
@@ -344,6 +351,29 @@ namespace MoBaSteuerung
 				}
 			}
 			return false;
+		}
+
+		public bool FahrstrasseSchalten(FahrstrasseK el) {
+			bool action = false;
+			if (this.AppTyp == AppTyp.Master) {
+				_model.ElementToggeln(el.GetType().Name, el.ID);
+				//action = _model.FahrstrasseSchalten(el, signal);
+				//if (master != null) {
+				//	master.SendeAnlageZustandsDatenAnAlle(this._model.AnlagenZustandsDatenAuslesen());
+				//}
+			}
+			if (this.AppTyp == AppTyp.Slave) {
+				if (slave != null) {
+					try {
+						slave.SlaveAnMasterMouseClick(el.GetType().Name, el.ID);
+					}
+					catch (Exception e) {
+
+					}
+				}
+				return true;
+			}
+			return action;
 		}
 
 		public bool FahrstrasseSchalten(FahrstrasseN el, FahrstrassenSignalTyp signal, bool verlaengern)

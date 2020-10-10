@@ -219,6 +219,9 @@ namespace MoBaSteuerung {
 					//	return true;
 					//}
 					return false;
+				case "FahrstrasseK":
+					el = _zeichnenElemente.FahrstrassenKElemente.Element(nr);
+					break;
 				case "Servo":
 					el = _zeichnenElemente.ServoElemente.Element(nr);
 					break;
@@ -299,14 +302,12 @@ namespace MoBaSteuerung {
 
 					}
 					return true;
-					break;
 				case "FahrstrasseN_Start":
 					el = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(nr);
 
 					FahrstrasseSchalten((FahrstrasseN)el, FahrstrassenSignalTyp.StartSignal);
 					_zeichnenElemente.FSSAktualisieren();
 					return true;
-					break;
 			}
 
 			if (el != null) {

@@ -222,7 +222,8 @@ namespace MoBaSteuerung {
 				}
 				if (elem[0] == "FahrstrasseK") {
 					string fsListe = anlageDatenStreamReader.ReadLine();
-					new FahrstrasseK(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem, fsListe);
+					string befehle = anlageDatenStreamReader.ReadLine();
+					new FahrstrasseK(_zeichnenElemente, Constanten.STANDARDRASTER, this._anzeigeTyp, elem, fsListe, befehle);
 				}
 			}
 			anlageDatenStreamReader.Dispose();
@@ -315,7 +316,7 @@ namespace MoBaSteuerung {
 										+ this._zeichnenElemente.ReglerElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Knoten\tNr.\tLageX\tLageY"
 										+ this._zeichnenElemente.KnotenElemente.SpeicherString);
-			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Gleise\tNr.\tStartKn\tEndKn\tRegler\tAusgang\tEingang\tBez.\tStecker"
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Gleise\tNr.\tStartKn\tEndKn\tRegler\tAusgang\tEingang\tBez.\tStecker\tKoppelung"
 										+ this._zeichnenElemente.GleisElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Weichen\tNr.\tKnoten\tGru-Ste\tAusgang\tBez.\tStecker\tKoppelung"
 										+ this._zeichnenElemente.WeicheElemente.SpeicherString);
@@ -323,7 +324,7 @@ namespace MoBaSteuerung {
 										+ this._zeichnenElemente.SchalterElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "EingangsSchalter\tNr.\tGleis\tEingang\tBez.\tStecker"
 										+ this._zeichnenElemente.EingSchalterElemente.SpeicherString);
-			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung"
+			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "FSSer\tNr.\tGleis\tRegler1\tRegler2\tAusgang\tBez.\tStecker\tKoppelung\tSichtbar"
 										+ this._zeichnenElemente.FssElemente.SpeicherString);
 			anlageStreamWriter.WriteLine(trennung + Environment.NewLine + "Entkuppler_\tNr.\tGleis\tAusgang\tBez.\tStecker"
 										+ this._zeichnenElemente.EntkupplerElemente.SpeicherString);

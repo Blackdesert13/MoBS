@@ -30,7 +30,7 @@ namespace MoBaSteuerung.Elemente {
 		private Zug zug;
 		private Signal _gegenSignal = null;
 		private bool _autoStart = false;
-		private List<FahrstrasseN>  _autoStartFSGruppe;
+		private List<FahrstrasseN> _autoStartFSGruppe;
 		private int _zugLaengeMax;
 		private List<string> _zugTyp = new List<string>();
 		private Gleis _zielGleis;
@@ -58,7 +58,7 @@ namespace MoBaSteuerung.Elemente {
 						 + "\t" + _zugLaengeMax
 						 + "\t" + ZugTypString
 						 + "\t" + (Koppelung != null ? Koppelung.ListenString : "")// KoppelungsString; ;
-						 + "\t" + Convert.ToString( ZielGleisNr) ;
+						 + "\t" + Convert.ToString(ZielGleisNr);
 			}
 		}
 		/// <summary>
@@ -72,18 +72,15 @@ namespace MoBaSteuerung.Elemente {
 		/// <summary>
 		/// bei aktiver Rückmeldung sollen Fahrstrassen diesem Zielsiegnal aufgelöst werden
 		/// </summary>
-		public int ZielGleisNr
-		{
-			set
-			{
+		public int ZielGleisNr {
+			set {
 				if (value > 0) {
 					_zielGleis = Parent.GleisElemente.Element(value);
 				}
 				else { _zielGleis = null; }
 			}
-			get
-			{
-				if(_zielGleis == null) { return 0; }
+			get {
+				if (_zielGleis == null) { return 0; }
 				else { return _zielGleis.ID; }
 			}
 		}
@@ -99,21 +96,19 @@ namespace MoBaSteuerung.Elemente {
 		/// Aufzählung der zulässigen Zug-Typen
 		/// </summary>
 		[Description("Aufzählung der zulässigen Zug-Typen an diesem Signal\nohne Angaben sind alle Zug-Typen zulässig")]
-		public string ZugTypString
-		{
-			get
-			{
-				string ergebnis="";
-				foreach(string x in _zugTyp) {	ergebnis += x + " "; }
+		public string ZugTypString {
+			get {
+				string ergebnis = "";
+				foreach (string x in _zugTyp) { ergebnis += x + " "; }
 				return ergebnis.Trim();
 			}
-			set
-			{
+			set {
 				_zugTyp = new List<string>();
 				string[] ztyp = value.Split(' ');
-				for(int i=0; i < ztyp.Length; i++)
-				{if(ztyp[i]!="")
-					_zugTyp.Add(ztyp[i]); }
+				for (int i = 0; i < ztyp.Length; i++) {
+					if (ztyp[i] != "")
+						_zugTyp.Add(ztyp[i]);
+				}
 			}
 		}
 		/// <summary>
@@ -258,7 +253,7 @@ namespace MoBaSteuerung.Elemente {
 			if (elem.Length > 8) _autoStart = Convert.ToBoolean(elem[8]);
 			if (elem.Length > 9) _zugLaengeMax = Convert.ToInt32(elem[9]);
 			if (elem.Length > 10) ZugTypString = elem[10];
-			if (elem.Length >11) KoppelungsString = elem[11];
+			if (elem.Length > 11) KoppelungsString = elem[11];
 			if (elem.Length > 12) { ZielGleisNr = Convert.ToInt16(elem[12]); }
 			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
 			if (gl != null) {
@@ -285,7 +280,7 @@ namespace MoBaSteuerung.Elemente {
 					this.Berechnung();
 				}
 				Signal gegenSig = GegenSignalSuchen();
-				if(gegenSig != null) {
+				if (gegenSig != null) {
 					GegenSignal = gegenSig;
 					gegenSig.GegenSignal = this;
 				}
@@ -315,8 +310,8 @@ namespace MoBaSteuerung.Elemente {
 			Knoten kn = (richtung ? gl.StartKn : gl.EndKn);
 			while (kn.Weichen[0] == null && kn.Weichen[1] == null) {
 				bool stumpfGleis = true;
-				foreach(Gleis g in kn.Gleise) {
-					if(g != null && g!= gl) {
+				foreach (Gleis g in kn.Gleise) {
+					if (g != null && g != gl) {
 						gl = g;
 						stumpfGleis = false;
 						break;
@@ -367,15 +362,22 @@ namespace MoBaSteuerung.Elemente {
 						if (zug == null) { _infoFenster.Text = ""; }
 						else { _infoFenster.Text = zug.Anzeige; }
 					}
-
-					graphics.FillPath(Brushes.White, this._graphicsPathHintergrund);
+					if (this.Selektiert) {
+						graphics.FillPath(Brushes.Yellow, this._graphicsPathHintergrund);
+					}
+					else {
+						graphics.FillPath(Brushes.White, this._graphicsPathHintergrund);
+					}
 					//if (Passiv) {
 					//	transpanz = 128;
 					//}
-					if (this.ElementZustand == Elementzustand.An)
+					if (this.ElementZustand == Elementzustand.An) {
 						farbePinsel = Color.FromArgb(transpanz, Color.Green);
-					else
+					}
+					else {
 						farbePinsel = Color.FromArgb(transpanz, Color.Red);
+					}
+					
 					farbeStift = Color.FromArgb(transpanz, Color.Black);
 					if (Ausgang.IsLocked) {
 						farbeStift = Color.FromArgb(transpanz, Color.Red);
@@ -386,14 +388,12 @@ namespace MoBaSteuerung.Elemente {
 			SolidBrush pinsel = new SolidBrush(farbePinsel);
 			Pen stift = new Pen(farbeStift, 1);
 
-
-
 			graphics.FillPath(pinsel, this._graphicsPathKreis);
 			graphics.DrawPath(Pens.Black, this._graphicsPathKreis);
 			graphics.DrawPath(Pens.Black, this._graphicsPathLinien);
 
-			if (this.AnzeigenTyp == AnzeigeTyp.Bedienen)
-				graphics.DrawPath(Pens.Black, this._graphicsPathText);
+			//if (this.AnzeigenTyp == AnzeigeTyp.Bedienen)
+			graphics.DrawPath(Pens.Black, this._graphicsPathText);
 		}
 
 		/// <summary>
@@ -402,9 +402,9 @@ namespace MoBaSteuerung.Elemente {
 		public override void Berechnung() {
 			//Stopwatch watch = new Stopwatch();
 			//watch.Start();
-			if (AnschlussGleis != null) { 
+			if (AnschlussGleis != null) {
 				PositionRaster = AnschlussGleis.GetRasterPosition(this, Gleisposition);
-            }
+			}
 
 			int winkel = 0;
 			if (AnschlussGleis != null)
@@ -498,11 +498,9 @@ namespace MoBaSteuerung.Elemente {
 		/// </summary>
 		/// <param name="ZugTyp">der zu prüfende Zugtyp</param>
 		/// <returns>gibt true wenn der Zugtyp zugelässig ist</returns>
-		public bool ZugTypPruefung(string ZugTyp)
-		{
-			if(_zugTyp.Count == 0)  { return true; }
-			foreach (string x in _zugTyp)
-			{
+		public bool ZugTypPruefung(string ZugTyp) {
+			if (_zugTyp.Count == 0) { return true; }
+			foreach (string x in _zugTyp) {
 				if (x.Equals(ZugTyp)) { return true; }
 			}
 			return false;
@@ -512,16 +510,13 @@ namespace MoBaSteuerung.Elemente {
 		/// </summary>
 		/// <param name="PruefZug">der zu prüfende Zug</param>
 		/// <returns>gibt true wenn der Zug am Signal zugelässig ist</returns>
-		public bool ZugPruefung(Zug PruefZug)
-		{
+		public bool ZugPruefung(Zug PruefZug) {
 			if (_zugLaengeMax > 0) { }
-			if (_zugTyp.Count != 0)
-			{ 
-				foreach (string x in _zugTyp)
-				{
+			if (_zugTyp.Count != 0) {
+				foreach (string x in _zugTyp) {
 					if (!x.Equals(PruefZug.ZugTyp)) { return false; }
 				}
-		  }
+			}
 			return true;
 		}
 	}

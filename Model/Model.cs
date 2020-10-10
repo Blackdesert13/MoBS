@@ -364,7 +364,7 @@ namespace MoBaSteuerung {
 						case 19:
 							aktiveFSZielgleisPruefen();
 							OnArduinoRueckmeldungReceived();
-							OnAnlageNeuZeichnen();//Todo: zeile entfernen oder auskommentieren
+							//OnAnlageNeuZeichnen();//Todo: zeile entfernen oder auskommentieren
 							break;
 						case 40:
 							arduino.Ausgaenge[0] = (ushort)(befehl[2] + befehl[3] * 256);
@@ -413,6 +413,7 @@ namespace MoBaSteuerung {
 			}
 		}
 		#endregion
+
 		/// <summary>
 		/// prüft ob durch Rückmeldung eine FS aufgelöst werden kann
 		/// </summary>
@@ -422,7 +423,7 @@ namespace MoBaSteuerung {
 			
 			for(int i=0;i< _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen.Count;i++) { 
 				fs = _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen[i];
-				//fs = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(x.Id);
+
 				if (fs.ZielPruefung()) {
 					ElementToggeln("FahrstrasseN_Ziel", fs.ID);
 					if (fs.EndSignal.AutoStart) {
@@ -485,12 +486,12 @@ namespace MoBaSteuerung {
 			this._zeichnenElemente.GleisElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.WeicheElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.FahrstrassenElemente.ElementeZeichnen(graphics);
-			this._zeichnenElemente.FahrstrassenKElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SsgElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SchalterElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.FssElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.EntkupplerElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.SignalElemente.ElementeZeichnen(graphics);
+			this._zeichnenElemente.FahrstrassenKElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.EingSchalterElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.InfoElemente.ElementeZeichnen(graphics);
 			this._zeichnenElemente.ReglerElemente.ElementeZeichnen(graphics);
@@ -674,11 +675,18 @@ namespace MoBaSteuerung {
 		/// </summary>
 		/// <returns>Gibt TRUE zurück, wenn eine Auswahl gelöscht wurde</returns>
 		public bool BedienenAuswahlLöschen() {
+			bool retValue = false;
 			if (_zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count > 0) {
 				_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
-				return true;
+				retValue = true;
 			}
-			return false;
+			foreach(FahrstrasseK fs in _zeichnenElemente.FahrstrassenKElemente.Elemente) {
+				if (fs.Selektiert) {
+					retValue = true;
+				}
+				fs.Selektiert = false;
+			}
+			return retValue;
 		}
 
 

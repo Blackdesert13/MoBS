@@ -29,7 +29,16 @@ namespace MoBaSteuerung {
 	public partial class Model : Control {
 
 		public void FahrstrassenAuswahl(List<AnlagenElement> el) {
-			this._zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(el);
+			List<AnlagenElement> fsN = new List<AnlagenElement>();
+			foreach (AnlagenElement item in el) {
+				if(item is FahrstrasseN) {
+					fsN.Add(item);
+				}
+				else if(item is FahrstrasseK) {
+					item.Selektiert = true;
+				}
+			}
+			this._zeichnenElemente.FahrstrassenElemente.HinzufügenAuswahl(fsN);
 		}
 
 		private void FahrstraßeStarten(object fahrstraße) {
@@ -160,6 +169,12 @@ namespace MoBaSteuerung {
 					if (fs.StartSignal == signal && fs.Verfuegbarkeit())
 						el.Add(fs);
 				}
+
+				foreach (FahrstrasseK fs in _zeichnenElemente.FahrstrassenKElemente.Elemente) {
+					if (fs.StartSignal == signal && fs.Verfuegbarkeit()) {
+						el.Add(fs);
+					}
+				}
 				//zeichnenElemente.FahrstarssenElemente.SucheFahrstrassen((Signal)elemList[0]);
 				return el;
 			}
@@ -168,10 +183,27 @@ namespace MoBaSteuerung {
 					if (fs.EndSignal == signal) {
 						_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 						el.Add(fs);
+						foreach (FahrstrasseK fsK in _zeichnenElemente.FahrstrassenKElemente.Elemente) {
+							if (fsK.Selektiert) {
+
+								fsK.Selektiert = false;
+							}
+						}
 						//zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
 						return el;
 					}
 				_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+				foreach (FahrstrasseK fs in _zeichnenElemente.FahrstrassenKElemente.Elemente) {
+					if (fs.Selektiert) {
+						if ((fs.EndSignal == signal) && (el.Count == 0)) {
+							el.Add(fs);
+						}
+						fs.Selektiert = false;
+					}
+				}
+				if (el.Count > 0) {
+					return el;
+				}
 				OnAnlageNeuZeichnen();
 			}
 			return null;
@@ -204,26 +236,46 @@ namespace MoBaSteuerung {
 		public List<AnlagenElement> FahrstrassenSignalSchalten(Signal signal) {
 			List<AnlagenElement> el = new List<AnlagenElement>();
 			if (_zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen.Count == 0) {
-				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen)
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen) {
 					if (signal == fs.StartSignal || signal == fs.EndSignal) {
 						el.Add(fs);
 						return el;
 					}
+				}
 				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.GespeicherteFahrstrassen) {
 					if (fs.StartSignal == signal && fs.Verfuegbarkeit())
 						el.Add(fs);
 				}
+				foreach (FahrstrasseK fs in _zeichnenElemente.FahrstrassenKElemente.Elemente) {
+					if(fs.StartSignal == signal && fs.Verfuegbarkeit()) {
+						fs.Selektiert = true;
+					}
+				}
 				return el;
 			}
 			else {
-				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen)
+
+				foreach (FahrstrasseN fs in _zeichnenElemente.FahrstrassenElemente.AuswahlFahrstrassen) {
 					if (fs.EndSignal == signal) {
 						_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
 						el.Add(fs);
 						//zeichnenElemente.FahrstarssenElemente.HinzufügenAktiv(fs);
 						return el;
 					}
+				}
 				_zeichnenElemente.FahrstrassenElemente.AlleLöschenAuswahl();
+
+				foreach (FahrstrasseK fs in _zeichnenElemente.FahrstrassenKElemente.Elemente) {
+					if (fs.Selektiert) {
+						if((fs.EndSignal == signal) && (el.Count == 0)) {
+							el.Add(fs);
+						}
+						fs.Selektiert = false;
+					}
+				}
+				if(el.Count > 0) {
+					return el;
+				}
 				OnAnlageNeuZeichnen();
 			}
 			return null;

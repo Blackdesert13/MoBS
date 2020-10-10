@@ -648,7 +648,7 @@ public List<AnlagenElement> SteckerSuchen(string SteckerName)
 		}
 		
 		[Browsable(false)]//verstecke Eigenschaft im PropertyGrid
-		public bool Selektiert {
+		public virtual bool Selektiert {
 			get {
 				return _selektiert;
 			}

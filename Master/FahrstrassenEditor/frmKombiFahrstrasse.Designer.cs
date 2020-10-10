@@ -32,10 +32,15 @@
 			this.comboBoxStartSignal = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.Element = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Stellung = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.checkedComboBox2 = new CheckComboBoxTest.CheckedComboBox();
 			this.checkedComboBox1 = new CheckComboBoxTest.CheckedComboBox();
 			this.tableLayoutPanel1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonOK
@@ -66,6 +71,7 @@
 			this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.HighlightText;
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.74359F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.25641F));
@@ -83,6 +89,7 @@
 			// 
 			this.panel2.AutoScroll = true;
 			this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.panel2.Controls.Add(this.dataGridView1);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(267, 3);
 			this.panel2.Name = "panel2";
@@ -107,8 +114,10 @@
 			// 
 			// comboBoxZielSignal
 			// 
+			this.comboBoxZielSignal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxZielSignal.FormattingEnabled = true;
-			this.comboBoxZielSignal.Location = new System.Drawing.Point(94, 146);
+			this.comboBoxZielSignal.Location = new System.Drawing.Point(85, 64);
 			this.comboBoxZielSignal.Name = "comboBoxZielSignal";
 			this.comboBoxZielSignal.Size = new System.Drawing.Size(151, 21);
 			this.comboBoxZielSignal.TabIndex = 2;
@@ -116,8 +125,10 @@
 			// 
 			// comboBoxStartSignal
 			// 
+			this.comboBoxStartSignal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxStartSignal.FormattingEnabled = true;
-			this.comboBoxStartSignal.Location = new System.Drawing.Point(94, 119);
+			this.comboBoxStartSignal.Location = new System.Drawing.Point(85, 37);
 			this.comboBoxStartSignal.Name = "comboBoxStartSignal";
 			this.comboBoxStartSignal.Size = new System.Drawing.Size(151, 21);
 			this.comboBoxStartSignal.TabIndex = 2;
@@ -126,7 +137,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(18, 149);
+			this.label2.Location = new System.Drawing.Point(16, 67);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(56, 13);
 			this.label2.TabIndex = 1;
@@ -135,11 +146,33 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(18, 122);
+			this.label1.Location = new System.Drawing.Point(16, 40);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(61, 13);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Start-Signal";
+			// 
+			// dataGridView1
+			// 
+			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Element,
+            this.Stellung});
+			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.Size = new System.Drawing.Size(261, 376);
+			this.dataGridView1.TabIndex = 1;
+			// 
+			// Element
+			// 
+			this.Element.HeaderText = "Element";
+			this.Element.Name = "Element";
+			// 
+			// Stellung
+			// 
+			this.Stellung.HeaderText = "Stellung";
+			this.Stellung.Name = "Stellung";
 			// 
 			// checkedComboBox2
 			// 
@@ -151,13 +184,13 @@
 			this.checkedComboBox2.Enabled = false;
 			this.checkedComboBox2.FormattingEnabled = true;
 			this.checkedComboBox2.IntegralHeight = false;
-			this.checkedComboBox2.Location = new System.Drawing.Point(94, 173);
+			this.checkedComboBox2.Location = new System.Drawing.Point(85, 91);
 			this.checkedComboBox2.Name = "checkedComboBox2";
 			this.checkedComboBox2.Size = new System.Drawing.Size(151, 21);
 			this.checkedComboBox2.TabIndex = 0;
 			this.checkedComboBox2.Text = "Start-Ziel-Signal auswählen";
 			this.checkedComboBox2.ValueSeparator = ", ";
-			this.checkedComboBox2.SelectedIndexChanged += new System.EventHandler(this.checkedComboBox2_SelectedIndexChanged);
+			this.checkedComboBox2.DropDownClosed += new System.EventHandler(this.checkedComboBox2_DropDownClosed);
 			// 
 			// checkedComboBox1
 			// 
@@ -169,13 +202,13 @@
 			this.checkedComboBox1.Enabled = false;
 			this.checkedComboBox1.FormattingEnabled = true;
 			this.checkedComboBox1.IntegralHeight = false;
-			this.checkedComboBox1.Location = new System.Drawing.Point(94, 92);
+			this.checkedComboBox1.Location = new System.Drawing.Point(85, 10);
 			this.checkedComboBox1.Name = "checkedComboBox1";
 			this.checkedComboBox1.Size = new System.Drawing.Size(151, 21);
 			this.checkedComboBox1.TabIndex = 0;
 			this.checkedComboBox1.Text = "Start-Ziel-Signal auswählen";
 			this.checkedComboBox1.ValueSeparator = ", ";
-			this.checkedComboBox1.SelectedIndexChanged += new System.EventHandler(this.checkedComboBox1_SelectedIndexChanged);
+			this.checkedComboBox1.DropDownClosed += new System.EventHandler(this.checkedComboBox1_DropDownClosed);
 			// 
 			// frmKombiFahrstrasse
 			// 
@@ -196,8 +229,10 @@
 			this.Text = "Kombi-Fahrstrasse";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmArduino_FormClosed);
 			this.tableLayoutPanel1.ResumeLayout(false);
+			this.panel2.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -216,5 +251,8 @@
 		private CheckComboBoxTest.CheckedComboBox checkedComboBox1;
 		private System.Windows.Forms.ComboBox comboBoxZielSignal;
 		private System.Windows.Forms.ComboBox comboBoxStartSignal;
+		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Element;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Stellung;
 	}
 }

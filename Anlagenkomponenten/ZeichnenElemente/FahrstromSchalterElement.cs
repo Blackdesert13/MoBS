@@ -26,8 +26,9 @@ namespace MoBaSteuerung.Elemente {
           die 4. Nummer ist die aktuelle Reglernummer,
           ist die 3.Nummer ein FSS ist die 4. Nummer dessen aktueller Regler!
         */
-		//private bool stellung = false;
+		private bool sichtbarkeit = true;
 
+		#region properties
 		[Description("die Zeile in der Anlagendatei")]
 		/// <summary>
 		/// zum Speichern in der Anlagen-Datei
@@ -42,10 +43,10 @@ namespace MoBaSteuerung.Elemente {
                         + "\t" + _reglerNr[1]
                         + "\t" + Ausgang.SpeicherString
                         + "\t" + Bezeichnung
-                        + "\t" + Stecker
-                        + "\t";
-                if (Koppelung == null) { erg = erg + ""; }
-                else { erg = erg + Koppelung.ListenString; }//KoppelungsString;
+												+ "\t" + Stecker;           
+				                if (Koppelung == null) { erg = erg + "\t" + ""; }
+				                else { erg = erg + "\t" + Koppelung.ListenString; };//KoppelungsString;
+								       erg += "\t" + Sichtbarkeit;
                 return erg;
 			}
 		}
@@ -57,7 +58,56 @@ namespace MoBaSteuerung.Elemente {
 				return "FSS " + this.ID;
 			}
 		}
+		[Description("Sichtbar bei Bedienung")]
+		public bool Sichtbarkeit { get { return sichtbarkeit; } set { sichtbarkeit = value; } }
+		/// <summary>
+		/// liefert die aktive Reglernummer
+		/// </summary>
+		/// <returns></returns>
+		public int AktiverReglerNr
+		{
+			get
+			{
+				if (this.ElementZustand == Elementzustand.An) { if (_regler[1] != null) return _regler[1].ID; }
+				else { if (_regler[0] != null) return _regler[0].ID; }
+				return 0;
+			}
+		}
 
+		[Description("Regler am Öffner des Relais \nFSS wird mit negativer Nr. angegeben")]
+		public int ReglerNummer1
+		{
+			get { return _reglerNr[0]; }
+			set
+			{
+				_reglerNr[0] = value;
+				if (_reglerNr[0] > -1)
+				{
+					_regler[0] = this.Parent.ReglerElemente.Element(_reglerNr[0]);
+					_fss[0] = null;
+				}
+				else _fss[0] = this.Parent.FssElemente.Element(-_reglerNr[0]);
+			}
+		}
+
+		[Description("Regler am Schließer des Relais \nFSS wird mit negativer Nr. angegeben")]
+		public int ReglerNummer2
+		{
+			get { return _reglerNr[1]; }
+			set
+			{
+				_reglerNr[1] = value;
+				if (_reglerNr[0] > -1)
+				{
+					_regler[1] = this.Parent.ReglerElemente.Element(_reglerNr[1]);
+					_fss[1] = null;
+				}
+				else _fss[1] = this.Parent.FssElemente.Element(-_reglerNr[1]);
+			}
+		}
+		#endregion//properties
+
+		#region Konstruktoren
 		public FSS(AnlagenElemente parent, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
 		: base(parent, 0, zoom, anzeigeTyp) {
 			KurzBezeichnung = "Fss";
@@ -67,7 +117,6 @@ namespace MoBaSteuerung.Elemente {
 			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			this.Berechnung();
 		}
-
 		public FSS(AnlagenElemente parent, Int32 iD, Int32 zoom, AnzeigeTyp anzeigeTyp, Point rasterPosition)
 		 : base(parent, iD, zoom, anzeigeTyp) {
 			KurzBezeichnung = "Fss";
@@ -77,6 +126,7 @@ namespace MoBaSteuerung.Elemente {
 			Ausgang = new Adresse(parent);
 			Position = new Point(PositionRaster.X * Zoom, PositionRaster.Y * Zoom);
 			this.ReglerNummer1 = 1; this.ReglerNummer2 = 1;
+			
 			foreach (Gleis gl in Parent.GleisElemente.Elemente) {
 				if (gl.GleisElementAnschluss(this)) {
 					AnschlussGleis = gl;
@@ -115,7 +165,7 @@ namespace MoBaSteuerung.Elemente {
 			if (elem.Length > 8) {
 				KoppelungsString = elem[8];
 			}
-
+			if (elem.Length > 9) { sichtbarkeit = Convert.ToBoolean( elem[9]); }
 
 			Gleis gl = Parent.GleisElemente.Element(Convert.ToInt32(glAnschl[0]));
 			Gleisposition = Convert.ToInt32(glAnschl[1]);
@@ -131,32 +181,7 @@ namespace MoBaSteuerung.Elemente {
 				}
 			}
 		}
-
-    [Description("Regler am Öffner des Relais \nFSS wird mit negativer Nr. angegeben")]
-		public int ReglerNummer1 {
-			get { return _reglerNr[0]; }
-			set {
-				_reglerNr[0] = value;
-				if (_reglerNr[0] > -1) {
-					_regler[0] = this.Parent.ReglerElemente.Element(_reglerNr[0]);
-					_fss[0] = null;
-				}
-				else _fss[0] = this.Parent.FssElemente.Element(-_reglerNr[0]);
-			}
-		}
-
-		[Description("Regler am Schließer des Relais \nFSS wird mit negativer Nr. angegeben")]
-		public int ReglerNummer2 {
-			get { return _reglerNr[1]; }
-			set {
-				_reglerNr[1] = value;
-				if (_reglerNr[0] > -1) {
-					_regler[1] = this.Parent.ReglerElemente.Element(_reglerNr[1]);
-					_fss[1] = null;
-				}
-				else _fss[1] = this.Parent.FssElemente.Element(-_reglerNr[1]);
-			}
-		}
+		#endregion//Konstrutoren
 
 		public void FSSLaden() {
 			if (_reglerNr[0] < 0) _fss[0] = Parent.FssElemente.Element(-_reglerNr[0]);
@@ -191,17 +216,6 @@ namespace MoBaSteuerung.Elemente {
 			else return _regler[0];
 		}
 
-		/// <summary>
-		/// liefert die aktive Reglernummer
-		/// </summary>
-		/// <returns></returns>
-		public int AktiverReglerNr {
-			get {
-				if (this.ElementZustand == Elementzustand.An) { if (_regler[1] != null) return _regler[1].ID; }
-				else { if (_regler[0] != null) return _regler[0].ID; }
-				return 0;
-			}
-		}
 
 		/// <summary>
 		/// zum reseten von verketteten FSS
@@ -309,6 +323,7 @@ namespace MoBaSteuerung.Elemente {
 
 
 		public override void ElementZeichnen(Graphics graphics) {
+			if ((this.AnzeigenTyp == AnzeigeTyp.Bearbeiten) || sichtbarkeit) {
 			int transpanz = 255;
 			Color farbePinsel = Color.LightGray;
 			Color farbePinselInnen = Color.LightGray;
@@ -361,5 +376,6 @@ namespace MoBaSteuerung.Elemente {
 			graphics.FillPath(pinsel, this._graphicsPathKreis);
 		}
 	}
+}
 }
 

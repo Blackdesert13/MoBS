@@ -176,6 +176,7 @@ namespace MoBaSteuerung {
 			foreach (AnlagenElement el in this.AuswahlElemente)
 				el.Selektiert = false;
 			this.AuswahlElemente.Clear();
+			BedienenAuswahlLöschen();
 		}
 
 		public bool BearbeitenSelektieren(MouseButtons button, bool ctrlPressed, Point punkt) {

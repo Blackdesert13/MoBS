@@ -23,12 +23,13 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.alleFahrstraßenSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fahrstraßenSuchenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +49,7 @@
 			this.ColumnEndBefehle = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabPagePropertyGrid = new System.Windows.Forms.TabPage();
 			this.tabPageKombiFs = new System.Windows.Forms.TabPage();
+			this.neueKombiFahrstrasse = new System.Windows.Forms.Button();
 			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
 			this.label2 = new System.Windows.Forms.Label();
 			this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -56,7 +58,7 @@
 			this.KombiFsColumnStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.KombiFsColumnEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.KombiFsColumnFahrstrassen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.neueKombiFahrstrasse = new System.Windows.Forms.Button();
+			this.Befehle = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPageTabelle.SuspendLayout();
@@ -204,14 +206,14 @@
 			this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnId,
@@ -219,24 +221,24 @@
             this.ColumnZielSignal,
             this.ColumnStartBefehle,
             this.ColumnEndBefehle});
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle13;
 			this.dataGridView1.Location = new System.Drawing.Point(9, 33);
 			this.dataGridView1.Name = "dataGridView1";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
 			this.dataGridView1.Size = new System.Drawing.Size(445, 373);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
@@ -270,8 +272,8 @@
 			// 
 			this.ColumnStartBefehle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.ColumnStartBefehle.DataPropertyName = "Start-Befehle";
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ColumnStartBefehle.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle11.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ColumnStartBefehle.DefaultCellStyle = dataGridViewCellStyle11;
 			this.ColumnStartBefehle.HeaderText = "Start-Befehle";
 			this.ColumnStartBefehle.MinimumWidth = 75;
 			this.ColumnStartBefehle.Name = "ColumnStartBefehle";
@@ -280,8 +282,8 @@
 			// 
 			this.ColumnEndBefehle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.ColumnEndBefehle.DataPropertyName = "End-Befehle";
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ColumnEndBefehle.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle12.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ColumnEndBefehle.DefaultCellStyle = dataGridViewCellStyle12;
 			this.ColumnEndBefehle.HeaderText = "End-Befehle";
 			this.ColumnEndBefehle.MinimumWidth = 75;
 			this.ColumnEndBefehle.Name = "ColumnEndBefehle";
@@ -310,6 +312,17 @@
 			this.tabPageKombiFs.TabIndex = 2;
 			this.tabPageKombiFs.Text = "Kombi Fahrstraßen";
 			this.tabPageKombiFs.UseVisualStyleBackColor = true;
+			// 
+			// neueKombiFahrstrasse
+			// 
+			this.neueKombiFahrstrasse.Location = new System.Drawing.Point(345, 9);
+			this.neueKombiFahrstrasse.Name = "neueKombiFahrstrasse";
+			this.neueKombiFahrstrasse.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.neueKombiFahrstrasse.Size = new System.Drawing.Size(86, 20);
+			this.neueKombiFahrstrasse.TabIndex = 7;
+			this.neueKombiFahrstrasse.Text = "neu";
+			this.neueKombiFahrstrasse.UseVisualStyleBackColor = true;
+			this.neueKombiFahrstrasse.Click += new System.EventHandler(this.neueKombiFahrstrasse_Click);
 			// 
 			// numericUpDown2
 			// 
@@ -359,6 +372,7 @@
 			// 
 			// dataGridView2
 			// 
+			this.dataGridView2.AllowUserToAddRows = false;
 			this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -367,11 +381,13 @@
             this.KombiFsColumnID,
             this.KombiFsColumnStart,
             this.KombiFsColumnEnd,
-            this.KombiFsColumnFahrstrassen});
+            this.KombiFsColumnFahrstrassen,
+            this.Befehle});
 			this.dataGridView2.Location = new System.Drawing.Point(8, 36);
 			this.dataGridView2.Name = "dataGridView2";
 			this.dataGridView2.Size = new System.Drawing.Size(446, 364);
 			this.dataGridView2.TabIndex = 0;
+			this.dataGridView2.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDoubleClick);
 			this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
 			this.dataGridView2.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView2_RowsRemoved);
 			this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -404,21 +420,21 @@
 			// 
 			this.KombiFsColumnFahrstrassen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.KombiFsColumnFahrstrassen.DataPropertyName = "Fahrstraßen";
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.KombiFsColumnFahrstrassen.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.KombiFsColumnFahrstrassen.DefaultCellStyle = dataGridViewCellStyle8;
+			this.KombiFsColumnFahrstrassen.FillWeight = 50F;
 			this.KombiFsColumnFahrstrassen.HeaderText = "Fahrstraßen";
 			this.KombiFsColumnFahrstrassen.Name = "KombiFsColumnFahrstrassen";
+			this.KombiFsColumnFahrstrassen.ReadOnly = true;
 			// 
-			// neueKombiFahrstrasse
+			// Befehle
 			// 
-			this.neueKombiFahrstrasse.Location = new System.Drawing.Point(345, 9);
-			this.neueKombiFahrstrasse.Name = "neueKombiFahrstrasse";
-			this.neueKombiFahrstrasse.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.neueKombiFahrstrasse.Size = new System.Drawing.Size(86, 20);
-			this.neueKombiFahrstrasse.TabIndex = 7;
-			this.neueKombiFahrstrasse.Text = "neu";
-			this.neueKombiFahrstrasse.UseVisualStyleBackColor = true;
-			this.neueKombiFahrstrasse.Click += new System.EventHandler(this.neueKombiFahrstrasse_Click);
+			this.Befehle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Befehle.DataPropertyName = "Befehle";
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Befehle.DefaultCellStyle = dataGridViewCellStyle9;
+			this.Befehle.HeaderText = "Befehle";
+			this.Befehle.Name = "Befehle";
 			// 
 			// FahrstrassenEditor
 			// 
@@ -476,10 +492,11 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox2;
+		private System.Windows.Forms.Button neueKombiFahrstrasse;
 		private System.Windows.Forms.DataGridViewTextBoxColumn KombiFsColumnID;
 		private System.Windows.Forms.DataGridViewTextBoxColumn KombiFsColumnStart;
 		private System.Windows.Forms.DataGridViewTextBoxColumn KombiFsColumnEnd;
 		private System.Windows.Forms.DataGridViewTextBoxColumn KombiFsColumnFahrstrassen;
-		private System.Windows.Forms.Button neueKombiFahrstrasse;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Befehle;
 	}
 }
