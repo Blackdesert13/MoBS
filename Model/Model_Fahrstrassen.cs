@@ -74,8 +74,8 @@ namespace MoBaSteuerung {
 			if (el != null) {
 				bool verlaengern = el.StartSignal.IsLocked;
 				if (!el.IsAktiv && !verlaengern) {
-					//Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
-					//fahrstraßenStartThread.Start(el);
+					Thread fahrstraßenStartThread = new Thread(this.FahrstraßeStarten);
+					fahrstraßenStartThread.Start(el);
 				}
 				bool action = el.AusgangToggeln(signalTyp, verlaengern && !el.StartSignal.AutoStart);
 				//if (action && _ardController.IsPortOpen())

@@ -413,7 +413,6 @@ namespace MoBaSteuerung {
 			}
 		}
 		#endregion
-
 		/// <summary>
 		/// prüft ob durch Rückmeldung eine FS aufgelöst werden kann
 		/// </summary>
@@ -423,7 +422,7 @@ namespace MoBaSteuerung {
 			
 			for(int i=0;i< _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen.Count;i++) { 
 				fs = _zeichnenElemente.FahrstrassenElemente.AktiveFahrstrassen[i];
-
+				//fs = _zeichnenElemente.FahrstrassenElemente.Fahrstrasse(x.Id);
 				if (fs.ZielPruefung()) {
 					ElementToggeln("FahrstrasseN_Ziel", fs.ID);
 					if (fs.EndSignal.AutoStart) {

@@ -239,8 +239,11 @@ namespace MoBaSteuerung.Anlagenkomponenten.MCSpeicher {
 				Arduino ard = _parent.AnlagenZustand.GetArduino(_ardNr);
 				if (ard != null) {
 					ard.Ausgaenge.Toggle(_adresseNr, _bitNr);
+					_stellung = ard.Ausgaenge[_adresseNr, _bitNr];
 				}
-				_stellung = !_stellung;
+				else{
+					_stellung = !_stellung;
+				}
 				return true;
 			}
 			return false;

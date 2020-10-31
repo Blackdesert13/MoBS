@@ -480,7 +480,7 @@ namespace ModellBahnSteuerung.FahrstrassenEditor {
 
 		public List<List<FahrstrasseN>> GetFahrstrassenListen() {
 			List<List<FahrstrasseN>> fahrstrassenListe = new List<List<FahrstrasseN>>();
-			if((comboBoxStartSignal.SelectedItem == null) || (comboBoxZielSignal.SelectedItem == null)){
+			if((comboBoxStartSignal.SelectedItem) == null || (comboBoxZielSignal== null)) {
 				return fahrstrassenListe;
 			}
 			{
