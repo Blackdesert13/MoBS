@@ -242,7 +242,7 @@ namespace MoBaSteuerung.Anlagenkomponenten.MCSpeicher {
 					_stellung = ard.Ausgaenge[_adresseNr, _bitNr];
 				}
 				else{
-					_stellung = !_stellung;
+				_stellung = !_stellung;
 				}
 				return true;
 			}

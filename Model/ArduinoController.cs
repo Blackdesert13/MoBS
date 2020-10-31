@@ -172,9 +172,7 @@ namespace MoBaSteuerung {
 				Debug.Write("COM Port not open");
 			}
 		}
-
-
-
+		
 		public bool CloseComPort() {
 			if (ComPort != null) {
 				try {
